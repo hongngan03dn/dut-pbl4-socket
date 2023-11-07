@@ -16,7 +16,7 @@ namespace ClientWinform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new loginForm());
+            Application.Run(new NavigationForm());
             //Application.Run(new SignUpForm());
         }
     }
