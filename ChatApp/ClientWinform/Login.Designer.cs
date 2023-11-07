@@ -32,6 +32,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelIntro = new System.Windows.Forms.Panel();
             this.tableLayoutPanelImage = new System.Windows.Forms.TableLayoutPanel();
+            this.imgLogin = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.slogan = new System.Windows.Forms.Label();
             this.nameApp = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@ namespace ClientWinform
             this.usernameLbl = new Guna.UI2.WinForms.Guna2TextBox();
             this.userTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.passPnl = new System.Windows.Forms.Panel();
+            this.passTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.lineUserPnl = new System.Windows.Forms.Panel();
             this.passPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,14 +57,13 @@ namespace ClientWinform
             this.signUpBtn = new Guna.UI2.WinForms.Guna2Button();
             this.labelDontHaveAnAccount = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
-            this.imgLogin = new System.Windows.Forms.PictureBox();
-            this.passTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.minBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.maxBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.closeBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelIntro.SuspendLayout();
             this.tableLayoutPanelImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelContent.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -73,11 +74,11 @@ namespace ClientWinform
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.panelControlBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanelMain
             // 
+            this.tableLayoutPanelMain.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanelMain.ColumnCount = 2;
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
@@ -85,12 +86,15 @@ namespace ClientWinform
             this.tableLayoutPanelMain.Controls.Add(this.panelContent, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(5);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1000, 730);
             this.tableLayoutPanelMain.TabIndex = 0;
+            this.tableLayoutPanelMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.tableLayoutPanelMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.tableLayoutPanelMain.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // panelIntro
             // 
@@ -119,6 +123,24 @@ namespace ClientWinform
             this.tableLayoutPanelImage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.89373F));
             this.tableLayoutPanelImage.Size = new System.Drawing.Size(500, 730);
             this.tableLayoutPanelImage.TabIndex = 0;
+            this.tableLayoutPanelImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.tableLayoutPanelImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.tableLayoutPanelImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
+            // 
+            // imgLogin
+            // 
+            this.imgLogin.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.imgLogin.Image = global::ClientWinform.Properties.Resources.Group_Chat_rafiki;
+            this.imgLogin.Location = new System.Drawing.Point(0, 156);
+            this.imgLogin.Margin = new System.Windows.Forms.Padding(0);
+            this.imgLogin.Name = "imgLogin";
+            this.imgLogin.Size = new System.Drawing.Size(500, 450);
+            this.imgLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgLogin.TabIndex = 0;
+            this.imgLogin.TabStop = false;
+            this.imgLogin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.imgLogin.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.imgLogin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // tableLayoutPanel1
             // 
@@ -136,6 +158,9 @@ namespace ClientWinform
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(500, 156);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.tableLayoutPanel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // slogan
             // 
@@ -199,6 +224,9 @@ namespace ClientWinform
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 78F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(500, 697);
             this.tableLayoutPanel2.TabIndex = 1;
+            this.tableLayoutPanel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.tableLayoutPanel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.tableLayoutPanel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // labelNote
             // 
@@ -299,6 +327,31 @@ namespace ClientWinform
             this.passPnl.Size = new System.Drawing.Size(340, 67);
             this.passPnl.TabIndex = 7;
             // 
+            // passTxt
+            // 
+            this.passTxt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.passTxt.BorderThickness = 0;
+            this.passTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.passTxt.DefaultText = "";
+            this.passTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.passTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.passTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.passTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.passTxt.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.passTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.passTxt.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
+            this.passTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.passTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.passTxt.Location = new System.Drawing.Point(0, 34);
+            this.passTxt.Margin = new System.Windows.Forms.Padding(0);
+            this.passTxt.Name = "passTxt";
+            this.passTxt.PasswordChar = '*';
+            this.passTxt.PlaceholderText = "Password";
+            this.passTxt.SelectedText = "";
+            this.passTxt.Size = new System.Drawing.Size(340, 33);
+            this.passTxt.TabIndex = 1;
+            this.passTxt.TextOffset = new System.Drawing.Point(-9, 0);
+            // 
             // lineUserPnl
             // 
             this.lineUserPnl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
@@ -346,11 +399,11 @@ namespace ClientWinform
             this.recoverPassBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.recoverPassBtn.HoverState.FillColor = System.Drawing.Color.White;
             this.recoverPassBtn.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
-            this.recoverPassBtn.Location = new System.Drawing.Point(158, 19);
+            this.recoverPassBtn.Location = new System.Drawing.Point(161, 19);
             this.recoverPassBtn.Margin = new System.Windows.Forms.Padding(0);
             this.recoverPassBtn.Name = "recoverPassBtn";
             this.recoverPassBtn.PressedColor = System.Drawing.Color.White;
-            this.recoverPassBtn.Size = new System.Drawing.Size(182, 37);
+            this.recoverPassBtn.Size = new System.Drawing.Size(179, 37);
             this.recoverPassBtn.TabIndex = 1;
             this.recoverPassBtn.Text = "Recover password";
             this.recoverPassBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -480,43 +533,9 @@ namespace ClientWinform
             this.panelControlBox.Name = "panelControlBox";
             this.panelControlBox.Size = new System.Drawing.Size(500, 33);
             this.panelControlBox.TabIndex = 0;
-            // 
-            // imgLogin
-            // 
-            this.imgLogin.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.imgLogin.Image = global::ClientWinform.Properties.Resources.Group_Chat_rafiki;
-            this.imgLogin.Location = new System.Drawing.Point(0, 156);
-            this.imgLogin.Margin = new System.Windows.Forms.Padding(0);
-            this.imgLogin.Name = "imgLogin";
-            this.imgLogin.Size = new System.Drawing.Size(500, 450);
-            this.imgLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgLogin.TabIndex = 0;
-            this.imgLogin.TabStop = false;
-            // 
-            // passTxt
-            // 
-            this.passTxt.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.passTxt.BorderThickness = 0;
-            this.passTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.passTxt.DefaultText = "";
-            this.passTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.passTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.passTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passTxt.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.passTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passTxt.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
-            this.passTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.passTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passTxt.Location = new System.Drawing.Point(0, 34);
-            this.passTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.passTxt.Name = "passTxt";
-            this.passTxt.PasswordChar = '*';
-            this.passTxt.PlaceholderText = "Password";
-            this.passTxt.SelectedText = "";
-            this.passTxt.Size = new System.Drawing.Size(340, 33);
-            this.passTxt.TabIndex = 1;
-            this.passTxt.TextOffset = new System.Drawing.Point(-9, 0);
+            this.panelControlBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.panelControlBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.panelControlBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // minBtn
             // 
@@ -575,6 +594,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelIntro.ResumeLayout(false);
             this.tableLayoutPanelImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panelContent.ResumeLayout(false);
@@ -589,7 +609,6 @@ namespace ClientWinform
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
             this.panelControlBox.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).EndInit();
             this.ResumeLayout(false);
 
         }

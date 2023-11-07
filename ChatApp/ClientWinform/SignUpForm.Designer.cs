@@ -39,8 +39,8 @@ namespace ClientWinform
             this.signUpBtn = new Guna.UI2.WinForms.Guna2Button();
             this.linePassPnl = new System.Windows.Forms.Panel();
             this.passPanel = new System.Windows.Forms.Panel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.passTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.userTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.lineUserPnl = new System.Windows.Forms.Panel();
             this.usernameLbl = new Guna.UI2.WinForms.Guna2TextBox();
@@ -48,10 +48,14 @@ namespace ClientWinform
             this.labelWelcomback = new System.Windows.Forms.Label();
             this.usernamePnl = new System.Windows.Forms.Panel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
             this.passPnl = new System.Windows.Forms.Panel();
+            this.guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.panelContent = new System.Windows.Forms.Panel();
             this.slogan = new System.Windows.Forms.Label();
             this.nameApp = new System.Windows.Forms.Label();
@@ -60,10 +64,6 @@ namespace ClientWinform
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panelIntro = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.guna2TextBox1 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.guna2TextBox2 = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2TextBox3 = new Guna.UI2.WinForms.Guna2TextBox();
             this.tableLayoutPanel5.SuspendLayout();
             this.panelControlBox.SuspendLayout();
             this.passPanel.SuspendLayout();
@@ -72,13 +72,13 @@ namespace ClientWinform
             this.tableLayoutPanel2.SuspendLayout();
             this.passPnl.SuspendLayout();
             this.panel3.SuspendLayout();
+            this.panel4.SuspendLayout();
             this.panelContent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).BeginInit();
             this.tableLayoutPanelImage.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelIntro.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
-            this.panel4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel5
@@ -184,6 +184,9 @@ namespace ClientWinform
             this.panelControlBox.Name = "panelControlBox";
             this.panelControlBox.Size = new System.Drawing.Size(500, 33);
             this.panelControlBox.TabIndex = 0;
+            this.panelControlBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseDown);
+            this.panelControlBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseMove);
+            this.panelControlBox.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseUp);
             // 
             // signUpBtn
             // 
@@ -227,24 +230,6 @@ namespace ClientWinform
             this.passPanel.Size = new System.Drawing.Size(340, 74);
             this.passPanel.TabIndex = 5;
             // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 3;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.293413F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.11377F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.293413F));
-            this.tableLayoutPanel4.Controls.Add(this.signUpBtn, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.77778F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.22222F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(340, 203);
-            this.tableLayoutPanel4.TabIndex = 9;
-            // 
             // passTxt
             // 
             this.passTxt.BorderThickness = 0;
@@ -268,6 +253,24 @@ namespace ClientWinform
             this.passTxt.Size = new System.Drawing.Size(340, 33);
             this.passTxt.TabIndex = 1;
             this.passTxt.TextOffset = new System.Drawing.Point(-9, 0);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.293413F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 93.11377F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.293413F));
+            this.tableLayoutPanel4.Controls.Add(this.signUpBtn, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 1);
+            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 2;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.77778F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.22222F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(340, 203);
+            this.tableLayoutPanel4.TabIndex = 9;
             // 
             // userTxt
             // 
@@ -393,16 +396,9 @@ namespace ClientWinform
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(500, 697);
             this.tableLayoutPanel2.TabIndex = 1;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(340, 2);
-            this.panel1.TabIndex = 2;
+            this.tableLayoutPanel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseDown);
+            this.tableLayoutPanel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseMove);
+            this.tableLayoutPanel2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseUp);
             // 
             // passPnl
             // 
@@ -415,6 +411,55 @@ namespace ClientWinform
             this.passPnl.Name = "passPnl";
             this.passPnl.Size = new System.Drawing.Size(340, 73);
             this.passPnl.TabIndex = 7;
+            // 
+            // guna2TextBox3
+            // 
+            this.guna2TextBox3.BorderThickness = 0;
+            this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2TextBox3.DefaultText = "Username";
+            this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.White;
+            this.guna2TextBox3.DisabledState.FillColor = System.Drawing.Color.White;
+            this.guna2TextBox3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
+            this.guna2TextBox3.DisabledState.PlaceholderForeColor = System.Drawing.Color.White;
+            this.guna2TextBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2TextBox3.Enabled = false;
+            this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
+            this.guna2TextBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
+            this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox3.Location = new System.Drawing.Point(0, 7);
+            this.guna2TextBox3.Margin = new System.Windows.Forms.Padding(0);
+            this.guna2TextBox3.Name = "guna2TextBox3";
+            this.guna2TextBox3.PasswordChar = '\0';
+            this.guna2TextBox3.PlaceholderText = "";
+            this.guna2TextBox3.SelectedText = "";
+            this.guna2TextBox3.Size = new System.Drawing.Size(340, 33);
+            this.guna2TextBox3.TabIndex = 2;
+            this.guna2TextBox3.TextOffset = new System.Drawing.Point(-9, 0);
+            // 
+            // guna2TextBox2
+            // 
+            this.guna2TextBox2.BorderThickness = 0;
+            this.guna2TextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2TextBox2.DefaultText = "";
+            this.guna2TextBox2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.guna2TextBox2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.guna2TextBox2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox2.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
+            this.guna2TextBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox2.Location = new System.Drawing.Point(0, 40);
+            this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.guna2TextBox2.Name = "guna2TextBox2";
+            this.guna2TextBox2.PasswordChar = '\0';
+            this.guna2TextBox2.PlaceholderText = "";
+            this.guna2TextBox2.SelectedText = "";
+            this.guna2TextBox2.Size = new System.Drawing.Size(340, 33);
+            this.guna2TextBox2.TabIndex = 2;
+            this.guna2TextBox2.TextOffset = new System.Drawing.Point(-9, 0);
             // 
             // panel3
             // 
@@ -436,6 +481,51 @@ namespace ClientWinform
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(340, 2);
             this.panel2.TabIndex = 3;
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.guna2TextBox1);
+            this.panel4.Controls.Add(this.panel1);
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel4.Location = new System.Drawing.Point(80, 395);
+            this.panel4.Margin = new System.Windows.Forms.Padding(0);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(340, 75);
+            this.panel4.TabIndex = 11;
+            // 
+            // guna2TextBox1
+            // 
+            this.guna2TextBox1.BorderThickness = 0;
+            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.guna2TextBox1.DefaultText = "";
+            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.guna2TextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox1.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
+            this.guna2TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.guna2TextBox1.Location = new System.Drawing.Point(0, 42);
+            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.guna2TextBox1.Name = "guna2TextBox1";
+            this.guna2TextBox1.PasswordChar = '*';
+            this.guna2TextBox1.PlaceholderText = "Verify password";
+            this.guna2TextBox1.SelectedText = "";
+            this.guna2TextBox1.Size = new System.Drawing.Size(340, 33);
+            this.guna2TextBox1.TabIndex = 3;
+            this.guna2TextBox1.TextOffset = new System.Drawing.Point(-9, 0);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(340, 2);
+            this.panel1.TabIndex = 2;
             // 
             // panelContent
             // 
@@ -485,6 +575,9 @@ namespace ClientWinform
             this.imgLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgLogin.TabIndex = 0;
             this.imgLogin.TabStop = false;
+            this.imgLogin.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseDown);
+            this.imgLogin.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseMove);
+            this.imgLogin.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseUp);
             // 
             // tableLayoutPanelImage
             // 
@@ -502,6 +595,9 @@ namespace ClientWinform
             this.tableLayoutPanelImage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.89373F));
             this.tableLayoutPanelImage.Size = new System.Drawing.Size(500, 730);
             this.tableLayoutPanelImage.TabIndex = 0;
+            this.tableLayoutPanelImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseDown);
+            this.tableLayoutPanelImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseMove);
+            this.tableLayoutPanelImage.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseUp);
             // 
             // tableLayoutPanel1
             // 
@@ -519,6 +615,9 @@ namespace ClientWinform
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(500, 156);
             this.tableLayoutPanel1.TabIndex = 1;
+            this.tableLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseDown);
+            this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseMove);
+            this.tableLayoutPanel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.SignUpForm_MouseUp);
             // 
             // panelIntro
             // 
@@ -547,90 +646,6 @@ namespace ClientWinform
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1000, 730);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
-            // guna2TextBox1
-            // 
-            this.guna2TextBox1.BorderThickness = 0;
-            this.guna2TextBox1.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox1.DefaultText = "";
-            this.guna2TextBox1.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2TextBox1.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
-            this.guna2TextBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.guna2TextBox1.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox1.Location = new System.Drawing.Point(0, 42);
-            this.guna2TextBox1.Margin = new System.Windows.Forms.Padding(0);
-            this.guna2TextBox1.Name = "guna2TextBox1";
-            this.guna2TextBox1.PasswordChar = '*';
-            this.guna2TextBox1.PlaceholderText = "Verify password";
-            this.guna2TextBox1.SelectedText = "";
-            this.guna2TextBox1.Size = new System.Drawing.Size(340, 33);
-            this.guna2TextBox1.TabIndex = 3;
-            this.guna2TextBox1.TextOffset = new System.Drawing.Point(-9, 0);
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.guna2TextBox1);
-            this.panel4.Controls.Add(this.panel1);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(80, 395);
-            this.panel4.Margin = new System.Windows.Forms.Padding(0);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(340, 75);
-            this.panel4.TabIndex = 11;
-            // 
-            // guna2TextBox2
-            // 
-            this.guna2TextBox2.BorderThickness = 0;
-            this.guna2TextBox2.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox2.DefaultText = "";
-            this.guna2TextBox2.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBox2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBox2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBox2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2TextBox2.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Font = new System.Drawing.Font("Arial Unicode MS", 9F);
-            this.guna2TextBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.guna2TextBox2.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox2.Location = new System.Drawing.Point(0, 40);
-            this.guna2TextBox2.Margin = new System.Windows.Forms.Padding(0);
-            this.guna2TextBox2.Name = "guna2TextBox2";
-            this.guna2TextBox2.PasswordChar = '\0';
-            this.guna2TextBox2.PlaceholderText = "";
-            this.guna2TextBox2.SelectedText = "";
-            this.guna2TextBox2.Size = new System.Drawing.Size(340, 33);
-            this.guna2TextBox2.TabIndex = 2;
-            this.guna2TextBox2.TextOffset = new System.Drawing.Point(-9, 0);
-            // 
-            // guna2TextBox3
-            // 
-            this.guna2TextBox3.BorderThickness = 0;
-            this.guna2TextBox3.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBox3.DefaultText = "Username";
-            this.guna2TextBox3.DisabledState.BorderColor = System.Drawing.Color.White;
-            this.guna2TextBox3.DisabledState.FillColor = System.Drawing.Color.White;
-            this.guna2TextBox3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
-            this.guna2TextBox3.DisabledState.PlaceholderForeColor = System.Drawing.Color.White;
-            this.guna2TextBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.guna2TextBox3.Enabled = false;
-            this.guna2TextBox3.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold);
-            this.guna2TextBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
-            this.guna2TextBox3.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBox3.Location = new System.Drawing.Point(0, 7);
-            this.guna2TextBox3.Margin = new System.Windows.Forms.Padding(0);
-            this.guna2TextBox3.Name = "guna2TextBox3";
-            this.guna2TextBox3.PasswordChar = '\0';
-            this.guna2TextBox3.PlaceholderText = "";
-            this.guna2TextBox3.SelectedText = "";
-            this.guna2TextBox3.Size = new System.Drawing.Size(340, 33);
-            this.guna2TextBox3.TabIndex = 2;
-            this.guna2TextBox3.TextOffset = new System.Drawing.Point(-9, 0);
-            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -653,6 +668,7 @@ namespace ClientWinform
             this.tableLayoutPanel2.PerformLayout();
             this.passPnl.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
+            this.panel4.ResumeLayout(false);
             this.panelContent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgLogin)).EndInit();
             this.tableLayoutPanelImage.ResumeLayout(false);
@@ -660,7 +676,6 @@ namespace ClientWinform
             this.tableLayoutPanel1.PerformLayout();
             this.panelIntro.ResumeLayout(false);
             this.tableLayoutPanelMain.ResumeLayout(false);
-            this.panel4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
