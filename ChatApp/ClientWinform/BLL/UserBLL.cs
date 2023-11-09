@@ -56,6 +56,18 @@ namespace ClientWinform.BLL
                 var user = testpbldb.Users.Where(x => x.Username == username && x.Password == password && x.Status == Constants.Statuses.ACTIVE).FirstOrDefault();
                 if (user != null)
                 {
+                    return user.Id;
+                }
+                return 0;
+            }
+        }
+        public static int getRole(int id)
+        {
+            using (testpbldbEntities1 testpbldb = new testpbldbEntities1())
+            {
+                var user = testpbldb.Users.Where(x => x.Id == id && x.Status == Constants.Statuses.ACTIVE).FirstOrDefault();
+                if (user != null)
+                {
                     if (user.IdRole == null) throw new Exception("Missing Role Authorization.");
                     return (int)user.IdRole;
                 }

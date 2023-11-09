@@ -15,9 +15,8 @@ namespace ClientWinform.SocketHandles
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
-        static int _myId;
 
-        public static void connectServer(String username)
+        public static void connectServer(int myId, String username)
         {
             _ipep = new IPEndPoint(IPAddress.Parse(_ipServer), _port);
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -29,7 +28,7 @@ namespace ClientWinform.SocketHandles
 
                 //gửi ID + Username cho Server
                 byte[] datasend = new byte[1024];
-                datasend = Encoding.ASCII.GetBytes(_myId.ToString() + " | " + username);
+                datasend = Encoding.ASCII.GetBytes(myId.ToString() + " | " + username);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
 
                 //Thread recvMss = new Thread(receiveMessage);
