@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c3c493f0e7c94827a1d392dee968aa9f" Name="Diagram1">
+        <EntityTypeShape EntityType="testpbldbModel.File" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="testpbldbModel.Message" Width="1.5" PointX="5.25" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="testpbldbModel.Role" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="testpbldbModel.sysdiagram" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="testpbldbModel.User" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="testpbldbModel.FK_IdAvatar_Users_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="testpbldbModel.FK_IdFile_Messages_Files" ManuallyRouted="false" />
+        <AssociationConnector Association="testpbldbModel.FK_IdFrom_Messages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="testpbldbModel.FK_IdTo_Messages_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="testpbldbModel.FK_IdRole_Users_Roles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

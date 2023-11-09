@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClientWinform.BLL;
+using ClientWinform.DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace ClientWinform
 {
@@ -47,6 +50,37 @@ namespace ClientWinform
         {
             SignUpForm f = new SignUpForm();
             f.ShowDialog();
+        }
+
+        private void btnSignIn_Click(object sender, EventArgs e)
+        {
+            // validate
+            if (String.IsNullOrWhiteSpace(txtUsername.Text)
+                || String.IsNullOrWhiteSpace(txtPassword.Text)
+                )
+            {
+                MessageBox.Show("Please fill all information.", "ERROR");
+                return;
+            }
+
+            // Sign In
+            try
+            {
+                int idRole = UserBLL.SignIn(txtUsername.Text, txtPassword.Text);
+                if (idRole == 0)
+                {
+                    MessageBox.Show("Username or Password is wrong", "ERROR");
+                }
+                else
+                {
+                    MessageBox.Show("Sign In Successfully.", "INFO");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "ERROR");
+            }
+            
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using ClientWinform.DTO;
+using ClientWinform.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,6 +50,47 @@ namespace ClientWinform
         {
             loginForm f = new loginForm();
             f.ShowDialog();
+        }
+
+        private void signUpBtn_Click(object sender, EventArgs e)
+        {
+            // validate
+            if (String.IsNullOrWhiteSpace(txtEmail.Text) 
+                || String.IsNullOrWhiteSpace(txtName.Text)
+                || String.IsNullOrWhiteSpace(txtUsername.Text)
+                || String.IsNullOrWhiteSpace(txtPassword.Text)
+                || String.IsNullOrWhiteSpace(txtVerifyPW.Text)
+                )
+            {
+                MessageBox.Show("Please fill all information.", "ERROR");
+                return;
+            }
+            if(txtPassword.Text != txtVerifyPW.Text)
+            {
+                MessageBox.Show("Verify Password fail.", "ERROR");
+                return;
+            }
+
+            // Sign Up
+            User user = new User()
+            {
+                IdRole = Constants.Roles.USER,
+                Name = txtName.Text,
+                Email = txtEmail.Text,
+                Username = txtUsername.Text,
+                Password = txtPassword.Text,
+                Status = Constants.Statuses.ACTIVE,
+                CreatedDate = DateTime.Now
+            };
+            try
+            {
+                UserBLL.SignUp(user);
+                MessageBox.Show("Sign Up Successfully.", "INFO");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }
