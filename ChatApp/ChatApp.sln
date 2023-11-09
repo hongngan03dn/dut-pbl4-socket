@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31515.178
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientWinform", "ClientWinform\ClientWinform.csproj", "{8E3E3276-6B24-4747-99BB-BCCD69D0FE4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MailServer", "MailServer\MailServer.csproj", "{D3591B15-F084-43AC-B4DA-0FBF09AEF241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8E3E3276-6B24-4747-99BB-BCCD69D0FE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E3E3276-6B24-4747-99BB-BCCD69D0FE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E3E3276-6B24-4747-99BB-BCCD69D0FE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3591B15-F084-43AC-B4DA-0FBF09AEF241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3591B15-F084-43AC-B4DA-0FBF09AEF241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3591B15-F084-43AC-B4DA-0FBF09AEF241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3591B15-F084-43AC-B4DA-0FBF09AEF241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
