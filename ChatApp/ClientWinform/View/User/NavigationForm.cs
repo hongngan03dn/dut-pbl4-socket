@@ -16,10 +16,13 @@ namespace ClientWinform
     {
         private Guna2Button currentBut;
         private Form activeForm;
+        private Panel exploreUser;
         public NavigationForm()
         {
             InitializeComponent();
             ActiveButton((Guna2Button)chatBtn);
+            ChatListForm f = new ChatListForm();
+            OpenStartForm(f); 
         }
         private void ActiveButton(object btnSender)
         {
@@ -64,10 +67,10 @@ namespace ClientWinform
         }
         public void OpenChilForm(Form childForm, object sender)
         {
-            if (activeForm != null)
-            {
-                activeForm.Close();
-            }
+            //if (activeForm != null)
+            //{
+            //    activeForm.Close();
+            //}
             ActiveButton(sender);
             activeForm = childForm;
             childForm.TopLevel = false;
@@ -85,9 +88,29 @@ namespace ClientWinform
             OpenChilForm(f, sender);
         }
 
+
         private void exploreBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
+            panelExplore.Size = new Size(300, panelChild.Height);
+            panelExplore.Location = new Point(0, 0);
+            panelExplore.Visible = true;
+            panelExplore.BringToFront();
+        }
+        private void searchTxt_IconLeftClick(object sender, EventArgs e)
+        {
+            exploreUser = new Panel();
+            exploreUser.Size = new Size(268, 56);
+            exploreUser.BackColor = Color.FromArgb(233, 233, 236);
+
+            exploreUser.Click += new EventHandler(exploreUserPanel_Click);
+
+            flowLayoutPanelListExplore.Controls.Add(exploreUser);
+        }
+        private void exploreUserPanel_Click(object sender, EventArgs e)
+        {
+            ProfileExplorerForm f = new ProfileExplorerForm();
+            f.ShowDialog();
         }
 
         private void profileBtn_Click(object sender, EventArgs e)
@@ -95,5 +118,7 @@ namespace ClientWinform
             ProfileForm f = new ProfileForm();
             OpenChilForm(f, sender);
         }
+
+
     }
 }

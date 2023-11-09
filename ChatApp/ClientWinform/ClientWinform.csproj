@@ -109,6 +109,12 @@
     <Compile Include="View\SignInSignUp\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\ChatContentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\User\ChatContentForm.Designer.cs">
+      <DependentUpon>ChatContentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\User\ChatListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -120,6 +126,12 @@
     </Compile>
     <Compile Include="View\User\NavigationForm.Designer.cs">
       <DependentUpon>NavigationForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\ProfileExplorerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\User\ProfileExplorerForm.Designer.cs">
+      <DependentUpon>ProfileExplorerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\User\ProfileForm.cs">
       <SubType>Form</SubType>
@@ -135,8 +147,17 @@
     <Compile Include="View\SignInSignUp\SignUpForm.Designer.cs">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\UpdateProfileForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\User\UpdateProfileForm.Designer.cs">
+      <DependentUpon>UpdateProfileForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\SignInSignUp\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\ChatContentForm.resx">
+      <DependentUpon>ChatContentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\ChatListForm.resx">
       <DependentUpon>ChatListForm.cs</DependentUpon>
@@ -157,8 +178,14 @@
     <EmbeddedResource Include="View\SignInSignUp\SignUpForm.resx">
       <DependentUpon>SignUpForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\User\ProfileExplorerForm.resx">
+      <DependentUpon>ProfileExplorerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\User\ProfileForm.resx">
       <DependentUpon>ProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\UpdateProfileForm.resx">
+      <DependentUpon>UpdateProfileForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DTO\DBChatApp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -243,6 +270,27 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Setup-amico 1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chat content.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Chat content %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Untitled %282%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paperclip.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
