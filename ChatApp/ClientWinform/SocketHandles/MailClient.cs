@@ -21,28 +21,28 @@ namespace ClientWinform.SocketHandles
 
         } 
 
-        public void connectServer()
-        {
-            ipep = new IPEndPoint(IPAddress.Parse(IpServer), Port);
-            client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //public void connectServer()
+        //{
+        //    ipep = new IPEndPoint(IPAddress.Parse(IpServer), Port);
+        //    client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-            try
-            {
-                client.Connect(ipep);
+        //    try
+        //    {
+        //        client.Connect(ipep);
 
-                //send MyId
-                byte[] datasend = new byte[1024];
-                datasend = Encoding.ASCII.GetBytes(myId.ToString());
-                client.Send(datasend, datasend.Length, SocketFlags.None);
+        //        //send MyId
+        //        byte[] datasend = new byte[1024];
+        //        datasend = Encoding.ASCII.GetBytes(myId.ToString());
+        //        client.Send(datasend, datasend.Length, SocketFlags.None);
 
-                Thread recvMss = new Thread(receiveMessage);
-                recvMss.Start();
-                lbInfo.Text = "Connected";
-            }
-            catch (Exception ex)
-            {
-                lbInfo.Text = ex.Message;
-            }
-        }
+        //        Thread recvMss = new Thread(receiveMessage);
+        //        recvMss.Start();
+        //        lbInfo.Text = "Connected";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        lbInfo.Text = ex.Message;
+        //    }
+        //}
     }
 }
