@@ -9,40 +9,35 @@ using System.Threading.Tasks;
 
 namespace ClientWinform.SocketHandles
 {
-    internal class MailClient
+    public class MailClient
     {
-        String IpServer = "127.0.0.0";
-        int Port = 6767;
-        IPEndPoint ipep;
-        Socket client;
-        int myId;
-        public MailClient() 
+        static String _ipServer = "192.168.32.1";
+        static int _port = 6767;
+        static IPEndPoint _ipep;
+        static Socket _client;
+
+        public static void connectServer(int myId, String username)
         {
+            _ipep = new IPEndPoint(IPAddress.Parse(_ipServer), _port);
+            _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        } 
+            try
+            {
+                // kết nối Server
+                _client.Connect(_ipep);
 
-        //public void connectServer()
-        //{
-        //    ipep = new IPEndPoint(IPAddress.Parse(IpServer), Port);
-        //    client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                //gửi ID + Username cho Server
+                byte[] datasend = new byte[1024];
+                datasend = Encoding.ASCII.GetBytes(myId.ToString() + " | " + username);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
 
-        //    try
-        //    {
-        //        client.Connect(ipep);
-
-        //        //send MyId
-        //        byte[] datasend = new byte[1024];
-        //        datasend = Encoding.ASCII.GetBytes(myId.ToString());
-        //        client.Send(datasend, datasend.Length, SocketFlags.None);
-
-        //        Thread recvMss = new Thread(receiveMessage);
-        //        recvMss.Start();
-        //        lbInfo.Text = "Connected";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        lbInfo.Text = ex.Message;
-        //    }
-        //}
+                //Thread recvMss = new Thread(receiveMessage);
+                //recvMss.Start();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

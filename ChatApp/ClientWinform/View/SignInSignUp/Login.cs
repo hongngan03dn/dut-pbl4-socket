@@ -65,34 +65,51 @@ namespace ClientWinform
             }
 
             // Sign In
-            try
+            int id = UserBLL.SignIn(txtUsername.Text, txtPassword.Text);
+            int idRole;
+
+            if (id == 0)
             {
-                int idRole = UserBLL.SignIn(txtUsername.Text, txtPassword.Text);
-                if (idRole == 0)
+                MessageBox.Show("Username or Password is wrong", "ERROR");
+            }
+            else
+            {
+                // phân quyền
+                try
                 {
-                    MessageBox.Show("Username or Password is wrong", "ERROR");
+                    idRole = UserBLL.getRole(id);
                 }
-                else
-                {   MessageBox.Show("Sign In Successfully.", "INFO");
-                    this.Hide();
-                    if(idRole == Constants.Roles.USER)
-                    {
-                        NavigationForm f = new NavigationForm();
-                        f.ShowDialog();
-                    }
-                    if(idRole == Constants.Roles.ADMIN)
-                    {
-                        AdminHomeForm f = new AdminHomeForm();
-                        f.ShowDialog();
-                    }
-                    
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                MessageBox.Show("Sign In Successfully.", "INFO");
+
+                // kết nối Mail Server
+                try
+                {
+                    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+                
+                // điều hướng
+                this.Hide();
+                if(idRole == Constants.Roles.USER)
+                {
+                    NavigationForm f = new NavigationForm();
+                    f.ShowDialog();
+                }
+                if(idRole == Constants.Roles.ADMIN)
+                {
+                    AdminHomeForm f = new AdminHomeForm();
+                    f.ShowDialog();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "ERROR");
-            }
-            
         }
     }
 }
