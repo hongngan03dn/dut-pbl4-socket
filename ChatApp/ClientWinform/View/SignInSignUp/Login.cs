@@ -1,5 +1,6 @@
 ﻿using ClientWinform.BLL;
 using ClientWinform.DTO;
+using ClientWinform.View.Admin;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -72,8 +73,19 @@ namespace ClientWinform
                     MessageBox.Show("Username or Password is wrong", "ERROR");
                 }
                 else
-                {
-                    MessageBox.Show("Sign In Successfully.", "INFO");
+                {   MessageBox.Show("Sign In Successfully.", "INFO");
+                    this.Hide();
+                    if(idRole == Constants.Roles.USER)
+                    {
+                        NavigationForm f = new NavigationForm();
+                        f.ShowDialog();
+                    }
+                    if(idRole == Constants.Roles.ADMIN)
+                    {
+                        AdminHomeForm f = new AdminHomeForm();
+                        f.ShowDialog();
+                    }
+                    
                 }
             }
             catch (Exception ex)

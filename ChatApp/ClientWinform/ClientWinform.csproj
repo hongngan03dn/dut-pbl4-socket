@@ -153,6 +153,9 @@
     <Compile Include="View\User\UpdateProfileForm.Designer.cs">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
+      <DependentUpon>AdminHomeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\SignInSignUp\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
