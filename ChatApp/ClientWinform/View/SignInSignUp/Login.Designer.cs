@@ -42,6 +42,7 @@ namespace ClientWinform
             this.labelWelcomback = new System.Windows.Forms.Label();
             this.usernamePnl = new System.Windows.Forms.Panel();
             this.usernameLbl = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             this.passPnl = new System.Windows.Forms.Panel();
             this.txtPassword = new Guna.UI2.WinForms.Guna2TextBox();
             this.lineUserPnl = new System.Windows.Forms.Panel();
@@ -59,7 +60,6 @@ namespace ClientWinform
             this.minBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.maxBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.closeBtn = new Guna.UI2.WinForms.Guna2ControlBox();
-            this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelIntro.SuspendLayout();
             this.tableLayoutPanelImage.SuspendLayout();
@@ -283,7 +283,7 @@ namespace ClientWinform
             this.usernameLbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.usernameLbl.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernameLbl.Location = new System.Drawing.Point(0, 75);
+            this.usernameLbl.Location = new System.Drawing.Point(0, 36);
             this.usernameLbl.Margin = new System.Windows.Forms.Padding(0);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.PasswordChar = '\0';
@@ -292,6 +292,29 @@ namespace ClientWinform
             this.usernameLbl.Size = new System.Drawing.Size(340, 32);
             this.usernameLbl.TabIndex = 1;
             this.usernameLbl.TextOffset = new System.Drawing.Point(-9, 0);
+            // 
+            // txtUsername
+            // 
+            this.txtUsername.BorderThickness = 0;
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsername.DefaultText = "";
+            this.txtUsername.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtUsername.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtUsername.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsername.Location = new System.Drawing.Point(0, 68);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PasswordChar = '\0';
+            this.txtUsername.PlaceholderText = "";
+            this.txtUsername.SelectedText = "";
+            this.txtUsername.Size = new System.Drawing.Size(340, 39);
+            this.txtUsername.TabIndex = 4;
+            this.txtUsername.TextOffset = new System.Drawing.Point(-9, 0);
             // 
             // passPnl
             // 
@@ -564,31 +587,9 @@ namespace ClientWinform
             this.closeBtn.Size = new System.Drawing.Size(45, 32);
             this.closeBtn.TabIndex = 0;
             // 
-            // txtUsername
-            // 
-            this.txtUsername.BorderThickness = 0;
-            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtUsername.DefaultText = "";
-            this.txtUsername.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.txtUsername.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.txtUsername.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtUsername.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.txtUsername.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Location = new System.Drawing.Point(0, 36);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.txtUsername.Name = "txtUsername";
-            this.txtUsername.PasswordChar = '\0';
-            this.txtUsername.PlaceholderText = "";
-            this.txtUsername.SelectedText = "";
-            this.txtUsername.Size = new System.Drawing.Size(340, 39);
-            this.txtUsername.TabIndex = 4;
-            this.txtUsername.TextOffset = new System.Drawing.Point(-9, 0);
-            // 
             // loginForm
             // 
+            this.AcceptButton = this.btnSignIn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 730);

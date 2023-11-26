@@ -34,25 +34,27 @@ namespace ClientWinform.View.User
             this.maleBtn = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panelBio = new System.Windows.Forms.Panel();
-            this.bioTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtBio = new Guna.UI2.WinForms.Guna2TextBox();
             this.panelEmail = new System.Windows.Forms.Panel();
-            this.emailTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.labelInvalidemail = new System.Windows.Forms.Label();
+            this.txtMail = new Guna.UI2.WinForms.Guna2TextBox();
             this.labeBio = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.cancelBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.submitBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.btnCancel = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
+            this.dtPickerBirth = new System.Windows.Forms.DateTimePicker();
             this.labelBirth = new System.Windows.Forms.Label();
             this.panelBirthday = new System.Windows.Forms.Panel();
             this.labelEmail = new System.Windows.Forms.Label();
             this.panelName = new System.Windows.Forms.Panel();
-            this.nameTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtName = new Guna.UI2.WinForms.Guna2TextBox();
             this.labelName = new System.Windows.Forms.Label();
             this.labelGender = new System.Windows.Forms.Label();
             this.panelGender = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panelUsernameEdit = new System.Windows.Forms.Panel();
-            this.usernameTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtUsername = new Guna.UI2.WinForms.Guna2TextBox();
             this.labelUsernameEdit = new System.Windows.Forms.Label();
             this.labelUsername = new System.Windows.Forms.Label();
             this.panelUserName = new System.Windows.Forms.Panel();
@@ -60,9 +62,8 @@ namespace ClientWinform.View.User
             this.changeAvaBtn = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTittle = new System.Windows.Forms.TableLayoutPanel();
+            this.pictBoxAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
-            this.avaPictureBox = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.pictureBox = new System.Windows.Forms.PictureBox();
             this.genderGroupBox.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.panelBio.SuspendLayout();
@@ -72,14 +73,14 @@ namespace ClientWinform.View.User
             this.panelName.SuspendLayout();
             this.panelGender.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.panelUsernameEdit.SuspendLayout();
             this.panelUserName.SuspendLayout();
             this.tableLayoutPanelHead.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanelTittle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictBoxAva)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.avaPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // genderGroupBox
@@ -140,7 +141,7 @@ namespace ClientWinform.View.User
             // 
             // panelBio
             // 
-            this.panelBio.Controls.Add(this.bioTxt);
+            this.panelBio.Controls.Add(this.txtBio);
             this.panelBio.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBio.Location = new System.Drawing.Point(0, 139);
             this.panelBio.Margin = new System.Windows.Forms.Padding(0);
@@ -149,34 +150,35 @@ namespace ClientWinform.View.User
             this.panelBio.Size = new System.Drawing.Size(503, 143);
             this.panelBio.TabIndex = 11;
             // 
-            // bioTxt
+            // txtBio
             // 
-            this.bioTxt.AutoRoundedCorners = true;
-            this.bioTxt.BorderColor = System.Drawing.Color.Black;
-            this.bioTxt.BorderRadius = 25;
-            this.bioTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.bioTxt.DefaultText = "13//13";
-            this.bioTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.bioTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.bioTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.bioTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.bioTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bioTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.bioTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.bioTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.bioTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.bioTxt.Location = new System.Drawing.Point(0, 30);
-            this.bioTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.bioTxt.Name = "bioTxt";
-            this.bioTxt.PasswordChar = '\0';
-            this.bioTxt.PlaceholderText = "";
-            this.bioTxt.SelectedText = "";
-            this.bioTxt.Size = new System.Drawing.Size(459, 52);
-            this.bioTxt.TabIndex = 10;
+            this.txtBio.AutoRoundedCorners = true;
+            this.txtBio.BorderColor = System.Drawing.Color.Black;
+            this.txtBio.BorderRadius = 25;
+            this.txtBio.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtBio.DefaultText = "";
+            this.txtBio.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtBio.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtBio.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBio.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtBio.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtBio.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBio.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtBio.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtBio.Location = new System.Drawing.Point(0, 30);
+            this.txtBio.Margin = new System.Windows.Forms.Padding(0);
+            this.txtBio.Name = "txtBio";
+            this.txtBio.PasswordChar = '\0';
+            this.txtBio.PlaceholderText = "";
+            this.txtBio.SelectedText = "";
+            this.txtBio.Size = new System.Drawing.Size(459, 52);
+            this.txtBio.TabIndex = 10;
             // 
             // panelEmail
             // 
-            this.panelEmail.Controls.Add(this.emailTxt);
+            this.panelEmail.Controls.Add(this.labelInvalidemail);
+            this.panelEmail.Controls.Add(this.txtMail);
             this.panelEmail.Controls.Add(this.labeBio);
             this.panelEmail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEmail.Location = new System.Drawing.Point(0, 0);
@@ -186,30 +188,44 @@ namespace ClientWinform.View.User
             this.panelEmail.Size = new System.Drawing.Size(503, 139);
             this.panelEmail.TabIndex = 0;
             // 
-            // emailTxt
+            // labelInvalidemail
             // 
-            this.emailTxt.AutoRoundedCorners = true;
-            this.emailTxt.BorderColor = System.Drawing.Color.Black;
-            this.emailTxt.BorderRadius = 25;
-            this.emailTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.emailTxt.DefaultText = "thaonguyenvy109@gmail.com";
-            this.emailTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.emailTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.emailTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.emailTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.emailTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.emailTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emailTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.emailTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.emailTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emailTxt.Location = new System.Drawing.Point(0, 30);
-            this.emailTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.emailTxt.Name = "emailTxt";
-            this.emailTxt.PasswordChar = '\0';
-            this.emailTxt.PlaceholderText = "";
-            this.emailTxt.SelectedText = "";
-            this.emailTxt.Size = new System.Drawing.Size(459, 52);
-            this.emailTxt.TabIndex = 10;
+            this.labelInvalidemail.AutoSize = true;
+            this.labelInvalidemail.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelInvalidemail.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelInvalidemail.ForeColor = System.Drawing.Color.Red;
+            this.labelInvalidemail.Location = new System.Drawing.Point(0, 82);
+            this.labelInvalidemail.Name = "labelInvalidemail";
+            this.labelInvalidemail.Size = new System.Drawing.Size(149, 21);
+            this.labelInvalidemail.TabIndex = 12;
+            this.labelInvalidemail.Text = "Invalid email format";
+            this.labelInvalidemail.Visible = false;
+            // 
+            // txtMail
+            // 
+            this.txtMail.AutoRoundedCorners = true;
+            this.txtMail.BorderColor = System.Drawing.Color.Black;
+            this.txtMail.BorderRadius = 25;
+            this.txtMail.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMail.DefaultText = "";
+            this.txtMail.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtMail.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtMail.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMail.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMail.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtMail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMail.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtMail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMail.Location = new System.Drawing.Point(0, 30);
+            this.txtMail.Margin = new System.Windows.Forms.Padding(0);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.PasswordChar = '\0';
+            this.txtMail.PlaceholderText = "";
+            this.txtMail.SelectedText = "";
+            this.txtMail.Size = new System.Drawing.Size(459, 52);
+            this.txtMail.TabIndex = 10;
+            this.txtMail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
             // labeBio
             // 
@@ -228,8 +244,8 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.cancelBtn, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.submitBtn, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnCancel, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.btnSubmit, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 282);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
@@ -239,48 +255,49 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel4.Size = new System.Drawing.Size(503, 155);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
-            // cancelBtn
+            // btnCancel
             // 
-            this.cancelBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.cancelBtn.BorderRadius = 8;
-            this.cancelBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.cancelBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.cancelBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.cancelBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.cancelBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
-            this.cancelBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.cancelBtn.Location = new System.Drawing.Point(283, 3);
-            this.cancelBtn.Margin = new System.Windows.Forms.Padding(3, 3, 44, 3);
-            this.cancelBtn.Name = "cancelBtn";
-            this.cancelBtn.Size = new System.Drawing.Size(176, 53);
-            this.cancelBtn.TabIndex = 5;
-            this.cancelBtn.Text = "Cancel";
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
+            this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCancel.BorderRadius = 8;
+            this.btnCancel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnCancel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnCancel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
+            this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.btnCancel.Location = new System.Drawing.Point(283, 3);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 3, 44, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(176, 53);
+            this.btnCancel.TabIndex = 5;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
-            // submitBtn
+            // btnSubmit
             // 
-            this.submitBtn.BorderRadius = 8;
-            this.submitBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.submitBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.submitBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.submitBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.submitBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
-            this.submitBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.submitBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.submitBtn.Location = new System.Drawing.Point(3, 3);
-            this.submitBtn.Name = "submitBtn";
-            this.submitBtn.Size = new System.Drawing.Size(176, 53);
-            this.submitBtn.TabIndex = 4;
-            this.submitBtn.Text = "Submit";
+            this.btnSubmit.BorderRadius = 8;
+            this.btnSubmit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSubmit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSubmit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSubmit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
+            this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.btnSubmit.Location = new System.Drawing.Point(3, 3);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(176, 53);
+            this.btnSubmit.TabIndex = 4;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
-            // dateTimePicker1
+            // dtPickerBirth
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(8, 31);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(499, 34);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dtPickerBirth.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtPickerBirth.Location = new System.Drawing.Point(8, 31);
+            this.dtPickerBirth.Name = "dtPickerBirth";
+            this.dtPickerBirth.Size = new System.Drawing.Size(499, 34);
+            this.dtPickerBirth.TabIndex = 9;
             // 
             // labelBirth
             // 
@@ -296,7 +313,7 @@ namespace ClientWinform.View.User
             // 
             // panelBirthday
             // 
-            this.panelBirthday.Controls.Add(this.dateTimePicker1);
+            this.panelBirthday.Controls.Add(this.dtPickerBirth);
             this.panelBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBirthday.Location = new System.Drawing.Point(596, 172);
             this.panelBirthday.Margin = new System.Windows.Forms.Padding(0);
@@ -318,7 +335,7 @@ namespace ClientWinform.View.User
             // 
             // panelName
             // 
-            this.panelName.Controls.Add(this.nameTxt);
+            this.panelName.Controls.Add(this.txtName);
             this.panelName.Controls.Add(this.labelName);
             this.panelName.Controls.Add(this.labelGender);
             this.panelName.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -329,30 +346,30 @@ namespace ClientWinform.View.User
             this.panelName.Size = new System.Drawing.Size(503, 172);
             this.panelName.TabIndex = 2;
             // 
-            // nameTxt
+            // txtName
             // 
-            this.nameTxt.AutoRoundedCorners = true;
-            this.nameTxt.BorderColor = System.Drawing.Color.Black;
-            this.nameTxt.BorderRadius = 25;
-            this.nameTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.nameTxt.DefaultText = "Nguyen Vy Thao";
-            this.nameTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.nameTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.nameTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.nameTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.nameTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.nameTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.nameTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.nameTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.nameTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.nameTxt.Location = new System.Drawing.Point(0, 60);
-            this.nameTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.nameTxt.Name = "nameTxt";
-            this.nameTxt.PasswordChar = '\0';
-            this.nameTxt.PlaceholderText = "";
-            this.nameTxt.SelectedText = "";
-            this.nameTxt.Size = new System.Drawing.Size(459, 52);
-            this.nameTxt.TabIndex = 11;
+            this.txtName.AutoRoundedCorners = true;
+            this.txtName.BorderColor = System.Drawing.Color.Black;
+            this.txtName.BorderRadius = 25;
+            this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtName.DefaultText = "";
+            this.txtName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtName.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtName.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtName.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtName.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtName.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtName.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtName.Location = new System.Drawing.Point(0, 60);
+            this.txtName.Margin = new System.Windows.Forms.Padding(0);
+            this.txtName.Name = "txtName";
+            this.txtName.PasswordChar = '\0';
+            this.txtName.PlaceholderText = "";
+            this.txtName.SelectedText = "";
+            this.txtName.Size = new System.Drawing.Size(459, 52);
+            this.txtName.TabIndex = 11;
             // 
             // labelName
             // 
@@ -415,9 +432,20 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1566, 740);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // pictureBox
+            // 
+            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox.Image = global::ClientWinform.Properties.Resources.Setup_amico_1;
+            this.pictureBox.Location = new System.Drawing.Point(1063, 313);
+            this.pictureBox.Name = "pictureBox";
+            this.pictureBox.Size = new System.Drawing.Size(500, 424);
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox.TabIndex = 12;
+            this.pictureBox.TabStop = false;
+            // 
             // panelUsernameEdit
             // 
-            this.panelUsernameEdit.Controls.Add(this.usernameTxt);
+            this.panelUsernameEdit.Controls.Add(this.txtUsername);
             this.panelUsernameEdit.Controls.Add(this.labelUsernameEdit);
             this.panelUsernameEdit.Controls.Add(this.labelBirth);
             this.panelUsernameEdit.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -427,29 +455,29 @@ namespace ClientWinform.View.User
             this.panelUsernameEdit.Size = new System.Drawing.Size(970, 172);
             this.panelUsernameEdit.TabIndex = 13;
             // 
-            // usernameTxt
+            // txtUsername
             // 
-            this.usernameTxt.AutoRoundedCorners = true;
-            this.usernameTxt.BorderColor = System.Drawing.Color.Black;
-            this.usernameTxt.BorderRadius = 25;
-            this.usernameTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.usernameTxt.DefaultText = "Viez_taho";
-            this.usernameTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.usernameTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.usernameTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.usernameTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.usernameTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernameTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.usernameTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.usernameTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernameTxt.Location = new System.Drawing.Point(8, 60);
-            this.usernameTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.usernameTxt.Name = "usernameTxt";
-            this.usernameTxt.PasswordChar = '\0';
-            this.usernameTxt.PlaceholderText = "";
-            this.usernameTxt.SelectedText = "";
-            this.usernameTxt.Size = new System.Drawing.Size(499, 52);
-            this.usernameTxt.TabIndex = 13;
+            this.txtUsername.AutoRoundedCorners = true;
+            this.txtUsername.BorderColor = System.Drawing.Color.Black;
+            this.txtUsername.BorderRadius = 25;
+            this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtUsername.DefaultText = "";
+            this.txtUsername.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtUsername.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtUsername.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtUsername.Location = new System.Drawing.Point(8, 60);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(0);
+            this.txtUsername.Name = "txtUsername";
+            this.txtUsername.PasswordChar = '\0';
+            this.txtUsername.PlaceholderText = "";
+            this.txtUsername.SelectedText = "";
+            this.txtUsername.Size = new System.Drawing.Size(499, 52);
+            this.txtUsername.TabIndex = 13;
             // 
             // labelUsernameEdit
             // 
@@ -475,9 +503,8 @@ namespace ClientWinform.View.User
             this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
-            this.labelUsername.Size = new System.Drawing.Size(144, 53);
+            this.labelUsername.Size = new System.Drawing.Size(0, 53);
             this.labelUsername.TabIndex = 3;
-            this.labelUsername.Text = "Viez_taho";
             // 
             // panelUserName
             // 
@@ -525,6 +552,7 @@ namespace ClientWinform.View.User
             this.changeAvaBtn.Text = "Change profile photo";
             this.changeAvaBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
             this.changeAvaBtn.TextOffset = new System.Drawing.Point(-12, -2);
+            this.changeAvaBtn.Click += new System.EventHandler(this.changeAvaBtn_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -546,7 +574,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelTittle.ColumnCount = 2;
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.68274F));
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.31726F));
-            this.tableLayoutPanelTittle.Controls.Add(this.avaPictureBox, 0, 0);
+            this.tableLayoutPanelTittle.Controls.Add(this.pictBoxAva, 0, 0);
             this.tableLayoutPanelTittle.Controls.Add(this.tableLayoutPanelHead, 1, 0);
             this.tableLayoutPanelTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTittle.Location = new System.Drawing.Point(0, 0);
@@ -556,6 +584,20 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1566, 284);
             this.tableLayoutPanelTittle.TabIndex = 0;
+            // 
+            // pictBoxAva
+            // 
+            this.pictBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictBoxAva.Image = global::ClientWinform.Properties.Resources.Ava_img;
+            this.pictBoxAva.ImageRotate = 0F;
+            this.pictBoxAva.Location = new System.Drawing.Point(90, 92);
+            this.pictBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.pictBoxAva.Name = "pictBoxAva";
+            this.pictBoxAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.pictBoxAva.Size = new System.Drawing.Size(151, 192);
+            this.pictBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictBoxAva.TabIndex = 1;
+            this.pictBoxAva.TabStop = false;
             // 
             // tableLayoutPanelMain
             // 
@@ -572,31 +614,6 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.26563F));
             this.tableLayoutPanelMain.Size = new System.Drawing.Size(1566, 1024);
             this.tableLayoutPanelMain.TabIndex = 1;
-            // 
-            // avaPictureBox
-            // 
-            this.avaPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.avaPictureBox.Image = global::ClientWinform.Properties.Resources.Ava_img;
-            this.avaPictureBox.ImageRotate = 0F;
-            this.avaPictureBox.Location = new System.Drawing.Point(90, 92);
-            this.avaPictureBox.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.avaPictureBox.Name = "avaPictureBox";
-            this.avaPictureBox.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.avaPictureBox.Size = new System.Drawing.Size(151, 192);
-            this.avaPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.avaPictureBox.TabIndex = 1;
-            this.avaPictureBox.TabStop = false;
-            // 
-            // pictureBox
-            // 
-            this.pictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox.Image = global::ClientWinform.Properties.Resources.Setup_amico_1;
-            this.pictureBox.Location = new System.Drawing.Point(1063, 313);
-            this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(500, 424);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox.TabIndex = 12;
-            this.pictureBox.TabStop = false;
             // 
             // UpdateProfileForm
             // 
@@ -621,6 +638,7 @@ namespace ClientWinform.View.User
             this.panelGender.ResumeLayout(false);
             this.panelGender.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.panelUsernameEdit.ResumeLayout(false);
             this.panelUsernameEdit.PerformLayout();
             this.panelUserName.ResumeLayout(false);
@@ -628,9 +646,8 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelHead.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanelTittle.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictBoxAva)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.avaPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -641,20 +658,20 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.RadioButton maleBtn;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panelBio;
-        private Guna.UI2.WinForms.Guna2TextBox bioTxt;
+        private Guna.UI2.WinForms.Guna2TextBox txtBio;
         private System.Windows.Forms.Panel panelEmail;
-        private Guna.UI2.WinForms.Guna2TextBox emailTxt;
+        private Guna.UI2.WinForms.Guna2TextBox txtMail;
         private System.Windows.Forms.Label labeBio;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtPickerBirth;
         private System.Windows.Forms.Label labelBirth;
         private System.Windows.Forms.Panel panelBirthday;
         private System.Windows.Forms.Label labelEmail;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox avaPictureBox;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox pictBoxAva;
         private System.Windows.Forms.Panel panelName;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Panel panelGender;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private Guna.UI2.WinForms.Guna2Button submitBtn;
+        private Guna.UI2.WinForms.Guna2Button btnSubmit;
         private System.Windows.Forms.Label labelUsername;
         private System.Windows.Forms.Panel panelUserName;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHead;
@@ -662,13 +679,14 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTittle;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private Guna.UI2.WinForms.Guna2Button cancelBtn;
+        private Guna.UI2.WinForms.Guna2Button btnCancel;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Label labelName;
-        private Guna.UI2.WinForms.Guna2TextBox nameTxt;
+        private Guna.UI2.WinForms.Guna2TextBox txtName;
         private System.Windows.Forms.Panel panelUsernameEdit;
-        private Guna.UI2.WinForms.Guna2TextBox usernameTxt;
+        private Guna.UI2.WinForms.Guna2TextBox txtUsername;
         private System.Windows.Forms.Label labelUsernameEdit;
         private Guna.UI2.WinForms.Guna2Button changeAvaBtn;
+        protected System.Windows.Forms.Label labelInvalidemail;
     }
 }

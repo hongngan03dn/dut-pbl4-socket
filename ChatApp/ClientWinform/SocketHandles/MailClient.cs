@@ -11,7 +11,7 @@ namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
-        static String _ipServer = "192.168.32.1";
+        static String _ipServer = "192.168.1.15";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
