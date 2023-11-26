@@ -49,7 +49,6 @@ namespace ClientWinform
             this.passPanel = new System.Windows.Forms.Panel();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.recoverPassBtn = new Guna.UI2.WinForms.Guna2Button();
-            this.rememberLoginCb = new System.Windows.Forms.CheckBox();
             this.linePassPnl = new System.Windows.Forms.Panel();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSignIn = new Guna.UI2.WinForms.Guna2Button();
@@ -86,11 +85,11 @@ namespace ClientWinform
             this.tableLayoutPanelMain.Controls.Add(this.panelContent, 1, 0);
             this.tableLayoutPanelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelMain.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tableLayoutPanelMain.Margin = new System.Windows.Forms.Padding(4);
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(889, 584);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1082, 695);
             this.tableLayoutPanelMain.TabIndex = 0;
             this.tableLayoutPanelMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanelMain.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -104,7 +103,7 @@ namespace ClientWinform
             this.panelIntro.Location = new System.Drawing.Point(0, 0);
             this.panelIntro.Margin = new System.Windows.Forms.Padding(0);
             this.panelIntro.Name = "panelIntro";
-            this.panelIntro.Size = new System.Drawing.Size(444, 584);
+            this.panelIntro.Size = new System.Drawing.Size(541, 695);
             this.panelIntro.TabIndex = 0;
             // 
             // tableLayoutPanelImage
@@ -121,7 +120,7 @@ namespace ClientWinform
             this.tableLayoutPanelImage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.36986F));
             this.tableLayoutPanelImage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.64384F));
             this.tableLayoutPanelImage.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.89373F));
-            this.tableLayoutPanelImage.Size = new System.Drawing.Size(444, 584);
+            this.tableLayoutPanelImage.Size = new System.Drawing.Size(541, 695);
             this.tableLayoutPanelImage.TabIndex = 0;
             this.tableLayoutPanelImage.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanelImage.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -131,10 +130,10 @@ namespace ClientWinform
             // 
             this.imgLogin.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imgLogin.Image = global::ClientWinform.Properties.Resources.Group_Chat_rafiki;
-            this.imgLogin.Location = new System.Drawing.Point(0, 124);
+            this.imgLogin.Location = new System.Drawing.Point(0, 148);
             this.imgLogin.Margin = new System.Windows.Forms.Padding(0);
             this.imgLogin.Name = "imgLogin";
-            this.imgLogin.Size = new System.Drawing.Size(444, 360);
+            this.imgLogin.Size = new System.Drawing.Size(541, 428);
             this.imgLogin.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgLogin.TabIndex = 0;
             this.imgLogin.TabStop = false;
@@ -156,7 +155,7 @@ namespace ClientWinform
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(444, 124);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(541, 148);
             this.tableLayoutPanel1.TabIndex = 1;
             this.tableLayoutPanel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -168,9 +167,9 @@ namespace ClientWinform
             this.slogan.AutoSize = true;
             this.slogan.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.slogan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(83)))), ((int)(((byte)(164)))));
-            this.slogan.Location = new System.Drawing.Point(155, 106);
+            this.slogan.Location = new System.Drawing.Point(196, 126);
             this.slogan.Name = "slogan";
-            this.slogan.Size = new System.Drawing.Size(259, 18);
+            this.slogan.Size = new System.Drawing.Size(310, 22);
             this.slogan.TabIndex = 1;
             this.slogan.Text = "\"Connect, Communicate, Collaborate\"\r\n";
             // 
@@ -180,9 +179,9 @@ namespace ClientWinform
             this.nameApp.AutoSize = true;
             this.nameApp.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nameApp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.nameApp.Location = new System.Drawing.Point(213, 65);
+            this.nameApp.Location = new System.Drawing.Point(272, 85);
             this.nameApp.Name = "nameApp";
-            this.nameApp.Size = new System.Drawing.Size(201, 29);
+            this.nameApp.Size = new System.Drawing.Size(234, 33);
             this.nameApp.TabIndex = 0;
             this.nameApp.Text = "W e C o n n e c t\r\n";
             // 
@@ -193,10 +192,10 @@ namespace ClientWinform
             this.panelContent.Controls.Add(this.tableLayoutPanel2);
             this.panelContent.Controls.Add(this.panelControlBox);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelContent.Location = new System.Drawing.Point(444, 0);
+            this.panelContent.Location = new System.Drawing.Point(541, 0);
             this.panelContent.Margin = new System.Windows.Forms.Padding(0);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(445, 584);
+            this.panelContent.Size = new System.Drawing.Size(541, 695);
             this.panelContent.TabIndex = 1;
             // 
             // tableLayoutPanel2
@@ -223,7 +222,7 @@ namespace ClientWinform
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.62554F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.2726F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(445, 558);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(541, 669);
             this.tableLayoutPanel2.TabIndex = 1;
             this.tableLayoutPanel2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanel2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -236,9 +235,9 @@ namespace ClientWinform
             this.labelNote.AutoSize = true;
             this.labelNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNote.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelNote.Location = new System.Drawing.Point(74, 126);
+            this.labelNote.Location = new System.Drawing.Point(89, 156);
             this.labelNote.Name = "labelNote";
-            this.labelNote.Size = new System.Drawing.Size(296, 17);
+            this.labelNote.Size = new System.Drawing.Size(361, 20);
             this.labelNote.TabIndex = 2;
             this.labelNote.Text = "Fill your data to enter. Thank you!!!\r\n";
             this.labelNote.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -250,9 +249,9 @@ namespace ClientWinform
             this.labelWelcomback.AutoSize = true;
             this.labelWelcomback.Font = new System.Drawing.Font("Arial", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWelcomback.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.labelWelcomback.Location = new System.Drawing.Point(74, 92);
+            this.labelWelcomback.Location = new System.Drawing.Point(89, 116);
             this.labelWelcomback.Name = "labelWelcomback";
-            this.labelWelcomback.Size = new System.Drawing.Size(296, 29);
+            this.labelWelcomback.Size = new System.Drawing.Size(361, 33);
             this.labelWelcomback.TabIndex = 2;
             this.labelWelcomback.Text = "W E L C O M E  B A C K\r\n";
             this.labelWelcomback.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -262,10 +261,10 @@ namespace ClientWinform
             this.usernamePnl.Controls.Add(this.usernameLbl);
             this.usernamePnl.Controls.Add(this.txtUsername);
             this.usernamePnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.usernamePnl.Location = new System.Drawing.Point(71, 143);
+            this.usernamePnl.Location = new System.Drawing.Point(86, 176);
             this.usernamePnl.Margin = new System.Windows.Forms.Padding(0);
             this.usernamePnl.Name = "usernamePnl";
-            this.usernamePnl.Size = new System.Drawing.Size(302, 85);
+            this.usernamePnl.Size = new System.Drawing.Size(367, 104);
             this.usernamePnl.TabIndex = 6;
             // 
             // usernameLbl
@@ -283,13 +282,13 @@ namespace ClientWinform
             this.usernameLbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.usernameLbl.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernameLbl.Location = new System.Drawing.Point(0, 36);
+            this.usernameLbl.Location = new System.Drawing.Point(0, 39);
             this.usernameLbl.Margin = new System.Windows.Forms.Padding(0);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.PasswordChar = '\0';
             this.usernameLbl.PlaceholderText = "";
             this.usernameLbl.SelectedText = "";
-            this.usernameLbl.Size = new System.Drawing.Size(302, 26);
+            this.usernameLbl.Size = new System.Drawing.Size(367, 26);
             this.usernameLbl.TabIndex = 1;
             this.usernameLbl.TextOffset = new System.Drawing.Point(-9, 0);
             // 
@@ -306,13 +305,13 @@ namespace ClientWinform
             this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Location = new System.Drawing.Point(0, 68);
+            this.txtUsername.Location = new System.Drawing.Point(0, 65);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "";
             this.txtUsername.SelectedText = "";
-            this.txtUsername.Size = new System.Drawing.Size(340, 39);
+            this.txtUsername.Size = new System.Drawing.Size(367, 39);
             this.txtUsername.TabIndex = 4;
             this.txtUsername.TextOffset = new System.Drawing.Point(-9, 0);
             // 
@@ -321,10 +320,10 @@ namespace ClientWinform
             this.passPnl.Controls.Add(this.txtPassword);
             this.passPnl.Controls.Add(this.lineUserPnl);
             this.passPnl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.passPnl.Location = new System.Drawing.Point(71, 228);
+            this.passPnl.Location = new System.Drawing.Point(86, 280);
             this.passPnl.Margin = new System.Windows.Forms.Padding(0);
             this.passPnl.Name = "passPnl";
-            this.passPnl.Size = new System.Drawing.Size(302, 53);
+            this.passPnl.Size = new System.Drawing.Size(367, 65);
             this.passPnl.TabIndex = 7;
             // 
             // txtPassword
@@ -342,13 +341,13 @@ namespace ClientWinform
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.txtPassword.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtPassword.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPassword.Location = new System.Drawing.Point(0, 27);
+            this.txtPassword.Location = new System.Drawing.Point(0, 39);
             this.txtPassword.Margin = new System.Windows.Forms.Padding(0);
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.PlaceholderText = "Password";
             this.txtPassword.SelectedText = "";
-            this.txtPassword.Size = new System.Drawing.Size(302, 26);
+            this.txtPassword.Size = new System.Drawing.Size(367, 26);
             this.txtPassword.TabIndex = 1;
             this.txtPassword.TextOffset = new System.Drawing.Point(-9, 0);
             // 
@@ -359,7 +358,7 @@ namespace ClientWinform
             this.lineUserPnl.Location = new System.Drawing.Point(0, 0);
             this.lineUserPnl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lineUserPnl.Name = "lineUserPnl";
-            this.lineUserPnl.Size = new System.Drawing.Size(302, 2);
+            this.lineUserPnl.Size = new System.Drawing.Size(367, 2);
             this.lineUserPnl.TabIndex = 1;
             // 
             // passPanel
@@ -367,26 +366,24 @@ namespace ClientWinform
             this.passPanel.Controls.Add(this.tableLayoutPanel3);
             this.passPanel.Controls.Add(this.linePassPnl);
             this.passPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.passPanel.Location = new System.Drawing.Point(71, 281);
+            this.passPanel.Location = new System.Drawing.Point(86, 345);
             this.passPanel.Margin = new System.Windows.Forms.Padding(0);
             this.passPanel.Name = "passPanel";
-            this.passPanel.Size = new System.Drawing.Size(302, 62);
+            this.passPanel.Size = new System.Drawing.Size(367, 76);
             this.passPanel.TabIndex = 5;
             // 
             // tableLayoutPanel3
             // 
-            this.tableLayoutPanel3.ColumnCount = 2;
+            this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 46.47059F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 53.52941F));
-            this.tableLayoutPanel3.Controls.Add(this.recoverPassBtn, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.rememberLoginCb, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.recoverPassBtn, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 2);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(302, 60);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(367, 74);
             this.tableLayoutPanel3.TabIndex = 3;
             // 
             // recoverPassBtn
@@ -401,30 +398,16 @@ namespace ClientWinform
             this.recoverPassBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.recoverPassBtn.HoverState.FillColor = System.Drawing.Color.White;
             this.recoverPassBtn.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
-            this.recoverPassBtn.Location = new System.Drawing.Point(143, 15);
+            this.recoverPassBtn.Location = new System.Drawing.Point(191, 22);
             this.recoverPassBtn.Margin = new System.Windows.Forms.Padding(0);
             this.recoverPassBtn.Name = "recoverPassBtn";
             this.recoverPassBtn.PressedColor = System.Drawing.Color.White;
-            this.recoverPassBtn.Size = new System.Drawing.Size(159, 30);
+            this.recoverPassBtn.Size = new System.Drawing.Size(176, 30);
             this.recoverPassBtn.TabIndex = 1;
             this.recoverPassBtn.Text = "Recover password";
             this.recoverPassBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.recoverPassBtn.TextOffset = new System.Drawing.Point(7, 0);
+            this.recoverPassBtn.TextOffset = new System.Drawing.Point(6, 0);
             this.recoverPassBtn.Click += new System.EventHandler(this.recoverPassBtn_Click);
-            // 
-            // rememberLoginCb
-            // 
-            this.rememberLoginCb.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.rememberLoginCb.AutoSize = true;
-            this.rememberLoginCb.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rememberLoginCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.rememberLoginCb.Location = new System.Drawing.Point(3, 19);
-            this.rememberLoginCb.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.rememberLoginCb.Name = "rememberLoginCb";
-            this.rememberLoginCb.Size = new System.Drawing.Size(133, 21);
-            this.rememberLoginCb.TabIndex = 3;
-            this.rememberLoginCb.Text = "Remember login";
-            this.rememberLoginCb.UseVisualStyleBackColor = true;
             // 
             // linePassPnl
             // 
@@ -433,7 +416,7 @@ namespace ClientWinform
             this.linePassPnl.Location = new System.Drawing.Point(0, 0);
             this.linePassPnl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.linePassPnl.Name = "linePassPnl";
-            this.linePassPnl.Size = new System.Drawing.Size(302, 2);
+            this.linePassPnl.Size = new System.Drawing.Size(367, 2);
             this.linePassPnl.TabIndex = 2;
             // 
             // tableLayoutPanel4
@@ -445,13 +428,13 @@ namespace ClientWinform
             this.tableLayoutPanel4.Controls.Add(this.btnSignIn, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 1, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(71, 343);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(86, 421);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.77778F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.22222F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(302, 149);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(367, 182);
             this.tableLayoutPanel4.TabIndex = 9;
             // 
             // btnSignIn
@@ -459,7 +442,7 @@ namespace ClientWinform
             this.btnSignIn.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnSignIn.AutoRoundedCorners = true;
             this.btnSignIn.BackColor = System.Drawing.Color.Transparent;
-            this.btnSignIn.BorderRadius = 17;
+            this.btnSignIn.BorderRadius = 21;
             this.btnSignIn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnSignIn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnSignIn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -467,13 +450,13 @@ namespace ClientWinform
             this.btnSignIn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.btnSignIn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnSignIn.ForeColor = System.Drawing.Color.White;
-            this.btnSignIn.Location = new System.Drawing.Point(70, 18);
+            this.btnSignIn.Location = new System.Drawing.Point(93, 21);
             this.btnSignIn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSignIn.Name = "btnSignIn";
             this.btnSignIn.ShadowDecoration.BorderRadius = 5;
             this.btnSignIn.ShadowDecoration.Depth = 15;
             this.btnSignIn.ShadowDecoration.Shadow = new System.Windows.Forms.Padding(0);
-            this.btnSignIn.Size = new System.Drawing.Size(160, 36);
+            this.btnSignIn.Size = new System.Drawing.Size(180, 45);
             this.btnSignIn.TabIndex = 0;
             this.btnSignIn.Text = "Sign in";
             this.btnSignIn.Click += new System.EventHandler(this.btnSignIn_Click);
@@ -486,12 +469,12 @@ namespace ClientWinform
             this.tableLayoutPanel5.Controls.Add(this.signUpBtn, 1, 0);
             this.tableLayoutPanel5.Controls.Add(this.labelDontHaveAnAccount, 0, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(9, 56);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(12, 68);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(282, 93);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(342, 114);
             this.tableLayoutPanel5.TabIndex = 1;
             // 
             // signUpBtn
@@ -505,15 +488,15 @@ namespace ClientWinform
             this.signUpBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.signUpBtn.HoverState.FillColor = System.Drawing.Color.White;
             this.signUpBtn.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(83)))), ((int)(((byte)(164)))));
-            this.signUpBtn.Location = new System.Drawing.Point(176, 0);
+            this.signUpBtn.Location = new System.Drawing.Point(214, 0);
             this.signUpBtn.Margin = new System.Windows.Forms.Padding(0);
             this.signUpBtn.Name = "signUpBtn";
             this.signUpBtn.PressedColor = System.Drawing.Color.White;
-            this.signUpBtn.Size = new System.Drawing.Size(90, 22);
+            this.signUpBtn.Size = new System.Drawing.Size(108, 69);
             this.signUpBtn.TabIndex = 4;
             this.signUpBtn.Text = "Sign up";
             this.signUpBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.signUpBtn.TextOffset = new System.Drawing.Point(-12, -2);
+            this.signUpBtn.TextOffset = new System.Drawing.Point(-12, -16);
             this.signUpBtn.Click += new System.EventHandler(this.signUpBtn_Click);
             // 
             // labelDontHaveAnAccount
@@ -522,9 +505,9 @@ namespace ClientWinform
             this.labelDontHaveAnAccount.AutoSize = true;
             this.labelDontHaveAnAccount.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelDontHaveAnAccount.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelDontHaveAnAccount.Location = new System.Drawing.Point(15, 0);
+            this.labelDontHaveAnAccount.Location = new System.Drawing.Point(34, 0);
             this.labelDontHaveAnAccount.Name = "labelDontHaveAnAccount";
-            this.labelDontHaveAnAccount.Size = new System.Drawing.Size(158, 17);
+            this.labelDontHaveAnAccount.Size = new System.Drawing.Size(177, 20);
             this.labelDontHaveAnAccount.TabIndex = 9;
             this.labelDontHaveAnAccount.Text = "Don\'t have an account?";
             this.labelDontHaveAnAccount.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -538,7 +521,7 @@ namespace ClientWinform
             this.panelControlBox.Location = new System.Drawing.Point(0, 0);
             this.panelControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.panelControlBox.Name = "panelControlBox";
-            this.panelControlBox.Size = new System.Drawing.Size(445, 26);
+            this.panelControlBox.Size = new System.Drawing.Size(541, 26);
             this.panelControlBox.TabIndex = 0;
             this.panelControlBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.panelControlBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -551,7 +534,7 @@ namespace ClientWinform
             this.minBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.minBtn.FillColor = System.Drawing.Color.Transparent;
             this.minBtn.IconColor = System.Drawing.Color.White;
-            this.minBtn.Location = new System.Drawing.Point(325, 0);
+            this.minBtn.Location = new System.Drawing.Point(421, 0);
             this.minBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.minBtn.Name = "minBtn";
             this.minBtn.ShowIcon = false;
@@ -566,7 +549,7 @@ namespace ClientWinform
             this.maxBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.maxBtn.FillColor = System.Drawing.Color.Transparent;
             this.maxBtn.IconColor = System.Drawing.Color.White;
-            this.maxBtn.Location = new System.Drawing.Point(365, 0);
+            this.maxBtn.Location = new System.Drawing.Point(461, 0);
             this.maxBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.maxBtn.Name = "maxBtn";
             this.maxBtn.ShowIcon = false;
@@ -581,7 +564,7 @@ namespace ClientWinform
             this.closeBtn.Dock = System.Windows.Forms.DockStyle.Right;
             this.closeBtn.FillColor = System.Drawing.Color.Transparent;
             this.closeBtn.IconColor = System.Drawing.Color.White;
-            this.closeBtn.Location = new System.Drawing.Point(405, 0);
+            this.closeBtn.Location = new System.Drawing.Point(501, 0);
             this.closeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.ShowIcon = false;
@@ -593,7 +576,7 @@ namespace ClientWinform
             this.AcceptButton = this.btnSignIn;
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(889, 584);
+            this.ClientSize = new System.Drawing.Size(1082, 695);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Location = new System.Drawing.Point(250, 80);
@@ -616,7 +599,6 @@ namespace ClientWinform
             this.passPnl.ResumeLayout(false);
             this.passPanel.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel3.PerformLayout();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel5.PerformLayout();
@@ -649,7 +631,6 @@ namespace ClientWinform
         private Guna.UI2.WinForms.Guna2TextBox txtPassword;
         private System.Windows.Forms.Panel linePassPnl;
         private Guna.UI2.WinForms.Guna2TextBox usernameLbl;
-        private System.Windows.Forms.CheckBox rememberLoginCb;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private Guna.UI2.WinForms.Guna2Button recoverPassBtn;
         private Guna.UI2.WinForms.Guna2Button btnSignIn;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +21,7 @@ namespace ClientWinform
         private Panel exploreUser;
 
         private User user = new User();
+        byte[] images = null;
         public NavigationForm()
         {
             InitializeComponent();
@@ -27,9 +29,30 @@ namespace ClientWinform
         public NavigationForm(User user):this()
         {
             this.user = user;
+            showDetail(user);
             ActiveButton((Guna2Button)chatBtn);
             ChatListForm f = new ChatListForm();
             OpenStartForm(f); 
+        }
+        public void showDetail(User user)
+        {
+            lableUsername.Text = user.Username;
+            images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
+            if (images == null)
+            {
+                pictureAva.Image = null;
+            }
+            else
+            {
+                MemoryStream mstream = new MemoryStream(images);
+                pictureAva.Image = Image.FromStream(mstream);
+            }
+        }
+        private void profileBtn_Click(object sender, EventArgs e)
+        {
+            ProfileForm f = new ProfileForm(user);
+            OpenChilForm(f, sender);
+            f.del += new ProfileForm.MyDel(showDetail);
         }
         private void ActiveButton(object btnSender)
         {
@@ -120,11 +143,7 @@ namespace ClientWinform
             f.ShowDialog();
         }
 
-        private void profileBtn_Click(object sender, EventArgs e)
-        {
-            ProfileForm f = new ProfileForm(user);
-            OpenChilForm(f, sender);
-        }
+
 
 
     }

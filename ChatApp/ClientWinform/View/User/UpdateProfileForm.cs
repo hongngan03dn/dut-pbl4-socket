@@ -91,6 +91,7 @@ namespace ClientWinform.View.User
         public void updateUser()
         {
             bool isChanged = false;
+            int idImg = 0;
             byte[] imagecChanged = null;
             bool gender;
             if (maleBtn.Checked == true)
@@ -101,16 +102,24 @@ namespace ClientWinform.View.User
             string username = txtUsername.Text;
             string email = txtMail.Text;
             string bio = txtBio.Text;
-            FileStream stream = new FileStream(imgLocation, FileMode.Open, FileAccess.Read);
-            BinaryReader brs = new BinaryReader(stream);
-            imagecChanged = brs.ReadBytes((int)stream.Length);
-            int idImg = BLL.UserBLL.changeAva(imagecChanged, user);
-            DateTime birth = Convert.ToDateTime(dtPickerBirth.Text);
-            if(name != user.Name || username != user.Username || birth != user.BOD || gender != user.Gender || bio != user.Bio || imagecChanged != images)
+            if(imgLocation != "")
             {
+                FileStream stream = new FileStream(imgLocation, FileMode.Open, FileAccess.Read);
+                BinaryReader brs = new BinaryReader(stream);
+                imagecChanged = brs.ReadBytes((int)stream.Length);
+                idImg = BLL.UserBLL.changeAva(imagecChanged, user);
+
+            }
+            DateTime birth = Convert.ToDateTime(dtPickerBirth.Text);
+            if(name != user.Name || username != user.Username || birth != user.BOD || gender != user.Gender || bio != user.Bio || idImg != 0)
+            {
+
                 isChanged = true;
                 user.Name = name;
-                user.IdAvatar = idImg;
+                if (idImg != 0)
+                    user.IdAvatar = idImg;
+                else
+                    user.IdAvatar = user.IdAvatar;
                 user.Username = username;
                 user.Email = email;
                 user.Bio = bio;

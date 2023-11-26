@@ -108,10 +108,10 @@
     <Compile Include="View\Admin\AdminHomeForm.Designer.cs">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ForgetPassForm.cs">
+    <Compile Include="View\SignInSignUp\ForgetPassForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\ForgetPassForm.Designer.cs">
+    <Compile Include="View\SignInSignUp\ForgetPassForm.Designer.cs">
       <DependentUpon>ForgetPassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SignInSignUp\Login.cs">
@@ -119,6 +119,12 @@
     </Compile>
     <Compile Include="View\SignInSignUp\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\User\ChangePassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\User\ChangePassForm.Designer.cs">
+      <DependentUpon>ChangePassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\User\ChatContentForm.cs">
       <SubType>Form</SubType>
@@ -167,11 +173,14 @@
     <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\ForgetPassForm.resx">
+    <EmbeddedResource Include="View\SignInSignUp\ForgetPassForm.resx">
       <DependentUpon>ForgetPassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SignInSignUp\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\ChangePassForm.resx">
+      <DependentUpon>ChangePassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\ChatContentForm.resx">
       <DependentUpon>ChatContentForm.cs</DependentUpon>
