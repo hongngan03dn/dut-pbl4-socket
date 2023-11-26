@@ -1,5 +1,6 @@
 ﻿using ClientWinform.BLL;
 using ClientWinform.DTO;
+using ClientWinform.View;
 using ClientWinform.View.Admin;
 using System;
 using System.Collections.Generic;
@@ -110,6 +111,12 @@ namespace ClientWinform
                     f.ShowDialog();
                 }
             }
+        }
+
+        private void recoverPassBtn_Click(object sender, EventArgs e)
+        {
+            ForgetPassForm f = new ForgetPassForm();
+            f.ShowDialog();
         }
     }
 }
