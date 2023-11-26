@@ -99,12 +99,20 @@
     <Compile Include="DTO\User.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MailUtils.cs" />
+    <Compile Include="Helpers\MD5Hasher.cs" />
     <Compile Include="SocketHandles\MailClient.cs" />
     <Compile Include="View\Admin\AdminHomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\Admin\AdminHomeForm.Designer.cs">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForgetPassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ForgetPassForm.Designer.cs">
+      <DependentUpon>ForgetPassForm.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SignInSignUp\Login.cs">
       <SubType>Form</SubType>
@@ -158,6 +166,9 @@
     </Compile>
     <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ForgetPassForm.resx">
+      <DependentUpon>ForgetPassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SignInSignUp\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
