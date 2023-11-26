@@ -12,25 +12,16 @@ namespace ClientWinform.DTO
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Avatar
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Avatar()
         {
-            this.Messages = new HashSet<Message>();
-            this.Messages1 = new HashSet<Message>();
+            this.Users = new HashSet<User>();
         }
     
         public int Id { get; set; }
-        public Nullable<int> IdRole { get; set; }
-        public Nullable<int> IdAvatar { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public string Name { get; set; }
-        public Nullable<System.DateTime> BOD { get; set; }
-        public Nullable<bool> Gender { get; set; }
-        public string Email { get; set; }
-        public string Bio { get; set; }
+        public byte[] AvaImg { get; set; }
         public Nullable<int> Status { get; set; }
         public string Description { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
@@ -38,12 +29,7 @@ namespace ClientWinform.DTO
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<int> UpdatedBy { get; set; }
     
-        public virtual File File { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Messages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Message> Messages1 { get; set; }
-        public virtual Role Role { get; set; }
-        public virtual Avatar Avatar { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

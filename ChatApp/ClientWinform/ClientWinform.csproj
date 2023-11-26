@@ -65,6 +65,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="DTO\Avatar.cs">
+      <DependentUpon>DBChatApp.tt</DependentUpon>
+    </Compile>
     <Compile Include="DTO\Constants.cs" />
     <Compile Include="DTO\DBChatApp.Context.cs">
       <AutoGen>True</AutoGen>

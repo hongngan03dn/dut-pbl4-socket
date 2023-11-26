@@ -32,7 +32,7 @@ namespace ClientWinform
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTittle = new System.Windows.Forms.TableLayoutPanel();
-            this.avaPictureBox = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.picBoxAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tableLayoutPanelHead = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panelUserName = new System.Windows.Forms.Panel();
@@ -44,14 +44,14 @@ namespace ClientWinform
             this.labelNumberConnections = new System.Windows.Forms.Label();
             this.panelName = new System.Windows.Forms.Panel();
             this.labelName = new System.Windows.Forms.Label();
-            this.bioLabel = new System.Windows.Forms.Label();
+            this.labelBio = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBirth = new System.Windows.Forms.Label();
             this.panelInfo = new System.Windows.Forms.Panel();
             this.labelGender = new System.Windows.Forms.Label();
             this.labelInfo = new System.Windows.Forms.Label();
             this.panelBirthday = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtPickerBirth = new System.Windows.Forms.DateTimePicker();
             this.panelGender = new System.Windows.Forms.Panel();
             this.genderGroupBox = new Guna.UI2.WinForms.Guna2GroupBox();
             this.femaleBtn = new System.Windows.Forms.RadioButton();
@@ -59,15 +59,15 @@ namespace ClientWinform
             this.labelEmail = new System.Windows.Forms.Label();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.panelPass = new System.Windows.Forms.Panel();
-            this.passwordTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.txtPass = new Guna.UI2.WinForms.Guna2TextBox();
             this.panelEmail = new System.Windows.Forms.Panel();
-            this.emailTxt = new Guna.UI2.WinForms.Guna2TextBox();
-            this.labelBio = new System.Windows.Forms.Label();
+            this.txtMail = new Guna.UI2.WinForms.Guna2TextBox();
+            this.labelPass = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelTittle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.avaPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).BeginInit();
             this.tableLayoutPanelHead.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelUserName.SuspendLayout();
@@ -114,9 +114,9 @@ namespace ClientWinform
             this.tableLayoutPanelTittle.ColumnCount = 2;
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.68274F));
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.31726F));
-            this.tableLayoutPanelTittle.Controls.Add(this.avaPictureBox, 0, 0);
+            this.tableLayoutPanelTittle.Controls.Add(this.picBoxAva, 0, 0);
             this.tableLayoutPanelTittle.Controls.Add(this.tableLayoutPanelHead, 1, 0);
-            this.tableLayoutPanelTittle.Controls.Add(this.bioLabel, 0, 1);
+            this.tableLayoutPanelTittle.Controls.Add(this.labelBio, 0, 1);
             this.tableLayoutPanelTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTittle.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTittle.Margin = new System.Windows.Forms.Padding(0);
@@ -127,19 +127,19 @@ namespace ClientWinform
             this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1566, 358);
             this.tableLayoutPanelTittle.TabIndex = 0;
             // 
-            // avaPictureBox
+            // picBoxAva
             // 
-            this.avaPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.avaPictureBox.Image = global::ClientWinform.Properties.Resources.Ava_img;
-            this.avaPictureBox.ImageRotate = 0F;
-            this.avaPictureBox.Location = new System.Drawing.Point(90, 92);
-            this.avaPictureBox.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.avaPictureBox.Name = "avaPictureBox";
-            this.avaPictureBox.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.avaPictureBox.Size = new System.Drawing.Size(151, 192);
-            this.avaPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.avaPictureBox.TabIndex = 1;
-            this.avaPictureBox.TabStop = false;
+            this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBoxAva.Image = global::ClientWinform.Properties.Resources.Ava_img;
+            this.picBoxAva.ImageRotate = 0F;
+            this.picBoxAva.Location = new System.Drawing.Point(90, 92);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
+            this.picBoxAva.Name = "picBoxAva";
+            this.picBoxAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picBoxAva.Size = new System.Drawing.Size(151, 192);
+            this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxAva.TabIndex = 1;
+            this.picBoxAva.TabStop = false;
             // 
             // tableLayoutPanelHead
             // 
@@ -294,18 +294,18 @@ namespace ClientWinform
             this.labelName.TabIndex = 3;
             this.labelName.Text = "Nguyen Vy Thao";
             // 
-            // bioLabel
+            // labelBio
             // 
-            this.bioLabel.AutoSize = true;
-            this.bioLabel.Dock = System.Windows.Forms.DockStyle.Top;
-            this.bioLabel.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.bioLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.bioLabel.Location = new System.Drawing.Point(3, 284);
-            this.bioLabel.Name = "bioLabel";
-            this.bioLabel.Size = new System.Drawing.Size(255, 28);
-            this.bioLabel.TabIndex = 4;
-            this.bioLabel.Text = "13//13";
-            this.bioLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelBio.AutoSize = true;
+            this.labelBio.Dock = System.Windows.Forms.DockStyle.Top;
+            this.labelBio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.labelBio.Location = new System.Drawing.Point(3, 284);
+            this.labelBio.Name = "labelBio";
+            this.labelBio.Size = new System.Drawing.Size(255, 28);
+            this.labelBio.TabIndex = 4;
+            this.labelBio.Text = "13//13";
+            this.labelBio.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tableLayoutPanel1
             // 
@@ -382,7 +382,7 @@ namespace ClientWinform
             // 
             // panelBirthday
             // 
-            this.panelBirthday.Controls.Add(this.dateTimePicker1);
+            this.panelBirthday.Controls.Add(this.dtPickerBirth);
             this.panelBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBirthday.Location = new System.Drawing.Point(562, 99);
             this.panelBirthday.Margin = new System.Windows.Forms.Padding(0);
@@ -390,13 +390,13 @@ namespace ClientWinform
             this.panelBirthday.Size = new System.Drawing.Size(1004, 137);
             this.panelBirthday.TabIndex = 10;
             // 
-            // dateTimePicker1
+            // dtPickerBirth
             // 
-            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(8, 31);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(496, 34);
-            this.dateTimePicker1.TabIndex = 9;
+            this.dtPickerBirth.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtPickerBirth.Location = new System.Drawing.Point(8, 31);
+            this.dtPickerBirth.Name = "dtPickerBirth";
+            this.dtPickerBirth.Size = new System.Drawing.Size(496, 34);
+            this.dtPickerBirth.TabIndex = 9;
             // 
             // panelGender
             // 
@@ -479,44 +479,44 @@ namespace ClientWinform
             // 
             // panelPass
             // 
-            this.panelPass.Controls.Add(this.passwordTxt);
+            this.panelPass.Controls.Add(this.txtPass);
             this.panelPass.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelPass.Location = new System.Drawing.Point(0, 137);
             this.panelPass.Margin = new System.Windows.Forms.Padding(0);
             this.panelPass.Name = "panelPass";
             this.panelPass.Padding = new System.Windows.Forms.Padding(0, 30, 10, 0);
-            this.panelPass.Size = new System.Drawing.Size(469, 140);
+            this.panelPass.Size = new System.Drawing.Size(469, 141);
             this.panelPass.TabIndex = 11;
             // 
-            // passwordTxt
+            // txtPass
             // 
-            this.passwordTxt.AutoRoundedCorners = true;
-            this.passwordTxt.BorderColor = System.Drawing.Color.Black;
-            this.passwordTxt.BorderRadius = 25;
-            this.passwordTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.passwordTxt.DefaultText = "*******************";
-            this.passwordTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.passwordTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.passwordTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passwordTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.passwordTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.passwordTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passwordTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.passwordTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.passwordTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.passwordTxt.Location = new System.Drawing.Point(0, 30);
-            this.passwordTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.passwordTxt.Name = "passwordTxt";
-            this.passwordTxt.PasswordChar = '*';
-            this.passwordTxt.PlaceholderText = "";
-            this.passwordTxt.SelectedText = "";
-            this.passwordTxt.Size = new System.Drawing.Size(459, 52);
-            this.passwordTxt.TabIndex = 10;
+            this.txtPass.AutoRoundedCorners = true;
+            this.txtPass.BorderColor = System.Drawing.Color.Black;
+            this.txtPass.BorderRadius = 25;
+            this.txtPass.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtPass.DefaultText = "*******************";
+            this.txtPass.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtPass.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtPass.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPass.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtPass.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtPass.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPass.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtPass.Location = new System.Drawing.Point(0, 30);
+            this.txtPass.Margin = new System.Windows.Forms.Padding(0);
+            this.txtPass.Name = "txtPass";
+            this.txtPass.PasswordChar = '*';
+            this.txtPass.PlaceholderText = "";
+            this.txtPass.SelectedText = "";
+            this.txtPass.Size = new System.Drawing.Size(459, 52);
+            this.txtPass.TabIndex = 10;
             // 
             // panelEmail
             // 
-            this.panelEmail.Controls.Add(this.emailTxt);
-            this.panelEmail.Controls.Add(this.labelBio);
+            this.panelEmail.Controls.Add(this.txtMail);
+            this.panelEmail.Controls.Add(this.labelPass);
             this.panelEmail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelEmail.Location = new System.Drawing.Point(0, 0);
             this.panelEmail.Margin = new System.Windows.Forms.Padding(0);
@@ -525,42 +525,42 @@ namespace ClientWinform
             this.panelEmail.Size = new System.Drawing.Size(469, 137);
             this.panelEmail.TabIndex = 0;
             // 
-            // emailTxt
+            // txtMail
             // 
-            this.emailTxt.AutoRoundedCorners = true;
-            this.emailTxt.BorderColor = System.Drawing.Color.Black;
-            this.emailTxt.BorderRadius = 25;
-            this.emailTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.emailTxt.DefaultText = "thaonguyenvy109@gmail.com";
-            this.emailTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.emailTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.emailTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.emailTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.emailTxt.Dock = System.Windows.Forms.DockStyle.Top;
-            this.emailTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emailTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.emailTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.emailTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.emailTxt.Location = new System.Drawing.Point(0, 30);
-            this.emailTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.emailTxt.Name = "emailTxt";
-            this.emailTxt.PasswordChar = '\0';
-            this.emailTxt.PlaceholderText = "";
-            this.emailTxt.SelectedText = "";
-            this.emailTxt.Size = new System.Drawing.Size(459, 52);
-            this.emailTxt.TabIndex = 10;
+            this.txtMail.AutoRoundedCorners = true;
+            this.txtMail.BorderColor = System.Drawing.Color.Black;
+            this.txtMail.BorderRadius = 25;
+            this.txtMail.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMail.DefaultText = "thaonguyenvy109@gmail.com";
+            this.txtMail.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.txtMail.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.txtMail.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMail.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.txtMail.Dock = System.Windows.Forms.DockStyle.Top;
+            this.txtMail.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMail.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.txtMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.txtMail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.txtMail.Location = new System.Drawing.Point(0, 30);
+            this.txtMail.Margin = new System.Windows.Forms.Padding(0);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.PasswordChar = '\0';
+            this.txtMail.PlaceholderText = "";
+            this.txtMail.SelectedText = "";
+            this.txtMail.Size = new System.Drawing.Size(459, 52);
+            this.txtMail.TabIndex = 10;
             // 
-            // labelBio
+            // labelPass
             // 
-            this.labelBio.AutoSize = true;
-            this.labelBio.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.labelBio.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelBio.Location = new System.Drawing.Point(0, 107);
-            this.labelBio.Name = "labelBio";
-            this.labelBio.Size = new System.Drawing.Size(105, 30);
-            this.labelBio.TabIndex = 9;
-            this.labelBio.Text = "Password";
+            this.labelPass.AutoSize = true;
+            this.labelPass.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.labelPass.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.labelPass.Location = new System.Drawing.Point(0, 107);
+            this.labelPass.Name = "labelPass";
+            this.labelPass.Size = new System.Drawing.Size(105, 30);
+            this.labelPass.TabIndex = 9;
+            this.labelPass.Text = "Password";
             // 
             // pictureBox
             // 
@@ -587,7 +587,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelTittle.ResumeLayout(false);
             this.tableLayoutPanelTittle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.avaPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).EndInit();
             this.tableLayoutPanelHead.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panelUserName.ResumeLayout(false);
@@ -619,7 +619,7 @@ namespace ClientWinform
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTittle;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox avaPictureBox;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox picBoxAva;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHead;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panelUserName;
@@ -631,14 +631,14 @@ namespace ClientWinform
         private System.Windows.Forms.Label labelNumberConnections;
         private System.Windows.Forms.Panel panelName;
         private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.Label bioLabel;
+        private System.Windows.Forms.Label labelBio;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelBirth;
         private System.Windows.Forms.Panel panelInfo;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Panel panelBirthday;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dtPickerBirth;
         private System.Windows.Forms.Panel panelGender;
         private Guna.UI2.WinForms.Guna2GroupBox genderGroupBox;
         private System.Windows.Forms.RadioButton femaleBtn;
@@ -646,10 +646,10 @@ namespace ClientWinform
         private System.Windows.Forms.Label labelEmail;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Panel panelPass;
-        private Guna.UI2.WinForms.Guna2TextBox passwordTxt;
+        private Guna.UI2.WinForms.Guna2TextBox txtPass;
         private System.Windows.Forms.Panel panelEmail;
-        private Guna.UI2.WinForms.Guna2TextBox emailTxt;
-        private System.Windows.Forms.Label labelBio;
+        private Guna.UI2.WinForms.Guna2TextBox txtMail;
+        private System.Windows.Forms.Label labelPass;
         private System.Windows.Forms.PictureBox pictureBox;
     }
 }
