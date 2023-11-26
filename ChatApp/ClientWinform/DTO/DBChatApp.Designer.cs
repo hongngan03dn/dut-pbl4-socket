@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\Ngan\source\repos\dut-pbl4-socket\ChatApp\ClientWinform\DTO\DBChatApp.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Nam3Ki1\PBL4\ChatApplication\ChatApp\ClientWinform\DTO\DBChatApp.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

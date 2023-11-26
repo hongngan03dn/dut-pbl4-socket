@@ -283,7 +283,7 @@ namespace ClientWinform
             this.usernameLbl.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.usernameLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.usernameLbl.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.usernameLbl.Location = new System.Drawing.Point(0, 28);
+            this.usernameLbl.Location = new System.Drawing.Point(0, 36);
             this.usernameLbl.Margin = new System.Windows.Forms.Padding(0);
             this.usernameLbl.Name = "usernameLbl";
             this.usernameLbl.PasswordChar = '\0';
@@ -306,13 +306,13 @@ namespace ClientWinform
             this.txtUsername.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Location = new System.Drawing.Point(0, 54);
-            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtUsername.Location = new System.Drawing.Point(0, 68);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "";
             this.txtUsername.SelectedText = "";
-            this.txtUsername.Size = new System.Drawing.Size(302, 31);
+            this.txtUsername.Size = new System.Drawing.Size(340, 39);
             this.txtUsername.TabIndex = 4;
             this.txtUsername.TextOffset = new System.Drawing.Point(-9, 0);
             // 
@@ -590,7 +590,8 @@ namespace ClientWinform
             // 
             // loginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AcceptButton = this.btnSignIn;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 584);
             this.Controls.Add(this.tableLayoutPanelMain);

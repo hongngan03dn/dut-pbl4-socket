@@ -67,6 +67,7 @@ namespace ClientWinform
 
             // Sign In
             int id = UserBLL.SignIn(txtUsername.Text, txtPassword.Text);
+            User user = UserBLL.getUserByID(id);
             int idRole;
 
             if (id == 0)
@@ -88,25 +89,27 @@ namespace ClientWinform
                 MessageBox.Show("Sign In Successfully.", "INFO");
 
                 // kết nối Mail Server
-                try
-                {
-                    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
+                //try
+                //{
+                //    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
+                //}
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show(ex.Message);
+                //    return;
+                //}
                 
                 // điều hướng
-                this.Hide();
+                
                 if(idRole == Constants.Roles.USER)
                 {
-                    NavigationForm f = new NavigationForm();
+                    this.Hide();
+                    NavigationForm f = new NavigationForm(user);
                     f.ShowDialog();
                 }
                 if(idRole == Constants.Roles.ADMIN)
                 {
+                    this.Hide();
                     AdminHomeForm f = new AdminHomeForm();
                     f.ShowDialog();
                 }

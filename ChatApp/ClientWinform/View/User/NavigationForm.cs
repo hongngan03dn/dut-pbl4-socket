@@ -1,4 +1,5 @@
-﻿using ClientWinform.View.User;
+﻿using ClientWinform.DTO;
+using ClientWinform.View.User;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,15 @@ namespace ClientWinform
         private Guna2Button currentBut;
         private Form activeForm;
         private Panel exploreUser;
+
+        private User user = new User();
         public NavigationForm()
         {
             InitializeComponent();
+        }
+        public NavigationForm(User user):this()
+        {
+            this.user = user;
             ActiveButton((Guna2Button)chatBtn);
             ChatListForm f = new ChatListForm();
             OpenStartForm(f); 
@@ -115,7 +122,7 @@ namespace ClientWinform
 
         private void profileBtn_Click(object sender, EventArgs e)
         {
-            ProfileForm f = new ProfileForm();
+            ProfileForm f = new ProfileForm(user);
             OpenChilForm(f, sender);
         }
 
