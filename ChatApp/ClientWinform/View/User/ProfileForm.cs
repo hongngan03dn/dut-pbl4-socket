@@ -17,6 +17,8 @@ namespace ClientWinform
     {
         private Form activeForm;
         private User user = new User();
+        public delegate void MyDel(User user);
+        public MyDel del { get; set; }
         public ProfileForm(User user)
         {
             InitializeComponent();
@@ -49,6 +51,11 @@ namespace ClientWinform
                 MemoryStream mstream = new MemoryStream(images);
                 picBoxAva.Image = Image.FromStream(mstream);
             }
+            if(del != null)
+            {
+                del(user);
+            }
+            
         }
         public void OpenChilForm(Form childForm)
         {
@@ -72,6 +79,12 @@ namespace ClientWinform
             UpdateProfileForm f = new UpdateProfileForm(user);
             OpenChilForm(f);
             f.d += new UpdateProfileForm.MyDel(showDetail);
+        }
+
+        private void changePassBtn_Click(object sender, EventArgs e)
+        {
+            ChangePassForm f = new ChangePassForm();
+            f.ShowDialog();
         }
     }
 }

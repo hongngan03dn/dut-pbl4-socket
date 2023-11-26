@@ -235,6 +235,7 @@ namespace ClientWinform
             this.changePassBtn.Name = "changePassBtn";
             this.changePassBtn.Size = new System.Drawing.Size(59, 60);
             this.changePassBtn.TabIndex = 5;
+            this.changePassBtn.Click += new System.EventHandler(this.changePassBtn_Click);
             // 
             // panelConnections
             // 

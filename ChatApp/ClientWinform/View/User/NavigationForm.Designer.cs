@@ -38,7 +38,7 @@ namespace ClientWinform
             this.exploreBtn = new Guna.UI2.WinForms.Guna2Button();
             this.profileBtn = new Guna.UI2.WinForms.Guna2Button();
             this.pictureAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
-            this.usernameLable = new System.Windows.Forms.Label();
+            this.lableUsername = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
             this.closeBtn = new Guna.UI2.WinForms.Guna2ControlBox();
             this.maxBtn = new Guna.UI2.WinForms.Guna2ControlBox();
@@ -96,7 +96,7 @@ namespace ClientWinform
             this.tableLayoutPanelMenu.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelMenu.Controls.Add(this.panelBtn, 0, 2);
             this.tableLayoutPanelMenu.Controls.Add(this.pictureAva, 0, 0);
-            this.tableLayoutPanelMenu.Controls.Add(this.usernameLable, 0, 1);
+            this.tableLayoutPanelMenu.Controls.Add(this.lableUsername, 0, 1);
             this.tableLayoutPanelMenu.Dock = System.Windows.Forms.DockStyle.Top;
             this.tableLayoutPanelMenu.Location = new System.Drawing.Point(0, 33);
             this.tableLayoutPanelMenu.Margin = new System.Windows.Forms.Padding(0);
@@ -216,18 +216,18 @@ namespace ClientWinform
             this.pictureAva.TabIndex = 0;
             this.pictureAva.TabStop = false;
             // 
-            // usernameLable
+            // lableUsername
             // 
-            this.usernameLable.AutoSize = true;
-            this.usernameLable.Dock = System.Windows.Forms.DockStyle.Top;
-            this.usernameLable.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.usernameLable.ForeColor = System.Drawing.Color.White;
-            this.usernameLable.Location = new System.Drawing.Point(3, 261);
-            this.usernameLable.Name = "usernameLable";
-            this.usernameLable.Size = new System.Drawing.Size(135, 28);
-            this.usernameLable.TabIndex = 1;
-            this.usernameLable.Text = "Viez_taho";
-            this.usernameLable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lableUsername.AutoSize = true;
+            this.lableUsername.Dock = System.Windows.Forms.DockStyle.Top;
+            this.lableUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lableUsername.ForeColor = System.Drawing.Color.White;
+            this.lableUsername.Location = new System.Drawing.Point(3, 261);
+            this.lableUsername.Name = "lableUsername";
+            this.lableUsername.Size = new System.Drawing.Size(135, 28);
+            this.lableUsername.TabIndex = 1;
+            this.lableUsername.Text = "Viez_taho";
+            this.lableUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelControlBox
             // 
@@ -401,7 +401,7 @@ namespace ClientWinform
         private Guna.UI2.WinForms.Guna2Button exploreBtn;
         private Guna.UI2.WinForms.Guna2Button profileBtn;
         private Guna.UI2.WinForms.Guna2CirclePictureBox pictureAva;
-        private System.Windows.Forms.Label usernameLable;
+        private System.Windows.Forms.Label lableUsername;
         private System.Windows.Forms.Panel panelLeftMenu;
         private System.Windows.Forms.Panel panelBtn;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListExplore;
