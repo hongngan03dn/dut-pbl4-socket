@@ -31,7 +31,7 @@ namespace ClientWinform
             this.user = user;
             showDetail(user);
             ActiveButton((Guna2Button)chatBtn);
-            ChatListForm f = new ChatListForm();
+            ChatListForm f = new ChatListForm(this.user);
             OpenStartForm(f); 
         }
         public void showDetail(User user)
@@ -114,7 +114,7 @@ namespace ClientWinform
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            ChatListForm f = new ChatListForm();
+            ChatListForm f = new ChatListForm(this.user);
             OpenChilForm(f, sender);
         }
 

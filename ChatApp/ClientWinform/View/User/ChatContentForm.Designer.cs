@@ -36,9 +36,11 @@ namespace ClientWinform.View.User
             this.labelUsername = new System.Windows.Forms.Label();
             this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.panelChatMessage = new System.Windows.Forms.Panel();
+            this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.panelChatMessage.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -48,7 +50,7 @@ namespace ClientWinform.View.User
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1190, 1024);
+            this.panelMain.Size = new System.Drawing.Size(1058, 819);
             this.panelMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -65,8 +67,8 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.35955F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.64045F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 133F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1190, 1024);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 106F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1058, 819);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // messageTxt
@@ -74,7 +76,7 @@ namespace ClientWinform.View.User
             this.messageTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.messageTxt.AutoRoundedCorners = true;
             this.messageTxt.BorderColor = System.Drawing.Color.Black;
-            this.messageTxt.BorderRadius = 29;
+            this.messageTxt.BorderRadius = 23;
             this.messageTxt.BorderThickness = 0;
             this.messageTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.messageTxt.DefaultText = "";
@@ -92,14 +94,14 @@ namespace ClientWinform.View.User
             this.messageTxt.IconRight = global::ClientWinform.Properties.Resources.paperclip;
             this.messageTxt.IconRightOffset = new System.Drawing.Point(15, 0);
             this.messageTxt.IconRightSize = new System.Drawing.Size(25, 25);
-            this.messageTxt.Location = new System.Drawing.Point(0, 926);
+            this.messageTxt.Location = new System.Drawing.Point(0, 741);
             this.messageTxt.Margin = new System.Windows.Forms.Padding(0);
             this.messageTxt.Name = "messageTxt";
             this.messageTxt.PasswordChar = '\0';
             this.messageTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.messageTxt.PlaceholderText = "Type a message...";
             this.messageTxt.SelectedText = "";
-            this.messageTxt.Size = new System.Drawing.Size(1190, 61);
+            this.messageTxt.Size = new System.Drawing.Size(1058, 49);
             this.messageTxt.TabIndex = 13;
             this.messageTxt.IconRightClick += new System.EventHandler(this.messageTxt_IconRightClick);
             // 
@@ -112,7 +114,7 @@ namespace ClientWinform.View.User
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1190, 110);
+            this.panel1.Size = new System.Drawing.Size(1058, 88);
             this.panel1.TabIndex = 0;
             // 
             // labelUsername
@@ -120,10 +122,10 @@ namespace ClientWinform.View.User
             this.labelUsername.AutoSize = true;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(103, 34);
+            this.labelUsername.Location = new System.Drawing.Point(92, 27);
             this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(83, 38);
+            this.labelUsername.Size = new System.Drawing.Size(71, 32);
             this.labelUsername.TabIndex = 6;
             this.labelUsername.Text = "hona";
             this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -138,36 +140,55 @@ namespace ClientWinform.View.User
             this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.backBtn.ForeColor = System.Drawing.Color.White;
             this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
-            this.backBtn.Location = new System.Drawing.Point(29, 30);
+            this.backBtn.Location = new System.Drawing.Point(26, 24);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backBtn.Name = "backBtn";
             this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.backBtn.Size = new System.Drawing.Size(50, 50);
+            this.backBtn.Size = new System.Drawing.Size(44, 40);
             this.backBtn.TabIndex = 0;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // panelChatMessage
             // 
+            this.panelChatMessage.Controls.Add(this.btnSubmit);
             this.panelChatMessage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChatMessage.Location = new System.Drawing.Point(0, 110);
+            this.panelChatMessage.Location = new System.Drawing.Point(0, 88);
             this.panelChatMessage.Margin = new System.Windows.Forms.Padding(0);
             this.panelChatMessage.Name = "panelChatMessage";
-            this.panelChatMessage.Size = new System.Drawing.Size(1190, 780);
+            this.panelChatMessage.Size = new System.Drawing.Size(1058, 624);
             this.panelChatMessage.TabIndex = 1;
+            // 
+            // btnSubmit
+            // 
+            this.btnSubmit.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSubmit.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSubmit.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSubmit.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSubmit.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnSubmit.ForeColor = System.Drawing.Color.White;
+            this.btnSubmit.Location = new System.Drawing.Point(26, 564);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(180, 45);
+            this.btnSubmit.TabIndex = 0;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // ChatContentForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1190, 1024);
+            this.ClientSize = new System.Drawing.Size(1058, 819);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ChatContentForm";
             this.Text = "ChatContentForm";
             this.panelMain.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.panelChatMessage.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -181,5 +202,6 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Label labelUsername;
         private System.Windows.Forms.Panel panelChatMessage;
         private Guna.UI2.WinForms.Guna2TextBox messageTxt;
+        private Guna.UI2.WinForms.Guna2Button btnSubmit;
     }
 }

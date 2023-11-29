@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClientWinform.DTO;
 
 namespace ClientWinform.View.User
 {
@@ -14,9 +15,14 @@ namespace ClientWinform.View.User
     {
         private Panel chat;
         private Form activeForm;
+        private ClientWinform.DTO.User user = new DTO.User();
         public ChatListForm()
         {
             InitializeComponent();
+        }
+        public ChatListForm(ClientWinform.DTO.User user) : this()
+        {
+            this.user = user;
         }
 
         private void searchTxt_IconLeftClick(object sender, EventArgs e)
@@ -68,7 +74,7 @@ namespace ClientWinform.View.User
         }
         private void chatPanel_Click(object sender, EventArgs e)
         {
-            ChatContentForm f = new ChatContentForm();
+            ChatContentForm f = new ChatContentForm(this.user);
             OpenChilForm(f, sender);
         }
     }

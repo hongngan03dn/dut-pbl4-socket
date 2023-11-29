@@ -89,19 +89,19 @@ namespace ClientWinform
                 MessageBox.Show("Sign In Successfully.", "INFO");
 
                 // kết nối Mail Server
-                //try
-                //{
-                //    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message);
-                //    return;
-                //}
-                
+                try
+                {
+                    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+
                 // điều hướng
-                
-                if(idRole == Constants.Roles.USER)
+
+                if (idRole == Constants.Roles.USER)
                 {
                     this.Hide();
                     NavigationForm f = new NavigationForm(user);

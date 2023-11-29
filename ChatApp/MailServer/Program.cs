@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MailServer.Models;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -30,7 +32,8 @@ namespace MailServer
                 getClientInfo(client);
 
                 // tạo Thread nhận tin nhắn của Client -> xử lí tn : Save DB + Sent to targetClient if online
-                //...
+                Thread threadListenClient = new Thread(listenClient);
+                threadListenClient.Start(client);
 
             }
         }
@@ -39,7 +42,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[3];
+            IPAddress address = hostEntry.AddressList[7];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -67,5 +70,28 @@ namespace MailServer
 
             Console.WriteLine("INFO Login by: " + id + " | " + splitted[1].Trim() + "\n");
         }
+
+        public static void listenClient(object objClient)
+        {
+            Socket client = objClient as Socket;
+            while (true)
+            {
+                byte[] datarecv = new byte[1024];
+                try
+                {
+                    int recv = client.Receive(datarecv);
+                    string recvStr = Encoding.ASCII.GetString(datarecv, 0, recv);
+
+                    // chuyển JSonString thành Object
+                    SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
+                    Console.WriteLine("INFO Listen from: " + packet.FromId + " | " + packet.ToId + " | " + packet.ContentMsg + "\n");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("ERROR " + ex.Message);
+                }
+            }
+        }
+
     }
 }
