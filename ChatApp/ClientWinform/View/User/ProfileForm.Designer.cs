@@ -32,7 +32,6 @@ namespace ClientWinform
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTittle = new System.Windows.Forms.TableLayoutPanel();
-            this.picBoxAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tableLayoutPanelHead = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.panelUserName = new System.Windows.Forms.Panel();
@@ -45,6 +44,7 @@ namespace ClientWinform
             this.panelName = new System.Windows.Forms.Panel();
             this.labelName = new System.Windows.Forms.Label();
             this.labelBio = new System.Windows.Forms.Label();
+            this.picBoxAva = new Guna.UI2.WinForms.Guna2PictureBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelBirth = new System.Windows.Forms.Label();
             this.panelInfo = new System.Windows.Forms.Panel();
@@ -67,12 +67,12 @@ namespace ClientWinform
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanelTittle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).BeginInit();
             this.tableLayoutPanelHead.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.panelUserName.SuspendLayout();
             this.panelConnections.SuspendLayout();
             this.panelName.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panelInfo.SuspendLayout();
             this.panelBirthday.SuspendLayout();
@@ -114,9 +114,9 @@ namespace ClientWinform
             this.tableLayoutPanelTittle.ColumnCount = 2;
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.68274F));
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.31726F));
-            this.tableLayoutPanelTittle.Controls.Add(this.picBoxAva, 0, 0);
             this.tableLayoutPanelTittle.Controls.Add(this.tableLayoutPanelHead, 1, 0);
             this.tableLayoutPanelTittle.Controls.Add(this.labelBio, 0, 1);
+            this.tableLayoutPanelTittle.Controls.Add(this.picBoxAva, 0, 0);
             this.tableLayoutPanelTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTittle.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanelTittle.Margin = new System.Windows.Forms.Padding(0);
@@ -126,20 +126,6 @@ namespace ClientWinform
             this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74F));
             this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1566, 358);
             this.tableLayoutPanelTittle.TabIndex = 0;
-            // 
-            // picBoxAva
-            // 
-            this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBoxAva.Image = global::ClientWinform.Properties.Resources.Ava_img;
-            this.picBoxAva.ImageRotate = 0F;
-            this.picBoxAva.Location = new System.Drawing.Point(90, 92);
-            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.picBoxAva.Name = "picBoxAva";
-            this.picBoxAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picBoxAva.Size = new System.Drawing.Size(151, 192);
-            this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxAva.TabIndex = 1;
-            this.picBoxAva.TabStop = false;
             // 
             // tableLayoutPanelHead
             // 
@@ -307,6 +293,20 @@ namespace ClientWinform
             this.labelBio.TabIndex = 4;
             this.labelBio.Text = "13//13";
             this.labelBio.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // picBoxAva
+            // 
+            this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBoxAva.AutoRoundedCorners = true;
+            this.picBoxAva.BorderRadius = 81;
+            this.picBoxAva.ImageRotate = 0F;
+            this.picBoxAva.Location = new System.Drawing.Point(77, 100);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 20);
+            this.picBoxAva.Name = "picBoxAva";
+            this.picBoxAva.Size = new System.Drawing.Size(164, 164);
+            this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxAva.TabIndex = 6;
+            this.picBoxAva.TabStop = false;
             // 
             // tableLayoutPanel1
             // 
@@ -588,7 +588,6 @@ namespace ClientWinform
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanelTittle.ResumeLayout(false);
             this.tableLayoutPanelTittle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).EndInit();
             this.tableLayoutPanelHead.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.panelUserName.ResumeLayout(false);
@@ -597,6 +596,7 @@ namespace ClientWinform
             this.panelConnections.PerformLayout();
             this.panelName.ResumeLayout(false);
             this.panelName.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panelInfo.ResumeLayout(false);
@@ -620,7 +620,6 @@ namespace ClientWinform
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelTittle;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox picBoxAva;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelHead;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Panel panelUserName;
@@ -652,5 +651,6 @@ namespace ClientWinform
         private Guna.UI2.WinForms.Guna2TextBox txtMail;
         private System.Windows.Forms.Label labelPass;
         private System.Windows.Forms.PictureBox pictureBox;
+        private Guna.UI2.WinForms.Guna2PictureBox picBoxAva;
     }
 }

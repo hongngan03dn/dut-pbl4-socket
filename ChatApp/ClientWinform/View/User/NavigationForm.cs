@@ -1,4 +1,5 @@
 ﻿using ClientWinform.DTO;
+using ClientWinform.Properties;
 using ClientWinform.View.User;
 using Guna.UI2.WinForms;
 using System;
@@ -9,6 +10,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,7 +20,8 @@ namespace ClientWinform
     {
         private Guna2Button currentBut;
         private Form activeForm;
-        private Panel exploreUser;
+        private bool mouseDown;
+        private Point lastLocation;
 
         private User user = new User();
         byte[] images = null;
@@ -31,8 +34,28 @@ namespace ClientWinform
             this.user = user;
             showDetail(user);
             ActiveButton((Guna2Button)chatBtn);
-            ChatListForm f = new ChatListForm();
-            OpenStartForm(f); 
+            ChatListForm f = new ChatListForm(user.Id);
+            OpenStartForm(f);
+        }  
+
+        private void loginForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void loginForm_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point((this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+                this.Update();
+            }
+        }
+
+        private void loginForm_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
         }
         public void showDetail(User user)
         {
@@ -40,7 +63,7 @@ namespace ClientWinform
             images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
             if (images == null)
             {
-                pictureAva.Image = null;
+                pictureAva.Image = Resources.defaultAvatar;
             }
             else
             {
@@ -93,7 +116,9 @@ namespace ClientWinform
             this.panelChild.Controls.Add(childForm);
             this.panelChild.Tag = childForm;
             childForm.BringToFront();
+            //childForm.Activate();
             childForm.Show();
+            
         }
         public void OpenChilForm(Form childForm, object sender)
         {
@@ -109,12 +134,13 @@ namespace ClientWinform
             this.panelChild.Controls.Add(childForm);
             this.panelChild.Tag = childForm;
             childForm.BringToFront();
+            childForm.Activate();
             childForm.Show();
         }
 
         private void chatBtn_Click(object sender, EventArgs e)
         {
-            ChatListForm f = new ChatListForm();
+            ChatListForm f = new ChatListForm(user.Id);
             OpenChilForm(f, sender);
         }
 
@@ -127,23 +153,11 @@ namespace ClientWinform
             panelExplore.Visible = true;
             panelExplore.BringToFront();
         }
-        private void searchTxt_IconLeftClick(object sender, EventArgs e)
-        {
-            exploreUser = new Panel();
-            exploreUser.Size = new Size(268, 56);
-            exploreUser.BackColor = Color.FromArgb(233, 233, 236);
-
-            exploreUser.Click += new EventHandler(exploreUserPanel_Click);
-
-            flowLayoutPanelListExplore.Controls.Add(exploreUser);
-        }
         private void exploreUserPanel_Click(object sender, EventArgs e)
         {
             ProfileExplorerForm f = new ProfileExplorerForm();
             f.ShowDialog();
         }
-
-
 
 
     }

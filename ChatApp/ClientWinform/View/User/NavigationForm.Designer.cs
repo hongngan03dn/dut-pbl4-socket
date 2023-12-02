@@ -107,6 +107,9 @@ namespace ClientWinform
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.15825F));
             this.tableLayoutPanelMenu.Size = new System.Drawing.Size(141, 594);
             this.tableLayoutPanelMenu.TabIndex = 1;
+            this.tableLayoutPanelMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
+            this.tableLayoutPanelMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
+            this.tableLayoutPanelMenu.MouseUp += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseUp);
             // 
             // panelBtn
             // 
@@ -204,14 +207,13 @@ namespace ClientWinform
             // 
             // pictureAva
             // 
-            this.pictureAva.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pictureAva.Image = global::ClientWinform.Properties.Resources.Ava_img;
+            this.pictureAva.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureAva.ImageRotate = 0F;
-            this.pictureAva.Location = new System.Drawing.Point(0, 161);
+            this.pictureAva.Location = new System.Drawing.Point(20, 161);
             this.pictureAva.Margin = new System.Windows.Forms.Padding(0);
             this.pictureAva.Name = "pictureAva";
             this.pictureAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pictureAva.Size = new System.Drawing.Size(141, 100);
+            this.pictureAva.Size = new System.Drawing.Size(100, 100);
             this.pictureAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureAva.TabIndex = 0;
             this.pictureAva.TabStop = false;
@@ -226,7 +228,6 @@ namespace ClientWinform
             this.lableUsername.Name = "lableUsername";
             this.lableUsername.Size = new System.Drawing.Size(135, 28);
             this.lableUsername.TabIndex = 1;
-            this.lableUsername.Text = "Viez_taho";
             this.lableUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelControlBox
@@ -350,7 +351,6 @@ namespace ClientWinform
             this.searchTxt.SelectedText = "";
             this.searchTxt.Size = new System.Drawing.Size(355, 52);
             this.searchTxt.TabIndex = 13;
-            this.searchTxt.IconLeftClick += new System.EventHandler(this.searchTxt_IconLeftClick);
             // 
             // flowLayoutPanelListExplore
             // 

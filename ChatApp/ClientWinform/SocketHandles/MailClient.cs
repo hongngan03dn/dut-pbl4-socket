@@ -6,12 +6,16 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ClientWinform.View.User;
+using System.Windows.Forms;
+using System.Runtime.CompilerServices;
 
 namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
-        static String _ipServer = "192.168.1.15";
+        delegate void setForm(string msg, Form chatListForm);
+        static String _ipServer = "192.168.2.17";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -33,10 +37,41 @@ namespace ClientWinform.SocketHandles
 
                 //Thread recvMss = new Thread(receiveMessage);
                 //recvMss.Start();
+
+                //Thread listenThread = new Thread(listenForMessages);
+                //listenThread.Start();
             }
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+        public static void UpdateListChat(string message, Form activeForm)
+        {
+            //ChatListForm form = activeForm as ChatListForm;
+            //string txt = form.idUser.ToString();
+            //System.Console.WriteLine(txt);
+            if(activeForm.InvokeRequired)
+            {
+                setForm d = new setForm(UpdateListChat);
+                activeForm.Invoke(d, new object[] { message });
+            }
+            else
+            {
+                if (activeForm is ChatListForm chatListForm)
+                {
+                    chatListForm.listBox1.Items.Add(message);
+                }
+            }
+        }
+        public static void listenForMessages(Form form)
+        {
+            while(true)
+            {
+                byte[] data = new byte[1024];
+                int receivedDataLength = _client.Receive(data);
+                string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
+                UpdateListChat(stringData, form);
             }
         }
     }

@@ -39,7 +39,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[3];
+            IPAddress address = hostEntry.AddressList[1];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -47,6 +47,14 @@ namespace MailServer
             server.Bind(endPoint);
             //server.Listen(10);
             //lbInfo.Text = "Waiting to connect...";
+        }
+        public static void broadcastMessage(string message)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            foreach (ClientModel client in clientOnline)
+            {
+                client.clientSocket.Send(data);
+            }
         }
         public static void getClientInfo(object objClient)
         {
@@ -58,14 +66,23 @@ namespace MailServer
             String[] splitted = recvStr.Split('|');
             int id = Int32.Parse(splitted[0].Trim());
 
-            clientOnline.Add(new ClientModel()
+            //clientOnline.Add(new ClientModel()
+            //{
+            //    Id = id,
+            //    Username = splitted[1].Trim(),
+            //    clientSocket = client,
+            //});
+            ClientModel newClient = new ClientModel()
             {
                 Id = id,
                 Username = splitted[1].Trim(),
                 clientSocket = client,
-            });
+            };
+
+            clientOnline.Add(newClient);
 
             Console.WriteLine("INFO Login by: " + id + " | " + splitted[1].Trim() + "\n");
+            broadcastMessage(newClient.Username + " has logged in.");
         }
     }
 }

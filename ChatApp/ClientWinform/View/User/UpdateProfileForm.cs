@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.IO;
+using ClientWinform.Properties;
 
 namespace ClientWinform.View.User
 {
@@ -41,12 +42,12 @@ namespace ClientWinform.View.User
             images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
             if (images == null)
             {
-                pictBoxAva.Image = null;
+                picBoxAva.Image = Resources.defaultAvatar;
             }
             else
             {
                 MemoryStream mstream = new MemoryStream(images);
-                pictBoxAva.Image = Image.FromStream(mstream);
+                picBoxAva.Image = Image.FromStream(mstream);
             }
         }
         private void changeAvaBtn_Click(object sender, EventArgs e)
@@ -56,7 +57,7 @@ namespace ClientWinform.View.User
             if(dialog.ShowDialog() == DialogResult.OK)
             {
                 imgLocation = dialog.FileName.ToString();
-                pictBoxAva.ImageLocation = imgLocation;
+                picBoxAva.ImageLocation = imgLocation;
             }
         }
 

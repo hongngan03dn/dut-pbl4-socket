@@ -62,7 +62,7 @@ namespace ClientWinform.View.User
             this.changeAvaBtn = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTittle = new System.Windows.Forms.TableLayoutPanel();
-            this.pictBoxAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.picBoxAva = new Guna.UI2.WinForms.Guna2PictureBox();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.genderGroupBox.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -79,7 +79,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelHead.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanelTittle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictBoxAva)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).BeginInit();
             this.tableLayoutPanelMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -499,7 +499,7 @@ namespace ClientWinform.View.User
             this.labelUsername.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(0, 141);
+            this.labelUsername.Location = new System.Drawing.Point(0, 127);
             this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
@@ -513,7 +513,7 @@ namespace ClientWinform.View.User
             this.panelUserName.Location = new System.Drawing.Point(0, 0);
             this.panelUserName.Margin = new System.Windows.Forms.Padding(0);
             this.panelUserName.Name = "panelUserName";
-            this.panelUserName.Size = new System.Drawing.Size(233, 194);
+            this.panelUserName.Size = new System.Drawing.Size(233, 180);
             this.panelUserName.TabIndex = 4;
             // 
             // tableLayoutPanelHead
@@ -526,9 +526,10 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelHead.Location = new System.Drawing.Point(261, 0);
             this.tableLayoutPanelHead.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelHead.Name = "tableLayoutPanelHead";
-            this.tableLayoutPanelHead.RowCount = 2;
+            this.tableLayoutPanelHead.RowCount = 3;
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.51064F));
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.48936F));
+            this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanelHead.Size = new System.Drawing.Size(1305, 284);
             this.tableLayoutPanelHead.TabIndex = 2;
             // 
@@ -543,7 +544,7 @@ namespace ClientWinform.View.User
             this.changeAvaBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.changeAvaBtn.HoverState.FillColor = System.Drawing.Color.White;
             this.changeAvaBtn.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(83)))), ((int)(((byte)(164)))));
-            this.changeAvaBtn.Location = new System.Drawing.Point(0, 194);
+            this.changeAvaBtn.Location = new System.Drawing.Point(0, 180);
             this.changeAvaBtn.Margin = new System.Windows.Forms.Padding(0);
             this.changeAvaBtn.Name = "changeAvaBtn";
             this.changeAvaBtn.PressedColor = System.Drawing.Color.White;
@@ -566,7 +567,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1305, 194);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1305, 180);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanelTittle
@@ -574,7 +575,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelTittle.ColumnCount = 2;
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.68274F));
             this.tableLayoutPanelTittle.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.31726F));
-            this.tableLayoutPanelTittle.Controls.Add(this.pictBoxAva, 0, 0);
+            this.tableLayoutPanelTittle.Controls.Add(this.picBoxAva, 0, 0);
             this.tableLayoutPanelTittle.Controls.Add(this.tableLayoutPanelHead, 1, 0);
             this.tableLayoutPanelTittle.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanelTittle.Location = new System.Drawing.Point(0, 0);
@@ -585,19 +586,19 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1566, 284);
             this.tableLayoutPanelTittle.TabIndex = 0;
             // 
-            // pictBoxAva
+            // picBoxAva
             // 
-            this.pictBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictBoxAva.Image = global::ClientWinform.Properties.Resources.Ava_img;
-            this.pictBoxAva.ImageRotate = 0F;
-            this.pictBoxAva.Location = new System.Drawing.Point(90, 92);
-            this.pictBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 0);
-            this.pictBoxAva.Name = "pictBoxAva";
-            this.pictBoxAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pictBoxAva.Size = new System.Drawing.Size(151, 192);
-            this.pictBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictBoxAva.TabIndex = 1;
-            this.pictBoxAva.TabStop = false;
+            this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.picBoxAva.AutoRoundedCorners = true;
+            this.picBoxAva.BorderRadius = 81;
+            this.picBoxAva.ImageRotate = 0F;
+            this.picBoxAva.Location = new System.Drawing.Point(77, 100);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 20);
+            this.picBoxAva.Name = "picBoxAva";
+            this.picBoxAva.Size = new System.Drawing.Size(164, 164);
+            this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picBoxAva.TabIndex = 7;
+            this.picBoxAva.TabStop = false;
             // 
             // tableLayoutPanelMain
             // 
@@ -646,7 +647,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelHead.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanelTittle.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictBoxAva)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoxAva)).EndInit();
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -666,7 +667,6 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Label labelBirth;
         private System.Windows.Forms.Panel panelBirthday;
         private System.Windows.Forms.Label labelEmail;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox pictBoxAva;
         private System.Windows.Forms.Panel panelName;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Panel panelGender;
@@ -688,5 +688,6 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Label labelUsernameEdit;
         private Guna.UI2.WinForms.Guna2Button changeAvaBtn;
         protected System.Windows.Forms.Label labelInvalidemail;
+        private Guna.UI2.WinForms.Guna2PictureBox picBoxAva;
     }
 }
