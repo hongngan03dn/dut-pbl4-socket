@@ -27,7 +27,9 @@ namespace MailServer
                 Socket client = server.Accept();
 
                 // lấy IDUser + Username của client
-                getClientInfo(client);
+                //getClientInfo(client);
+
+                onClientConnect(client);
 
                 // tạo Thread nhận tin nhắn của Client -> xử lí tn : Save DB + Sent to targetClient if online
                 //...
@@ -39,7 +41,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[3];
+            IPAddress address = hostEntry.AddressList[1];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -48,7 +50,15 @@ namespace MailServer
             //server.Listen(10);
             //lbInfo.Text = "Waiting to connect...";
         }
-        public static void getClientInfo(object objClient)
+        public static void broadcastMessage(string message)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message);
+            foreach (ClientModel client in clientOnline)
+            {
+                client.clientSocket.Send(data);
+            }
+        }
+        public static ClientModel getClientInfo(object objClient)
         {
             Socket client = objClient as Socket;
             byte[] datarecv = new byte[1024];
@@ -58,14 +68,33 @@ namespace MailServer
             String[] splitted = recvStr.Split('|');
             int id = Int32.Parse(splitted[0].Trim());
 
-            clientOnline.Add(new ClientModel()
+            //clientOnline.Add(new ClientModel()
+            //{
+            //    Id = id,
+            //    Username = splitted[1].Trim(),
+            //    clientSocket = client,
+            //});
+            ClientModel newClient = new ClientModel()
             {
                 Id = id,
                 Username = splitted[1].Trim(),
                 clientSocket = client,
-            });
+            };
+
+            clientOnline.Add(newClient);
 
             Console.WriteLine("INFO Login by: " + id + " | " + splitted[1].Trim() + "\n");
+            //broadcastMessage(newClient.Username + " has logged in.");
+            return newClient;
+        }
+        public static void onClientConnect(Socket client)
+        {
+            ClientModel newClient = getClientInfo(client);
+            string message = clientOnline.Last().Username;
+            broadcastMessage(message);
+            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Username));
+            byte[] currentOnline = Encoding.ASCII.GetBytes("\nCurrently: " + onlineClients);
+            newClient.clientSocket.Send(currentOnline);
         }
     }
 }

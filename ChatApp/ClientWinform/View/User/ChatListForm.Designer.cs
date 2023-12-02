@@ -36,6 +36,7 @@ namespace ClientWinform.View.User
             this.flowLayoutPanelListChat = new System.Windows.Forms.FlowLayoutPanel();
             this.panelChatContentAndLeftLine = new System.Windows.Forms.Panel();
             this.panelChatContent = new System.Windows.Forms.Panel();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.pictureBoxNoChatSelected = new System.Windows.Forms.PictureBox();
             this.panelLineLeft = new System.Windows.Forms.Panel();
             this.panelMain.SuspendLayout();
@@ -118,7 +119,6 @@ namespace ClientWinform.View.User
             this.searchTxt.SelectedText = "";
             this.searchTxt.Size = new System.Drawing.Size(358, 52);
             this.searchTxt.TabIndex = 12;
-            this.searchTxt.IconLeftClick += new System.EventHandler(this.searchTxt_IconLeftClick);
             // 
             // flowLayoutPanelListChat
             // 
@@ -143,12 +143,22 @@ namespace ClientWinform.View.User
             // 
             // panelChatContent
             // 
+            this.panelChatContent.Controls.Add(this.listBox1);
             this.panelChatContent.Controls.Add(this.pictureBoxNoChatSelected);
             this.panelChatContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelChatContent.Location = new System.Drawing.Point(1, 0);
             this.panelChatContent.Name = "panelChatContent";
             this.panelChatContent.Size = new System.Drawing.Size(1190, 1024);
             this.panelChatContent.TabIndex = 2;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 20;
+            this.listBox1.Location = new System.Drawing.Point(153, 186);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(515, 324);
+            this.listBox1.TabIndex = 3;
             // 
             // pictureBoxNoChatSelected
             // 
@@ -199,8 +209,9 @@ namespace ClientWinform.View.User
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
         private System.Windows.Forms.Panel panelLineLeft;
         private System.Windows.Forms.Panel panelChatContentAndLeftLine;
-        private System.Windows.Forms.PictureBox pictureBoxNoChatSelected;
         private System.Windows.Forms.Panel panelChatContent;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListChat;
+        public System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.PictureBox pictureBoxNoChatSelected;
     }
 }

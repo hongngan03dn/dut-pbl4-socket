@@ -110,6 +110,16 @@ namespace ClientWinform.BLL
                 return usernames;
             }
         }
+        public static List<User> getUserListChat(int idUser)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                List<User> users = new List<User>();
+                var li = db.Users.Where(record => record.Id != idUser && record.IdRole == Constants.Roles.USER);
+                users.AddRange(li); 
+                return users;
+            }
+        }
         public static void updateUser(User user)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
@@ -163,6 +173,7 @@ namespace ClientWinform.BLL
                 return avaLink;
             }
         }
+
         public static void resetPassword(string email)
         {
             string newPw = MailUtils.SendResetPassword(email);
@@ -177,5 +188,6 @@ namespace ClientWinform.BLL
                 }
             }
         }
+
     }
 }

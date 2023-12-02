@@ -1,4 +1,5 @@
 ﻿using ClientWinform.DTO;
+using ClientWinform.Properties;
 using ClientWinform.View.User;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ namespace ClientWinform
             byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
             if(images == null ) 
             {
-                picBoxAva.Image = null;            
+                picBoxAva.Image = Resources.defaultAvatar;            
             }
             else
             {
