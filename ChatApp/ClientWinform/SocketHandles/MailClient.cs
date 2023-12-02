@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using ClientWinform.View.User;
 using System.Windows.Forms;
 using System.Runtime.CompilerServices;
+using ClientWinform.Properties;
+using System.IO;
 
 namespace ClientWinform.SocketHandles
 {
@@ -48,13 +50,10 @@ namespace ClientWinform.SocketHandles
         }
         public static void UpdateListChat(string message, Form activeForm)
         {
-            //ChatListForm form = activeForm as ChatListForm;
-            //string txt = form.idUser.ToString();
-            //System.Console.WriteLine(txt);
             if(activeForm.InvokeRequired)
             {
                 setForm d = new setForm(UpdateListChat);
-                activeForm.Invoke(d, new object[] { message });
+                activeForm.Invoke(d, new object[] { message, activeForm });
             }
             else
             {

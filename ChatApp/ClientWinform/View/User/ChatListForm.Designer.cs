@@ -157,7 +157,7 @@ namespace ClientWinform.View.User
             this.listBox1.ItemHeight = 20;
             this.listBox1.Location = new System.Drawing.Point(153, 186);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(213, 144);
+            this.listBox1.Size = new System.Drawing.Size(515, 324);
             this.listBox1.TabIndex = 3;
             // 
             // pictureBoxNoChatSelected

@@ -27,7 +27,9 @@ namespace MailServer
                 Socket client = server.Accept();
 
                 // lấy IDUser + Username của client
-                getClientInfo(client);
+                //getClientInfo(client);
+
+                onClientConnect(client);
 
                 // tạo Thread nhận tin nhắn của Client -> xử lí tn : Save DB + Sent to targetClient if online
                 //...
@@ -56,7 +58,7 @@ namespace MailServer
                 client.clientSocket.Send(data);
             }
         }
-        public static void getClientInfo(object objClient)
+        public static ClientModel getClientInfo(object objClient)
         {
             Socket client = objClient as Socket;
             byte[] datarecv = new byte[1024];
@@ -82,7 +84,17 @@ namespace MailServer
             clientOnline.Add(newClient);
 
             Console.WriteLine("INFO Login by: " + id + " | " + splitted[1].Trim() + "\n");
-            broadcastMessage(newClient.Username + " has logged in.");
+            //broadcastMessage(newClient.Username + " has logged in.");
+            return newClient;
+        }
+        public static void onClientConnect(Socket client)
+        {
+            ClientModel newClient = getClientInfo(client);
+            string message = clientOnline.Last().Username;
+            broadcastMessage(message);
+            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Username));
+            byte[] currentOnline = Encoding.ASCII.GetBytes("\nCurrently: " + onlineClients);
+            newClient.clientSocket.Send(currentOnline);
         }
     }
 }
