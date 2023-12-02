@@ -1,10 +1,13 @@
-﻿using System;
+﻿using ClientWinform.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ClientWinform.DTO;
@@ -15,26 +18,39 @@ namespace ClientWinform.View.User
     {
         private Panel chat;
         private Form activeForm;
-        private ClientWinform.DTO.User user = new DTO.User();
-        public ChatListForm()
+        public int idUser;
+        public ChatListForm(int idUser)
         {
+            this.idUser = idUser;
             InitializeComponent();
+            this.Activate();
+            //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
+            //Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
+            //listenThread.Start();
+            listChatOfUser();
         }
-        public ChatListForm(ClientWinform.DTO.User user) : this()
+        private void listChatOfUser()
         {
-            this.user = user;
+            List<DTO.User> users = BLL.UserBLL.getUserListChat(idUser);
+            byte[] images = null;
+            foreach (DTO.User user in users) 
+            {
+                ChatReviewForm chat = new ChatReviewForm();
+                images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
+                if (images == null)
+                {
+                    chat.ava = Resources.defaultAvatar;
+                }
+                else
+                {
+                    MemoryStream mstream = new MemoryStream(images);
+                    chat.ava = Image.FromStream(mstream);
+                }
+                chat.userName = user.Username;
+                flowLayoutPanelListChat.Controls.Add(chat);
+            }
         }
 
-        private void searchTxt_IconLeftClick(object sender, EventArgs e)
-        {
-            chat = new Panel();
-            chat.Size = new Size(244, 56);
-            chat.BackColor = Color.FromArgb(233, 233, 236);
-
-            chat.Click += new EventHandler(chatPanel_Click);
-
-            flowLayoutPanelListChat.Controls.Add(chat);
-        }
         private void ActiveButton(object btnSender)
         {
             DisableButton();

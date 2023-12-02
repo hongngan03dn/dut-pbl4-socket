@@ -77,9 +77,23 @@ namespace ClientWinform
             else
             {
                 // phân quyền
+                // kết nối Mail Server
                 try
                 {
                     idRole = UserBLL.getRole(id);
+                    this.Hide();
+                    if (idRole == Constants.Roles.USER)
+                    {
+                        NavigationForm f = new NavigationForm(user);
+                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        f.ShowDialog();
+                    }
+                    else if (idRole == Constants.Roles.ADMIN)
+                    {
+                        AdminHomeForm f = new AdminHomeForm();
+                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        f.ShowDialog();
+                    }
                 }
                 catch (Exception ex)
                 {
