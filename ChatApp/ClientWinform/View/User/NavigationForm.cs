@@ -37,7 +37,7 @@ namespace ClientWinform
             this.user = user;
             showDetail(user);
             ActiveButton((Guna2Button)chatBtn);
-            chatForm = new ChatListForm(user.Id);
+            chatForm = new ChatListForm(this.user);
             profileForm = new ProfileForm(user);
             OpenStartForm(chatForm);
         }  

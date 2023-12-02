@@ -56,17 +56,18 @@
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(365, 80);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(324, 64);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // picAva
             // 
             this.picAva.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.picAva.ImageRotate = 0F;
-            this.picAva.Location = new System.Drawing.Point(19, 10);
+            this.picAva.Location = new System.Drawing.Point(17, 8);
+            this.picAva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picAva.Name = "picAva";
             this.picAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAva.Size = new System.Drawing.Size(60, 60);
+            this.picAva.Size = new System.Drawing.Size(53, 48);
             this.picAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAva.TabIndex = 0;
             this.picAva.TabStop = false;
@@ -76,10 +77,10 @@
             this.panel1.Controls.Add(this.labelMessage);
             this.panel1.Controls.Add(this.labelUsername);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(82, 0);
+            this.panel1.Location = new System.Drawing.Point(73, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(230, 80);
+            this.panel1.Size = new System.Drawing.Size(204, 64);
             this.panel1.TabIndex = 1;
             // 
             // labelMessage
@@ -87,9 +88,9 @@
             this.labelMessage.AutoSize = true;
             this.labelMessage.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelMessage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelMessage.Location = new System.Drawing.Point(4, 47);
+            this.labelMessage.Location = new System.Drawing.Point(4, 38);
             this.labelMessage.Name = "labelMessage";
-            this.labelMessage.Size = new System.Drawing.Size(71, 21);
+            this.labelMessage.Size = new System.Drawing.Size(63, 19);
             this.labelMessage.TabIndex = 1;
             this.labelMessage.Text = "Message";
             // 
@@ -98,9 +99,9 @@
             this.labelUsername.AutoSize = true;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelUsername.Location = new System.Drawing.Point(3, 12);
+            this.labelUsername.Location = new System.Drawing.Point(3, 10);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(104, 28);
+            this.labelUsername.Size = new System.Drawing.Size(87, 23);
             this.labelUsername.TabIndex = 0;
             this.labelUsername.Text = "Username";
             // 
@@ -108,22 +109,22 @@
             // 
             this.pictureBoxOnline.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBoxOnline.Image = global::ClientWinform.Properties.Resources.Group_3;
-            this.pictureBoxOnline.Location = new System.Drawing.Point(326, 28);
+            this.pictureBoxOnline.Location = new System.Drawing.Point(290, 22);
+            this.pictureBoxOnline.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxOnline.Name = "pictureBoxOnline";
-            this.pictureBoxOnline.Size = new System.Drawing.Size(24, 24);
+            this.pictureBoxOnline.Size = new System.Drawing.Size(21, 19);
             this.pictureBoxOnline.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxOnline.TabIndex = 2;
             this.pictureBoxOnline.TabStop = false;
-            this.pictureBoxOnline.Visible = false;
             // 
             // ChatReviewForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanelMain);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ChatReviewForm";
-            this.Size = new System.Drawing.Size(365, 80);
+            this.Size = new System.Drawing.Size(324, 64);
             this.tableLayoutPanelMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picAva)).EndInit();
             this.panel1.ResumeLayout(false);

@@ -11,13 +11,15 @@ using System.Windows.Forms;
 using System.Runtime.CompilerServices;
 using ClientWinform.Properties;
 using System.IO;
+using ClientWinform.DTO;
+using Newtonsoft.Json;
 
 namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
         delegate void setForm(string msg, Form chatListForm);
-        static String _ipServer = "192.168.2.17";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -39,6 +41,24 @@ namespace ClientWinform.SocketHandles
 
                 Thread listenThread = new Thread(() => listenForMessages(activeForm));
                 listenThread.Start();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static void sendMsg(int myId, int toId, String content)
+        {
+            byte[] datasend = new byte[1024];
+            SocketPacketModel packet = new SocketPacketModel(myId, toId, content);
+            string sendMsg = JsonConvert.SerializeObject(packet); // chuyển Object thành JsonString
+            try
+            {
+                datasend = Encoding.ASCII.GetBytes(sendMsg);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+
+                //Thread recvMss = new Thread(receiveMessage);
+                //recvMss.Start();
             }
             catch (Exception ex)
             {

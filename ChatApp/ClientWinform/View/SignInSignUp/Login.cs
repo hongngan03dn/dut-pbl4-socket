@@ -100,21 +100,6 @@ namespace ClientWinform
                     MessageBox.Show(ex.Message);
                     return;
                 }
-
-                // điều hướng
-
-                if (idRole == Constants.Roles.USER)
-                {
-                    this.Hide();
-                    NavigationForm f = new NavigationForm(user);
-                    f.ShowDialog();
-                }
-                if(idRole == Constants.Roles.ADMIN)
-                {
-                    this.Hide();
-                    AdminHomeForm f = new AdminHomeForm();
-                    f.ShowDialog();
-                }
             }
         }
 

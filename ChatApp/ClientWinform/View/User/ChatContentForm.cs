@@ -12,9 +12,14 @@ namespace ClientWinform.View.User
 {
     public partial class ChatContentForm : Form
     {
+        private ClientWinform.DTO.User user = new DTO.User();
         public ChatContentForm()
         {
             InitializeComponent();
+        }
+        public ChatContentForm(ClientWinform.DTO.User user) : this()
+        {
+            this.user = user;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -25,6 +30,22 @@ namespace ClientWinform.View.User
         private void messageTxt_IconRightClick(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSubmit_Click(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(messageTxt.Text))
+            {
+                try
+                {
+                    SocketHandles.MailClient.sendMsg(user.Id, 2, messageTxt.Text);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
         }
     }
 }

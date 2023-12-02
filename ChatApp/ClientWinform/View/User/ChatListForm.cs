@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClientWinform.DTO;
 
 namespace ClientWinform.View.User
 {
@@ -17,10 +18,11 @@ namespace ClientWinform.View.User
     {
         private Panel chat;
         private Form activeForm;
-        public int idUser;
-        public ChatListForm(int idUser)
+        //public int idUser;
+        public ClientWinform.DTO.User user = new DTO.User();
+        public ChatListForm(ClientWinform.DTO.User user)
         {
-            this.idUser = idUser;
+            this.user = user;
             InitializeComponent();
             this.Activate();
             //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
@@ -30,7 +32,7 @@ namespace ClientWinform.View.User
         }
         private void listChatOfUser()
         {
-            List<DTO.User> users = BLL.UserBLL.getUserListChat(idUser);
+            List<DTO.User> users = BLL.UserBLL.getUserListChat(user.Id);
             byte[] images = null;
             foreach (DTO.User user in users) 
             {
@@ -46,6 +48,10 @@ namespace ClientWinform.View.User
                     chat.ava = Image.FromStream(mstream);
                 }
                 chat.userName = user.Username;
+                foreach (Control c in chat.Controls)
+                {
+                    c.Click += new EventHandler(chatPanel_Click);
+                }
                 flowLayoutPanelListChat.Controls.Add(chat);
             }
         }
@@ -89,7 +95,7 @@ namespace ClientWinform.View.User
         }
         private void chatPanel_Click(object sender, EventArgs e)
         {
-            ChatContentForm f = new ChatContentForm();
+            ChatContentForm f = new ChatContentForm(this.user);
             OpenChilForm(f, sender);
         }
     }
