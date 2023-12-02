@@ -15,12 +15,12 @@ namespace ClientWinform.SocketHandles
     public class MailClient
     {
         delegate void setForm(string msg, Form chatListForm);
-        static String _ipServer = "192.168.2.17";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
 
-        public static void connectServer(int myId, String username)
+        public static void connectServer(int myId, String username, Form activeForm)
         {
             _ipep = new IPEndPoint(IPAddress.Parse(_ipServer), _port);
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
@@ -35,11 +35,8 @@ namespace ClientWinform.SocketHandles
                 datasend = Encoding.ASCII.GetBytes(myId.ToString() + " | " + username);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
 
-                //Thread recvMss = new Thread(receiveMessage);
-                //recvMss.Start();
-
-                //Thread listenThread = new Thread(listenForMessages);
-                //listenThread.Start();
+                Thread listenThread = new Thread(() => listenForMessages(activeForm));
+                listenThread.Start();
             }
             catch (Exception ex)
             {
@@ -54,13 +51,13 @@ namespace ClientWinform.SocketHandles
             if(activeForm.InvokeRequired)
             {
                 setForm d = new setForm(UpdateListChat);
-                activeForm.Invoke(d, new object[] { message });
+                activeForm.Invoke(d, new object[] { message, activeForm });
             }
             else
             {
-                if (activeForm is ChatListForm chatListForm)
+                if (activeForm is NavigationForm navigationForm)
                 {
-                    chatListForm.listBox1.Items.Add(message);
+                    navigationForm.chatForm.listBox1.Items.Add(message);
                 }
             }
         }

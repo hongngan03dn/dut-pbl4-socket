@@ -26,8 +26,8 @@ namespace ClientWinform
         private User user = new User();
         byte[] images = null;
 
-        ChatListForm chatForm = null;
-        ProfileForm profileForm = null;
+        public ChatListForm chatForm = null;
+        public ProfileForm profileForm = null;
         public NavigationForm()
         {
             InitializeComponent();
