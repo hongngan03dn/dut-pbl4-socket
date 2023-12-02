@@ -24,8 +24,8 @@ namespace ClientWinform.View.User
             InitializeComponent();
             this.Activate();
             //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
-            Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
-            listenThread.Start();
+            //Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
+            //listenThread.Start();
             listChatOfUser();
         }
         private void listChatOfUser()

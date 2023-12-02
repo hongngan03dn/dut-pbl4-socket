@@ -77,21 +77,23 @@ namespace ClientWinform
             else
             {
                 // phân quyền
-                try
-                {
-                    idRole = UserBLL.getRole(id);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
-                }
-                //MessageBox.Show("Sign In Successfully.", "INFO");
-
                 // kết nối Mail Server
                 try
                 {
-                    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
+                    idRole = UserBLL.getRole(id);
+                    this.Hide();
+                    if (idRole == Constants.Roles.USER)
+                    {
+                        NavigationForm f = new NavigationForm(user);
+                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        f.ShowDialog();
+                    }
+                    else if (idRole == Constants.Roles.ADMIN)
+                    {
+                        AdminHomeForm f = new AdminHomeForm();
+                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        f.ShowDialog();
+                    }
                 }
                 catch (Exception ex)
                 {
