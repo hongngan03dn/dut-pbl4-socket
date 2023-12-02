@@ -17,7 +17,7 @@ namespace ClientWinform.SocketHandles
     public class MailClient
     {
         delegate void setForm(string msg, Form chatListForm);
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.2.17";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
