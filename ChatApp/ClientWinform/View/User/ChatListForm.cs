@@ -28,34 +28,8 @@ namespace ClientWinform.View.User
             //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
             //Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
             //listenThread.Start();
-            listChatOfUser();
+            //listChatOfUser();
         }
-        private void listChatOfUser()
-        {
-            List<DTO.User> users = BLL.UserBLL.getUserListChat(user.Id);
-            byte[] images = null;
-            foreach (DTO.User user in users) 
-            {
-                ChatReviewForm chat = new ChatReviewForm();
-                images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
-                if (images == null)
-                {
-                    chat.ava = Resources.defaultAvatar;
-                }
-                else
-                {
-                    MemoryStream mstream = new MemoryStream(images);
-                    chat.ava = Image.FromStream(mstream);
-                }
-                chat.userName = user.Username;
-                foreach (Control c in chat.Controls)
-                {
-                    c.Click += new EventHandler(chatPanel_Click);
-                }
-                flowLayoutPanelListChat.Controls.Add(chat);
-            }
-        }
-
         private void ActiveButton(object btnSender)
         {
             DisableButton();
@@ -93,7 +67,7 @@ namespace ClientWinform.View.User
             childForm.BringToFront();
             childForm.Show();
         }
-        private void chatPanel_Click(object sender, EventArgs e)
+        public void chatPanel_Click(object sender, EventArgs e)
         {
             ChatContentForm f = new ChatContentForm(this.user);
             OpenChilForm(f, sender);

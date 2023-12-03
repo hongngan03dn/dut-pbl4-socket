@@ -13,21 +13,26 @@ using ClientWinform.Properties;
 using System.IO;
 using ClientWinform.DTO;
 using Newtonsoft.Json;
+using System.Drawing;
 
 namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
         delegate void setForm(string msg, Form chatListForm);
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.1.21";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
 
+        static User user;
+        static int idLoggined = 0;
         public static void connectServer(int myId, String username, Form activeForm)
         {
             _ipep = new IPEndPoint(IPAddress.Parse(_ipServer), _port);
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            user = BLL.UserBLL.getUserByID(myId);
+
 
             try
             {
@@ -67,16 +72,88 @@ namespace ClientWinform.SocketHandles
         }
         public static void UpdateListChat(string message, Form activeForm)
         {
-            if(activeForm.InvokeRequired)
+            bool isParsableToId = int.TryParse(message, out int myId);
+            
+            int[] idOnlines = null;
+            if (isParsableToId)
             {
-                setForm d = new setForm(UpdateListChat);
-                activeForm.Invoke(d, new object[] { message, activeForm });
+                idLoggined = myId;
             }
             else
             {
-                if (activeForm is NavigationForm navigationForm)
+                string keyword = "Current onlines: ";
+
+                string onlyIdNumbers = "";
+
+                string[] parts = message.Split(new[] {keyword}, StringSplitOptions.None);
+                if (parts.Length == 2)
                 {
-                    navigationForm.chatForm.listBox1.Items.Add(message);
+                    if (parts[0] != "")
+                        idLoggined = int.Parse(parts[0].Trim());
+
+                    onlyIdNumbers = parts[1];
+                }
+                string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
+
+                idOnlines = new int[onlineStrings.Length];
+                for (int i = 0; i < onlineStrings.Length; i++)
+                {
+                    if (int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                    {
+                        idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                    }
+                }
+                Array.Resize(ref idOnlines, idOnlines.Length - 1);
+
+                //delegate
+                if(activeForm.InvokeRequired)
+                {
+                    setForm d = new setForm(UpdateListChat);
+                    activeForm.Invoke(d, new object[] { message, activeForm });
+                }
+                else
+                {
+
+                    if (activeForm is NavigationForm navigationForm && idLoggined != 0)
+                    {
+                        List<DTO.User> users = BLL.UserBLL.getUserListChat(user.Id);
+                        byte[] images = null;
+                        foreach (DTO.User user in users)
+                        {
+                            ChatReviewForm chat = new ChatReviewForm();
+                            images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
+                            if (images == null)
+                            {
+                                chat.ava = Resources.defaultAvatar;
+                            }
+                            else
+                            {
+                                MemoryStream mstream = new MemoryStream(images);
+                                chat.ava = Image.FromStream(mstream);
+                            }
+                            if(user.Id == idLoggined)
+                            {
+                                chat.isPictureBoxOnlineVisible = true;
+                            }
+                            if (idOnlines != null)
+                            {
+                                for (int i = 0; i < idOnlines.Length; i++)
+                                {
+                                    if(user.Id == idOnlines[i])
+                                        chat.isPictureBoxOnlineVisible = true;
+                                }
+                            }
+                            chat.userName = user.Username;
+                            navigationForm.chatForm.Invoke((MethodInvoker)delegate {
+
+                                foreach (Control c in chat.Controls)
+                                {
+                                    c.Click += new EventHandler(navigationForm.chatForm.chatPanel_Click);
+                                }
+                                navigationForm.chatForm.flowLayoutPanelListChat.Controls.Add(chat);
+                            });
+                        }
+                    }
                 }
             }
         }

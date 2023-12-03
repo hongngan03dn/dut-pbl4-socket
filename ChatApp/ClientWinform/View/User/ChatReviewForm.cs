@@ -47,7 +47,14 @@ namespace ClientWinform.View.User
         public Image isOnline
         {
             get { return _isOnline; }
-            set { _isOnline = value; pictureBoxOnline.Image = value; }
+            set { _isOnline = value; pictureBoxOnline.Image = value; pictureBoxOnline.Visible = false; }
+        }
+
+        [Category("Custom Props")]
+        public bool isPictureBoxOnlineVisible
+        {
+            get { return pictureBoxOnline.Visible; }
+            set { pictureBoxOnline.Visible = value; }
         }
 
 

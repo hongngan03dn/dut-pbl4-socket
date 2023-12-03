@@ -44,7 +44,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[7];
+            IPAddress address = hostEntry.AddressList[3];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -93,10 +93,10 @@ namespace MailServer
         public static void onClientConnect(Socket client)
         {
             ClientModel newClient = getClientInfo(client);
-            string message = clientOnline.Last().Username;
+            string message = clientOnline.Last().Id.ToString();
             broadcastMessage(message);
-            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Username));
-            byte[] currentOnline = Encoding.ASCII.GetBytes("\nCurrently: " + onlineClients);
+            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Id));
+            byte[] currentOnline = Encoding.ASCII.GetBytes("Current onlines: " + onlineClients);
             newClient.clientSocket.Send(currentOnline);
         }
 
