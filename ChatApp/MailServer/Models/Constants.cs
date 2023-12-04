@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClientWinform.DTO
+namespace MailServer
 {
     public class Constants
     {
@@ -20,6 +20,7 @@ namespace ClientWinform.DTO
         }
         public static class MessageStatuses
         {
+            public const int READ = 3;
             public const int RECEIVED = 2;
             public const int SENT = 1;
             public const int INACTIVE = 0;

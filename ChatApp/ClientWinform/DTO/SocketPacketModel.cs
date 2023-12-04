@@ -8,15 +8,15 @@ namespace ClientWinform.DTO
 {
     public class SocketPacketModel
     {
-        public int FromId {  get; set; }
-        public int ToId { get; set; }
+        public int IdFrom {  get; set; }
+        public int IdTo { get; set; }
         public String ContentMsg { get; set; }
 
         public SocketPacketModel() { }
         public SocketPacketModel(int fromId, int toId, string contentMsg)
         {
-            FromId = fromId;
-            ToId = toId;
+            IdFrom = fromId;
+            IdTo = toId;
             ContentMsg = contentMsg;
         }
     }

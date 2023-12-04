@@ -1,4 +1,6 @@
-﻿using MailServer.Models;
+﻿using MailServer.DBHelpers;
+using MailServer.Entities;
+using MailServer.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +21,7 @@ namespace MailServer
 
         static void Main(string[] args)
         {
+
             getInfoServer();
 
             // lắng nghe client
@@ -100,6 +103,7 @@ namespace MailServer
             newClient.clientSocket.Send(currentOnline);
         }
 
+        
         public static void listenClient(object objClient)
         {
             Socket client = objClient as Socket;
@@ -113,7 +117,29 @@ namespace MailServer
 
                     // chuyển JSonString thành Object
                     SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
-                    Console.WriteLine("INFO Listen from: " + packet.FromId + " | " + packet.ToId + " | " + packet.ContentMsg + "\n");
+
+                    // check IdTo có online không
+                    ClientModel onlineToClient = clientOnline.Where(x => x.Id == packet.IdTo).FirstOrDefault();
+
+                    // Lưu DB
+                    MessageHelper messageHelper = new MessageHelper();
+
+                    // chua xu li Status; Save vo DB dc r
+                    // idea là check idTo có đang onl ko
+                    // có thì gửi r Save DB status RECEIVED lun
+                    // ko thì Save DB status SENT
+                    if (onlineToClient == null)
+                    {
+                        messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.SENT);
+                    }
+                    else
+                    {
+                        messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.RECEIVED);
+                    }
+
+
+
+                    Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                 }
                 catch (Exception ex)
                 {
