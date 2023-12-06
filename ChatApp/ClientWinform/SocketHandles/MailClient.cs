@@ -121,7 +121,7 @@ namespace ClientWinform.SocketHandles
                         navigationForm.chatForm.Invoke((MethodInvoker)delegate
                         {
                             ChatReviewForm chat = navigationForm.chatForm.flowLayoutPanelListChat.Controls.OfType<ChatReviewForm>()
-                                                                                                      .FirstOrDefault(c => c.userName == user.Username);
+                                                                                                          .FirstOrDefault(c => c.userName == user.Username);
                         if (chat == null)
                         {
                             chat = new ChatReviewForm();
@@ -150,6 +150,7 @@ namespace ClientWinform.SocketHandles
                             }
                         }
                         chat.userName = user.Username;
+                        chat.message = BLL.UserBLL.getMessage(2, 6);
                         foreach (Control c in chat.Controls)
                         {
                             c.Click -= new EventHandler(navigationForm.chatForm.chatPanel_Click);
