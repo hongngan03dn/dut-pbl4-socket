@@ -309,6 +309,7 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\OnlineIcon.png" />
     <None Include="Resources\defaultAvatar.jpg" />
     <None Include="Resources\Ava img %281%29.png" />
     <None Include="Resources\avaKiet.jpg" />

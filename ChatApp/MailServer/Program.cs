@@ -47,7 +47,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[7];
+            IPAddress address = hostEntry.AddressList[1];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -56,14 +56,7 @@ namespace MailServer
             //server.Listen(10);
             //lbInfo.Text = "Waiting to connect...";
         }
-        public static void broadcastMessage(string message)
-        {
-            byte[] data = Encoding.ASCII.GetBytes(message);
-            foreach (ClientModel client in clientOnline)
-            {
-                client.clientSocket.Send(data);
-            }
-        }
+
         public static ClientModel getClientInfo(object objClient)
         {
             Socket client = objClient as Socket;
@@ -93,13 +86,21 @@ namespace MailServer
             //broadcastMessage(newClient.Username + " has logged in.");
             return newClient;
         }
+        public static void broadcastMessage(string message)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(message + "\n");
+            foreach (ClientModel client in clientOnline)
+            {
+                client.clientSocket.Send(data);
+            }
+        }
         public static void onClientConnect(Socket client)
         {
             ClientModel newClient = getClientInfo(client);
-            string message = clientOnline.Last().Username;
+            string message = newClient.Id.ToString() + " has loggined ";
             broadcastMessage(message);
-            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Username));
-            byte[] currentOnline = Encoding.ASCII.GetBytes("\nCurrently: " + onlineClients);
+            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Id));
+            byte[] currentOnline = Encoding.ASCII.GetBytes("Current onlines: " + onlineClients + "\n");
             newClient.clientSocket.Send(currentOnline);
         }
 

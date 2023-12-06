@@ -243,6 +243,16 @@ namespace ClientWinform.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap OnlineIcon {
+            get {
+                object obj = ResourceManager.GetObject("OnlineIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap paperclip {
             get {
                 object obj = ResourceManager.GetObject("paperclip", resourceCulture);

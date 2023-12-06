@@ -120,6 +120,16 @@ namespace ClientWinform.BLL
                 return users;
             }
         }
+        public static string getMessage(int idFrom, int idTo)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                string msg = db.Messages.Where(record => record.IdFrom == idFrom && record.IdTo == idTo)
+                                     .Select(record => record.ContentMsg).FirstOrDefault();
+                return msg;
+
+            }
+        }
         public static void updateUser(User user)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
