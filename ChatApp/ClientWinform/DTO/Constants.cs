@@ -25,5 +25,10 @@ namespace ClientWinform.DTO
             public const int SENT = 1;
             public const int INACTIVE = 0;
         }
+        public static class MessageTies
+        {
+            public const int MAXLENGTHINREVIEW = 18;
+            public const int MAXLENGTHINCONTENT = 70;
+        }
     }
 }

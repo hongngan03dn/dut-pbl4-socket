@@ -14,6 +14,7 @@ using System.IO;
 using ClientWinform.DTO;
 using Newtonsoft.Json;
 using System.Drawing;
+using Guna.UI2.WinForms;
 
 namespace ClientWinform.SocketHandles
 {
@@ -89,7 +90,11 @@ namespace ClientWinform.SocketHandles
                 {
                     if(idFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
                     {
-                        navigationForm.chatForm.chatContentForm.listBox1.Items.Add(content);
+                        DTO.Message newMessage = new DTO.Message();
+                        newMessage.ContentMsg = content;
+
+                        List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, idFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
                     }
                     
                 }
@@ -183,13 +188,18 @@ namespace ClientWinform.SocketHandles
                             if(msg != null)
                             {
                                 if (BLL.UserBLL.getMessage(userLoggined.Id, user.Id).IdFrom == userLoggined.Id)
-
                                 {
-                                    chat.message = "You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
+                                    if (("You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                        chat.message = ("You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                                    else
+                                        chat.message = "You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
                                 }
                                 else
                                 {
-                                    chat.message = BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
+                                    if ( BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                        chat.message = BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                                    else
+                                        chat.message = BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
                                 }
                             }
                             else

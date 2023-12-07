@@ -11,6 +11,7 @@ using static System.ComponentModel.Design.ObjectSelectorEditor;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Security.Cryptography;
 using System.Windows.Forms;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace ClientWinform.BLL
 {
@@ -154,8 +155,6 @@ namespace ClientWinform.BLL
             using(testpbldbEntities1 db = new testpbldbEntities1())
             {
                 db.Avatars.Add(ava);
-                //User updateUser = db.Users.Where(record => record.Id == user.Id).FirstOrDefault();
-                //updateUser.IdAvatar = ava.Id;
                 db.SaveChanges();
             }
             return ava.Id;
@@ -248,6 +247,18 @@ namespace ClientWinform.BLL
                 return msg.Id;
             }
         }
+        public static List<DTO.Message> GetTopMessages(int idFrom, int idTo)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
+                                                      (record.IdFrom == idTo && record.IdTo == idFrom))
+                                     .OrderByDescending(record => record.CreatedDate)
+                                     .Take(15).ToList();  
+                return msg;
+            }
+        }
+
 
     }
 }
