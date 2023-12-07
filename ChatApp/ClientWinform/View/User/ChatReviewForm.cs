@@ -56,6 +56,11 @@ namespace ClientWinform.View.User
             get { return pictureBoxOnline.Visible; }
             set { pictureBoxOnline.Visible = value; }
         }
+        [Category("Custom Props")]
+        public Panel isSelected
+        {
+            get { return panelMain; }
+        }
 
 
 

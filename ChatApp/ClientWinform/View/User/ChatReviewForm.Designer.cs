@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.panelMain = new System.Windows.Forms.Panel();
+            this.picAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.labelMessage = new System.Windows.Forms.Label();
             this.labelUsername = new System.Windows.Forms.Label();
-            this.picAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.pictureBoxOnline = new System.Windows.Forms.PictureBox();
             this.panelMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAva)).BeginInit();
@@ -50,6 +50,19 @@
             this.panelMain.Name = "panelMain";
             this.panelMain.Size = new System.Drawing.Size(364, 80);
             this.panelMain.TabIndex = 7;
+            // 
+            // picAva
+            // 
+            this.picAva.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.picAva.ImageRotate = 0F;
+            this.picAva.Location = new System.Drawing.Point(25, 10);
+            this.picAva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.picAva.Name = "picAva";
+            this.picAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picAva.Size = new System.Drawing.Size(60, 60);
+            this.picAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picAva.TabIndex = 3;
+            this.picAva.TabStop = false;
             // 
             // labelMessage
             // 
@@ -73,19 +86,6 @@
             this.labelUsername.TabIndex = 4;
             this.labelUsername.Text = "Username";
             // 
-            // picAva
-            // 
-            this.picAva.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.picAva.ImageRotate = 0F;
-            this.picAva.Location = new System.Drawing.Point(25, 10);
-            this.picAva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.picAva.Name = "picAva";
-            this.picAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAva.Size = new System.Drawing.Size(60, 60);
-            this.picAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picAva.TabIndex = 3;
-            this.picAva.TabStop = false;
-            // 
             // pictureBoxOnline
             // 
             this.pictureBoxOnline.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -103,6 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.panelMain);
             this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "ChatReviewForm";

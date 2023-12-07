@@ -34,5 +34,19 @@ namespace MailServer.DBHelpers
                 throw;
             }
         }
+        public void UpdateMesageToReceived(int idMsg)
+        {
+            try
+            {
+                Message msg = _context.Messages.Where(msg => msg.Id == idMsg).FirstOrDefault();
+                msg.Status = Constants.MessageStatuses.RECEIVED;
+
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -37,7 +37,7 @@ namespace MailServer
                 onClientConnect(client);
 
                 // tạo Thread nhận tin nhắn của Client -> xử lí tn : Save DB + Sent to targetClient if online
-                Thread threadListenClient = new Thread(listenClient);
+                Thread threadListenClient = new Thread(listenMsgClient);
                 threadListenClient.Start(client);
 
             }
@@ -105,7 +105,7 @@ namespace MailServer
         }
 
         
-        public static void listenClient(object objClient)
+        public static void listenMsgClient(object objClient)
         {
             Socket client = objClient as Socket;
             while (true)
@@ -129,17 +129,17 @@ namespace MailServer
                     // idea là check idTo có đang onl ko
                     // có thì gửi r Save DB status RECEIVED lun
                     // ko thì Save DB status SENT
-                    if (onlineToClient == null)
+                    if (onlineToClient != null)
                     {
-                        messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.SENT);
+                        //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.RECEIVED);
+                        messageHelper.UpdateMesageToReceived(packet.IdMsg);
+                        byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo);
+                        onlineToClient.clientSocket.Send(msg);
                     }
                     else
                     {
-                        messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.RECEIVED);
+                        //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.SENT);
                     }
-
-
-
                     Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                 }
                 catch (Exception ex)

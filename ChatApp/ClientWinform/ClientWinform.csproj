@@ -103,6 +103,7 @@
     <Compile Include="DTO\User.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\UserModel.cs" />
     <Compile Include="Helpers\MailUtils.cs" />
     <Compile Include="Helpers\MD5Hasher.cs" />
     <Compile Include="SocketHandles\MailClient.cs" />

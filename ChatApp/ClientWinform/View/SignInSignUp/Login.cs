@@ -86,12 +86,13 @@ namespace ClientWinform
                     {
                         NavigationForm f = new NavigationForm(user);
                         SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        BLL.UserBLL.LoadMsgesToReceived(id);
                         f.ShowDialog();
                     }
                     else if (idRole == Constants.Roles.ADMIN)
                     {
                         AdminHomeForm f = new AdminHomeForm();
-                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        //SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
                         f.ShowDialog();
                     }
                 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientWinform.BLL;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,14 +13,17 @@ namespace ClientWinform.View.User
 {
     public partial class ChatContentForm : Form
     {
-        private ClientWinform.DTO.User user = new DTO.User();
+        public DTO.User userFrom = new DTO.User();
+        public DTO.User userTo = new DTO.User();
         public ChatContentForm()
         {
             InitializeComponent();
         }
-        public ChatContentForm(ClientWinform.DTO.User user) : this()
+        public ChatContentForm(int idFrom, int idTo) : this()
         {
-            this.user = user;
+            this.userFrom.Id = idFrom;
+            this.userTo = BLL.UserBLL.getUserByID(idTo);
+            labelUsername.Text = this.userTo.Username;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -36,9 +40,12 @@ namespace ClientWinform.View.User
         {
             if (!String.IsNullOrWhiteSpace(messageTxt.Text))
             {
+                listBox1.Items.Add("You: " + messageTxt.Text);
                 try
                 {
-                    SocketHandles.MailClient.sendMsg(user.Id, 2, messageTxt.Text);
+                    //BLL.UserBLL.InsertMessage(userFrom.Id, userTo.Id, messageTxt.Text);
+                    SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text);
+                    messageTxt.Text = "";
                 }
                 catch (Exception ex)
                 {

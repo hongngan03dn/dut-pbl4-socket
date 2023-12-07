@@ -6,6 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClientWinform.Helpers;
+using static Guna.UI2.Native.WinApi;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using System.Security.Cryptography;
+using System.Windows.Forms;
 
 namespace ClientWinform.BLL
 {
@@ -110,26 +115,7 @@ namespace ClientWinform.BLL
                 return usernames;
             }
         }
-        public static List<User> getUserListChat(int idUser)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                List<User> users = new List<User>();
-                var li = db.Users.Where(record => record.Id != idUser && record.IdRole == Constants.Roles.USER);
-                users.AddRange(li); 
-                return users;
-            }
-        }
-        public static string getMessage(int idFrom, int idTo)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                string msg = db.Messages.Where(record => record.IdFrom == idFrom && record.IdTo == idTo)
-                                     .Select(record => record.ContentMsg).FirstOrDefault();
-                return msg;
 
-            }
-        }
         public static void updateUser(User user)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
@@ -196,6 +182,70 @@ namespace ClientWinform.BLL
                     user.UpdatedDate = DateTime.Now;
                     testpbldb.SaveChanges();
                 }
+            }
+        }
+        public static List<UserModel> getUserListChat(int id)
+        {
+            using (var context = new testpbldbEntities1())
+            {
+                var users = context.Users
+                                   .Where(u => u.Id != id)
+                                   .Join(context.Messages,
+                                         u => u.Id,
+                                         m => m.IdFrom == id ? m.IdTo : m.IdFrom,
+                                         (u, m) => new { User = u, Message = m })
+                                   .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
+                                   .Select(g => new UserModel
+                                   {
+                                       Id = g.Key.Id,
+                                       Username = g.Key.Username,
+                                       IdAvatar = g.Key.IdAvatar,
+                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate)
+                                   })
+                                   .OrderByDescending(u => u.LatestMessageTime)
+                                   .ToList();
+
+                return users;
+            }
+        }
+        public static DTO.Message getMessage(int idFrom, int idTo)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
+                                                         (record.IdFrom == idTo && record.IdTo == idFrom))
+                                        .OrderByDescending(record => record.CreatedDate)
+                                        .FirstOrDefault();
+                return msg;
+            }
+        }
+        public static void LoadMsgesToReceived(int idTo)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var msgLi = db.Messages.Where(record =>  record.IdTo == idTo).ToList();
+
+                msgLi.ForEach(msg => msg.Status = Constants.MessageStatuses.RECEIVED);
+
+                db.SaveChanges();
+            }
+        }
+        public static int InsertMessage(int idFrom, int idTo, String contentMsg)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message msg = new DTO.Message()
+                {
+                    IdFrom = idFrom,
+                    IdTo = idTo,
+                    ContentMsg = contentMsg,
+                    Status = Constants.MessageStatuses.SENT,
+                    CreatedDate = DateTime.Now,
+                    CreatedBy = idFrom,
+                };
+                db.Messages.Add(msg);
+                db.SaveChanges();
+                return msg.Id;
             }
         }
 

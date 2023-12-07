@@ -16,27 +16,23 @@ namespace ClientWinform.View.User
 {
     public partial class ChatListForm : Form
     {
-        private Panel chat;
+        private ChatReviewForm chat;
+        public ChatContentForm chatContentForm = null;
         private Form activeForm;
-        //public int idUser;
-        public ClientWinform.DTO.User user = new DTO.User();
-        public ChatListForm(ClientWinform.DTO.User user)
+        public DTO.User user = new DTO.User();
+        public ChatListForm(DTO.User user)
         {
             this.user = user;
             InitializeComponent();
             this.Activate();
-            //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
-            //Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
-            //listenThread.Start();
-            //listChatOfUser();
         }
         private void ActiveButton(object btnSender)
         {
             DisableButton();
             if (btnSender != null)
             {
-                chat = (Panel)btnSender;
-                chat.BackColor = Color.FromArgb(204, 218, 251);
+                chat = (ChatReviewForm)btnSender;
+                chat.isSelected.BackColor = Color.FromArgb(204, 218, 251);
 
             }
         }
@@ -44,10 +40,10 @@ namespace ClientWinform.View.User
         {
             foreach (Control ctrl in flowLayoutPanelListChat.Controls)
             {
-                if (ctrl is Panel)
+                if (ctrl is ChatReviewForm)
                 {
-                    Panel btn = (Panel)ctrl;
-                    btn.BackColor = Color.FromArgb(233, 233, 236);
+                    ChatReviewForm panel = (ChatReviewForm)ctrl;
+                    panel.isSelected.BackColor = Color.White;
                 }
             }
         }
@@ -57,7 +53,7 @@ namespace ClientWinform.View.User
             {
                 activeForm.Close();
             }
-            ActiveButton(sender);
+            //ActiveButton(sender);
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -67,10 +63,10 @@ namespace ClientWinform.View.User
             childForm.BringToFront();
             childForm.Show();
         }
-        public void chatPanel_Click(object sender, EventArgs e)
+        public void chatPanel_Click(object sender, EventArgs e, int userId, int userToId)
         {
-            ChatContentForm f = new ChatContentForm(this.user);
-            OpenChilForm(f, sender);
+            chatContentForm = new ChatContentForm(userId, userToId);
+            OpenChilForm(chatContentForm, sender);
         }
     }
 }
