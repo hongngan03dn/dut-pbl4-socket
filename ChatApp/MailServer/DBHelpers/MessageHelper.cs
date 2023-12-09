@@ -40,7 +40,7 @@ namespace MailServer.DBHelpers
             {
                 Message msg = _context.Messages.Where(msg => msg.Id == idMsg).FirstOrDefault();
                 msg.Status = Constants.MessageStatuses.RECEIVED;
-
+                msg.UpdatedDate = DateTime.Now;
                 _context.SaveChanges();
             }
             catch (Exception e)

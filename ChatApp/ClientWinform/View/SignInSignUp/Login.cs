@@ -86,7 +86,7 @@ namespace ClientWinform
                     {
                         NavigationForm f = new NavigationForm(user);
                         SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
-                        BLL.UserBLL.LoadMsgesToReceived(id);
+                        BLL.MsgBLL.LoadMsgesToReceived(id);
                         f.ShowDialog();
                     }
                     else if (idRole == Constants.Roles.ADMIN)

@@ -16,7 +16,7 @@ namespace ClientWinform.View.User
 {
     public partial class ChatListForm : Form
     {
-        private ChatReviewForm chat;
+        private Panel chat;
         public ChatContentForm chatContentForm = null;
         private Form activeForm;
         public DTO.User user = new DTO.User();
@@ -31,8 +31,8 @@ namespace ClientWinform.View.User
             DisableButton();
             if (btnSender != null)
             {
-                chat = (ChatReviewForm)btnSender;
-                chat.isSelected.BackColor = Color.FromArgb(204, 218, 251);
+                chat = (Panel)btnSender;
+                chat.BackColor = Color.FromArgb(204, 218, 251);
 
             }
         }
@@ -53,7 +53,7 @@ namespace ClientWinform.View.User
             {
                 activeForm.Close();
             }
-            //ActiveButton(sender);
+            ActiveButton(sender);
             activeForm = childForm;
             childForm.TopLevel = false;
             childForm.FormBorderStyle = FormBorderStyle.None;
@@ -66,7 +66,9 @@ namespace ClientWinform.View.User
         public void chatPanel_Click(object sender, EventArgs e, int userId, int userToId)
         {
             chatContentForm = new ChatContentForm(userId, userToId);
+            //SocketHandles.MailClient.UpdateListChat(null, this);
             OpenChilForm(chatContentForm, sender);
+            
         }
     }
 }

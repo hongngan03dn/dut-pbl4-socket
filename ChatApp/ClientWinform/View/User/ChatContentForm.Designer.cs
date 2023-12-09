@@ -31,17 +31,19 @@ namespace ClientWinform.View.User
         {
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.labelUsername = new System.Windows.Forms.Label();
-            this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.messageTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.labelUsername = new System.Windows.Forms.Label();
+            this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.flowLayoutPanelChat = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnLoadmore = new System.Windows.Forms.Label();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.panel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.flowLayoutPanelChat.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelMain
@@ -71,49 +73,6 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 132F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1245, 797);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
-            this.panel1.Controls.Add(this.labelUsername);
-            this.panel1.Controls.Add(this.backBtn);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1245, 71);
-            this.panel1.TabIndex = 0;
-            // 
-            // labelUsername
-            // 
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(104, 26);
-            this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
-            this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(148, 38);
-            this.labelUsername.TabIndex = 6;
-            this.labelUsername.Text = "Username";
-            this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // backBtn
-            // 
-            this.backBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.backBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.backBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.backBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.backBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.backBtn.ForeColor = System.Drawing.Color.White;
-            this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
-            this.backBtn.Location = new System.Drawing.Point(29, 22);
-            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backBtn.Name = "backBtn";
-            this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.backBtn.Size = new System.Drawing.Size(50, 50);
-            this.backBtn.TabIndex = 0;
-            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -182,9 +141,53 @@ namespace ClientWinform.View.User
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(247)))), ((int)(((byte)(247)))), ((int)(((byte)(247)))));
+            this.panel1.Controls.Add(this.labelUsername);
+            this.panel1.Controls.Add(this.backBtn);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1245, 71);
+            this.panel1.TabIndex = 0;
+            // 
+            // labelUsername
+            // 
+            this.labelUsername.AutoSize = true;
+            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.labelUsername.Location = new System.Drawing.Point(104, 26);
+            this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
+            this.labelUsername.Name = "labelUsername";
+            this.labelUsername.Size = new System.Drawing.Size(148, 38);
+            this.labelUsername.TabIndex = 6;
+            this.labelUsername.Text = "Username";
+            this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // backBtn
+            // 
+            this.backBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.backBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.backBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.backBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.backBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.backBtn.ForeColor = System.Drawing.Color.White;
+            this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
+            this.backBtn.Location = new System.Drawing.Point(29, 22);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.backBtn.Size = new System.Drawing.Size(50, 50);
+            this.backBtn.TabIndex = 0;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
             // flowLayoutPanelChat
             // 
             this.flowLayoutPanelChat.AutoScroll = true;
+            this.flowLayoutPanelChat.Controls.Add(this.btnLoadmore);
             this.flowLayoutPanelChat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelChat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelChat.Location = new System.Drawing.Point(0, 71);
@@ -193,6 +196,21 @@ namespace ClientWinform.View.User
             this.flowLayoutPanelChat.Size = new System.Drawing.Size(1245, 593);
             this.flowLayoutPanelChat.TabIndex = 3;
             this.flowLayoutPanelChat.WrapContents = false;
+            // 
+            // btnLoadmore
+            // 
+            this.btnLoadmore.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.btnLoadmore.AutoSize = true;
+            this.btnLoadmore.Font = new System.Drawing.Font("Segoe UI Light", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoadmore.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.btnLoadmore.Location = new System.Drawing.Point(0, 0);
+            this.btnLoadmore.Margin = new System.Windows.Forms.Padding(0);
+            this.btnLoadmore.Name = "btnLoadmore";
+            this.btnLoadmore.Size = new System.Drawing.Size(94, 21);
+            this.btnLoadmore.TabIndex = 7;
+            this.btnLoadmore.Text = "Load more...";
+            this.btnLoadmore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.btnLoadmore.Click += new System.EventHandler(this.btnLoadmore_Click);
             // 
             // ChatContentForm
             // 
@@ -208,9 +226,11 @@ namespace ClientWinform.View.User
             this.Text = "ChatContentForm";
             this.panelMain.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanelChat.ResumeLayout(false);
+            this.flowLayoutPanelChat.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -226,5 +246,6 @@ namespace ClientWinform.View.User
         private Guna.UI2.WinForms.Guna2Button btnSubmit;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanelChat;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label btnLoadmore;
     }
 }

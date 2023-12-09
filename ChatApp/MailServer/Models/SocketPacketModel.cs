@@ -12,14 +12,16 @@ namespace MailServer.Models
         public int IdFrom { get; set; }
         public int IdTo { get; set; }
         public String ContentMsg { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public SocketPacketModel() { }
-        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg)
+        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg, DateTime createdDate)
         {
             IdMsg = idMsg;
             IdFrom = fromId;
             IdTo = toId;
             ContentMsg = contentMsg;
+            CreatedDate = createdDate;
         }
     }
 }

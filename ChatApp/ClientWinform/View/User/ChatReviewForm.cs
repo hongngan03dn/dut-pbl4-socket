@@ -20,6 +20,7 @@ namespace ClientWinform.View.User
 
         private string _userName;
         private string _message;
+        private string _time;
         private Image _ava;
         private Image _isOnline;
 
@@ -35,6 +36,12 @@ namespace ClientWinform.View.User
         {
             get { return _message; }
             set { _message = value; labelMessage.Text = value; }
+        }
+        [Category("Custom Props")]
+        public string time
+        {
+            get { return _time; }
+            set { _time = value; labelTime.Text = value; }
         }
 
         [Category("Custom Props")]
@@ -56,14 +63,26 @@ namespace ClientWinform.View.User
             get { return pictureBoxOnline.Visible; }
             set { pictureBoxOnline.Visible = value; }
         }
+
         [Category("Custom Props")]
         public Panel isSelected
         {
             get { return panelMain; }
         }
 
-
-
+        [Category("Custom Props")]
+        public Font isRead
+        {
+            get { return labelMessage.Font; }
+            set { labelMessage.Font = value; }
+        }
+        [Category("Custom Props")]
+        public Color changeForeColor
+        {
+            get { return labelMessage.ForeColor; }
+            set { labelMessage.ForeColor = value; }
+        }
         #endregion
+
     }
 }

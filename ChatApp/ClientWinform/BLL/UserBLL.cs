@@ -183,82 +183,80 @@ namespace ClientWinform.BLL
                 }
             }
         }
-        public static List<UserModel> getUserListChat(int id)
-        {
-            using (var context = new testpbldbEntities1())
-            {
-                var users = context.Users
-                                   .Where(u => u.Id != id)
-                                   .Join(context.Messages,
-                                         u => u.Id,
-                                         m => m.IdFrom == id ? m.IdTo : m.IdFrom,
-                                         (u, m) => new { User = u, Message = m })
-                                   .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
-                                   .Select(g => new UserModel
-                                   {
-                                       Id = g.Key.Id,
-                                       Username = g.Key.Username,
-                                       IdAvatar = g.Key.IdAvatar,
-                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate)
-                                   })
-                                   .OrderByDescending(u => u.LatestMessageTime)
-                                   .ToList();
+        //public static List<UserModel> getUserListChat(int id)
+        //{
+        //    using (var context = new testpbldbEntities1())
+        //    {
+        //        var users = context.Users
+        //                           .Where(u => u.Id != id)
+        //                           .Join(context.Messages,
+        //                                 u => u.Id,
+        //                                 m => m.IdFrom == id ? m.IdTo : m.IdFrom,
+        //                                 (u, m) => new { User = u, Message = m })
+        //                           .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
+        //                           .Select(g => new UserModel
+        //                           {
+        //                               Id = g.Key.Id,
+        //                               Username = g.Key.Username,
+        //                               IdAvatar = g.Key.IdAvatar,
+        //                               LatestMessageTime = g.Max(um => um.Message.CreatedDate)
+        //                           })
+        //                           .OrderByDescending(u => u.LatestMessageTime)
+        //                           .ToList();
 
-                return users;
-            }
-        }
-        public static DTO.Message getMessage(int idFrom, int idTo)
-        {
-            using (testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
-                                                         (record.IdFrom == idTo && record.IdTo == idFrom))
-                                        .OrderByDescending(record => record.CreatedDate)
-                                        .FirstOrDefault();
-                return msg;
-            }
-        }
-        public static void LoadMsgesToReceived(int idTo)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                var msgLi = db.Messages.Where(record =>  record.IdTo == idTo).ToList();
+        //        return users;
+        //    }
+        //}
+        //public static DTO.Message getMessage(int idFrom, int idTo)
+        //{
+        //    using (testpbldbEntities1 db = new testpbldbEntities1())
+        //    {
+        //        var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
+        //                                                 (record.IdFrom == idTo && record.IdTo == idFrom))
+        //                                .OrderByDescending(record => record.CreatedDate)
+        //                                .FirstOrDefault();
+        //        return msg;
+        //    }
+        //}
+        //public static void LoadMsgesToReceived(int idTo)
+        //{
+        //    using(testpbldbEntities1 db = new testpbldbEntities1())
+        //    {
+        //        var msgLi = db.Messages.Where(record =>  record.IdTo == idTo).ToList();
 
-                msgLi.ForEach(msg => msg.Status = Constants.MessageStatuses.RECEIVED);
+        //        msgLi.ForEach(msg => msg.Status = Constants.MessageStatuses.RECEIVED);
 
-                db.SaveChanges();
-            }
-        }
-        public static int InsertMessage(int idFrom, int idTo, String contentMsg)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                DTO.Message msg = new DTO.Message()
-                {
-                    IdFrom = idFrom,
-                    IdTo = idTo,
-                    ContentMsg = contentMsg,
-                    Status = Constants.MessageStatuses.SENT,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = idFrom,
-                };
-                db.Messages.Add(msg);
-                db.SaveChanges();
-                return msg.Id;
-            }
-        }
-        public static List<DTO.Message> GetTopMessages(int idFrom, int idTo)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
-                                                      (record.IdFrom == idTo && record.IdTo == idFrom))
-                                     .OrderByDescending(record => record.CreatedDate)
-                                     .Take(15).ToList();  
-                return msg;
-            }
-        }
-
-
+        //        db.SaveChanges();
+        //    }
+        //}
+        //public static int InsertMessage(int idFrom, int idTo, String contentMsg)
+        //{
+        //    using(testpbldbEntities1 db = new testpbldbEntities1())
+        //    {
+        //        DTO.Message msg = new DTO.Message()
+        //        {
+        //            IdFrom = idFrom,
+        //            IdTo = idTo,
+        //            ContentMsg = contentMsg,
+        //            Status = Constants.MessageStatuses.SENT,
+        //            CreatedDate = DateTime.Now,
+        //            CreatedBy = idFrom,
+        //        };
+        //        db.Messages.Add(msg);
+        //        db.SaveChanges();
+        //        return msg.Id;
+        //    }
+        //}
+        //public static List<DTO.Message> GetTopMessages(int idFrom, int idTo, int skipCount)
+        //{
+        //    using(testpbldbEntities1 db = new testpbldbEntities1())
+        //    {
+        //        var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
+        //                                              (record.IdFrom == idTo && record.IdTo == idFrom))
+        //                             .OrderByDescending(record => record.CreatedDate)
+        //                             .Skip(skipCount).Take(30).ToList();  
+        //        return msg;
+        //    }
+        //}
     }
 }

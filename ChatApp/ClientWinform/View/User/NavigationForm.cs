@@ -152,13 +152,5 @@ namespace ClientWinform
             mouseDown = false;
         }
 
-
-
-
-
-
-
-
-
     }
 }

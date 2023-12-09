@@ -15,13 +15,17 @@ using ClientWinform.DTO;
 using Newtonsoft.Json;
 using System.Drawing;
 using Guna.UI2.WinForms;
+using System.Globalization;
+using System.Web.UI.WebControls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
         delegate void setForm(string[] msg, Form chatListForm);
-        delegate void setSubForm(int idTo, int idFrom, string msg, Form subForm);
+        delegate void setSubForm(int idMsg, Form subForm);
+        delegate void returnStatusForm(int status, Form form);
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
 
 
@@ -60,11 +64,11 @@ namespace ClientWinform.SocketHandles
                 throw ex;
             }
         }
-        public static void sendMsg(int myId, int toId, String content)
+        public static void sendMsg(int myId, int toId, String content, Nullable<System.DateTime> createdDate)
         {
             byte[] datasend = new byte[1024];
-            int idMsg = BLL.UserBLL.InsertMessage(myId, toId, content);
-            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, content);
+            int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, content);
+            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, content, createdDate);
             string sendMsg = JsonConvert.SerializeObject(packet); // chuyển Object thành JsonString
             try
             {
@@ -77,26 +81,52 @@ namespace ClientWinform.SocketHandles
                 throw ex;
             }
         }
-        public static void receivedMsg(int idTo, int idFrom, string content, Form form)
+        public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)
             {
                 setSubForm d = new setSubForm(receivedMsg);
-                form.Invoke(d, new object[] { idTo, idFrom, content, form });
+                form.Invoke(d, new object[] { idMsg, form});
             }
             else
             {
-                if (form is NavigationForm navigationForm)
+                if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
                 {
-                    if(idFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
+                    DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+                    if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
                     {
-                        DTO.Message newMessage = new DTO.Message();
-                        newMessage.ContentMsg = content;
-
                         List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, idFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+                        BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
+                        
+                        //navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+                        byte[] datasend = new byte[1024];
+                        try
+                        {
+                            datasend = Encoding.ASCII.GetBytes("Already seen");
+                            _client.Send(datasend, datasend.Length, SocketFlags.None);
+                        }
+                        catch (Exception ex)
+                        {
+                            throw ex;
+                        }
                     }
                     
+                }
+            }
+        }
+        public static void returnStatus(int status, Form form)
+        {
+            if (form.InvokeRequired)
+            {
+                returnStatusForm d = new returnStatusForm(returnStatus);
+                form.Invoke(d, new object[] { status, form });
+            }
+            else
+            {
+                if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
+                {
+                    navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(status, true);
                 }
             }
         }
@@ -149,73 +179,83 @@ namespace ClientWinform.SocketHandles
 
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
-                    List<DTO.UserModel> users = BLL.UserBLL.getUserListChat(userLoggined.Id);
-                    foreach (DTO.UserModel user in users)
-                    {
-                        navigationForm.chatForm.Invoke((MethodInvoker)delegate
-                        {
-                            ChatReviewForm chat = navigationForm.chatForm.flowLayoutPanelListChat.Controls.OfType<ChatReviewForm>()
-                                                                                                          .FirstOrDefault(c => c.userName == user.Username);
-                            if (chat == null)
-                            {
-                                chat = new ChatReviewForm();
-                                navigationForm.chatForm.flowLayoutPanelListChat.Controls.Add(chat);
-                            }
-                            byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
-                            if (images == null)
-                            {
-                                chat.ava = Resources.defaultAvatar;
-                            }
-                            else
-                            {
-                                MemoryStream mstream = new MemoryStream(images);
-                                chat.ava = Image.FromStream(mstream);
-                            }
-                            if (user.Id == idLoggined)
-                            {
-                                chat.isPictureBoxOnlineVisible = true;
-                            }
-                            if (idOnlines != null)
-                            {
-                                for (int i = 0; i < idOnlines.Length; i++)
-                                {
-                                    if (user.Id == idOnlines[i])
-                                        chat.isPictureBoxOnlineVisible = true;
-                                }
-                            }
-                            chat.userName = user.Username;
-                            DTO.Message msg = BLL.UserBLL.getMessage(userLoggined.Id, user.Id);
-                            if(msg != null)
-                            {
-                                if (BLL.UserBLL.getMessage(userLoggined.Id, user.Id).IdFrom == userLoggined.Id)
-                                {
-                                    if (("You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                        chat.message = ("You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
-                                    else
-                                        chat.message = "You: " + BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
-                                }
-                                else
-                                {
-                                    if ( BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                        chat.message = BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
-                                    else
-                                        chat.message = BLL.UserBLL.getMessage(userLoggined.Id, user.Id).ContentMsg;
-                                }
-                            }
-                            else
-                            {
-                                chat.message = "";
-                            }
-
-                            foreach (Control c in chat.Controls)
-                            {
-                                c.Click -= new EventHandler((sender, e) => navigationForm.chatForm.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
-                                c.Click += new EventHandler((sender, e) => navigationForm.chatForm.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
-                            };
-                            navigationForm.chatForm.flowLayoutPanelListChat.Controls.Add(chat);
-                        });
-                    }
+                    optionForm(navigationForm.chatForm);
                 }
+                else if (activeForm is ChatListForm chatList && idLoggined != 0)
+                {
+                    optionForm(chatList);
+                }
+            }
+        }
+        public static void optionForm(ChatListForm chatList)
+        {
+            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id);
+            foreach (DTO.UserModel user in users)
+            {
+                chatList.Invoke((MethodInvoker)delegate
+                {
+                    ChatReviewForm chat = chatList.flowLayoutPanelListChat.Controls.OfType<ChatReviewForm>()
+                                                                                                  .FirstOrDefault(c => c.userName == user.Username);
+                    if (chat == null)
+                    {
+                        chat = new ChatReviewForm();
+                        chatList.flowLayoutPanelListChat.Controls.Add(chat);
+                    }
+                    byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
+                    if (images == null)
+                    {
+                        chat.ava = Resources.defaultAvatar;
+                    }
+                    else
+                    {
+                        MemoryStream mstream = new MemoryStream(images);
+                        chat.ava = System.Drawing.Image.FromStream(mstream);
+                    }
+                    if (user.Id == idLoggined)
+                    {
+                        chat.isPictureBoxOnlineVisible = true;
+                    }
+                    if (idOnlines != null)
+                    {
+                        for (int i = 0; i < idOnlines.Length; i++)
+                        {
+                            if (user.Id == idOnlines[i])
+                                chat.isPictureBoxOnlineVisible = true;
+                        }
+                    }
+                    chat.userName = user.Username;
+                    DTO.Message msg = BLL.MsgBLL.getMessage(userLoggined.Id, user.Id);
+                    if (msg != null)
+                    {
+                        if (msg.IdFrom == userLoggined.Id)
+                        {
+                            if (("You: " + msg.ContentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                chat.message = ("You: " + msg.ContentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                            else
+                                chat.message = "You: " + msg.ContentMsg;
+                        }
+                        else
+                        {
+                            if (msg.ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                chat.message = msg.ContentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                            else
+                                chat.message = msg.ContentMsg;
+                        }
+                        chat.time = BLL.MsgBLL.formatTime(msg.CreatedDate);
+                    }
+                    else
+                    {
+                        chat.message = "";
+                    }
+
+
+                    foreach (Control c in chat.Controls)
+                    {
+                        c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                    };
+                    chatList.flowLayoutPanelListChat.Controls.Add(chat);
+                });
             }
         }
         public static void listenForMessages(Form form)
@@ -225,16 +265,22 @@ namespace ClientWinform.SocketHandles
                 byte[] data = new byte[1024];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
-                if(!stringData.Contains("Message: "))
+                if(stringData.Contains("Message: "))
                 {
-                    string[] messages = stringData.Split('\n');
-                    UpdateListChat(messages, form);
+                    string[] messages = stringData.Split(new string[] { "Message: ", " From: ", " To: ", " CreatedDate: ", " IdMsg: " }, StringSplitOptions.None);
+                    receivedMsg(Int32.Parse(messages[5]), form);
+                    UpdateListChat(null, form);
+                }
+                else if(stringData.Contains("Return status: "))
+                {
+                    string[] messages = stringData.Split(new string[] { "Return status: " }, StringSplitOptions.None);
+                    int status = Int32.Parse(messages[1]);
+                    returnStatus(status, form);
                 }
                 else
                 {
-                    string[] messages = stringData.Split(new string[] { "Message: ", " From: ", " To: " }, StringSplitOptions.None);
-                    receivedMsg(Int32.Parse(messages[3]), Int32.Parse(messages[2]), messages[1], form);
-                    UpdateListChat(null, form);
+                    string[] messages = stringData.Split('\n');
+                    UpdateListChat(messages, form);
                 }
 
             }

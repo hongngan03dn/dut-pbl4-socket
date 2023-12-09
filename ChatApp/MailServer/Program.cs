@@ -63,7 +63,6 @@ namespace MailServer
             byte[] datarecv = new byte[1024];
             int recv = client.Receive(datarecv);
             string recvStr = Encoding.ASCII.GetString(datarecv, 0, recv);
-
             String[] splitted = recvStr.Split('|');
             int id = Int32.Parse(splitted[0].Trim());
 
@@ -116,29 +115,45 @@ namespace MailServer
                     int recv = client.Receive(datarecv);
                     string recvStr = Encoding.ASCII.GetString(datarecv, 0, recv);
 
-                    // chuyển JSonString thành Object
+
+
                     SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
 
-                    // check IdTo có online không
                     ClientModel onlineToClient = clientOnline.Where(x => x.Id == packet.IdTo).FirstOrDefault();
+                    ClientModel clientSendMsg = clientOnline.Where(x => x.Id == packet.IdFrom).FirstOrDefault();
 
-                    // Lưu DB
                     MessageHelper messageHelper = new MessageHelper();
+                    if(recvStr == "Already seen")
+                    {
+                        byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.READ);
+                        clientSendMsg.clientSocket.Send(msg);
+                    }
 
-                    // chua xu li Status; Save vo DB dc r
-                    // idea là check idTo có đang onl ko
-                    // có thì gửi r Save DB status RECEIVED lun
-                    // ko thì Save DB status SENT
                     if (onlineToClient != null)
                     {
                         //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.RECEIVED);
                         messageHelper.UpdateMesageToReceived(packet.IdMsg);
-                        byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo);
+                        byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo + " CreatedDate: " + packet.CreatedDate + " IdMsg: " + packet.IdMsg);
                         onlineToClient.clientSocket.Send(msg);
                     }
                     else
                     {
+
                         //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.SENT);
+                    }
+                    if(clientSendMsg != null)
+                    {
+                        if (onlineToClient != null)
+                        {
+                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
+                            clientSendMsg.clientSocket.Send(msg);
+                        }
+                        else
+                        {
+                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
+                            clientSendMsg.clientSocket.Send(msg);
+                        }
+                            
                     }
                     Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                 }

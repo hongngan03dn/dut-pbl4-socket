@@ -13,13 +13,16 @@ namespace ClientWinform.DTO
         public int IdTo { get; set; }
         public String ContentMsg { get; set; }
 
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+
         public SocketPacketModel() { }
-        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg)
+        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg, Nullable<DateTime> createdDate)
         {
             IdMsg = idMsg;
             IdFrom = fromId;
             IdTo = toId;
             ContentMsg = contentMsg;
+            CreatedDate = createdDate;
         }
     }
 }
