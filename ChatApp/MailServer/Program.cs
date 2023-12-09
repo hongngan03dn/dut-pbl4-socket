@@ -116,46 +116,51 @@ namespace MailServer
                     string recvStr = Encoding.ASCII.GetString(datarecv, 0, recv);
 
 
-
-                    SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
-
-                    ClientModel onlineToClient = clientOnline.Where(x => x.Id == packet.IdTo).FirstOrDefault();
-                    ClientModel clientSendMsg = clientOnline.Where(x => x.Id == packet.IdFrom).FirstOrDefault();
-
-                    MessageHelper messageHelper = new MessageHelper();
-                    if(recvStr == "Already seen")
+                    if(recvStr.Contains("Already seen"))
                     {
-                        byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.READ);
-                        clientSendMsg.clientSocket.Send(msg);
-                    }
+                        string[] messages = recvStr.Split(new string[] { "Already seen. Sent confirm for: " }, StringSplitOptions.None);
+                        ClientModel clientSendMsg = clientOnline.Where(x => x.Id == Int32.Parse(messages[1])).FirstOrDefault();
+                        if(clientSendMsg != null)
+                        {
+                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.READ);
+                            clientSendMsg.clientSocket.Send(msg);
+                        }
 
-                    if (onlineToClient != null)
-                    {
-                        //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.RECEIVED);
-                        messageHelper.UpdateMesageToReceived(packet.IdMsg);
-                        byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo + " CreatedDate: " + packet.CreatedDate + " IdMsg: " + packet.IdMsg);
-                        onlineToClient.clientSocket.Send(msg);
                     }
                     else
                     {
+                        SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
 
-                        //messageHelper.InsertMessage(packet.IdFrom, packet.IdTo, packet.ContentMsg, Constants.MessageStatuses.SENT);
-                    }
-                    if(clientSendMsg != null)
-                    {
+                        ClientModel onlineToClient = clientOnline.Where(x => x.Id == packet.IdTo).FirstOrDefault();
+                        ClientModel clientSendMsg = clientOnline.Where(x => x.Id == packet.IdFrom).FirstOrDefault();
+
+                        MessageHelper messageHelper = new MessageHelper();
+
+
                         if (onlineToClient != null)
                         {
-                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
-                            clientSendMsg.clientSocket.Send(msg);
+                            messageHelper.UpdateMesageToReceived(packet.IdMsg);
+                            byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo + " CreatedDate: " + packet.CreatedDate + " IdMsg: " + packet.IdMsg);
+                            onlineToClient.clientSocket.Send(msg);
                         }
                         else
                         {
-                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
-                            clientSendMsg.clientSocket.Send(msg);
                         }
-                            
+                        if(clientSendMsg != null)
+                        {
+                            if (onlineToClient != null)
+                            {
+                                byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
+                                clientSendMsg.clientSocket.Send(msg);
+                            }
+                            else
+                            {
+                                byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
+                                clientSendMsg.clientSocket.Send(msg);
+                            }
+                            Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
+                        }
                     }
-                    Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                 }
                 catch (Exception ex)
                 {

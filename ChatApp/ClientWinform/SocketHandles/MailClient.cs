@@ -81,6 +81,15 @@ namespace ClientWinform.SocketHandles
                 throw ex;
             }
         }
+        public static void sendStatusSeen(Nullable<Int32> idFrom)
+        {
+            byte[] datasend = new byte[1024];
+            if(_client.Connected)
+            {
+                datasend = Encoding.ASCII.GetBytes("Already seen. Sent confirm for: " + idFrom.ToString());
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+            }
+        }
         public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)
@@ -98,18 +107,10 @@ namespace ClientWinform.SocketHandles
                         List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
                         BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
                         
-                        //navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+                        navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
                         navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-                        byte[] datasend = new byte[1024];
-                        try
-                        {
-                            datasend = Encoding.ASCII.GetBytes("Already seen");
-                            _client.Send(datasend, datasend.Length, SocketFlags.None);
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
-                        }
+
+                        sendStatusSeen(newMessage.IdFrom);
                     }
                     
                 }
