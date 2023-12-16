@@ -30,6 +30,7 @@ namespace ClientWinform
         {
             labelUsername.Text = user.Username;
             labelName.Text = user.Name;
+            labelNumberConnections.Text = BLL.UserBLL.getConnectionsOfUser(user.Id).ToString(); 
             labelBio.Text = user.Bio;
             if(user.Gender == true)
             {

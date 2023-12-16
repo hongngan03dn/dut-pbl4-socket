@@ -21,7 +21,33 @@ namespace ClientWinform.BLL
                                          u => u.Id,
                                          m => m.IdFrom == id ? m.IdTo : (m.IdTo == id ? m.IdFrom : -1),
                                          (u, m) => new { User = u, Message = m })
-                                   .Where(um => um.Message.IdFrom == id || um.Message.IdTo == id)
+                                   .Where(um => (((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                               || ((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && um.Message.Status == Constants.ConnectionsDescr.CONNECTED)))
+                                   .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
+                                   .Select(g => new UserModel
+                                   {
+                                       Id = g.Key.Id,
+                                       Username = g.Key.Username,
+                                       IdAvatar = g.Key.IdAvatar,
+                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate)
+                                   })
+                                   .OrderByDescending(u => u.LatestMessageTime)
+                                   .ToList();
+
+                return users;
+            }
+        }
+        public static List<UserModel> getUserConnection(int id)
+        {
+            using (var context = new testpbldbEntities1())
+            {
+                var users = context.Users
+                                   .Where(u => u.Id != id)
+                                   .Join(context.Messages,
+                                         u => u.Id,
+                                         m => m.IdFrom == id ? m.IdTo : (m.IdTo == id ? m.IdFrom : -1),
+                                         (u, m) => new { User = u, Message = m })
+                                   .Where(um => (um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD)
                                    .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
                                    .Select(g => new UserModel
                                    {
@@ -40,8 +66,9 @@ namespace ClientWinform.BLL
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
+                var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
                                                       (record.IdFrom == idTo && record.IdTo == idFrom))
+                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
                                         .OrderByDescending(record => record.CreatedDate)
                                         .FirstOrDefault();
                 return msg;
@@ -61,7 +88,9 @@ namespace ClientWinform.BLL
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
             {
-                var msg = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom && record.Status == Constants.MessageStatuses.RECEIVED).Count();
+                var msg = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom 
+                                                   && record.Status == Constants.MessageStatuses.RECEIVED
+                                                   && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).Count();
                 if (msg > 0)
                     return true;
                 else
@@ -72,7 +101,7 @@ namespace ClientWinform.BLL
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.Status == Constants.MessageStatuses.SENT).ToList();
+                var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.Status == Constants.MessageStatuses.SENT && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).ToList();
 
                 msgLi.ForEach(msg => { msg.Status = Constants.MessageStatuses.RECEIVED;
                                        msg.UpdatedDate = DateTime.Now;}) ;
@@ -84,7 +113,9 @@ namespace ClientWinform.BLL
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom && record.Status == Constants.MessageStatuses.RECEIVED).ToList();
+                var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom 
+                                                     && record.Status == Constants.MessageStatuses.RECEIVED 
+                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).ToList();
 
                 msgLi.ForEach(msg => {
                     msg.Status = Constants.MessageStatuses.SEEN;
@@ -126,8 +157,9 @@ namespace ClientWinform.BLL
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
-                                                      (record.IdFrom == idTo && record.IdTo == idFrom))
+                var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
+                                                       (record.IdFrom == idTo && record.IdTo == idFrom))
+                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
                                      .OrderByDescending(record => record.CreatedDate)
                                      .Skip(skipCount).Take(50).ToList();
                 return msg;

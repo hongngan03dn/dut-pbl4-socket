@@ -44,6 +44,7 @@ namespace ClientWinform.View.User
                 {
                     ChatReviewForm panel = (ChatReviewForm)ctrl;
                     panel.isSelected.BackColor = Color.White;
+                    panel.isClicked = false;
                 }
             }
         }

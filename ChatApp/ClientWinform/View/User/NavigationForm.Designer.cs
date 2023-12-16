@@ -37,6 +37,7 @@ namespace ClientWinform
             this.chatBtn = new Guna.UI2.WinForms.Guna2Button();
             this.exploreBtn = new Guna.UI2.WinForms.Guna2Button();
             this.profileBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSignOut = new Guna.UI2.WinForms.Guna2Button();
             this.pictureAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lableUsername = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
@@ -117,6 +118,7 @@ namespace ClientWinform
             this.panelBtn.Controls.Add(this.chatBtn);
             this.panelBtn.Controls.Add(this.exploreBtn);
             this.panelBtn.Controls.Add(this.profileBtn);
+            this.panelBtn.Controls.Add(this.btnSignOut);
             this.panelBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBtn.Location = new System.Drawing.Point(0, 301);
             this.panelBtn.Margin = new System.Windows.Forms.Padding(0);
@@ -148,7 +150,7 @@ namespace ClientWinform
             this.chatBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.chatBtn.Image = global::ClientWinform.Properties.Resources.message_square1;
             this.chatBtn.ImageOffset = new System.Drawing.Point(-8, 0);
-            this.chatBtn.Location = new System.Drawing.Point(0, 79);
+            this.chatBtn.Location = new System.Drawing.Point(0, 7);
             this.chatBtn.Margin = new System.Windows.Forms.Padding(0);
             this.chatBtn.Name = "chatBtn";
             this.chatBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
@@ -172,7 +174,7 @@ namespace ClientWinform
             this.exploreBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.exploreBtn.Image = global::ClientWinform.Properties.Resources.user_plus;
             this.exploreBtn.ImageOffset = new System.Drawing.Point(-3, 0);
-            this.exploreBtn.Location = new System.Drawing.Point(0, 150);
+            this.exploreBtn.Location = new System.Drawing.Point(0, 78);
             this.exploreBtn.Margin = new System.Windows.Forms.Padding(0);
             this.exploreBtn.Name = "exploreBtn";
             this.exploreBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
@@ -195,7 +197,7 @@ namespace ClientWinform
             this.profileBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.profileBtn.Image = global::ClientWinform.Properties.Resources.user;
             this.profileBtn.ImageOffset = new System.Drawing.Point(-5, 0);
-            this.profileBtn.Location = new System.Drawing.Point(0, 221);
+            this.profileBtn.Location = new System.Drawing.Point(0, 149);
             this.profileBtn.Margin = new System.Windows.Forms.Padding(0);
             this.profileBtn.Name = "profileBtn";
             this.profileBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
@@ -204,6 +206,30 @@ namespace ClientWinform
             this.profileBtn.Text = "Profile";
             this.profileBtn.TextOffset = new System.Drawing.Point(-1, 0);
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
+            // 
+            // btnSignOut
+            // 
+            this.btnSignOut.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignOut.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignOut.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSignOut.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSignOut.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSignOut.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
+            this.btnSignOut.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSignOut.ForeColor = System.Drawing.Color.White;
+            this.btnSignOut.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
+            this.btnSignOut.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnSignOut.Image = global::ClientWinform.Properties.Resources.log_out__1_;
+            this.btnSignOut.ImageOffset = new System.Drawing.Point(-2, 0);
+            this.btnSignOut.Location = new System.Drawing.Point(0, 221);
+            this.btnSignOut.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSignOut.Name = "btnSignOut";
+            this.btnSignOut.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
+            this.btnSignOut.Size = new System.Drawing.Size(221, 72);
+            this.btnSignOut.TabIndex = 3;
+            this.btnSignOut.Text = "Sign out";
+            this.btnSignOut.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
             // 
             // pictureAva
             // 
@@ -361,11 +387,13 @@ namespace ClientWinform
             this.flowLayoutPanelListExplore.AutoScroll = true;
             this.flowLayoutPanelListExplore.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanelListExplore.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanelListExplore.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
             this.flowLayoutPanelListExplore.Location = new System.Drawing.Point(0, 61);
             this.flowLayoutPanelListExplore.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelListExplore.Name = "flowLayoutPanelListExplore";
             this.flowLayoutPanelListExplore.Size = new System.Drawing.Size(382, 721);
             this.flowLayoutPanelListExplore.TabIndex = 0;
+            this.flowLayoutPanelListExplore.WrapContents = false;
             // 
             // NavigationForm
             // 
@@ -413,5 +441,6 @@ namespace ClientWinform
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelExplore;
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
         private System.Windows.Forms.Panel panelExplore;
+        private Guna.UI2.WinForms.Guna2Button btnSignOut;
     }
 }

@@ -109,14 +109,14 @@ namespace ClientWinform.View.User
             this.searchTxt.IconLeft = global::ClientWinform.Properties.Resources.Untitled__1_;
             this.searchTxt.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
             this.searchTxt.IconLeftSize = new System.Drawing.Size(22, 22);
-            this.searchTxt.Location = new System.Drawing.Point(8, 13);
+            this.searchTxt.Location = new System.Drawing.Point(0, 13);
             this.searchTxt.Margin = new System.Windows.Forms.Padding(0);
             this.searchTxt.Name = "searchTxt";
             this.searchTxt.PasswordChar = '\0';
             this.searchTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.searchTxt.PlaceholderText = "Search...";
             this.searchTxt.SelectedText = "";
-            this.searchTxt.Size = new System.Drawing.Size(358, 52);
+            this.searchTxt.Size = new System.Drawing.Size(375, 52);
             this.searchTxt.TabIndex = 12;
             // 
             // flowLayoutPanelListChat

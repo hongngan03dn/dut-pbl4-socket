@@ -127,6 +127,17 @@ namespace MailServer
                         }
 
                     }
+                    else if (recvStr.Contains(" has signned out"))
+                    {
+                        string[] messages = recvStr.Split(new string[] { " has signned out" }, StringSplitOptions.None);
+                        ClientModel clientSendMsg = clientOnline.Where(x => x.Id == Int32.Parse(messages[0].Trim())).FirstOrDefault();
+                        clientOnline.Remove(clientSendMsg);
+                        if(clientOnline.Count > 0)
+                        {
+                            broadcastMessage(recvStr);
+                        }
+                        Console.WriteLine("INFO Logout by: " + Int32.Parse(messages[0].Trim()) + "\n");
+                    }
                     else
                     {
                         SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);

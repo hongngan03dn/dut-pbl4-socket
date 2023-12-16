@@ -183,79 +183,102 @@ namespace ClientWinform.BLL
                 }
             }
         }
-        //public static List<UserModel> getUserListChat(int id)
-        //{
-        //    using (var context = new testpbldbEntities1())
-        //    {
-        //        var users = context.Users
-        //                           .Where(u => u.Id != id)
-        //                           .Join(context.Messages,
-        //                                 u => u.Id,
-        //                                 m => m.IdFrom == id ? m.IdTo : m.IdFrom,
-        //                                 (u, m) => new { User = u, Message = m })
-        //                           .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
-        //                           .Select(g => new UserModel
-        //                           {
-        //                               Id = g.Key.Id,
-        //                               Username = g.Key.Username,
-        //                               IdAvatar = g.Key.IdAvatar,
-        //                               LatestMessageTime = g.Max(um => um.Message.CreatedDate)
-        //                           })
-        //                           .OrderByDescending(u => u.LatestMessageTime)
-        //                           .ToList();
+        public static List<User> getConnectingOfUser(int idFrom)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var connections = db.Messages.Where(record => ((record.IdFrom == idFrom || record.IdTo == idFrom))
+                                         && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
+                List<User> users = new List<User>();
+                User user = null;
+                foreach (DTO.Message connection in connections)
+                {
+                    user = new User();
+                    if (connection.IdFrom == idFrom)
+                        user = BLL.UserBLL.getUserByID((int)connection.IdTo);
+                    else
+                        user = BLL.UserBLL.getUserByID((int)connection.IdFrom);
+                    users.Add(user);
+                }
+                return users;
+            }
+        }
+        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                List<User> getUserExplore = new List<User>();
+                var userTemp = db.Users.Where(record => record.Id != idFrom && record.IdRole == Constants.Roles.USER).ToList();
+                foreach(int idExcept in idUserExcept)
+                {
+                    var userExplore = db.Users.Where(record => record.Id == idExcept).FirstOrDefault();
+                    userTemp.Remove(userExplore);
+                }
+                foreach(User connecting in connectingList)
+                {
+                    var userConnecting = db.Users.Where(record => record.Id == connecting.Id).FirstOrDefault();
+                    userTemp.Remove(userConnecting);
+                }
+                getUserExplore = userTemp.ToList();
+                return getUserExplore;
+            }
+        }
+        public static int getConnectionsOfUser(int userId)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var numConnections = db.Messages.Where(record => (record.IdFrom == userId || record.IdTo == userId) && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).Count();
+                return numConnections;
+            }
+        }
 
-        //        return users;
-        //    }
-        //}
-        //public static DTO.Message getMessage(int idFrom, int idTo)
+        public static DTO.Message checkIsHaveConnection(int userId, int connectionId)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var check = db.Messages.Where(record => ((record.IdFrom == userId && record.IdTo == connectionId) ||
+                                                         (record.IdFrom == connectionId && record.IdTo == userId))
+                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).FirstOrDefault();
+                return check;
+            }
+        }
+
+        public static void InsertConnection(int userId, int connectionId)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = new DTO.Message()
+                {
+                    IdFrom = userId,
+                    IdTo = connectionId,
+                    Status = Constants.ConnectionsDescr.CONNECTING,
+                    Description = Constants.ConnectionsDescr.CONNECTIONKEYWORD,
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.Now,
+                };
+                db.Messages.Add(connection);
+                db.SaveChanges();
+            }
+        }
+        public static void UpdateConnectionToConnected(int idConnection, int idUser)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = db.Messages.Where(record => record.Id == idConnection).FirstOrDefault();
+                connection.Status = Constants.ConnectionsDescr.CONNECTED;
+                connection.UpdatedDate = DateTime.Now;
+                connection.UpdatedBy = idUser;
+                db.SaveChanges();
+            }
+        }
+        //public static void UpdateMsgesToSeen(int idMsg)
         //{
         //    using (testpbldbEntities1 db = new testpbldbEntities1())
         //    {
-        //        var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
-        //                                                 (record.IdFrom == idTo && record.IdTo == idFrom))
-        //                                .OrderByDescending(record => record.CreatedDate)
-        //                                .FirstOrDefault();
-        //        return msg;
-        //    }
-        //}
-        //public static void LoadMsgesToReceived(int idTo)
-        //{
-        //    using(testpbldbEntities1 db = new testpbldbEntities1())
-        //    {
-        //        var msgLi = db.Messages.Where(record =>  record.IdTo == idTo).ToList();
-
-        //        msgLi.ForEach(msg => msg.Status = Constants.MessageStatuses.RECEIVED);
-
+        //        Message message = db.Messages.Where(msg => msg.Id == idMsg).FirstOrDefault();
+        //        message.Status = Constants.MessageStatuses.SEEN;
+        //        message.UpdatedDate = DateTime.Now;
         //        db.SaveChanges();
-        //    }
-        //}
-        //public static int InsertMessage(int idFrom, int idTo, String contentMsg)
-        //{
-        //    using(testpbldbEntities1 db = new testpbldbEntities1())
-        //    {
-        //        DTO.Message msg = new DTO.Message()
-        //        {
-        //            IdFrom = idFrom,
-        //            IdTo = idTo,
-        //            ContentMsg = contentMsg,
-        //            Status = Constants.MessageStatuses.SENT,
-        //            CreatedDate = DateTime.Now,
-        //            CreatedBy = idFrom,
-        //        };
-        //        db.Messages.Add(msg);
-        //        db.SaveChanges();
-        //        return msg.Id;
-        //    }
-        //}
-        //public static List<DTO.Message> GetTopMessages(int idFrom, int idTo, int skipCount)
-        //{
-        //    using(testpbldbEntities1 db = new testpbldbEntities1())
-        //    {
-        //        var msg = db.Messages.Where(record => (record.IdFrom == idFrom && record.IdTo == idTo) ||
-        //                                              (record.IdFrom == idTo && record.IdTo == idFrom))
-        //                             .OrderByDescending(record => record.CreatedDate)
-        //                             .Skip(skipCount).Take(30).ToList();  
-        //        return msg;
         //    }
         //}
     }

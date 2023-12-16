@@ -23,7 +23,7 @@ namespace ClientWinform.SocketHandles
 {
     public class MailClient
     {
-        delegate void setForm(string[] msg, Form chatListForm);
+        delegate void setForm(string[] msg, Form chatListForm, bool bindLogin);
         delegate void setSubForm(int idMsg, Form subForm);
         delegate void returnStatusForm(int status, Form form);
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
@@ -74,7 +74,7 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes(sendMsg);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
-                UpdateListChat(null, formAll);
+                UpdateListChat(null, formAll, true);
             }
             catch (Exception ex)
             {
@@ -87,6 +87,15 @@ namespace ClientWinform.SocketHandles
             if(_client.Connected)
             {
                 datasend = Encoding.ASCII.GetBytes("Already seen. Sent confirm for: " + idFrom.ToString());
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+            }
+        }
+        public static void sendNotiSignOut(Nullable<Int32> idFrom)
+        {
+            byte[] datasend = new byte[1024];
+            if (_client.Connected)
+            {
+                datasend = Encoding.ASCII.GetBytes(idFrom.ToString() + " has signned out");
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
             }
         }
@@ -131,7 +140,8 @@ namespace ClientWinform.SocketHandles
                 }
             }
         }
-        public static void UpdateListChat(string[] message, Form activeForm)
+
+        public static void UpdateListChat(string[] message, Form activeForm, bool bindLogin)
         {
             if(message != null)
             {
@@ -146,26 +156,30 @@ namespace ClientWinform.SocketHandles
                 string keyword = "Current onlines: ";
 
                 string onlyIdNumbers = "";
-
-                string[] parts = message[1].Split(new[] {keyword}, StringSplitOptions.None);
-                if (parts.Length == 2)
+                if (message.Count() >= 2)
                 {
-                    if (parts[0] != "")
-                        idLoggined = int.Parse(parts[0].Trim());
-
-                    onlyIdNumbers = parts[1];
-                }
-                string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
-
-                idOnlines = new int[onlineStrings.Length];
-                for (int i = 0; i < onlineStrings.Length; i++)
-                {
-                    if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                    string[] parts = message[1].Split(new[] {keyword}, StringSplitOptions.None);
+                    if (parts.Length == 2)
                     {
-                        idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                        if (parts[0] != "")
+                            idLoggined = int.Parse(parts[0].Trim());
+
+                        onlyIdNumbers = parts[1];
                     }
+                    string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
+
+                    idOnlines = new int[onlineStrings.Length];
+                    for (int i = 0; i < onlineStrings.Length; i++)
+                    {
+                        if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                        {
+                            idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                        }
+                    }
+                    Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
-                Array.Resize(ref idOnlines, idOnlines.Length - 1);
+
+
             }
 
 
@@ -173,22 +187,22 @@ namespace ClientWinform.SocketHandles
             if (activeForm.InvokeRequired)
             {
                 setForm d = new setForm(UpdateListChat);
-                activeForm.Invoke(d, new object[] { message, activeForm });
+                activeForm.Invoke(d, new object[] { message, activeForm, bindLogin });
             }
             else
             {
 
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
-                    optionForm(navigationForm.chatForm);
+                    optionForm(navigationForm.chatForm, bindLogin);
                 }
                 else if (activeForm is ChatListForm chatList && idLoggined != 0)
                 {
-                    optionForm(chatList);
+                    optionForm(chatList, bindLogin);
                 }
             }
         }
-        public static void optionForm(ChatListForm chatList)
+        public static void optionForm(ChatListForm chatList, bool bindLogin)
         {
             List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id);
             foreach (DTO.UserModel user in users)
@@ -214,13 +228,16 @@ namespace ClientWinform.SocketHandles
                     }
                     if (user.Id == idLoggined)
                     {
-                        chat.isPictureBoxOnlineVisible = true;
+                        if (bindLogin)
+                            chat.isPictureBoxOnlineVisible = true;
+                        else 
+                            chat.isPictureBoxOnlineVisible = false;
                     }
                     if (idOnlines != null)
                     {
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
-                            if (user.Id == idOnlines[i])
+                            if (user.Id == idOnlines[i] && bindLogin)
                                 chat.isPictureBoxOnlineVisible = true;
                         }
                     }
@@ -270,7 +287,7 @@ namespace ClientWinform.SocketHandles
                 {
                     string[] messages = stringData.Split(new string[] { "Message: ", " From: ", " To: ", " CreatedDate: ", " IdMsg: " }, StringSplitOptions.None);
                     receivedMsg(Int32.Parse(messages[5]), form);
-                    UpdateListChat(null, form);
+                    UpdateListChat(null, form, true);
                 }
                 else if(stringData.Contains("Return status: "))
                 {
@@ -278,10 +295,15 @@ namespace ClientWinform.SocketHandles
                     int status = Int32.Parse(messages[1]);
                     returnStatus(status, form);
                 }
+                else if (stringData.Contains(" has signned out"))
+                {
+                    string[] messages = stringData.Split(new string[] { "Return status: " }, StringSplitOptions.None);
+                    UpdateListChat(messages, form, false);
+                }
                 else
                 {
                     string[] messages = stringData.Split('\n');
-                    UpdateListChat(messages, form);
+                    UpdateListChat(messages, form, true);
                 }
 
             }

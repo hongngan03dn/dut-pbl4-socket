@@ -182,6 +182,12 @@
     <Compile Include="View\User\UpdateProfileForm.Designer.cs">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\UserExploreControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User\UserExploreControl.Designer.cs">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -227,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\UpdateProfileForm.resx">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\UserExploreControl.resx">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DTO\DBChatApp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -311,6 +320,8 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\log-out %281%29.png" />
+    <None Include="Resources\log-out.png" />
     <None Include="Resources\OnlineIcon.png" />
     <None Include="Resources\defaultAvatar.jpg" />
     <None Include="Resources\Ava img %281%29.png" />

@@ -30,5 +30,13 @@ namespace ClientWinform.DTO
             public const int MAXLENGTHINREVIEW = 18;
             public const int MAXLENGTHINCONTENT = 70;
         }
+        public static class ConnectionsDescr
+        {
+            public const string CONNECTIONKEYWORD = "Connection";
+            public const int NOTCONNECT = 0;
+            public const int CONNECTED = 1;
+            public const int CONNECTING = 2;
+            //public const int CONFIRM = 3;
+        }
     }
 }

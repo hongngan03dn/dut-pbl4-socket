@@ -28,13 +28,18 @@ namespace ClientWinform.View.User
         public ChatContentForm()
         {
             InitializeComponent();
-            
+
         }
-        public ChatContentForm(int idFrom, int idTo) : this()
+        public ChatContentForm(int idFrom, int idTo): this()
         {
+            
             this.userFrom.Id = idFrom;
             this.userTo = BLL.UserBLL.getUserByID(idTo);
             labelUsername.Text = this.userTo.Username;
+            Panel width = new Panel();
+            width.Size = new Size(flowLayoutPanelChat.Width, 0);
+            flowLayoutPanelChat.Controls.Add(width);
+            LoadData(idFrom, idTo);
             BLL.MsgBLL.LoadMsgesToSeen(idFrom, idTo);
             try
             {
@@ -46,15 +51,91 @@ namespace ClientWinform.View.User
                 MessageBox.Show(ex.Message);
                 return;
             }
-
-            Panel width = new Panel();
-            width.Size = new Size(flowLayoutPanelChat.Width, 0);
-            flowLayoutPanelChat.Controls.Add(width);
- 
-            AddMessagesToChatPanel(BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount), userFrom.Id, flowLayoutPanelChat);
+        }
+        public async void LoadData(int idFrom, int idTo)
+        {
+            var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
             loadedMessageCount += 50;
         }
-        public FlowLayoutPanel shapeFormatPanelChat(string messages, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
+        public async Task AddMessagesToChatPanel(List<DTO.Message> messages, Nullable<System.Int32> idFrom, FlowLayoutPanel flowLayoutPanel)
+        {
+            for (int i = messages.Count - 1; i >= 0; i--)
+            {
+                if (flowLayoutPanel.IsHandleCreated)
+                {
+                    var message = messages[i];
+                    flowLayoutPanel.Invoke((MethodInvoker)async delegate
+                    {
+                        if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
+                        {
+                            Label timeSectionLabel = new Label();
+                            timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                            timeSectionLabel.AutoSize = true;
+                            timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+                            timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+                            timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
+                            timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                            flowLayoutPanel.Controls.Add(timeSectionLabel);
+                        }
+                        FlowLayoutPanel panel = new FlowLayoutPanel();
+                        panel = await shapeFormatPanelChat(message.ContentMsg, message.IdFrom, idFrom, message.CreatedDate);
+                        flowLayoutPanel.Controls.Add(panel);
+                        flowLayoutPanel.ScrollControlIntoView(panel);
+                        previousTime = messages[i].CreatedDate;
+                        if (i == 0)
+                        {
+                            if (messages[i].IdFrom == idFrom)
+                            {
+                                if (messages[i].Status == Constants.MessageStatuses.SEEN)
+                                {
+                                    AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
+                                }
+                                else
+                                {
+                                    AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
+                                }
+                            }
+                        }
+                    });
+                }
+                else
+                {
+                    var message = messages[i];
+                    if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
+                    {
+                        Label timeSectionLabel = new Label();
+                        timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                        timeSectionLabel.AutoSize = true;
+                        timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+                        timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+                        timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
+                        timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                        flowLayoutPanel.Controls.Add(timeSectionLabel);
+                    }
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
+                    panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, idFrom, messages[i].CreatedDate);
+                    flowLayoutPanel.Controls.Add(panel);
+                    flowLayoutPanel.ScrollControlIntoView(panel);
+                    previousTime = messages[i].CreatedDate;
+                    if (i == 0)
+                    {
+                        if (messages[i].IdFrom == idFrom)
+                        {
+                            if (messages[i].Status == Constants.MessageStatuses.SEEN)
+                            {
+                                AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
+                            }
+                            else
+                            {
+                                AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public async Task<FlowLayoutPanel> shapeFormatPanelChat(string messages, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -150,82 +231,8 @@ namespace ClientWinform.View.User
             }
 
         }
-        public void AddMessagesToChatPanel(List<DTO.Message> messages, Nullable<System.Int32> idFrom, FlowLayoutPanel flowLayoutPanel)
-        {
-            for (int i = messages.Count - 1; i >= 0; i--)
-            {
-                if (flowLayoutPanel.IsHandleCreated)
-                {
-                    flowLayoutPanel.Invoke((MethodInvoker)delegate
-                    {
-                        if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
-                        {
-                            Label timeSectionLabel = new Label();
-                            timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                            timeSectionLabel.AutoSize = true;
-                            timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                            timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
-                            timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
-                            timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                            flowLayoutPanel.Controls.Add(timeSectionLabel);
-                        }
-                        FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, idFrom, messages[i].CreatedDate);
-                        flowLayoutPanel.Controls.Add(panel);
-                        flowLayoutPanel.ScrollControlIntoView(panel);
-                        previousTime = messages[i].CreatedDate;
-                        if (i == 0)
-                        {
-                            if (messages[i].IdFrom == idFrom)
-                            {
-                                if (messages[i].Status == Constants.MessageStatuses.SEEN)
-                                {
-                                    AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
-                                }
-                                else
-                                {
-                                    AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
-                                }
-                            }
-                        }
-                    });
-                }
-                else
-                {
-                    if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
-                    {
-                        Label timeSectionLabel = new Label();
-                        timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                        timeSectionLabel.AutoSize = true;
-                        timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                        timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
-                        timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
-                        timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                        flowLayoutPanel.Controls.Add(timeSectionLabel);
-                    }
-                    FlowLayoutPanel panel = new FlowLayoutPanel();
-                    panel = shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, idFrom, messages[i].CreatedDate);
-                    flowLayoutPanel.Controls.Add(panel);
-                    flowLayoutPanel.ScrollControlIntoView(panel);
-                    previousTime = messages[i].CreatedDate;
-                    if (i == 0)
-                    {
-                        if (messages[i].IdFrom == idFrom)
-                        {
-                            if (messages[i].Status == Constants.MessageStatuses.SEEN)
-                            {
-                                AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
-                            }
-                            else
-                            {
-                                AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        private void btnLoadmore_Click(object sender, EventArgs e)
+
+        private async void btnLoadmore_Click(object sender, EventArgs e)
         {
             List<DTO.Message> messages = BLL.MsgBLL.GetTopMessages(userFrom.Id, userTo.Id, loadedMessageCount);
             flowLayoutPanelChat.Controls.Remove(btnLoadmore);
@@ -246,10 +253,10 @@ namespace ClientWinform.View.User
                         flowLayoutPanelChat.Controls.Add(timeSectionLabel);
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
-                    flowLayoutPanelChat.Invoke((MethodInvoker)delegate
+                    flowLayoutPanelChat.Invoke((MethodInvoker)async delegate
                     {
                         FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                        panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
                         flowLayoutPanelChat.Controls.Add(panel);
                         flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                         flowLayoutPanelChat.ScrollControlIntoView(panel);
@@ -271,7 +278,7 @@ namespace ClientWinform.View.User
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
                     FlowLayoutPanel panel = new FlowLayoutPanel();
-                    panel = shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                    panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
                     flowLayoutPanelChat.Controls.Add(panel);
                     flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                     flowLayoutPanelChat.ScrollControlIntoView(panel);
@@ -304,7 +311,7 @@ namespace ClientWinform.View.User
                 newMessage.CreatedDate = DateTime.Now;
 
                 List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                await Task.Run(() => AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat));
+                await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
 
                 try
                 {
