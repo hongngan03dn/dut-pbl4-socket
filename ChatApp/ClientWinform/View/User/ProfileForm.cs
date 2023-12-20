@@ -1,4 +1,5 @@
 ﻿using ClientWinform.DTO;
+using ClientWinform.Properties;
 using ClientWinform.View.User;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace ClientWinform
         {
             labelUsername.Text = user.Username;
             labelName.Text = user.Name;
+            labelNumberConnections.Text = BLL.UserBLL.getConnectionsOfUser(user.Id).ToString(); 
             labelBio.Text = user.Bio;
             if(user.Gender == true)
             {
@@ -44,7 +46,7 @@ namespace ClientWinform
             byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
             if(images == null ) 
             {
-                picBoxAva.Image = null;            
+                picBoxAva.Image = Resources.defaultAvatar;            
             }
             else
             {

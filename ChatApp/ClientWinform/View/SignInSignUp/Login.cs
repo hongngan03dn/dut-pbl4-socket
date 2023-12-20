@@ -77,41 +77,29 @@ namespace ClientWinform
             else
             {
                 // phân quyền
+                // kết nối Mail Server
                 try
                 {
                     idRole = UserBLL.getRole(id);
+                    this.Hide();
+                    if (idRole == Constants.Roles.USER)
+                    {
+                        NavigationForm f = new NavigationForm(user);
+                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        BLL.MsgBLL.LoadMsgesToReceived(id);
+                        f.ShowDialog();
+                    }
+                    else if (idRole == Constants.Roles.ADMIN)
+                    {
+                        AdminHomeForm f = new AdminHomeForm();
+                        //SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        f.ShowDialog();
+                    }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                     return;
-                }
-                MessageBox.Show("Sign In Successfully.", "INFO");
-
-                // kết nối Mail Server
-                //try
-                //{
-                //    SocketHandles.MailClient.connectServer(id, txtUsername.Text);
-                //}
-                //catch (Exception ex)
-                //{
-                //    MessageBox.Show(ex.Message);
-                //    return;
-                //}
-                
-                // điều hướng
-                
-                if(idRole == Constants.Roles.USER)
-                {
-                    this.Hide();
-                    NavigationForm f = new NavigationForm(user);
-                    f.ShowDialog();
-                }
-                if(idRole == Constants.Roles.ADMIN)
-                {
-                    this.Hide();
-                    AdminHomeForm f = new AdminHomeForm();
-                    f.ShowDialog();
                 }
             }
         }

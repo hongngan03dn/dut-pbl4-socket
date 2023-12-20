@@ -1,33 +1,31 @@
-﻿using System;
+﻿using ClientWinform.Properties;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ClientWinform.DTO;
 
 namespace ClientWinform.View.User
 {
     public partial class ChatListForm : Form
     {
         private Panel chat;
+        public ChatContentForm chatContentForm = null;
         private Form activeForm;
-        public ChatListForm()
+        public DTO.User user = new DTO.User();
+        public ChatListForm(DTO.User user)
         {
+            this.user = user;
             InitializeComponent();
-        }
-
-        private void searchTxt_IconLeftClick(object sender, EventArgs e)
-        {
-            chat = new Panel();
-            chat.Size = new Size(244, 56);
-            chat.BackColor = Color.FromArgb(233, 233, 236);
-
-            chat.Click += new EventHandler(chatPanel_Click);
-
-            flowLayoutPanelListChat.Controls.Add(chat);
+            this.Activate();
+            //searchTxt.Width = flowLayoutPanelListChat.Width;
         }
         private void ActiveButton(object btnSender)
         {
@@ -43,10 +41,11 @@ namespace ClientWinform.View.User
         {
             foreach (Control ctrl in flowLayoutPanelListChat.Controls)
             {
-                if (ctrl is Panel)
+                if (ctrl is ChatReviewForm)
                 {
-                    Panel btn = (Panel)ctrl;
-                    btn.BackColor = Color.FromArgb(233, 233, 236);
+                    ChatReviewForm panel = (ChatReviewForm)ctrl;
+                    panel.isSelected.BackColor = Color.White;
+                    panel.isClicked = false;
                 }
             }
         }
@@ -66,10 +65,12 @@ namespace ClientWinform.View.User
             childForm.BringToFront();
             childForm.Show();
         }
-        private void chatPanel_Click(object sender, EventArgs e)
+        public void chatPanel_Click(object sender, EventArgs e, int userId, int userToId)
         {
-            ChatContentForm f = new ChatContentForm();
-            OpenChilForm(f, sender);
+            chatContentForm = new ChatContentForm(userId, userToId);
+            //SocketHandles.MailClient.UpdateListChat(null, this);
+            OpenChilForm(chatContentForm, sender);
+            
         }
     }
 }

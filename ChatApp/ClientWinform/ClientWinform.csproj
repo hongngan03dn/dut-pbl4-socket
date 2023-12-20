@@ -45,6 +45,9 @@
     <Reference Include="Guna.UI2, Version=2.0.4.5, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
       <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.5\lib\net472\Guna.UI2.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -64,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\MsgBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DTO\Avatar.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
@@ -93,12 +97,14 @@
     <Compile Include="DTO\Role.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\SocketPacketModel.cs" />
     <Compile Include="DTO\sysdiagram.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\User.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\UserModel.cs" />
     <Compile Include="Helpers\MailUtils.cs" />
     <Compile Include="Helpers\MD5Hasher.cs" />
     <Compile Include="SocketHandles\MailClient.cs" />
@@ -138,6 +144,12 @@
     <Compile Include="View\User\ChatListForm.Designer.cs">
       <DependentUpon>ChatListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\ChatReviewForm.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User\ChatReviewForm.Designer.cs">
+      <DependentUpon>ChatReviewForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\User\NavigationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -170,6 +182,12 @@
     <Compile Include="View\User\UpdateProfileForm.Designer.cs">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\UserExploreControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User\UserExploreControl.Designer.cs">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -187,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\ChatListForm.resx">
       <DependentUpon>ChatListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\ChatReviewForm.resx">
+      <DependentUpon>ChatReviewForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\NavigationForm.resx">
       <DependentUpon>NavigationForm.cs</DependentUpon>
@@ -212,6 +233,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\UpdateProfileForm.resx">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\UserExploreControl.resx">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DTO\DBChatApp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -296,6 +320,12 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\log-out %281%29.png" />
+    <None Include="Resources\log-out.png" />
+    <None Include="Resources\OnlineIcon.png" />
+    <None Include="Resources\defaultAvatar.jpg" />
+    <None Include="Resources\Ava img %281%29.png" />
+    <None Include="Resources\avaKiet.jpg" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Untitled.png" />

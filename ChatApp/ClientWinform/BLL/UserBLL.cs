@@ -6,6 +6,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ClientWinform.Helpers;
+using static Guna.UI2.Native.WinApi;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using System.Security.Cryptography;
+using System.Windows.Forms;
+using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
 
 namespace ClientWinform.BLL
 {
@@ -110,6 +116,7 @@ namespace ClientWinform.BLL
                 return usernames;
             }
         }
+
         public static void updateUser(User user)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
@@ -148,8 +155,6 @@ namespace ClientWinform.BLL
             using(testpbldbEntities1 db = new testpbldbEntities1())
             {
                 db.Avatars.Add(ava);
-                //User updateUser = db.Users.Where(record => record.Id == user.Id).FirstOrDefault();
-                //updateUser.IdAvatar = ava.Id;
                 db.SaveChanges();
             }
             return ava.Id;
@@ -163,6 +168,7 @@ namespace ClientWinform.BLL
                 return avaLink;
             }
         }
+
         public static void resetPassword(string email)
         {
             string newPw = MailUtils.SendResetPassword(email);
@@ -175,6 +181,105 @@ namespace ClientWinform.BLL
                     user.UpdatedDate = DateTime.Now;
                     testpbldb.SaveChanges();
                 }
+            }
+        }
+        public static List<User> getConnectingOfUser(int idFrom)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var connections = db.Messages.Where(record => ((record.IdFrom == idFrom || record.IdTo == idFrom))
+                                         && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
+                List<User> users = new List<User>();
+                User user = null;
+                foreach (DTO.Message connection in connections)
+                {
+                    user = new User();
+                    if (connection.IdFrom == idFrom)
+                        user = BLL.UserBLL.getUserByID((int)connection.IdTo);
+                    else
+                        user = BLL.UserBLL.getUserByID((int)connection.IdFrom);
+                    users.Add(user);
+                }
+                return users;
+            }
+        }
+        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                List<User> getUserExplore = new List<User>();
+                var userTemp = db.Users.Where(record => record.Id != idFrom && record.IdRole == Constants.Roles.USER).ToList();
+                foreach(int idExcept in idUserExcept)
+                {
+                    var userExplore = db.Users.Where(record => record.Id == idExcept).FirstOrDefault();
+                    userTemp.Remove(userExplore);
+                }
+                foreach(User connecting in connectingList)
+                {
+                    var userConnecting = db.Users.Where(record => record.Id == connecting.Id).FirstOrDefault();
+                    userTemp.Remove(userConnecting);
+                }
+                getUserExplore = userTemp.ToList();
+                return getUserExplore;
+            }
+        }
+        public static int getConnectionsOfUser(int userId)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var numConnections = db.Messages.Where(record => (record.IdFrom == userId || record.IdTo == userId) && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).Count();
+                return numConnections;
+            }
+        }
+
+        public static DTO.Message checkIsHaveConnection(int userId, int connectionId)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                var check = db.Messages.Where(record => ((record.IdFrom == userId && record.IdTo == connectionId) ||
+                                                         (record.IdFrom == connectionId && record.IdTo == userId))
+                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).FirstOrDefault();
+                return check;
+            }
+        }
+
+        public static void InsertConnection(int userId, int connectionId)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = new DTO.Message()
+                {
+                    IdFrom = userId,
+                    IdTo = connectionId,
+                    Status = Constants.ConnectionsDescr.CONNECTING,
+                    Description = Constants.ConnectionsDescr.CONNECTIONKEYWORD,
+                    CreatedBy = userId,
+                    CreatedDate = DateTime.Now,
+                };
+                db.Messages.Add(connection);
+                db.SaveChanges();
+            }
+        }
+        public static void UpdateConnectionToConnected(int idConnection, int idUser)
+        {
+            using(testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = db.Messages.Where(record => record.Id == idConnection).FirstOrDefault();
+                connection.Status = Constants.ConnectionsDescr.CONNECTED;
+                connection.UpdatedDate = DateTime.Now;
+                connection.UpdatedBy = idUser;
+                db.SaveChanges();
+            }
+        }
+        public static void UpdateConnectionToDisConnect(int idConnection, int idUser)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = db.Messages.Where(record => record.Id == idConnection).FirstOrDefault();
+                connection.Status = Constants.ConnectionsDescr.NOTCONNECT;
+                connection.UpdatedDate = DateTime.Now;
+                connection.UpdatedBy = idUser;
+                db.SaveChanges();
             }
         }
     }
