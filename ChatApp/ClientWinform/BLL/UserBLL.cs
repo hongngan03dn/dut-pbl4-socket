@@ -271,15 +271,16 @@ namespace ClientWinform.BLL
                 db.SaveChanges();
             }
         }
-        //public static void UpdateMsgesToSeen(int idMsg)
-        //{
-        //    using (testpbldbEntities1 db = new testpbldbEntities1())
-        //    {
-        //        Message message = db.Messages.Where(msg => msg.Id == idMsg).FirstOrDefault();
-        //        message.Status = Constants.MessageStatuses.SEEN;
-        //        message.UpdatedDate = DateTime.Now;
-        //        db.SaveChanges();
-        //    }
-        //}
+        public static void UpdateConnectionToDisConnect(int idConnection, int idUser)
+        {
+            using (testpbldbEntities1 db = new testpbldbEntities1())
+            {
+                DTO.Message connection = db.Messages.Where(record => record.Id == idConnection).FirstOrDefault();
+                connection.Status = Constants.ConnectionsDescr.NOTCONNECT;
+                connection.UpdatedDate = DateTime.Now;
+                connection.UpdatedBy = idUser;
+                db.SaveChanges();
+            }
+        }
     }
 }

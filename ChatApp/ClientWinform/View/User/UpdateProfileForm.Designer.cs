@@ -93,15 +93,17 @@ namespace ClientWinform.View.User
             this.genderGroupBox.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.genderGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.genderGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.genderGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.genderGroupBox.Name = "genderGroupBox";
-            this.genderGroupBox.Size = new System.Drawing.Size(516, 79);
+            this.genderGroupBox.Size = new System.Drawing.Size(459, 63);
             this.genderGroupBox.TabIndex = 8;
             // 
             // femaleBtn
             // 
             this.femaleBtn.AutoSize = true;
             this.femaleBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.femaleBtn.Location = new System.Drawing.Point(192, 28);
+            this.femaleBtn.Location = new System.Drawing.Point(171, 22);
+            this.femaleBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.femaleBtn.Name = "femaleBtn";
             this.femaleBtn.Size = new System.Drawing.Size(85, 27);
             this.femaleBtn.TabIndex = 8;
@@ -113,7 +115,8 @@ namespace ClientWinform.View.User
             // 
             this.maleBtn.AutoSize = true;
             this.maleBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.maleBtn.Location = new System.Drawing.Point(4, 28);
+            this.maleBtn.Location = new System.Drawing.Point(4, 22);
+            this.maleBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.maleBtn.Name = "maleBtn";
             this.maleBtn.Size = new System.Drawing.Size(68, 27);
             this.maleBtn.TabIndex = 7;
@@ -129,32 +132,32 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel3.Controls.Add(this.panelEmail, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 0, 2);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(96, 347);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(85, 278);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.86047F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.7907F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.34884F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(516, 501);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(459, 401);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // panelBio
             // 
             this.panelBio.Controls.Add(this.txtBio);
             this.panelBio.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBio.Location = new System.Drawing.Point(0, 159);
+            this.panelBio.Location = new System.Drawing.Point(0, 127);
             this.panelBio.Margin = new System.Windows.Forms.Padding(0);
             this.panelBio.Name = "panelBio";
-            this.panelBio.Padding = new System.Windows.Forms.Padding(0, 30, 44, 0);
-            this.panelBio.Size = new System.Drawing.Size(516, 164);
+            this.panelBio.Padding = new System.Windows.Forms.Padding(0, 24, 39, 0);
+            this.panelBio.Size = new System.Drawing.Size(459, 131);
             this.panelBio.TabIndex = 11;
             // 
             // txtBio
             // 
             this.txtBio.AutoRoundedCorners = true;
             this.txtBio.BorderColor = System.Drawing.Color.Black;
-            this.txtBio.BorderRadius = 25;
+            this.txtBio.BorderRadius = 20;
             this.txtBio.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtBio.DefaultText = "";
             this.txtBio.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -166,13 +169,13 @@ namespace ClientWinform.View.User
             this.txtBio.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtBio.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtBio.Location = new System.Drawing.Point(0, 30);
+            this.txtBio.Location = new System.Drawing.Point(0, 24);
             this.txtBio.Margin = new System.Windows.Forms.Padding(0);
             this.txtBio.Name = "txtBio";
             this.txtBio.PasswordChar = '\0';
             this.txtBio.PlaceholderText = "";
             this.txtBio.SelectedText = "";
-            this.txtBio.Size = new System.Drawing.Size(472, 52);
+            this.txtBio.Size = new System.Drawing.Size(420, 42);
             this.txtBio.TabIndex = 10;
             // 
             // panelEmail
@@ -184,8 +187,8 @@ namespace ClientWinform.View.User
             this.panelEmail.Location = new System.Drawing.Point(0, 0);
             this.panelEmail.Margin = new System.Windows.Forms.Padding(0);
             this.panelEmail.Name = "panelEmail";
-            this.panelEmail.Padding = new System.Windows.Forms.Padding(0, 30, 44, 0);
-            this.panelEmail.Size = new System.Drawing.Size(516, 159);
+            this.panelEmail.Padding = new System.Windows.Forms.Padding(0, 24, 39, 0);
+            this.panelEmail.Size = new System.Drawing.Size(459, 127);
             this.panelEmail.TabIndex = 0;
             // 
             // labelInvalidemail
@@ -194,7 +197,7 @@ namespace ClientWinform.View.User
             this.labelInvalidemail.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelInvalidemail.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelInvalidemail.ForeColor = System.Drawing.Color.Red;
-            this.labelInvalidemail.Location = new System.Drawing.Point(0, 82);
+            this.labelInvalidemail.Location = new System.Drawing.Point(0, 66);
             this.labelInvalidemail.Name = "labelInvalidemail";
             this.labelInvalidemail.Size = new System.Drawing.Size(130, 19);
             this.labelInvalidemail.TabIndex = 12;
@@ -205,7 +208,7 @@ namespace ClientWinform.View.User
             // 
             this.txtMail.AutoRoundedCorners = true;
             this.txtMail.BorderColor = System.Drawing.Color.Black;
-            this.txtMail.BorderRadius = 25;
+            this.txtMail.BorderRadius = 20;
             this.txtMail.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtMail.DefaultText = "";
             this.txtMail.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -217,13 +220,13 @@ namespace ClientWinform.View.User
             this.txtMail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtMail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMail.Location = new System.Drawing.Point(0, 30);
+            this.txtMail.Location = new System.Drawing.Point(0, 24);
             this.txtMail.Margin = new System.Windows.Forms.Padding(0);
             this.txtMail.Name = "txtMail";
             this.txtMail.PasswordChar = '\0';
             this.txtMail.PlaceholderText = "";
             this.txtMail.SelectedText = "";
-            this.txtMail.Size = new System.Drawing.Size(472, 52);
+            this.txtMail.Size = new System.Drawing.Size(420, 42);
             this.txtMail.TabIndex = 10;
             this.txtMail.TextChanged += new System.EventHandler(this.txtEmail_TextChanged);
             // 
@@ -233,7 +236,7 @@ namespace ClientWinform.View.User
             this.labeBio.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labeBio.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labeBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labeBio.Location = new System.Drawing.Point(0, 134);
+            this.labeBio.Location = new System.Drawing.Point(0, 102);
             this.labeBio.Name = "labeBio";
             this.labeBio.Size = new System.Drawing.Size(39, 25);
             this.labeBio.TabIndex = 9;
@@ -247,12 +250,12 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel4.Controls.Add(this.btnCancel, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.btnSubmit, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 323);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(0, 258);
             this.tableLayoutPanel4.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 1;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(516, 178);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(459, 143);
             this.tableLayoutPanel4.TabIndex = 6;
             // 
             // btnCancel
@@ -266,10 +269,10 @@ namespace ClientWinform.View.User
             this.btnCancel.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
             this.btnCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnCancel.Location = new System.Drawing.Point(296, 3);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 3, 44, 3);
+            this.btnCancel.Location = new System.Drawing.Point(264, 2);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 39, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(176, 53);
+            this.btnCancel.Size = new System.Drawing.Size(156, 42);
             this.btnCancel.TabIndex = 5;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.Click += new System.EventHandler(this.cancelBtn_Click);
@@ -284,9 +287,10 @@ namespace ClientWinform.View.User
             this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnSubmit.Location = new System.Drawing.Point(3, 3);
+            this.btnSubmit.Location = new System.Drawing.Point(3, 2);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(176, 53);
+            this.btnSubmit.Size = new System.Drawing.Size(156, 42);
             this.btnSubmit.TabIndex = 4;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
@@ -294,9 +298,10 @@ namespace ClientWinform.View.User
             // dtPickerBirth
             // 
             this.dtPickerBirth.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtPickerBirth.Location = new System.Drawing.Point(8, 31);
+            this.dtPickerBirth.Location = new System.Drawing.Point(7, 25);
+            this.dtPickerBirth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtPickerBirth.Name = "dtPickerBirth";
-            this.dtPickerBirth.Size = new System.Drawing.Size(499, 30);
+            this.dtPickerBirth.Size = new System.Drawing.Size(444, 30);
             this.dtPickerBirth.TabIndex = 9;
             // 
             // labelBirth
@@ -305,7 +310,7 @@ namespace ClientWinform.View.User
             this.labelBirth.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelBirth.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBirth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelBirth.Location = new System.Drawing.Point(0, 172);
+            this.labelBirth.Location = new System.Drawing.Point(0, 133);
             this.labelBirth.Name = "labelBirth";
             this.labelBirth.Size = new System.Drawing.Size(85, 25);
             this.labelBirth.TabIndex = 6;
@@ -315,10 +320,10 @@ namespace ClientWinform.View.User
             // 
             this.panelBirthday.Controls.Add(this.dtPickerBirth);
             this.panelBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBirthday.Location = new System.Drawing.Point(612, 197);
+            this.panelBirthday.Location = new System.Drawing.Point(544, 158);
             this.panelBirthday.Margin = new System.Windows.Forms.Padding(0);
             this.panelBirthday.Name = "panelBirthday";
-            this.panelBirthday.Size = new System.Drawing.Size(994, 150);
+            this.panelBirthday.Size = new System.Drawing.Size(884, 120);
             this.panelBirthday.TabIndex = 10;
             // 
             // labelEmail
@@ -327,7 +332,7 @@ namespace ClientWinform.View.User
             this.labelEmail.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelEmail.Location = new System.Drawing.Point(0, 125);
+            this.labelEmail.Location = new System.Drawing.Point(0, 95);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(59, 25);
             this.labelEmail.TabIndex = 6;
@@ -339,18 +344,18 @@ namespace ClientWinform.View.User
             this.panelName.Controls.Add(this.labelName);
             this.panelName.Controls.Add(this.labelGender);
             this.panelName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelName.Location = new System.Drawing.Point(96, 0);
+            this.panelName.Location = new System.Drawing.Point(85, 0);
             this.panelName.Margin = new System.Windows.Forms.Padding(0);
             this.panelName.Name = "panelName";
-            this.panelName.Padding = new System.Windows.Forms.Padding(0, 0, 44, 0);
-            this.panelName.Size = new System.Drawing.Size(516, 197);
+            this.panelName.Padding = new System.Windows.Forms.Padding(0, 0, 39, 0);
+            this.panelName.Size = new System.Drawing.Size(459, 158);
             this.panelName.TabIndex = 2;
             // 
             // txtName
             // 
             this.txtName.AutoRoundedCorners = true;
             this.txtName.BorderColor = System.Drawing.Color.Black;
-            this.txtName.BorderRadius = 25;
+            this.txtName.BorderRadius = 20;
             this.txtName.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtName.DefaultText = "";
             this.txtName.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -362,13 +367,13 @@ namespace ClientWinform.View.User
             this.txtName.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtName.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtName.Location = new System.Drawing.Point(0, 55);
+            this.txtName.Location = new System.Drawing.Point(0, 49);
             this.txtName.Margin = new System.Windows.Forms.Padding(0);
             this.txtName.Name = "txtName";
             this.txtName.PasswordChar = '\0';
             this.txtName.PlaceholderText = "";
             this.txtName.SelectedText = "";
-            this.txtName.Size = new System.Drawing.Size(472, 52);
+            this.txtName.Size = new System.Drawing.Size(420, 42);
             this.txtName.TabIndex = 11;
             // 
             // labelName
@@ -380,8 +385,8 @@ namespace ClientWinform.View.User
             this.labelName.Location = new System.Drawing.Point(0, 0);
             this.labelName.Margin = new System.Windows.Forms.Padding(0);
             this.labelName.Name = "labelName";
-            this.labelName.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.labelName.Size = new System.Drawing.Size(64, 55);
+            this.labelName.Padding = new System.Windows.Forms.Padding(0, 0, 0, 24);
+            this.labelName.Size = new System.Drawing.Size(64, 49);
             this.labelName.TabIndex = 12;
             this.labelName.Text = "Name";
             // 
@@ -391,7 +396,7 @@ namespace ClientWinform.View.User
             this.labelGender.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelGender.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelGender.Location = new System.Drawing.Point(0, 172);
+            this.labelGender.Location = new System.Drawing.Point(0, 133);
             this.labelGender.Name = "labelGender";
             this.labelGender.Size = new System.Drawing.Size(74, 25);
             this.labelGender.TabIndex = 5;
@@ -402,10 +407,10 @@ namespace ClientWinform.View.User
             this.panelGender.Controls.Add(this.genderGroupBox);
             this.panelGender.Controls.Add(this.labelEmail);
             this.panelGender.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGender.Location = new System.Drawing.Point(96, 197);
+            this.panelGender.Location = new System.Drawing.Point(85, 158);
             this.panelGender.Margin = new System.Windows.Forms.Padding(0);
             this.panelGender.Name = "panelGender";
-            this.panelGender.Size = new System.Drawing.Size(516, 150);
+            this.panelGender.Size = new System.Drawing.Size(459, 120);
             this.panelGender.TabIndex = 11;
             // 
             // tableLayoutPanel1
@@ -422,14 +427,14 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 2, 2);
             this.tableLayoutPanel1.Controls.Add(this.panelUsernameEdit, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 254);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 203);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.24324F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.7027F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.78378F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1606, 848);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1428, 679);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // pictureBox
@@ -438,9 +443,10 @@ namespace ClientWinform.View.User
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Image = global::ClientWinform.Properties.Resources.Setup_amico_1;
-            this.pictureBox.Location = new System.Drawing.Point(615, 350);
+            this.pictureBox.Location = new System.Drawing.Point(547, 280);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(988, 495);
+            this.pictureBox.Size = new System.Drawing.Size(878, 397);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 12;
             this.pictureBox.TabStop = false;
@@ -451,17 +457,17 @@ namespace ClientWinform.View.User
             this.panelUsernameEdit.Controls.Add(this.labelUsernameEdit);
             this.panelUsernameEdit.Controls.Add(this.labelBirth);
             this.panelUsernameEdit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUsernameEdit.Location = new System.Drawing.Point(612, 0);
+            this.panelUsernameEdit.Location = new System.Drawing.Point(544, 0);
             this.panelUsernameEdit.Margin = new System.Windows.Forms.Padding(0);
             this.panelUsernameEdit.Name = "panelUsernameEdit";
-            this.panelUsernameEdit.Size = new System.Drawing.Size(994, 197);
+            this.panelUsernameEdit.Size = new System.Drawing.Size(884, 158);
             this.panelUsernameEdit.TabIndex = 13;
             // 
             // txtUsername
             // 
             this.txtUsername.AutoRoundedCorners = true;
             this.txtUsername.BorderColor = System.Drawing.Color.Black;
-            this.txtUsername.BorderRadius = 25;
+            this.txtUsername.BorderRadius = 20;
             this.txtUsername.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtUsername.DefaultText = "";
             this.txtUsername.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
@@ -472,13 +478,13 @@ namespace ClientWinform.View.User
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtUsername.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtUsername.Location = new System.Drawing.Point(8, 60);
+            this.txtUsername.Location = new System.Drawing.Point(7, 48);
             this.txtUsername.Margin = new System.Windows.Forms.Padding(0);
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.PasswordChar = '\0';
             this.txtUsername.PlaceholderText = "";
             this.txtUsername.SelectedText = "";
-            this.txtUsername.Size = new System.Drawing.Size(499, 52);
+            this.txtUsername.Size = new System.Drawing.Size(444, 42);
             this.txtUsername.TabIndex = 13;
             // 
             // labelUsernameEdit
@@ -490,8 +496,8 @@ namespace ClientWinform.View.User
             this.labelUsernameEdit.Location = new System.Drawing.Point(0, 0);
             this.labelUsernameEdit.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsernameEdit.Name = "labelUsernameEdit";
-            this.labelUsernameEdit.Padding = new System.Windows.Forms.Padding(0, 0, 0, 30);
-            this.labelUsernameEdit.Size = new System.Drawing.Size(98, 55);
+            this.labelUsernameEdit.Padding = new System.Windows.Forms.Padding(0, 0, 0, 24);
+            this.labelUsernameEdit.Size = new System.Drawing.Size(98, 49);
             this.labelUsernameEdit.TabIndex = 13;
             this.labelUsernameEdit.Text = "Username";
             // 
@@ -501,11 +507,11 @@ namespace ClientWinform.View.User
             this.labelUsername.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(0, 113);
+            this.labelUsername.Location = new System.Drawing.Point(0, 84);
             this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
-            this.labelUsername.Size = new System.Drawing.Size(0, 47);
+            this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
+            this.labelUsername.Size = new System.Drawing.Size(0, 44);
             this.labelUsername.TabIndex = 3;
             // 
             // panelUserName
@@ -515,7 +521,7 @@ namespace ClientWinform.View.User
             this.panelUserName.Location = new System.Drawing.Point(0, 0);
             this.panelUserName.Margin = new System.Windows.Forms.Padding(0);
             this.panelUserName.Name = "panelUserName";
-            this.panelUserName.Size = new System.Drawing.Size(240, 160);
+            this.panelUserName.Size = new System.Drawing.Size(213, 128);
             this.panelUserName.TabIndex = 4;
             // 
             // tableLayoutPanelHead
@@ -525,14 +531,14 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelHead.Controls.Add(this.changeAvaBtn, 0, 1);
             this.tableLayoutPanelHead.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanelHead.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelHead.Location = new System.Drawing.Point(267, 0);
+            this.tableLayoutPanelHead.Location = new System.Drawing.Point(238, 0);
             this.tableLayoutPanelHead.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelHead.Name = "tableLayoutPanelHead";
             this.tableLayoutPanelHead.RowCount = 3;
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.51064F));
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.48936F));
-            this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelHead.Size = new System.Drawing.Size(1339, 254);
+            this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanelHead.Size = new System.Drawing.Size(1190, 203);
             this.tableLayoutPanelHead.TabIndex = 2;
             // 
             // changeAvaBtn
@@ -546,11 +552,11 @@ namespace ClientWinform.View.User
             this.changeAvaBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
             this.changeAvaBtn.HoverState.FillColor = System.Drawing.Color.White;
             this.changeAvaBtn.HoverState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(36)))), ((int)(((byte)(83)))), ((int)(((byte)(164)))));
-            this.changeAvaBtn.Location = new System.Drawing.Point(0, 160);
+            this.changeAvaBtn.Location = new System.Drawing.Point(0, 128);
             this.changeAvaBtn.Margin = new System.Windows.Forms.Padding(0);
             this.changeAvaBtn.Name = "changeAvaBtn";
             this.changeAvaBtn.PressedColor = System.Drawing.Color.White;
-            this.changeAvaBtn.Size = new System.Drawing.Size(291, 46);
+            this.changeAvaBtn.Size = new System.Drawing.Size(259, 37);
             this.changeAvaBtn.TabIndex = 5;
             this.changeAvaBtn.Text = "Change profile photo";
             this.changeAvaBtn.TextAlign = System.Windows.Forms.HorizontalAlignment.Left;
@@ -569,7 +575,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1339, 160);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1190, 128);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanelTittle
@@ -585,19 +591,19 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelTittle.Name = "tableLayoutPanelTittle";
             this.tableLayoutPanelTittle.RowCount = 1;
             this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1606, 254);
+            this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1428, 203);
             this.tableLayoutPanelTittle.TabIndex = 0;
             // 
             // picBoxAva
             // 
             this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxAva.AutoRoundedCorners = true;
-            this.picBoxAva.BorderRadius = 81;
+            this.picBoxAva.BorderRadius = 64;
             this.picBoxAva.ImageRotate = 0F;
-            this.picBoxAva.Location = new System.Drawing.Point(83, 70);
-            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 20);
+            this.picBoxAva.Location = new System.Drawing.Point(74, 56);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 18, 16);
             this.picBoxAva.Name = "picBoxAva";
-            this.picBoxAva.Size = new System.Drawing.Size(164, 164);
+            this.picBoxAva.Size = new System.Drawing.Size(146, 131);
             this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxAva.TabIndex = 7;
             this.picBoxAva.TabStop = false;
@@ -615,17 +621,18 @@ namespace ClientWinform.View.User
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 23.049F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 76.951F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1606, 1102);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1428, 882);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
             // UpdateProfileForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1606, 1102);
+            this.ClientSize = new System.Drawing.Size(1428, 882);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UpdateProfileForm";
             this.Text = "UpdateProfileForm";
             this.genderGroupBox.ResumeLayout(false);

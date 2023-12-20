@@ -53,7 +53,7 @@ namespace ClientWinform.View.User
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Margin = new System.Windows.Forms.Padding(0);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1504, 871);
+            this.panelMain.Size = new System.Drawing.Size(1337, 781);
             this.panelMain.TabIndex = 0;
             // 
             // tableLayoutPanel1
@@ -70,8 +70,8 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.69277F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89.30723F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 132F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1504, 871);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 106F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1337, 781);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -82,11 +82,12 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.Controls.Add(this.messageTxt, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnSubmit, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 741);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 676);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1498, 127);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1331, 103);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // messageTxt
@@ -94,7 +95,7 @@ namespace ClientWinform.View.User
             this.messageTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.messageTxt.AutoRoundedCorners = true;
             this.messageTxt.BorderColor = System.Drawing.Color.Black;
-            this.messageTxt.BorderRadius = 25;
+            this.messageTxt.BorderRadius = 20;
             this.messageTxt.BorderThickness = 0;
             this.messageTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.messageTxt.DefaultText = "";
@@ -112,14 +113,14 @@ namespace ClientWinform.View.User
             this.messageTxt.IconRight = global::ClientWinform.Properties.Resources.paperclip;
             this.messageTxt.IconRightOffset = new System.Drawing.Point(15, 0);
             this.messageTxt.IconRightSize = new System.Drawing.Size(25, 25);
-            this.messageTxt.Location = new System.Drawing.Point(27, 37);
+            this.messageTxt.Location = new System.Drawing.Point(23, 30);
             this.messageTxt.Margin = new System.Windows.Forms.Padding(0);
             this.messageTxt.Name = "messageTxt";
             this.messageTxt.PasswordChar = '\0';
             this.messageTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.messageTxt.PlaceholderText = "Type a message...";
             this.messageTxt.SelectedText = "";
-            this.messageTxt.Size = new System.Drawing.Size(1228, 53);
+            this.messageTxt.Size = new System.Drawing.Size(1092, 42);
             this.messageTxt.TabIndex = 13;
             this.messageTxt.IconRightClick += new System.EventHandler(this.messageTxt_IconRightClick);
             // 
@@ -134,9 +135,10 @@ namespace ClientWinform.View.User
             this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnSubmit.Location = new System.Drawing.Point(1314, 37);
+            this.btnSubmit.Location = new System.Drawing.Point(1167, 30);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(152, 53);
+            this.btnSubmit.Size = new System.Drawing.Size(135, 42);
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
@@ -150,7 +152,7 @@ namespace ClientWinform.View.User
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1504, 79);
+            this.panel1.Size = new System.Drawing.Size(1337, 72);
             this.panel1.TabIndex = 0;
             // 
             // labelUsername
@@ -158,7 +160,7 @@ namespace ClientWinform.View.User
             this.labelUsername.AutoSize = true;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(104, 26);
+            this.labelUsername.Location = new System.Drawing.Point(92, 32);
             this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
             this.labelUsername.Name = "labelUsername";
             this.labelUsername.Size = new System.Drawing.Size(128, 32);
@@ -176,11 +178,11 @@ namespace ClientWinform.View.User
             this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.backBtn.ForeColor = System.Drawing.Color.White;
             this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
-            this.backBtn.Location = new System.Drawing.Point(29, 22);
+            this.backBtn.Location = new System.Drawing.Point(26, 29);
             this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.backBtn.Name = "backBtn";
             this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.backBtn.Size = new System.Drawing.Size(50, 50);
+            this.backBtn.Size = new System.Drawing.Size(44, 40);
             this.backBtn.TabIndex = 0;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
@@ -190,10 +192,10 @@ namespace ClientWinform.View.User
             this.flowLayoutPanelChat.Controls.Add(this.btnLoadmore);
             this.flowLayoutPanelChat.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelChat.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelChat.Location = new System.Drawing.Point(0, 79);
+            this.flowLayoutPanelChat.Location = new System.Drawing.Point(0, 72);
             this.flowLayoutPanelChat.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelChat.Name = "flowLayoutPanelChat";
-            this.flowLayoutPanelChat.Size = new System.Drawing.Size(1504, 659);
+            this.flowLayoutPanelChat.Size = new System.Drawing.Size(1337, 602);
             this.flowLayoutPanelChat.TabIndex = 3;
             this.flowLayoutPanelChat.WrapContents = false;
             // 
@@ -215,10 +217,10 @@ namespace ClientWinform.View.User
             // ChatContentForm
             // 
             this.AcceptButton = this.btnSubmit;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1504, 871);
+            this.ClientSize = new System.Drawing.Size(1337, 781);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

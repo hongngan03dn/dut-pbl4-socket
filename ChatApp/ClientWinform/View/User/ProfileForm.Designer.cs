@@ -89,8 +89,9 @@ namespace ClientWinform
             this.panelMain.Controls.Add(this.tableLayoutPanelMain);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(1566, 1024);
+            this.panelMain.Size = new System.Drawing.Size(1392, 819);
             this.panelMain.TabIndex = 0;
             // 
             // tableLayoutPanelMain
@@ -106,7 +107,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain.RowCount = 2;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.08225F));
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 74.91775F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1566, 1024);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1392, 819);
             this.tableLayoutPanelMain.TabIndex = 1;
             // 
             // tableLayoutPanelTittle
@@ -123,8 +124,8 @@ namespace ClientWinform
             this.tableLayoutPanelTittle.Name = "tableLayoutPanelTittle";
             this.tableLayoutPanelTittle.RowCount = 2;
             this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74F));
-            this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1566, 256);
+            this.tableLayoutPanelTittle.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+            this.tableLayoutPanelTittle.Size = new System.Drawing.Size(1392, 205);
             this.tableLayoutPanelTittle.TabIndex = 0;
             // 
             // tableLayoutPanelHead
@@ -134,14 +135,14 @@ namespace ClientWinform
             this.tableLayoutPanelHead.Controls.Add(this.tableLayoutPanel2, 0, 0);
             this.tableLayoutPanelHead.Controls.Add(this.panelConnections, 0, 1);
             this.tableLayoutPanelHead.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelHead.Location = new System.Drawing.Point(261, 0);
+            this.tableLayoutPanelHead.Location = new System.Drawing.Point(232, 0);
             this.tableLayoutPanelHead.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelHead.Name = "tableLayoutPanelHead";
             this.tableLayoutPanelHead.RowCount = 2;
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 68.51064F));
             this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.48936F));
-            this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelHead.Size = new System.Drawing.Size(1305, 182);
+            this.tableLayoutPanelHead.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanelHead.Size = new System.Drawing.Size(1160, 146);
             this.tableLayoutPanelHead.TabIndex = 2;
             // 
             // tableLayoutPanel2
@@ -160,7 +161,7 @@ namespace ClientWinform
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1305, 124);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1160, 100);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // panelUserName
@@ -170,7 +171,7 @@ namespace ClientWinform
             this.panelUserName.Location = new System.Drawing.Point(0, 0);
             this.panelUserName.Margin = new System.Windows.Forms.Padding(0);
             this.panelUserName.Name = "panelUserName";
-            this.panelUserName.Size = new System.Drawing.Size(234, 124);
+            this.panelUserName.Size = new System.Drawing.Size(208, 100);
             this.panelUserName.TabIndex = 4;
             // 
             // labelUsername
@@ -179,12 +180,11 @@ namespace ClientWinform
             this.labelUsername.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(0, 77);
+            this.labelUsername.Location = new System.Drawing.Point(0, 56);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 15);
-            this.labelUsername.Size = new System.Drawing.Size(123, 47);
+            this.labelUsername.Padding = new System.Windows.Forms.Padding(0, 0, 0, 12);
+            this.labelUsername.Size = new System.Drawing.Size(0, 44);
             this.labelUsername.TabIndex = 3;
-            this.labelUsername.Text = "Viez_taho";
             // 
             // editProfileBtn
             // 
@@ -197,9 +197,10 @@ namespace ClientWinform
             this.editProfileBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
             this.editProfileBtn.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.editProfileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.editProfileBtn.Location = new System.Drawing.Point(237, 61);
+            this.editProfileBtn.Location = new System.Drawing.Point(211, 50);
+            this.editProfileBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.editProfileBtn.Name = "editProfileBtn";
-            this.editProfileBtn.Size = new System.Drawing.Size(212, 60);
+            this.editProfileBtn.Size = new System.Drawing.Size(188, 48);
             this.editProfileBtn.TabIndex = 4;
             this.editProfileBtn.Text = "Edit profile";
             this.editProfileBtn.Click += new System.EventHandler(this.editProfileBtn_Click);
@@ -217,9 +218,10 @@ namespace ClientWinform
             this.changePassBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.changePassBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.changePassBtn.Image = global::ClientWinform.Properties.Resources.Untitled;
-            this.changePassBtn.Location = new System.Drawing.Point(455, 61);
+            this.changePassBtn.Location = new System.Drawing.Point(405, 50);
+            this.changePassBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.changePassBtn.Name = "changePassBtn";
-            this.changePassBtn.Size = new System.Drawing.Size(59, 60);
+            this.changePassBtn.Size = new System.Drawing.Size(52, 48);
             this.changePassBtn.TabIndex = 5;
             this.changePassBtn.Click += new System.EventHandler(this.changePassBtn_Click);
             // 
@@ -229,10 +231,10 @@ namespace ClientWinform
             this.panelConnections.Controls.Add(this.labelNumberConnections);
             this.panelConnections.Controls.Add(this.panelName);
             this.panelConnections.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelConnections.Location = new System.Drawing.Point(0, 124);
+            this.panelConnections.Location = new System.Drawing.Point(0, 100);
             this.panelConnections.Margin = new System.Windows.Forms.Padding(0);
             this.panelConnections.Name = "panelConnections";
-            this.panelConnections.Size = new System.Drawing.Size(1305, 58);
+            this.panelConnections.Size = new System.Drawing.Size(1160, 46);
             this.panelConnections.TabIndex = 1;
             // 
             // labelConnections
@@ -241,7 +243,7 @@ namespace ClientWinform
             this.labelConnections.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelConnections.Font = new System.Drawing.Font("Arial Unicode MS", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelConnections.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelConnections.Location = new System.Drawing.Point(36, 40);
+            this.labelConnections.Location = new System.Drawing.Point(0, 32);
             this.labelConnections.Name = "labelConnections";
             this.labelConnections.Padding = new System.Windows.Forms.Padding(0, 2, 0, 0);
             this.labelConnections.Size = new System.Drawing.Size(102, 25);
@@ -254,19 +256,19 @@ namespace ClientWinform
             this.labelNumberConnections.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelNumberConnections.Font = new System.Drawing.Font("Arial Unicode MS", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNumberConnections.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelNumberConnections.Location = new System.Drawing.Point(0, 40);
+            this.labelNumberConnections.Location = new System.Drawing.Point(0, 32);
             this.labelNumberConnections.Name = "labelNumberConnections";
-            this.labelNumberConnections.Size = new System.Drawing.Size(36, 25);
+            this.labelNumberConnections.Size = new System.Drawing.Size(0, 25);
             this.labelNumberConnections.TabIndex = 1;
-            this.labelNumberConnections.Text = "13";
             // 
             // panelName
             // 
             this.panelName.Controls.Add(this.labelName);
             this.panelName.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelName.Location = new System.Drawing.Point(0, 0);
+            this.panelName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelName.Name = "panelName";
-            this.panelName.Size = new System.Drawing.Size(1305, 40);
+            this.panelName.Size = new System.Drawing.Size(1160, 32);
             this.panelName.TabIndex = 3;
             // 
             // labelName
@@ -277,9 +279,8 @@ namespace ClientWinform
             this.labelName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
             this.labelName.Location = new System.Drawing.Point(0, 0);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(137, 23);
+            this.labelName.Size = new System.Drawing.Size(0, 23);
             this.labelName.TabIndex = 3;
-            this.labelName.Text = "Nguyen Vy Thao";
             // 
             // labelBio
             // 
@@ -287,23 +288,22 @@ namespace ClientWinform
             this.labelBio.Dock = System.Windows.Forms.DockStyle.Top;
             this.labelBio.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBio.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelBio.Location = new System.Drawing.Point(3, 182);
+            this.labelBio.Location = new System.Drawing.Point(3, 146);
             this.labelBio.Name = "labelBio";
-            this.labelBio.Size = new System.Drawing.Size(255, 23);
+            this.labelBio.Size = new System.Drawing.Size(226, 23);
             this.labelBio.TabIndex = 4;
-            this.labelBio.Text = "13//13";
             this.labelBio.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // picBoxAva
             // 
             this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.picBoxAva.AutoRoundedCorners = true;
-            this.picBoxAva.BorderRadius = 80;
+            this.picBoxAva.BorderRadius = 64;
             this.picBoxAva.ImageRotate = 0F;
-            this.picBoxAva.Location = new System.Drawing.Point(77, 0);
-            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 20, 20);
+            this.picBoxAva.Location = new System.Drawing.Point(68, 0);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 18, 16);
             this.picBoxAva.Name = "picBoxAva";
-            this.picBoxAva.Size = new System.Drawing.Size(164, 162);
+            this.picBoxAva.Size = new System.Drawing.Size(146, 130);
             this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picBoxAva.TabIndex = 6;
             this.picBoxAva.TabStop = false;
@@ -322,14 +322,14 @@ namespace ClientWinform
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 2, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 256);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 205);
             this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.72072F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.41441F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1566, 768);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1392, 614);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // labelBirth
@@ -338,9 +338,9 @@ namespace ClientWinform
             this.labelBirth.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelBirth.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBirth.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelBirth.Location = new System.Drawing.Point(565, 90);
+            this.labelBirth.Location = new System.Drawing.Point(503, 66);
             this.labelBirth.Name = "labelBirth";
-            this.labelBirth.Size = new System.Drawing.Size(998, 25);
+            this.labelBirth.Size = new System.Drawing.Size(886, 25);
             this.labelBirth.TabIndex = 6;
             this.labelBirth.Text = "Birthday";
             // 
@@ -349,10 +349,10 @@ namespace ClientWinform
             this.panelInfo.Controls.Add(this.labelGender);
             this.panelInfo.Controls.Add(this.labelInfo);
             this.panelInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelInfo.Location = new System.Drawing.Point(93, 0);
+            this.panelInfo.Location = new System.Drawing.Point(83, 0);
             this.panelInfo.Margin = new System.Windows.Forms.Padding(0);
             this.panelInfo.Name = "panelInfo";
-            this.panelInfo.Size = new System.Drawing.Size(469, 115);
+            this.panelInfo.Size = new System.Drawing.Size(417, 91);
             this.panelInfo.TabIndex = 2;
             // 
             // labelGender
@@ -361,7 +361,7 @@ namespace ClientWinform
             this.labelGender.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelGender.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGender.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelGender.Location = new System.Drawing.Point(0, 90);
+            this.labelGender.Location = new System.Drawing.Point(0, 66);
             this.labelGender.Name = "labelGender";
             this.labelGender.Size = new System.Drawing.Size(74, 25);
             this.labelGender.TabIndex = 5;
@@ -385,18 +385,19 @@ namespace ClientWinform
             // 
             this.panelBirthday.Controls.Add(this.dtPickerBirth);
             this.panelBirthday.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBirthday.Location = new System.Drawing.Point(562, 115);
+            this.panelBirthday.Location = new System.Drawing.Point(500, 91);
             this.panelBirthday.Margin = new System.Windows.Forms.Padding(0);
             this.panelBirthday.Name = "panelBirthday";
-            this.panelBirthday.Size = new System.Drawing.Size(1004, 158);
+            this.panelBirthday.Size = new System.Drawing.Size(892, 127);
             this.panelBirthday.TabIndex = 10;
             // 
             // dtPickerBirth
             // 
             this.dtPickerBirth.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtPickerBirth.Location = new System.Drawing.Point(8, 31);
+            this.dtPickerBirth.Location = new System.Drawing.Point(7, 25);
+            this.dtPickerBirth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtPickerBirth.Name = "dtPickerBirth";
-            this.dtPickerBirth.Size = new System.Drawing.Size(496, 30);
+            this.dtPickerBirth.Size = new System.Drawing.Size(441, 30);
             this.dtPickerBirth.TabIndex = 9;
             // 
             // panelGender
@@ -404,10 +405,10 @@ namespace ClientWinform
             this.panelGender.Controls.Add(this.genderGroupBox);
             this.panelGender.Controls.Add(this.labelEmail);
             this.panelGender.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGender.Location = new System.Drawing.Point(93, 115);
+            this.panelGender.Location = new System.Drawing.Point(83, 91);
             this.panelGender.Margin = new System.Windows.Forms.Padding(0);
             this.panelGender.Name = "panelGender";
-            this.panelGender.Size = new System.Drawing.Size(469, 158);
+            this.panelGender.Size = new System.Drawing.Size(417, 127);
             this.panelGender.TabIndex = 11;
             // 
             // genderGroupBox
@@ -420,15 +421,17 @@ namespace ClientWinform
             this.genderGroupBox.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.genderGroupBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.genderGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.genderGroupBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.genderGroupBox.Name = "genderGroupBox";
-            this.genderGroupBox.Size = new System.Drawing.Size(469, 79);
+            this.genderGroupBox.Size = new System.Drawing.Size(417, 63);
             this.genderGroupBox.TabIndex = 8;
             // 
             // femaleBtn
             // 
             this.femaleBtn.AutoSize = true;
             this.femaleBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.femaleBtn.Location = new System.Drawing.Point(192, 28);
+            this.femaleBtn.Location = new System.Drawing.Point(171, 22);
+            this.femaleBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.femaleBtn.Name = "femaleBtn";
             this.femaleBtn.Size = new System.Drawing.Size(85, 27);
             this.femaleBtn.TabIndex = 8;
@@ -440,7 +443,8 @@ namespace ClientWinform
             // 
             this.maleBtn.AutoSize = true;
             this.maleBtn.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.maleBtn.Location = new System.Drawing.Point(4, 28);
+            this.maleBtn.Location = new System.Drawing.Point(4, 22);
+            this.maleBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.maleBtn.Name = "maleBtn";
             this.maleBtn.Size = new System.Drawing.Size(68, 27);
             this.maleBtn.TabIndex = 7;
@@ -454,7 +458,7 @@ namespace ClientWinform
             this.labelEmail.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelEmail.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEmail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelEmail.Location = new System.Drawing.Point(0, 133);
+            this.labelEmail.Location = new System.Drawing.Point(0, 102);
             this.labelEmail.Name = "labelEmail";
             this.labelEmail.Size = new System.Drawing.Size(59, 25);
             this.labelEmail.TabIndex = 6;
@@ -467,35 +471,35 @@ namespace ClientWinform
             this.tableLayoutPanel3.Controls.Add(this.panelPass, 0, 1);
             this.tableLayoutPanel3.Controls.Add(this.panelEmail, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(93, 273);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(83, 218);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 3;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.86047F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.7907F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.34884F));
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(469, 495);
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 16F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(417, 396);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // panelPass
             // 
             this.panelPass.Controls.Add(this.txtPass);
             this.panelPass.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelPass.Location = new System.Drawing.Point(0, 157);
+            this.panelPass.Location = new System.Drawing.Point(0, 126);
             this.panelPass.Margin = new System.Windows.Forms.Padding(0);
             this.panelPass.Name = "panelPass";
-            this.panelPass.Padding = new System.Windows.Forms.Padding(0, 30, 10, 0);
-            this.panelPass.Size = new System.Drawing.Size(469, 162);
+            this.panelPass.Padding = new System.Windows.Forms.Padding(0, 24, 9, 0);
+            this.panelPass.Size = new System.Drawing.Size(417, 129);
             this.panelPass.TabIndex = 11;
             // 
             // txtPass
             // 
             this.txtPass.AutoRoundedCorners = true;
             this.txtPass.BorderColor = System.Drawing.Color.Black;
-            this.txtPass.BorderRadius = 25;
+            this.txtPass.BorderRadius = 20;
             this.txtPass.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtPass.DefaultText = "*******************";
+            this.txtPass.DefaultText = "";
             this.txtPass.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtPass.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtPass.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -505,13 +509,13 @@ namespace ClientWinform
             this.txtPass.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtPass.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtPass.Location = new System.Drawing.Point(0, 30);
+            this.txtPass.Location = new System.Drawing.Point(0, 24);
             this.txtPass.Margin = new System.Windows.Forms.Padding(0);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';
             this.txtPass.PlaceholderText = "";
             this.txtPass.SelectedText = "";
-            this.txtPass.Size = new System.Drawing.Size(459, 52);
+            this.txtPass.Size = new System.Drawing.Size(408, 42);
             this.txtPass.TabIndex = 10;
             // 
             // panelEmail
@@ -522,17 +526,17 @@ namespace ClientWinform
             this.panelEmail.Location = new System.Drawing.Point(0, 0);
             this.panelEmail.Margin = new System.Windows.Forms.Padding(0);
             this.panelEmail.Name = "panelEmail";
-            this.panelEmail.Padding = new System.Windows.Forms.Padding(0, 30, 10, 0);
-            this.panelEmail.Size = new System.Drawing.Size(469, 157);
+            this.panelEmail.Padding = new System.Windows.Forms.Padding(0, 24, 9, 0);
+            this.panelEmail.Size = new System.Drawing.Size(417, 126);
             this.panelEmail.TabIndex = 0;
             // 
             // txtMail
             // 
             this.txtMail.AutoRoundedCorners = true;
             this.txtMail.BorderColor = System.Drawing.Color.Black;
-            this.txtMail.BorderRadius = 25;
+            this.txtMail.BorderRadius = 20;
             this.txtMail.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtMail.DefaultText = "thaonguyenvy109@gmail.com";
+            this.txtMail.DefaultText = "";
             this.txtMail.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
             this.txtMail.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.txtMail.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
@@ -542,13 +546,13 @@ namespace ClientWinform
             this.txtMail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtMail.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.txtMail.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtMail.Location = new System.Drawing.Point(0, 30);
+            this.txtMail.Location = new System.Drawing.Point(0, 24);
             this.txtMail.Margin = new System.Windows.Forms.Padding(0);
             this.txtMail.Name = "txtMail";
             this.txtMail.PasswordChar = '\0';
             this.txtMail.PlaceholderText = "";
             this.txtMail.SelectedText = "";
-            this.txtMail.Size = new System.Drawing.Size(459, 52);
+            this.txtMail.Size = new System.Drawing.Size(408, 42);
             this.txtMail.TabIndex = 10;
             // 
             // labelPass
@@ -557,7 +561,7 @@ namespace ClientWinform
             this.labelPass.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelPass.Font = new System.Drawing.Font("Segoe UI Semibold", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPass.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelPass.Location = new System.Drawing.Point(0, 132);
+            this.labelPass.Location = new System.Drawing.Point(0, 101);
             this.labelPass.Name = "labelPass";
             this.labelPass.Size = new System.Drawing.Size(91, 25);
             this.labelPass.TabIndex = 9;
@@ -569,21 +573,23 @@ namespace ClientWinform
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox.Image = global::ClientWinform.Properties.Resources.Setup_amico_1;
-            this.pictureBox.Location = new System.Drawing.Point(565, 276);
+            this.pictureBox.Location = new System.Drawing.Point(503, 220);
+            this.pictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox.Name = "pictureBox";
-            this.pictureBox.Size = new System.Drawing.Size(998, 489);
+            this.pictureBox.Size = new System.Drawing.Size(886, 392);
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             // 
             // ProfileForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1566, 1024);
+            this.ClientSize = new System.Drawing.Size(1392, 819);
             this.Controls.Add(this.panelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ProfileForm";
             this.Text = "ProfileForm";
             this.panelMain.ResumeLayout(false);

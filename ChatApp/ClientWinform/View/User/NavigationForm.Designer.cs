@@ -73,7 +73,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1845, 945);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1640, 756);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // panelNavigation
@@ -87,7 +87,7 @@ namespace ClientWinform
             this.panelNavigation.Location = new System.Drawing.Point(0, 0);
             this.panelNavigation.Margin = new System.Windows.Forms.Padding(0);
             this.panelNavigation.Name = "panelNavigation";
-            this.panelNavigation.Size = new System.Drawing.Size(221, 945);
+            this.panelNavigation.Size = new System.Drawing.Size(196, 756);
             this.panelNavigation.TabIndex = 0;
             // 
             // tableLayoutPanelMenu
@@ -99,14 +99,14 @@ namespace ClientWinform
             this.tableLayoutPanelMenu.Controls.Add(this.pictureAva, 0, 0);
             this.tableLayoutPanelMenu.Controls.Add(this.lableUsername, 0, 1);
             this.tableLayoutPanelMenu.Dock = System.Windows.Forms.DockStyle.Top;
-            this.tableLayoutPanelMenu.Location = new System.Drawing.Point(0, 32);
+            this.tableLayoutPanelMenu.Location = new System.Drawing.Point(0, 26);
             this.tableLayoutPanelMenu.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelMenu.Name = "tableLayoutPanelMenu";
             this.tableLayoutPanelMenu.RowCount = 3;
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44F));
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.902357F));
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.15825F));
-            this.tableLayoutPanelMenu.Size = new System.Drawing.Size(221, 594);
+            this.tableLayoutPanelMenu.Size = new System.Drawing.Size(196, 475);
             this.tableLayoutPanelMenu.TabIndex = 1;
             this.tableLayoutPanelMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanelMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -120,19 +120,19 @@ namespace ClientWinform
             this.panelBtn.Controls.Add(this.profileBtn);
             this.panelBtn.Controls.Add(this.btnSignOut);
             this.panelBtn.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelBtn.Location = new System.Drawing.Point(0, 301);
+            this.panelBtn.Location = new System.Drawing.Point(0, 240);
             this.panelBtn.Margin = new System.Windows.Forms.Padding(0);
             this.panelBtn.Name = "panelBtn";
-            this.panelBtn.Size = new System.Drawing.Size(221, 293);
+            this.panelBtn.Size = new System.Drawing.Size(196, 235);
             this.panelBtn.TabIndex = 3;
             // 
             // panelLeftMenu
             // 
             this.panelLeftMenu.BackColor = System.Drawing.Color.White;
-            this.panelLeftMenu.Location = new System.Drawing.Point(0, 78);
+            this.panelLeftMenu.Location = new System.Drawing.Point(0, 62);
             this.panelLeftMenu.Margin = new System.Windows.Forms.Padding(0);
             this.panelLeftMenu.Name = "panelLeftMenu";
-            this.panelLeftMenu.Size = new System.Drawing.Size(10, 71);
+            this.panelLeftMenu.Size = new System.Drawing.Size(9, 57);
             this.panelLeftMenu.TabIndex = 0;
             this.panelLeftMenu.Visible = false;
             // 
@@ -150,11 +150,11 @@ namespace ClientWinform
             this.chatBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.chatBtn.Image = global::ClientWinform.Properties.Resources.message_square1;
             this.chatBtn.ImageOffset = new System.Drawing.Point(-8, 0);
-            this.chatBtn.Location = new System.Drawing.Point(0, 7);
+            this.chatBtn.Location = new System.Drawing.Point(0, 5);
             this.chatBtn.Margin = new System.Windows.Forms.Padding(0);
             this.chatBtn.Name = "chatBtn";
             this.chatBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.chatBtn.Size = new System.Drawing.Size(221, 71);
+            this.chatBtn.Size = new System.Drawing.Size(196, 57);
             this.chatBtn.TabIndex = 0;
             this.chatBtn.Text = "Chat";
             this.chatBtn.TextOffset = new System.Drawing.Point(-4, 0);
@@ -174,11 +174,11 @@ namespace ClientWinform
             this.exploreBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.exploreBtn.Image = global::ClientWinform.Properties.Resources.user_plus;
             this.exploreBtn.ImageOffset = new System.Drawing.Point(-3, 0);
-            this.exploreBtn.Location = new System.Drawing.Point(0, 78);
+            this.exploreBtn.Location = new System.Drawing.Point(0, 62);
             this.exploreBtn.Margin = new System.Windows.Forms.Padding(0);
             this.exploreBtn.Name = "exploreBtn";
             this.exploreBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.exploreBtn.Size = new System.Drawing.Size(221, 71);
+            this.exploreBtn.Size = new System.Drawing.Size(196, 57);
             this.exploreBtn.TabIndex = 1;
             this.exploreBtn.Text = "Explore";
             this.exploreBtn.Click += new System.EventHandler(this.exploreBtn_Click);
@@ -197,11 +197,11 @@ namespace ClientWinform
             this.profileBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.profileBtn.Image = global::ClientWinform.Properties.Resources.user;
             this.profileBtn.ImageOffset = new System.Drawing.Point(-5, 0);
-            this.profileBtn.Location = new System.Drawing.Point(0, 149);
+            this.profileBtn.Location = new System.Drawing.Point(0, 119);
             this.profileBtn.Margin = new System.Windows.Forms.Padding(0);
             this.profileBtn.Name = "profileBtn";
             this.profileBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.profileBtn.Size = new System.Drawing.Size(221, 72);
+            this.profileBtn.Size = new System.Drawing.Size(196, 58);
             this.profileBtn.TabIndex = 2;
             this.profileBtn.Text = "Profile";
             this.profileBtn.TextOffset = new System.Drawing.Point(-1, 0);
@@ -221,11 +221,11 @@ namespace ClientWinform
             this.btnSignOut.HoverState.ForeColor = System.Drawing.Color.White;
             this.btnSignOut.Image = global::ClientWinform.Properties.Resources.log_out__1_;
             this.btnSignOut.ImageOffset = new System.Drawing.Point(-2, 0);
-            this.btnSignOut.Location = new System.Drawing.Point(0, 221);
+            this.btnSignOut.Location = new System.Drawing.Point(0, 177);
             this.btnSignOut.Margin = new System.Windows.Forms.Padding(0);
             this.btnSignOut.Name = "btnSignOut";
             this.btnSignOut.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.btnSignOut.Size = new System.Drawing.Size(221, 72);
+            this.btnSignOut.Size = new System.Drawing.Size(196, 58);
             this.btnSignOut.TabIndex = 3;
             this.btnSignOut.Text = "Sign out";
             this.btnSignOut.TextOffset = new System.Drawing.Point(2, 0);
@@ -235,11 +235,11 @@ namespace ClientWinform
             // 
             this.pictureAva.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureAva.ImageRotate = 0F;
-            this.pictureAva.Location = new System.Drawing.Point(48, 137);
+            this.pictureAva.Location = new System.Drawing.Point(43, 109);
             this.pictureAva.Margin = new System.Windows.Forms.Padding(0);
             this.pictureAva.Name = "pictureAva";
             this.pictureAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pictureAva.Size = new System.Drawing.Size(124, 124);
+            this.pictureAva.Size = new System.Drawing.Size(110, 99);
             this.pictureAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureAva.TabIndex = 0;
             this.pictureAva.TabStop = false;
@@ -250,9 +250,9 @@ namespace ClientWinform
             this.lableUsername.Dock = System.Windows.Forms.DockStyle.Top;
             this.lableUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableUsername.ForeColor = System.Drawing.Color.White;
-            this.lableUsername.Location = new System.Drawing.Point(3, 261);
+            this.lableUsername.Location = new System.Drawing.Point(3, 208);
             this.lableUsername.Name = "lableUsername";
-            this.lableUsername.Size = new System.Drawing.Size(215, 28);
+            this.lableUsername.Size = new System.Drawing.Size(190, 23);
             this.lableUsername.TabIndex = 1;
             this.lableUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -265,7 +265,7 @@ namespace ClientWinform
             this.panelControlBox.Location = new System.Drawing.Point(0, 0);
             this.panelControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.panelControlBox.Name = "panelControlBox";
-            this.panelControlBox.Size = new System.Drawing.Size(221, 32);
+            this.panelControlBox.Size = new System.Drawing.Size(196, 26);
             this.panelControlBox.TabIndex = 1;
             // 
             // closeBtn
@@ -276,11 +276,11 @@ namespace ClientWinform
             this.closeBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.closeBtn.FillColor = System.Drawing.Color.Transparent;
             this.closeBtn.IconColor = System.Drawing.Color.White;
-            this.closeBtn.Location = new System.Drawing.Point(90, 0);
+            this.closeBtn.Location = new System.Drawing.Point(80, 0);
             this.closeBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.ShowIcon = false;
-            this.closeBtn.Size = new System.Drawing.Size(45, 32);
+            this.closeBtn.Size = new System.Drawing.Size(40, 26);
             this.closeBtn.TabIndex = 4;
             // 
             // maxBtn
@@ -291,11 +291,11 @@ namespace ClientWinform
             this.maxBtn.Dock = System.Windows.Forms.DockStyle.Left;
             this.maxBtn.FillColor = System.Drawing.Color.Transparent;
             this.maxBtn.IconColor = System.Drawing.Color.White;
-            this.maxBtn.Location = new System.Drawing.Point(45, 0);
+            this.maxBtn.Location = new System.Drawing.Point(40, 0);
             this.maxBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.maxBtn.Name = "maxBtn";
             this.maxBtn.ShowIcon = false;
-            this.maxBtn.Size = new System.Drawing.Size(45, 32);
+            this.maxBtn.Size = new System.Drawing.Size(40, 26);
             this.maxBtn.TabIndex = 3;
             // 
             // minBtn
@@ -309,7 +309,7 @@ namespace ClientWinform
             this.minBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.minBtn.Name = "minBtn";
             this.minBtn.ShowIcon = false;
-            this.minBtn.Size = new System.Drawing.Size(45, 32);
+            this.minBtn.Size = new System.Drawing.Size(40, 26);
             this.minBtn.TabIndex = 2;
             // 
             // panelChild
@@ -317,10 +317,10 @@ namespace ClientWinform
             this.panelChild.BackColor = System.Drawing.Color.White;
             this.panelChild.Controls.Add(this.panelExplore);
             this.panelChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChild.Location = new System.Drawing.Point(221, 0);
+            this.panelChild.Location = new System.Drawing.Point(196, 0);
             this.panelChild.Margin = new System.Windows.Forms.Padding(0);
             this.panelChild.Name = "panelChild";
-            this.panelChild.Size = new System.Drawing.Size(1624, 945);
+            this.panelChild.Size = new System.Drawing.Size(1444, 756);
             this.panelChild.TabIndex = 0;
             // 
             // panelExplore
@@ -331,7 +331,7 @@ namespace ClientWinform
             this.panelExplore.Location = new System.Drawing.Point(0, 0);
             this.panelExplore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelExplore.Name = "panelExplore";
-            this.panelExplore.Size = new System.Drawing.Size(386, 786);
+            this.panelExplore.Size = new System.Drawing.Size(416, 660);
             this.panelExplore.TabIndex = 2;
             // 
             // tableLayoutPanelExplore
@@ -348,7 +348,7 @@ namespace ClientWinform
             this.tableLayoutPanelExplore.RowCount = 2;
             this.tableLayoutPanelExplore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.894212F));
             this.tableLayoutPanelExplore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.10579F));
-            this.tableLayoutPanelExplore.Size = new System.Drawing.Size(382, 782);
+            this.tableLayoutPanelExplore.Size = new System.Drawing.Size(412, 656);
             this.tableLayoutPanelExplore.TabIndex = 1;
             // 
             // searchTxt
@@ -356,7 +356,7 @@ namespace ClientWinform
             this.searchTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.searchTxt.AutoRoundedCorners = true;
             this.searchTxt.BorderColor = System.Drawing.Color.Black;
-            this.searchTxt.BorderRadius = 25;
+            this.searchTxt.BorderRadius = 20;
             this.searchTxt.BorderThickness = 0;
             this.searchTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.searchTxt.DefaultText = "";
@@ -372,14 +372,14 @@ namespace ClientWinform
             this.searchTxt.IconLeft = global::ClientWinform.Properties.Resources.Untitled__1_;
             this.searchTxt.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
             this.searchTxt.IconLeftSize = new System.Drawing.Size(22, 22);
-            this.searchTxt.Location = new System.Drawing.Point(13, 4);
+            this.searchTxt.Location = new System.Drawing.Point(0, 4);
             this.searchTxt.Margin = new System.Windows.Forms.Padding(0);
             this.searchTxt.Name = "searchTxt";
             this.searchTxt.PasswordChar = '\0';
             this.searchTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.searchTxt.PlaceholderText = "Search...";
             this.searchTxt.SelectedText = "";
-            this.searchTxt.Size = new System.Drawing.Size(356, 52);
+            this.searchTxt.Size = new System.Drawing.Size(412, 42);
             this.searchTxt.TabIndex = 13;
             // 
             // flowLayoutPanelListExplore
@@ -388,18 +388,18 @@ namespace ClientWinform
             this.flowLayoutPanelListExplore.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanelListExplore.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanelListExplore.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanelListExplore.Location = new System.Drawing.Point(0, 61);
+            this.flowLayoutPanelListExplore.Location = new System.Drawing.Point(0, 51);
             this.flowLayoutPanelListExplore.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelListExplore.Name = "flowLayoutPanelListExplore";
-            this.flowLayoutPanelListExplore.Size = new System.Drawing.Size(382, 721);
+            this.flowLayoutPanelListExplore.Size = new System.Drawing.Size(412, 605);
             this.flowLayoutPanelListExplore.TabIndex = 0;
             this.flowLayoutPanelListExplore.WrapContents = false;
             // 
             // NavigationForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1845, 945);
+            this.ClientSize = new System.Drawing.Size(1640, 756);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -440,7 +440,7 @@ namespace ClientWinform
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListExplore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelExplore;
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
-        private System.Windows.Forms.Panel panelExplore;
+        public System.Windows.Forms.Panel panelExplore;
         private Guna.UI2.WinForms.Guna2Button btnSignOut;
     }
 }

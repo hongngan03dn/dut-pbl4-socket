@@ -25,5 +25,12 @@ namespace MailServer
             public const int SENT = 1;
             public const int INACTIVE = 0;
         }
+        public static class ConnectionsDescr
+        {
+            public const string CONNECTIONKEYWORD = "Connection";
+            public const int NOTCONNECT = 0;
+            public const int CONNECTED = 1;
+            public const int CONNECTING = 2;
+        }
     }
 }

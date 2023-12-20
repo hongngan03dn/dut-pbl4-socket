@@ -44,8 +44,9 @@
             this.panelMain.Controls.Add(this.picAva);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelMain.Location = new System.Drawing.Point(0, 0);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(438, 80);
+            this.panelMain.Size = new System.Drawing.Size(452, 64);
             this.panelMain.TabIndex = 8;
             // 
             // lableName
@@ -53,9 +54,9 @@
             this.lableName.AutoSize = true;
             this.lableName.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lableName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.lableName.Location = new System.Drawing.Point(101, 49);
+            this.lableName.Location = new System.Drawing.Point(90, 39);
             this.lableName.Name = "lableName";
-            this.lableName.Size = new System.Drawing.Size(52, 21);
+            this.lableName.Size = new System.Drawing.Size(45, 19);
             this.lableName.TabIndex = 5;
             this.lableName.Text = "Name";
             // 
@@ -64,9 +65,9 @@
             this.labelUsername.AutoSize = true;
             this.labelUsername.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(151)))), ((int)(((byte)(142)))), ((int)(((byte)(142)))));
-            this.labelUsername.Location = new System.Drawing.Point(100, 10);
+            this.labelUsername.Location = new System.Drawing.Point(89, 8);
             this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(104, 28);
+            this.labelUsername.Size = new System.Drawing.Size(87, 23);
             this.labelUsername.TabIndex = 4;
             this.labelUsername.Text = "Username";
             // 
@@ -74,22 +75,23 @@
             // 
             this.picAva.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.picAva.ImageRotate = 0F;
-            this.picAva.Location = new System.Drawing.Point(24, 10);
+            this.picAva.Location = new System.Drawing.Point(16, 10);
             this.picAva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picAva.Name = "picAva";
             this.picAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.picAva.Size = new System.Drawing.Size(60, 60);
+            this.picAva.Size = new System.Drawing.Size(53, 48);
             this.picAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAva.TabIndex = 3;
             this.picAva.TabStop = false;
             // 
             // UserExploreControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.panelMain);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserExploreControl";
-            this.Size = new System.Drawing.Size(438, 80);
+            this.Size = new System.Drawing.Size(452, 64);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAva)).EndInit();

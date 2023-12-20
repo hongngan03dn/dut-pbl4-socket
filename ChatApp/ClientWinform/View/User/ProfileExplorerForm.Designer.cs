@@ -39,7 +39,7 @@ namespace ClientWinform.View.User
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.btnMsg = new Guna.UI2.WinForms.Guna2Button();
+            this.btnDisconnect = new Guna.UI2.WinForms.Guna2Button();
             this.labelBio = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -187,7 +187,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 38F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
             this.tableLayoutPanel2.Controls.Add(this.btnConnection, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.btnMsg, 3, 1);
+            this.tableLayoutPanel2.Controls.Add(this.btnDisconnect, 3, 1);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 216);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
@@ -199,23 +199,23 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.Size = new System.Drawing.Size(392, 306);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
-            // btnMsg
+            // btnDisconnect
             // 
-            this.btnMsg.BorderRadius = 8;
-            this.btnMsg.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnMsg.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnMsg.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnMsg.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnMsg.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnMsg.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
-            this.btnMsg.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.btnMsg.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnMsg.Location = new System.Drawing.Point(213, 27);
-            this.btnMsg.Name = "btnMsg";
-            this.btnMsg.Size = new System.Drawing.Size(142, 41);
-            this.btnMsg.TabIndex = 11;
-            this.btnMsg.Text = "Message";
-            this.btnMsg.Click += new System.EventHandler(this.btnMsg_Click);
+            this.btnDisconnect.BorderRadius = 8;
+            this.btnDisconnect.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDisconnect.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDisconnect.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDisconnect.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDisconnect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDisconnect.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
+            this.btnDisconnect.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnDisconnect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.btnDisconnect.Location = new System.Drawing.Point(213, 27);
+            this.btnDisconnect.Name = "btnDisconnect";
+            this.btnDisconnect.Size = new System.Drawing.Size(142, 41);
+            this.btnDisconnect.TabIndex = 11;
+            this.btnDisconnect.Text = "Disconnect";
+            this.btnDisconnect.Click += new System.EventHandler(this.btnDisconnect_Click);
             // 
             // labelBio
             // 
@@ -269,7 +269,7 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private Guna.UI2.WinForms.Guna2Button btnMsg;
+        private Guna.UI2.WinForms.Guna2Button btnDisconnect;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Label labelBio;

@@ -36,7 +36,6 @@ namespace ClientWinform.DTO
             public const int NOTCONNECT = 0;
             public const int CONNECTED = 1;
             public const int CONNECTING = 2;
-            //public const int CONFIRM = 3;
         }
     }
 }

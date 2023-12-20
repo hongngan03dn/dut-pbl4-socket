@@ -37,7 +37,7 @@ namespace ClientWinform.BLL
                 return users;
             }
         }
-        public static List<UserModel> getUserConnection(int id)
+        public static List<UserModel> getUserListExplore(int id)
         {
             using (var context = new testpbldbEntities1())
             {
@@ -47,7 +47,7 @@ namespace ClientWinform.BLL
                                          u => u.Id,
                                          m => m.IdFrom == id ? m.IdTo : (m.IdTo == id ? m.IdFrom : -1),
                                          (u, m) => new { User = u, Message = m })
-                                   .Where(um => (um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                   .Where(um => (((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && um.Message.Status == Constants.ConnectionsDescr.CONNECTED)))
                                    .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
                                    .Select(g => new UserModel
                                    {
@@ -84,19 +84,19 @@ namespace ClientWinform.BLL
                 return acc;
             }
         }
-        public static bool checkMsgUnread(int idTo, int idFrom)
-        {
-            using(testpbldbEntities1 db = new testpbldbEntities1())
-            {
-                var msg = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom 
-                                                   && record.Status == Constants.MessageStatuses.RECEIVED
-                                                   && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).Count();
-                if (msg > 0)
-                    return true;
-                else
-                    return false;
-            }
-        }
+        //public static bool checkMsgUnread(int idTo, int idFrom)
+        //{
+        //    using(testpbldbEntities1 db = new testpbldbEntities1())
+        //    {
+        //        var msg = db.Messages.Where(record => record.IdTo == idTo && record.IdFrom == idFrom 
+        //                                           && record.Status == Constants.MessageStatuses.RECEIVED
+        //                                           && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).Count();
+        //        if (msg > 0)
+        //            return true;
+        //        else
+        //            return false;
+        //    }
+        //}
         public static void LoadMsgesToReceived(int idTo)
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())

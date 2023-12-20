@@ -27,9 +27,9 @@ namespace ClientWinform.SocketHandles
         delegate void setSubForm(int idMsg, Form subForm);
         delegate void returnStatusForm(int status, Form form);
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
+        delegate void updateExplore(Form form);
 
-
-        static String _ipServer = "192.168.2.17";
+        static String _ipServer = "192.168.31.16";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -99,6 +99,16 @@ namespace ClientWinform.SocketHandles
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
             }
         }
+        public static void sendNotiConnection(Nullable<Int32> idFrom, Nullable<Int32> idTo, int status)
+        {
+            byte[] datasend = new byte[1024];
+            if (_client.Connected)
+            {
+                datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+            }
+
+        }
         public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)
@@ -137,6 +147,21 @@ namespace ClientWinform.SocketHandles
                 if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
                 {
                     navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(status, true);
+                }
+            }
+        }
+        public static void updateListExplore(Form form)
+        {
+            if (form.InvokeRequired)
+            {
+                updateExplore d = new updateExplore(updateListExplore);
+                form.Invoke(d, new object[] { form });
+            }
+            else
+            {
+                if (form is NavigationForm navigationForm && navigationForm.panelExplore.Visible == true)
+                {
+                    navigationForm.addExplorePanel();
                 }
             }
         }
@@ -238,7 +263,14 @@ namespace ClientWinform.SocketHandles
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
                             if (user.Id == idOnlines[i] && bindLogin)
-                                chat.isPictureBoxOnlineVisible = true;
+                            {
+                                DTO.Message checkConnected = BLL.UserBLL.checkIsHaveConnection(idLoggined, user.Id);
+                                if (checkConnected != null) 
+                                { 
+                                    if(checkConnected.Status == Constants.ConnectionsDescr.CONNECTED)
+                                        chat.isPictureBoxOnlineVisible = true;
+                                }
+                            }                                
                         }
                     }
                     chat.userName = user.Username;
@@ -294,6 +326,10 @@ namespace ClientWinform.SocketHandles
                     string[] messages = stringData.Split(new string[] { "Return status: " }, StringSplitOptions.None);
                     int status = Int32.Parse(messages[1]);
                     returnStatus(status, form);
+                }
+                else if (stringData.Contains("Update connnection"))
+                {
+                    updateListExplore(form);
                 }
                 else if (stringData.Contains(" has signned out"))
                 {

@@ -33,19 +33,19 @@ namespace ClientWinform.View.User
                 if(check.Status == Constants.ConnectionsDescr.CONNECTED)
                 {
                     btnConnection.Text = "Connected";
-                    btnMsg.Visible = false;
+                    //btnDisconnect.Visible = false;
                 }
                 else if(check.Status == Constants.ConnectionsDescr.CONNECTING)
                 {
                     if(check.IdFrom == idUser)
                     {
                         btnConnection.Text = "Connecting";
-                        btnMsg.Text = "Cancel";
+                        btnDisconnect.Text = "Cancel";
                     }
                     else
                     {
                         btnConnection.Text = "Confirm";
-                        btnMsg.Text = "Delete";
+                        btnDisconnect.Text = "Delete";
                     }
                 }
                 idConnection = check.Id;
@@ -53,7 +53,7 @@ namespace ClientWinform.View.User
             else
             {
                 btnConnection.Text = "Connect";
-                btnMsg.Visible = false;
+                btnDisconnect.Visible = false;
             }
             showDetail(userConnect);
         }
@@ -84,22 +84,54 @@ namespace ClientWinform.View.User
             {
                 BLL.UserBLL.InsertConnection(user.Id, userConnect.Id);
                 btnConnection.Text = "Connecting";
-                btnMsg.Text = "Cancel";
-                btnMsg.Visible = true;
+                btnDisconnect.Text = "Cancel";
                 d();
+                try
+                {
+                    SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.CONNECTING);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
             }
             if(btnConnection.Text == "Confirm")
             {
                 BLL.UserBLL.UpdateConnectionToConnected(idConnection, user.Id);
                 btnConnection.Text = "Connected";
-                btnMsg.Visible = false;
+                btnDisconnect.Text = "Disconnect";
                 d();
+                try
+                {
+                    SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.CONNECTED);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
             }
 
         }
 
-        private void btnMsg_Click(object sender, EventArgs e)
+        private void btnDisconnect_Click(object sender, EventArgs e)
         {
+            DialogResult result =  MessageBox.Show("Remove connection with \"" + userConnect.Username + "\"?", "Confirmation", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                BLL.UserBLL.UpdateConnectionToDisConnect(idConnection, user.Id);
+                d();
+                try
+                {
+                    SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.NOTCONNECT);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
+            }
 
         }
     }

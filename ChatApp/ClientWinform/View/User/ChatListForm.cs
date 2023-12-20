@@ -25,6 +25,7 @@ namespace ClientWinform.View.User
             this.user = user;
             InitializeComponent();
             this.Activate();
+            //searchTxt.Width = flowLayoutPanelListChat.Width;
         }
         private void ActiveButton(object btnSender)
         {

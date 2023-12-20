@@ -138,6 +138,18 @@ namespace MailServer
                         }
                         Console.WriteLine("INFO Logout by: " + Int32.Parse(messages[0].Trim()) + "\n");
                     }
+                    else if (recvStr.Contains("Connection"))
+                    {
+                        string[] messages = recvStr.Split(new string[] { "Connection: ", " | ", " status: " }, StringSplitOptions.None);
+                        ClientModel clientSendMsg = clientOnline.Where(x => x.Id == Int32.Parse(messages[2].Trim())).FirstOrDefault();
+                        if (clientSendMsg != null)
+                        {
+                            byte[] msg = Encoding.ASCII.GetBytes("Update connnection");
+                            clientSendMsg.clientSocket.Send(msg);
+                            string onlineClients = string.Join(", ", clientOnline.Select(c => c.Id));
+                            broadcastMessage("\nCurrent onlines: " + onlineClients + "\n");
+                        }
+                    }
                     else
                     {
                         SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);

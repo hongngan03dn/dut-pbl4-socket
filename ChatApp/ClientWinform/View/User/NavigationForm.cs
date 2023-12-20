@@ -147,14 +147,14 @@ namespace ClientWinform
             lbl.ForeColor = Color.FromArgb(151, 142, 142);
             return lbl;
         }
-        public void addExplorePanel()
+        public  void addExplorePanel()
         {
             flowLayoutPanelListExplore.Controls.Clear();
             Label lblFriend = createLable("Friend");
             Label lblConnecting = createLable("Connecting");
             Label lblExplore = createLable("Explore");
 
-            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userOwn.Id);
+            List<DTO.UserModel> users = BLL.MsgBLL.getUserListExplore(userOwn.Id);
             if(users.Count > 0)
             {
                 flowLayoutPanelListExplore.Controls.Add(lblFriend);
@@ -264,7 +264,7 @@ namespace ClientWinform
         private void exploreBtn_Click(object sender, EventArgs e)
         {
             ActiveButton(sender);
-            panelExplore.Size = new Size(300, panelChild.Height);
+            panelExplore.Size = new Size(350, panelChild.Height);
             panelExplore.Location = new Point(0, 0);
             panelExplore.Visible = true;
             panelExplore.BringToFront();
@@ -276,7 +276,6 @@ namespace ClientWinform
             ActivePanel(sender);
             ProfileExplorerForm f = new ProfileExplorerForm(userOwn.Id, userId);
             f.FormClosed += new FormClosedEventHandler(f_FormClosed);
-            
             f.d += new ProfileExplorerForm.MyDel(addExplorePanel);
             f.ShowDialog();
         }
