@@ -50,6 +50,7 @@ namespace ClientWinform
 
         private void signUpBtn_Click(object sender, EventArgs e)
         {
+            this.Hide();
             SignUpForm f = new SignUpForm();
             f.ShowDialog();
         }

@@ -88,5 +88,10 @@ namespace ClientWinform
             ChangePassForm f = new ChangePassForm();
             f.ShowDialog();
         }
+
+        private void picBoxAva_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

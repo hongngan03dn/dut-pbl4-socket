@@ -19,7 +19,7 @@ namespace ClientWinform.View.User
         private DTO.User user = new DTO.User();
         private DTO.User userConnect = new DTO.User();
         private int idConnection = 0;
-        public delegate void MyDel();
+        public delegate void MyDel(string txt);
         public MyDel d { get; set; }
         public ProfileExplorerForm(int idUser, int idTo)
         {
@@ -30,6 +30,11 @@ namespace ClientWinform.View.User
             DTO.Message check = BLL.UserBLL.checkIsHaveConnection(idUser, idTo);
             if(check != null )
             {
+                if(check.Status == Constants.ConnectionsDescr.NOTCONNECT)
+                {
+                    btnConnection.Text = "Connect";
+                    btnDisconnect.Visible = false;
+                }
                 if(check.Status == Constants.ConnectionsDescr.CONNECTED)
                 {
                     btnConnection.Text = "Connected";
@@ -85,7 +90,7 @@ namespace ClientWinform.View.User
                 BLL.UserBLL.InsertConnection(user.Id, userConnect.Id);
                 btnConnection.Text = "Connecting";
                 btnDisconnect.Text = "Cancel";
-                d();
+                d("");
                 try
                 {
                     SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.CONNECTING);
@@ -95,13 +100,14 @@ namespace ClientWinform.View.User
                     MessageBox.Show(ex.Message);
                     return;
                 }
+                this.Close();
             }
             if(btnConnection.Text == "Confirm")
             {
                 BLL.UserBLL.UpdateConnectionToConnected(idConnection, user.Id);
                 btnConnection.Text = "Connected";
                 btnDisconnect.Text = "Disconnect";
-                d();
+                d("");
                 try
                 {
                     SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.CONNECTED);
@@ -111,6 +117,7 @@ namespace ClientWinform.View.User
                     MessageBox.Show(ex.Message);
                     return;
                 }
+                this.Close();
             }
 
         }
@@ -121,7 +128,7 @@ namespace ClientWinform.View.User
             if(result == DialogResult.Yes)
             {
                 BLL.UserBLL.UpdateConnectionToDisConnect(idConnection, user.Id);
-                d();
+                d("");
                 try
                 {
                     SocketHandles.MailClient.sendNotiConnection(user.Id, userConnect.Id, Constants.ConnectionsDescr.NOTCONNECT);
@@ -132,7 +139,7 @@ namespace ClientWinform.View.User
                     return;
                 }
             }
-
+            this.Close();
         }
     }
 }

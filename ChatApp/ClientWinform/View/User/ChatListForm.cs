@@ -25,7 +25,7 @@ namespace ClientWinform.View.User
             this.user = user;
             InitializeComponent();
             this.Activate();
-            //searchTxt.Width = flowLayoutPanelListChat.Width;
+            searchTxt.KeyDown += new KeyEventHandler(searchTxt_KeyDown);
         }
         private void ActiveButton(object btnSender)
         {
@@ -68,9 +68,32 @@ namespace ClientWinform.View.User
         public void chatPanel_Click(object sender, EventArgs e, int userId, int userToId)
         {
             chatContentForm = new ChatContentForm(userId, userToId);
-            //SocketHandles.MailClient.UpdateListChat(null, this);
             OpenChilForm(chatContentForm, sender);
-            
+        }
+        private void searchTxt_IconLeftClick(object sender, EventArgs e)
+        {
+            foreach (Control ctrl in flowLayoutPanelListChat.Controls)
+            {
+                if (ctrl is ChatReviewForm)
+                {
+                    ChatReviewForm userChat = (ChatReviewForm)ctrl;
+                    if(userChat.userName.Contains(searchTxt.Text))
+                    {
+                        userChat.Visible = true;
+                    }
+                    else
+                    {
+                        userChat.Visible = false;
+                    }
+                }
+            }
+        }
+        private void searchTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                searchTxt_IconLeftClick(sender, e);
+            }
         }
     }
 }

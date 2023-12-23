@@ -46,7 +46,7 @@
             this.panelMain.Location = new System.Drawing.Point(0, 0);
             this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(452, 64);
+            this.panelMain.Size = new System.Drawing.Size(456, 64);
             this.panelMain.TabIndex = 8;
             // 
             // lableName
@@ -75,7 +75,7 @@
             // 
             this.picAva.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.picAva.ImageRotate = 0F;
-            this.picAva.Location = new System.Drawing.Point(16, 10);
+            this.picAva.Location = new System.Drawing.Point(20, 10);
             this.picAva.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picAva.Name = "picAva";
             this.picAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
@@ -91,7 +91,7 @@
             this.Controls.Add(this.panelMain);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "UserExploreControl";
-            this.Size = new System.Drawing.Size(452, 64);
+            this.Size = new System.Drawing.Size(456, 64);
             this.panelMain.ResumeLayout(false);
             this.panelMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picAva)).EndInit();

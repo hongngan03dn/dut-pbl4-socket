@@ -321,6 +321,7 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\avaHy.jpg" />
     <None Include="Resources\log-out %281%29.png" />
     <None Include="Resources\log-out.png" />
     <None Include="Resources\OnlineIcon.png" />
