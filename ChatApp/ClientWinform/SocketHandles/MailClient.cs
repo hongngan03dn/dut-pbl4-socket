@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.31.16";
+        static String _ipServer = "192.168.2.17";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -161,7 +161,7 @@ namespace ClientWinform.SocketHandles
             {
                 if (form is NavigationForm navigationForm && navigationForm.panelExplore.Visible == true)
                 {
-                    navigationForm.addExplorePanel();
+                    navigationForm.addExplorePanel("");
                 }
             }
         }
@@ -203,11 +203,7 @@ namespace ClientWinform.SocketHandles
                     }
                     Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
-
-
             }
-
-
             //delegate
             if (activeForm.InvokeRequired)
             {
@@ -219,17 +215,21 @@ namespace ClientWinform.SocketHandles
 
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
-                    optionForm(navigationForm.chatForm, bindLogin);
+                    optionForm(navigationForm.chatForm, bindLogin, "");
                 }
                 else if (activeForm is ChatListForm chatList && idLoggined != 0)
                 {
-                    optionForm(chatList, bindLogin);
+                    optionForm(chatList, bindLogin, "");
                 }
             }
         }
-        public static void optionForm(ChatListForm chatList, bool bindLogin)
+        public static void optionForm(ChatListForm chatList, bool bindLogin, string txtSearch)
         {
-            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id);
+            if(txtSearch != "")
+            {
+                chatList.flowLayoutPanelListChat.Controls.Clear();
+            }
+            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id, txtSearch);
             foreach (DTO.UserModel user in users)
             {
                 chatList.Invoke((MethodInvoker)delegate
@@ -253,7 +253,7 @@ namespace ClientWinform.SocketHandles
                     }
                     if (user.Id == idLoggined)
                     {
-                        if (bindLogin)
+                        if (bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             chat.isPictureBoxOnlineVisible = true;
                         else 
                             chat.isPictureBoxOnlineVisible = false;
@@ -262,15 +262,11 @@ namespace ClientWinform.SocketHandles
                     {
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
-                            if (user.Id == idOnlines[i] && bindLogin)
+                        if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             {
-                                DTO.Message checkConnected = BLL.UserBLL.checkIsHaveConnection(idLoggined, user.Id);
-                                if (checkConnected != null) 
-                                { 
-                                    if(checkConnected.Status == Constants.ConnectionsDescr.CONNECTED)
-                                        chat.isPictureBoxOnlineVisible = true;
-                                }
-                            }                                
+
+                                chat.isPictureBoxOnlineVisible = true;
+                            }
                         }
                     }
                     chat.userName = user.Username;
@@ -297,8 +293,6 @@ namespace ClientWinform.SocketHandles
                     {
                         chat.message = "";
                     }
-
-
                     foreach (Control c in chat.Controls)
                     {
                         c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));

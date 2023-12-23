@@ -118,6 +118,7 @@ namespace ClientWinform.View.User
             this.searchTxt.SelectedText = "";
             this.searchTxt.Size = new System.Drawing.Size(384, 42);
             this.searchTxt.TabIndex = 12;
+            this.searchTxt.IconLeftClick += new System.EventHandler(this.searchTxt_IconLeftClick);
             // 
             // flowLayoutPanelListChat
             // 

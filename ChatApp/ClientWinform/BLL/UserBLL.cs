@@ -183,12 +183,12 @@ namespace ClientWinform.BLL
                 }
             }
         }
-        public static List<User> getConnectingOfUser(int idFrom)
+        public static List<User> getConnectingOfUser(int idFrom, string txtSearch)
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
                 var connections = db.Messages.Where(record => ((record.IdFrom == idFrom || record.IdTo == idFrom))
-                                         && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
+                                                 && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
                 List<User> users = new List<User>();
                 User user = null;
                 foreach (DTO.Message connection in connections)
@@ -200,10 +200,10 @@ namespace ClientWinform.BLL
                         user = BLL.UserBLL.getUserByID((int)connection.IdFrom);
                     users.Add(user);
                 }
-                return users;
+                return users.OrderBy(record => record.Username).Where(record => record.Username.Contains(txtSearch)).ToList();
             }
         }
-        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList)
+        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList, string txtSearch)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
             {
@@ -220,7 +220,7 @@ namespace ClientWinform.BLL
                     userTemp.Remove(userConnecting);
                 }
                 getUserExplore = userTemp.ToList();
-                return getUserExplore;
+                return getUserExplore.OrderBy(record => record.Username).Where(record => record.Username.Contains(txtSearch)).ToList();
             }
         }
         public static int getConnectionsOfUser(int userId)
@@ -238,7 +238,7 @@ namespace ClientWinform.BLL
             {
                 var check = db.Messages.Where(record => ((record.IdFrom == userId && record.IdTo == connectionId) ||
                                                          (record.IdFrom == connectionId && record.IdTo == userId))
-                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).FirstOrDefault();
+                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).OrderByDescending(record => record.CreatedDate).FirstOrDefault();
                 return check;
             }
         }

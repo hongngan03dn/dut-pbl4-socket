@@ -11,7 +11,7 @@ namespace ClientWinform.BLL
     internal class MsgBLL
     {
 
-        public static List<UserModel> getUserListChat(int id)
+        public static List<UserModel> getUserListChat(int id, string txtSearch)
         {
             using (var context = new testpbldbEntities1())
             {
@@ -32,12 +32,13 @@ namespace ClientWinform.BLL
                                        LatestMessageTime = g.Max(um => um.Message.CreatedDate)
                                    })
                                    .OrderByDescending(u => u.LatestMessageTime)
+                                   .Where(u => u.Username.Contains(txtSearch))
                                    .ToList();
 
                 return users;
             }
         }
-        public static List<UserModel> getUserListExplore(int id)
+        public static List<UserModel> getUserListExplore(int id, string search)
         {
             using (var context = new testpbldbEntities1())
             {
@@ -56,7 +57,7 @@ namespace ClientWinform.BLL
                                        IdAvatar = g.Key.IdAvatar,
                                        LatestMessageTime = g.Max(um => um.Message.CreatedDate)
                                    })
-                                   .OrderByDescending(u => u.LatestMessageTime)
+                                   .OrderBy(u => u.Username).Where(u => u.Username.Contains(search))
                                    .ToList();
 
                 return users;
@@ -161,7 +162,7 @@ namespace ClientWinform.BLL
                                                        (record.IdFrom == idTo && record.IdTo == idFrom))
                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
                                      .OrderByDescending(record => record.CreatedDate)
-                                     .Skip(skipCount).Take(50).ToList();
+                                     .Skip(skipCount).Take(30).ToList();
                 return msg;
             }
         }

@@ -381,6 +381,7 @@ namespace ClientWinform
             this.searchTxt.SelectedText = "";
             this.searchTxt.Size = new System.Drawing.Size(412, 42);
             this.searchTxt.TabIndex = 13;
+            this.searchTxt.IconLeftClick += new System.EventHandler(this.searchTxt_IconLeftClick);
             // 
             // flowLayoutPanelListExplore
             // 

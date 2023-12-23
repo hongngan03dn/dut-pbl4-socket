@@ -40,17 +40,26 @@ namespace ClientWinform.View.User
             width.Size = new Size(flowLayoutPanelChat.Width, 0);
             flowLayoutPanelChat.Controls.Add(width);
             LoadData(idFrom, idTo);
-            BLL.MsgBLL.LoadMsgesToSeen(idFrom, idTo);
-            try
+
+            if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
             {
-                SocketHandles.MailClient.sendStatusSeen(userTo.Id);
-                messageTxt.Text = "";
+                MessageBox.Show("Your connection had been deleted. You cannot chat with \"" + userTo.Username + "\"");
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
-                return;
+                BLL.MsgBLL.LoadMsgesToSeen(idFrom, idTo);
+                try
+                {
+                    SocketHandles.MailClient.sendStatusSeen(userTo.Id);
+                    messageTxt.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return;
+                }
             }
+
         }
         public async void LoadData(int idFrom, int idTo)
         {
@@ -65,7 +74,8 @@ namespace ClientWinform.View.User
                 if (flowLayoutPanel.IsHandleCreated)
                 {
                     var message = messages[i];
-                    flowLayoutPanel.Invoke((MethodInvoker)async delegate
+
+                    await Task.Run(() => flowLayoutPanel.Invoke((MethodInvoker)async delegate
                     {
                         if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
                         {
@@ -97,7 +107,7 @@ namespace ClientWinform.View.User
                                 }
                             }
                         }
-                    });
+                    }));
                 }
                 else
                 {
@@ -199,7 +209,6 @@ namespace ClientWinform.View.User
             panelContainTime.Controls.Add(panel);
             panelContainTime.Controls.Add(lblTime);
             
-
             return panelContainTime;
         }
         public void AddStatusPanelToChat(int status, bool condition)
@@ -237,19 +246,19 @@ namespace ClientWinform.View.User
             List<DTO.Message> messages = BLL.MsgBLL.GetTopMessages(userFrom.Id, userTo.Id, loadedMessageCount);
             flowLayoutPanelChat.Controls.Remove(btnLoadmore);
             Nullable<System.DateTime> previousTimeInClick = null;
+            Label timeSectionLabel = new Label();
+            timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            timeSectionLabel.AutoSize = true;
+            timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+            timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+            timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             for (int i = 0; i < messages.Count; i++)
             {
                 if (flowLayoutPanelChat.IsHandleCreated)
                 {
                     if (previousTimeInClick != null && (previousTimeInClick.Value - messages[i].CreatedDate.Value).TotalMinutes > 20)
                     {
-                        Label timeSectionLabel = new Label();
-                        timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                        timeSectionLabel.AutoSize = true;
-                        timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                        timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
                         timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(previousTimeInClick.Value);
-                        timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
                         flowLayoutPanelChat.Controls.Add(timeSectionLabel);
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
@@ -267,13 +276,7 @@ namespace ClientWinform.View.User
                 {
                     if (previousTimeInClick != null && (previousTimeInClick.Value - messages[i].CreatedDate.Value).TotalMinutes > 20)
                     {
-                        Label timeSectionLabel = new Label();
-                        timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                        timeSectionLabel.AutoSize = true;
-                        timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                        timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
                         timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(previousTimeInClick.Value);
-                        timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
                         flowLayoutPanelChat.Controls.Add(timeSectionLabel);
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
@@ -284,7 +287,6 @@ namespace ClientWinform.View.User
                     flowLayoutPanelChat.ScrollControlIntoView(panel);
                     previousTimeInClick = messages[i].CreatedDate;
                 }
-
             }
             flowLayoutPanelChat.Controls.Add(btnLoadmore);
             flowLayoutPanelChat.Controls.SetChildIndex(btnLoadmore, 0);
@@ -303,27 +305,36 @@ namespace ClientWinform.View.User
 
         private async void btnSubmit_Click(object sender, EventArgs e)
         {
-            if (!String.IsNullOrWhiteSpace(messageTxt.Text))
+            if (BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
             {
-                DTO.Message newMessage = new DTO.Message();
-                newMessage.IdFrom = userFrom.Id;
-                newMessage.ContentMsg = messageTxt.Text;
-                newMessage.CreatedDate = DateTime.Now;
-
-                List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
-
-                try
+                MessageBox.Show("Your connection had been deleted. You cannot chat with \"" + userTo.Username + "\"");
+            }
+            else
+            {
+                if (!String.IsNullOrWhiteSpace(messageTxt.Text))
                 {
-                    SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
-                    messageTxt.Text = "";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                    return;
+                    DTO.Message newMessage = new DTO.Message();
+                    newMessage.IdFrom = userFrom.Id;
+                    newMessage.ContentMsg = messageTxt.Text;
+                    newMessage.CreatedDate = DateTime.Now;
+                    loadedMessageCount ++;
+                    List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+                    await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
+
+                    messageTxt.Focus();
+                    try
+                    {
+                        SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                        messageTxt.Text = "";
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        return;
+                    }
                 }
             }
+
         }
     }
 }
