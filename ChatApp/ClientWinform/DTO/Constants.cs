@@ -37,5 +37,10 @@ namespace ClientWinform.DTO
             public const int CONNECTED = 1;
             public const int CONNECTING = 2;
         }
+        public static class PacketType
+        {
+            public const int MESSAGE = 1;
+            public const int FILE = 2;
+        }
     }
 }

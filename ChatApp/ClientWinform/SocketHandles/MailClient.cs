@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.31.16";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -342,6 +342,42 @@ namespace ClientWinform.SocketHandles
                     UpdateListChat(messages, form, true);
                 }
 
+            }
+        }
+
+        public static void sendFile(int myId, int toId, string fname, Nullable<System.DateTime> createdDate)
+        {
+            // handle fname
+            string path = "";
+            fname = fname.Replace("\\", "/");
+            while (fname.IndexOf("/") > -1)
+            {
+                path += fname.Substring(0, fname.IndexOf("/") + 1);
+                fname = fname.Substring(fname.IndexOf("/") + 1);
+            }
+            byte[] fileData = System.IO.File.ReadAllBytes(path + fname);
+            byte[] fnameByte = Encoding.ASCII.GetBytes(fname);
+            byte[] fnameLen = BitConverter.GetBytes(fnameByte.Length);
+            byte[] clientData = new byte[4 + fnameByte.Length + fileData.Length];
+            fnameLen.CopyTo(clientData, 0);
+            fnameByte.CopyTo(clientData, 4);
+            fileData.CopyTo(clientData, 4 + fnameByte.Length);
+
+            //giống sendMsg
+            int idFile = BLL.FileBLL.InsertFile(myId, fname, path);
+            int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, path + fname, idFile);
+            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, path + fname, createdDate, Constants.PacketType.FILE);
+            packet.SubPacketFile = clientData;
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+                UpdateListChat(null, formAll, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

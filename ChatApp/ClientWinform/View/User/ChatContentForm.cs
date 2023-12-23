@@ -298,7 +298,11 @@ namespace ClientWinform.View.User
 
         private void messageTxt_IconRightClick(object sender, EventArgs e)
         {
-
+            FileDialog fd = new OpenFileDialog();
+            if (fd.ShowDialog() == DialogResult.OK)
+            {
+                messageTxt.Text = fd.FileName;
+            }
         }
 
         private async void btnSubmit_Click(object sender, EventArgs e)
@@ -315,7 +319,8 @@ namespace ClientWinform.View.User
 
                 try
                 {
-                    SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                    //SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                    SocketHandles.MailClient.sendFile(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
                     messageTxt.Text = "";
                 }
                 catch (Exception ex)

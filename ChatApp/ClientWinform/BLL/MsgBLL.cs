@@ -135,19 +135,37 @@ namespace ClientWinform.BLL
                 db.SaveChanges();
             }
         }
-        public static int InsertMessage(int idFrom, int idTo, String contentMsg)
+        public static int InsertMessage(int idFrom, int idTo, String contentMsg, int idFile = 0)
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                DTO.Message msg = new DTO.Message()
+                DTO.Message msg;
+                if (idFile == 0)
                 {
-                    IdFrom = idFrom,
-                    IdTo = idTo,
-                    ContentMsg = contentMsg,
-                    Status = Constants.MessageStatuses.SENT,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = idFrom,
-                };
+                    msg = new DTO.Message()
+                    {
+                        IdFrom = idFrom,
+                        IdTo = idTo,
+                        ContentMsg = contentMsg,
+                        Status = Constants.MessageStatuses.SENT,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = idFrom,
+                    };
+                }
+                else
+                {
+                    msg = new DTO.Message()
+                    {
+                        IdFrom = idFrom,
+                        IdTo = idTo,
+                        ContentMsg = contentMsg,
+                        Status = Constants.MessageStatuses.SENT,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = idFrom,
+                        IdFile = idFile
+                    };
+                }
+                 
                 db.Messages.Add(msg);
                 db.SaveChanges();
                 return msg.Id;

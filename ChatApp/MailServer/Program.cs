@@ -4,6 +4,7 @@ using MailServer.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -18,6 +19,7 @@ namespace MailServer
         static Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         static List<ClientModel> clientOnline = new List<ClientModel>();
         static List<string> queueActivity = new List<string>();
+        static string pathServer = "../../../FileStorage";
 
         static void Main(string[] args)
         {
@@ -47,7 +49,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[1];
+            IPAddress address = hostEntry.AddressList[7];
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -109,7 +111,7 @@ namespace MailServer
             Socket client = objClient as Socket;
             while (true)
             {
-                byte[] datarecv = new byte[1024];
+                byte[] datarecv = new byte[1024 * 128];
                 try
                 {
                     int recv = client.Receive(datarecv);
@@ -158,6 +160,19 @@ namespace MailServer
                         ClientModel clientSendMsg = clientOnline.Where(x => x.Id == packet.IdFrom).FirstOrDefault();
 
                         MessageHelper messageHelper = new MessageHelper();
+
+                        // Start handle File
+                        if (packet.PacketType == Constants.PacketType.FILE)
+                        {
+                            int receiveByteLen = packet.SubPacketFile.Length;
+                            int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
+                            string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+                            BinaryWriter writer = new BinaryWriter(System.IO.File.Open(pathServer + "/" + fname, FileMode.Append));
+                            writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
+                            writer.Close();
+                        }
+
+                        // End handle File
 
 
                         if (onlineToClient != null)
