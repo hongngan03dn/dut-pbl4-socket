@@ -15,7 +15,7 @@ namespace ClientWinform.DTO
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
         public int PacketType { get; set; }
-        public byte[] SubPacketFile { get; set; } = new byte[1024 * 128]; // 128KB
+        public byte[] SubPacketFile { get; set; } = new byte[1024 * 85]; // 80KB
 
         public SocketPacketModel() 
         {

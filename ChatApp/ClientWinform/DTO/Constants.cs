@@ -41,6 +41,8 @@ namespace ClientWinform.DTO
         {
             public const int MESSAGE = 1;
             public const int FILE = 2;
+            public const int GET_FILE = 3;
+            public const int ERROR = 4;
         }
     }
 }

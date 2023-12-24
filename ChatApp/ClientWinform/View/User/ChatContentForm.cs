@@ -1,5 +1,6 @@
 ﻿using ClientWinform.BLL;
 using ClientWinform.DTO;
+using ClientWinform.SocketHandles;
 using Guna.UI2.WinForms;
 using System;
 using System.Collections.Generic;
@@ -7,11 +8,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ClientWinform.View.User
@@ -89,7 +92,7 @@ namespace ClientWinform.View.User
                             flowLayoutPanel.Controls.Add(timeSectionLabel);
                         }
                         FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = await shapeFormatPanelChat(message.ContentMsg, message.IdFrom, idFrom, message.CreatedDate);
+                        panel = await shapeFormatPanelChat(message, message.IdFrom, idFrom, message.CreatedDate);
                         flowLayoutPanel.Controls.Add(panel);
                         flowLayoutPanel.ScrollControlIntoView(panel);
                         previousTime = messages[i].CreatedDate;
@@ -124,7 +127,7 @@ namespace ClientWinform.View.User
                         flowLayoutPanel.Controls.Add(timeSectionLabel);
                     }
                     FlowLayoutPanel panel = new FlowLayoutPanel();
-                    panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, idFrom, messages[i].CreatedDate);
+                    panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, idFrom, messages[i].CreatedDate);
                     flowLayoutPanel.Controls.Add(panel);
                     flowLayoutPanel.ScrollControlIntoView(panel);
                     previousTime = messages[i].CreatedDate;
@@ -145,8 +148,10 @@ namespace ClientWinform.View.User
                 }
             }
         }
-        public async Task<FlowLayoutPanel> shapeFormatPanelChat(string messages, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
+        public async Task<FlowLayoutPanel> shapeFormatPanelChat(DTO.Message messageObject, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
         {
+            string messages = messageObject.ContentMsg;
+            FontStyle styleMsg = (messageObject.IdFile != null && messageObject.IdFile != 0) ? FontStyle.Underline : FontStyle.Regular;
             StringBuilder sb = new StringBuilder();
 
             for (int j = 0; j < messages.Length; j += Constants.MessageTies.MAXLENGTHINCONTENT)
@@ -171,7 +176,7 @@ namespace ClientWinform.View.User
 
             Label label = new Label();
             label.Text = result;
-            label.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            label.Font = new System.Drawing.Font("Segoe UI", 10F, styleMsg, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             label.AutoSize = true;
             label.Dock = DockStyle.Fill;
             label.TextAlign = ContentAlignment.MiddleLeft;
@@ -181,6 +186,9 @@ namespace ClientWinform.View.User
             Guna2Elipse border = new Guna2Elipse();
             border.BorderRadius = 12;
             border.TargetControl = panel;
+
+            panel.Click += (sender, e) => DownloadFile(sender, e, messageObject);
+            label.Click += (sender, e) => DownloadFile(sender, e, messageObject);
 
             FlowLayoutPanel panelContainTime = new FlowLayoutPanel();
             panelContainTime.AutoSize = true;
@@ -208,8 +216,20 @@ namespace ClientWinform.View.User
 
             panelContainTime.Controls.Add(panel);
             panelContainTime.Controls.Add(lblTime);
-            
+
             return panelContainTime;
+        }
+        
+        public void DownloadFile(object sender, EventArgs e, DTO.Message messageObject)
+        {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            folderBrowserDialog.Description = "Select a folder to download file...";
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
+            {
+                string selectedPath = folderBrowserDialog.SelectedPath;
+                selectedPath = selectedPath.Replace("\\", "/");
+                MailClient.sendRequestFile(messageObject, selectedPath);
+            }
         }
         public void AddStatusPanelToChat(int status, bool condition)
         {
@@ -265,7 +285,7 @@ namespace ClientWinform.View.User
                     flowLayoutPanelChat.Invoke((MethodInvoker)async delegate
                     {
                         FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                        panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
                         flowLayoutPanelChat.Controls.Add(panel);
                         flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                         flowLayoutPanelChat.ScrollControlIntoView(panel);
@@ -281,7 +301,7 @@ namespace ClientWinform.View.User
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
                     FlowLayoutPanel panel = new FlowLayoutPanel();
-                    panel = await shapeFormatPanelChat(messages[i].ContentMsg, messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                    panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
                     flowLayoutPanelChat.Controls.Add(panel);
                     flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                     flowLayoutPanelChat.ScrollControlIntoView(panel);
@@ -303,7 +323,8 @@ namespace ClientWinform.View.User
             FileDialog fd = new OpenFileDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
-                messageTxt.Text = fd.FileName;
+                messageTxt.Text = fd.FileName; // Path.GetFileName(fd.FileName);
+                btnSubmit_Click(sender, new EventArgs());
             }
         }
 
@@ -319,7 +340,7 @@ namespace ClientWinform.View.User
                 {
                     DTO.Message newMessage = new DTO.Message();
                     newMessage.IdFrom = userFrom.Id;
-                    newMessage.ContentMsg = messageTxt.Text;
+                    newMessage.ContentMsg = Path.GetFileName(messageTxt.Text);
                     newMessage.CreatedDate = DateTime.Now;
                     loadedMessageCount ++;
                     List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
@@ -328,7 +349,7 @@ namespace ClientWinform.View.User
                     messageTxt.Focus();
                     try
                     {
-                        SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                        SocketHandles.MailClient.sendFile(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
                         messageTxt.Text = "";
                     }
                     catch (Exception ex)

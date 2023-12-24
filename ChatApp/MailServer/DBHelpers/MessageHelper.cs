@@ -48,5 +48,29 @@ namespace MailServer.DBHelpers
                 throw;
             }
         }
+        public string getFileNameByIdMsg(int idMsg)
+        {
+            try
+            {
+                Message message =_context.Messages.Where(x => x.Id == idMsg && x.Status != Constants.MessageStatuses.INACTIVE).FirstOrDefault();
+                if (message == null) throw new Exception("Message Not Found.");
+                else if (message.IdFile != null && message.IdFile != 0)
+                {
+                    Entities.File file = _context.Files.Where(x => x.Id == message.IdFile && x.Status == Constants.Statuses.ACTIVE).FirstOrDefault();
+                    if (file == null)
+                        throw new Exception("File Not Found in DB");
+                    else
+                        return file.Name;
+                }
+                else
+                {
+                    throw new Exception("This message does not contain File.");
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
     }
 }

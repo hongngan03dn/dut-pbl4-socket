@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.1.219";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -306,10 +306,49 @@ namespace ClientWinform.SocketHandles
         {
             while(true)
             {
-                byte[] data = new byte[1024];
+                byte[] data = new byte[1024 * 128];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
-                if(stringData.Contains("Message: "))
+
+                SocketPacketModel packet = new SocketPacketModel();
+                bool isJsonString;
+                try
+                {
+                    packet = JsonConvert.DeserializeObject<SocketPacketModel>(stringData);
+                    isJsonString = true;
+                }
+                catch (Exception)
+                {
+                    isJsonString = false;
+                }
+
+                if (isJsonString)
+                {
+                    if (packet.PacketType == Constants.PacketType.GET_FILE)
+                    {
+                        try
+                        {
+                            string path = packet.ContentMsg;
+                            int receiveByteLen = packet.SubPacketFile.Length;
+                            int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
+                            string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+                            BinaryWriter writer = new BinaryWriter(System.IO.File.Open(path + "/" + fname, FileMode.Append));
+                            writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
+                            writer.Close();
+                            MessageBox.Show("Downloaded Successfully!");
+                        }
+                        catch (Exception e)
+                        {
+                            MessageBox.Show(e.Message);
+                        }
+                        
+                    }
+                    else if (packet.PacketType == Constants.PacketType.ERROR)
+                    {
+                        MessageBox.Show(packet.ContentMsg);
+                    }
+                }
+                else if(stringData.Contains("Message: "))
                 {
                     string[] messages = stringData.Split(new string[] { "Message: ", " From: ", " To: ", " CreatedDate: ", " IdMsg: " }, StringSplitOptions.None);
                     receivedMsg(Int32.Parse(messages[5]), form);
@@ -335,7 +374,6 @@ namespace ClientWinform.SocketHandles
                     string[] messages = stringData.Split('\n');
                     UpdateListChat(messages, form, true);
                 }
-
             }
         }
 
@@ -359,8 +397,8 @@ namespace ClientWinform.SocketHandles
 
             //giống sendMsg
             int idFile = BLL.FileBLL.InsertFile(myId, fname, path);
-            int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, path + fname, idFile);
-            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, path + fname, createdDate, Constants.PacketType.FILE);
+            int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, fname, idFile);
+            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, fname, createdDate, Constants.PacketType.FILE);
             packet.SubPacketFile = clientData;
             string sendMsg = JsonConvert.SerializeObject(packet);
             try
@@ -368,6 +406,21 @@ namespace ClientWinform.SocketHandles
                 byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
                 UpdateListChat(null, formAll, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static void sendRequestFile(DTO.Message message, string selectedFolderClient)
+        {
+            SocketPacketModel packet = new SocketPacketModel(message.Id, 0, 0, selectedFolderClient, DateTime.Now, Constants.PacketType.GET_FILE);
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+                //UpdateListChat(null, formAll, true);
             }
             catch (Exception ex)
             {
