@@ -318,13 +318,43 @@ namespace ClientWinform.View.User
             this.Close();
         }
 
-        private void messageTxt_IconRightClick(object sender, EventArgs e)
+        private async void messageTxt_IconRightClick(object sender, EventArgs e)
         {
             FileDialog fd = new OpenFileDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
                 messageTxt.Text = fd.FileName; // Path.GetFileName(fd.FileName);
-                btnSubmit_Click(sender, new EventArgs());
+
+                // copy btnSubmit_Click
+                if (BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
+                {
+                    MessageBox.Show("Your connection had been deleted. You cannot chat with \"" + userTo.Username + "\"");
+                }
+                else
+                {
+                    if (!String.IsNullOrWhiteSpace(messageTxt.Text))
+                    {
+                        DTO.Message newMessage = new DTO.Message();
+                        newMessage.IdFrom = userFrom.Id;
+                        newMessage.ContentMsg = Path.GetFileName(messageTxt.Text);
+                        newMessage.CreatedDate = DateTime.Now;
+                        loadedMessageCount++;
+                        List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+                        await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
+
+                        messageTxt.Focus();
+                        try
+                        {
+                            SocketHandles.MailClient.sendFile(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                            messageTxt.Text = "";
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                            return;
+                        }
+                    }
+                }
             }
         }
 
@@ -349,7 +379,7 @@ namespace ClientWinform.View.User
                     messageTxt.Focus();
                     try
                     {
-                        SocketHandles.MailClient.sendFile(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
+                        SocketHandles.MailClient.sendMsg(userFrom.Id, userTo.Id, messageTxt.Text, newMessage.CreatedDate);
                         messageTxt.Text = "";
                     }
                     catch (Exception ex)
