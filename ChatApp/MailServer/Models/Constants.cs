@@ -32,5 +32,12 @@ namespace MailServer
             public const int CONNECTED = 1;
             public const int CONNECTING = 2;
         }
+        public static class PacketType
+        {
+            public const int MESSAGE = 1;
+            public const int FILE = 2;
+            public const int GET_FILE = 3;
+            public const int ERROR = 4;
+        }
     }
 }

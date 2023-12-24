@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Entities\" />
+    <Folder Include="FileStorage\" />
   </ItemGroup>
 
 </Project>

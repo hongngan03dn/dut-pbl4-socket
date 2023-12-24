@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\FileBLL.cs" />
     <Compile Include="BLL\MsgBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DTO\Avatar.cs">

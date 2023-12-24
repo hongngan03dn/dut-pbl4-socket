@@ -4,12 +4,15 @@ using MailServer.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MailServer
 {
@@ -18,6 +21,7 @@ namespace MailServer
         static Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         static List<ClientModel> clientOnline = new List<ClientModel>();
         static List<string> queueActivity = new List<string>();
+        static string pathServer = "../../../FileStorage";
 
         static void Main(string[] args)
         {
@@ -47,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[1];
+            IPAddress address = IPAddress.Parse("192.168.1.219"); //hostEntry.AddressList[9]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -109,7 +113,7 @@ namespace MailServer
             Socket client = objClient as Socket;
             while (true)
             {
-                byte[] datarecv = new byte[1024];
+                byte[] datarecv = new byte[1024 * 128];
                 try
                 {
                     int recv = client.Receive(datarecv);
@@ -153,11 +157,59 @@ namespace MailServer
                     else
                     {
                         SocketPacketModel packet = JsonConvert.DeserializeObject<SocketPacketModel>(recvStr);
+                        MessageHelper messageHelper = new MessageHelper();
+
+                        // handle request download file
+                        if (packet.PacketType == Constants.PacketType.GET_FILE)
+                        {
+                            string result;
+                            try
+                            {
+                                Entities.File file = messageHelper.getFileNameByIdMsg(packet.IdMsg);
+                                string fname = file.Path;
+                                string userNameFile = file.Name;
+
+                                byte[] fileData = System.IO.File.ReadAllBytes(pathServer + "/" + fname);
+                                byte[] fnameByte = Encoding.ASCII.GetBytes(userNameFile);
+                                byte[] fnameLen = BitConverter.GetBytes(fnameByte.Length);
+                                byte[] clientData = new byte[4 + fnameByte.Length + fileData.Length];
+                                fnameLen.CopyTo(clientData, 0);
+                                fnameByte.CopyTo(clientData, 4);
+                                fileData.CopyTo(clientData, 4 + fnameByte.Length);
+
+                                
+                                SocketPacketModel packetDownload = new SocketPacketModel(packet.IdMsg, 0, 0, packet.ContentMsg, DateTime.Now, Constants.PacketType.GET_FILE);
+                                packetDownload.SubPacketFile = clientData;
+                                result = JsonConvert.SerializeObject(packetDownload);
+                            }
+                            catch (Exception e)
+                            {
+                                SocketPacketModel packetDownload = new SocketPacketModel(packet.IdMsg, 0, 0, e.Message, DateTime.Now, Constants.PacketType.ERROR);
+                                result = JsonConvert.SerializeObject(packetDownload);
+                            }
+
+                            byte[] msg = Encoding.ASCII.GetBytes(result);
+                            client.Send(msg);
+
+                            continue;
+                        }
+                        // end handle request download file
 
                         ClientModel onlineToClient = clientOnline.Where(x => x.Id == packet.IdTo).FirstOrDefault();
                         ClientModel clientSendMsg = clientOnline.Where(x => x.Id == packet.IdFrom).FirstOrDefault();
 
-                        MessageHelper messageHelper = new MessageHelper();
+                        // Start handle File
+                        if (packet.PacketType == Constants.PacketType.FILE)
+                        {
+                            int receiveByteLen = packet.SubPacketFile.Length;
+                            int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
+                            string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+                            BinaryWriter writer = new BinaryWriter(System.IO.File.Open(pathServer + "/" + fname, FileMode.Append));
+                            writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
+                            writer.Close();
+                        }
+
+                        // End handle File
 
 
                         if (onlineToClient != null)
