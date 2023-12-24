@@ -165,9 +165,12 @@ namespace MailServer
                             string result;
                             try
                             {
-                                string fname = messageHelper.getFileNameByIdMsg(packet.IdMsg);
+                                Entities.File file = messageHelper.getFileNameByIdMsg(packet.IdMsg);
+                                string fname = file.Path;
+                                string userNameFile = file.Name;
+
                                 byte[] fileData = System.IO.File.ReadAllBytes(pathServer + "/" + fname);
-                                byte[] fnameByte = Encoding.ASCII.GetBytes(fname);
+                                byte[] fnameByte = Encoding.ASCII.GetBytes(userNameFile);
                                 byte[] fnameLen = BitConverter.GetBytes(fnameByte.Length);
                                 byte[] clientData = new byte[4 + fnameByte.Length + fileData.Length];
                                 fnameLen.CopyTo(clientData, 0);

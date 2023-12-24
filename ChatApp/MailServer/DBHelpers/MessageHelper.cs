@@ -48,7 +48,7 @@ namespace MailServer.DBHelpers
                 throw;
             }
         }
-        public string getFileNameByIdMsg(int idMsg)
+        public Entities.File getFileNameByIdMsg(int idMsg)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace MailServer.DBHelpers
                     if (file == null)
                         throw new Exception("File Not Found in DB");
                     else
-                        return file.Name;
+                        return file;
                 }
                 else
                 {

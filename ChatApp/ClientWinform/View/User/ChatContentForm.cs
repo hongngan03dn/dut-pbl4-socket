@@ -228,7 +228,22 @@ namespace ClientWinform.View.User
             {
                 string selectedPath = folderBrowserDialog.SelectedPath;
                 selectedPath = selectedPath.Replace("\\", "/");
-                MailClient.sendRequestFile(messageObject, selectedPath);
+                try
+                {
+                    DTO.File file = FileBLL.getFileNameByIdMsg(messageObject.Id);
+                    if (System.IO.File.Exists(selectedPath + "/" + file.Name))
+                    {
+                        MessageBox.Show("File existed.");
+                    }
+                    else
+                    {
+                        MailClient.sendRequestFile(messageObject, selectedPath);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
         public void AddStatusPanelToChat(int status, bool condition)
@@ -323,6 +338,12 @@ namespace ClientWinform.View.User
             FileDialog fd = new OpenFileDialog();
             if (fd.ShowDialog() == DialogResult.OK)
             {
+                long fileSize = new FileInfo(fd.FileName).Length;
+                if (fileSize >= (1024 * 85))
+                {
+                    MessageBox.Show("Max Size of File is 85KB.");
+                    return;
+                }
                 messageTxt.Text = fd.FileName; // Path.GetFileName(fd.FileName);
 
                 // copy btnSubmit_Click

@@ -387,8 +387,12 @@ namespace ClientWinform.SocketHandles
                 path += fname.Substring(0, fname.IndexOf("/") + 1);
                 fname = fname.Substring(fname.IndexOf("/") + 1);
             }
+
+            // handle SaveNameFile
+            string savedNameFile = myId + "_" + toId + "_" + DateTime.Now.Ticks.ToString() + "_" + fname;
+
             byte[] fileData = System.IO.File.ReadAllBytes(path + fname);
-            byte[] fnameByte = Encoding.ASCII.GetBytes(fname);
+            byte[] fnameByte = Encoding.ASCII.GetBytes(savedNameFile);
             byte[] fnameLen = BitConverter.GetBytes(fnameByte.Length);
             byte[] clientData = new byte[4 + fnameByte.Length + fileData.Length];
             fnameLen.CopyTo(clientData, 0);
@@ -396,7 +400,7 @@ namespace ClientWinform.SocketHandles
             fileData.CopyTo(clientData, 4 + fnameByte.Length);
 
             //giống sendMsg
-            int idFile = BLL.FileBLL.InsertFile(myId, fname, path);
+            int idFile = BLL.FileBLL.InsertFile(myId, fname, savedNameFile);
             int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, fname, idFile);
             SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, fname, createdDate, Constants.PacketType.FILE);
             packet.SubPacketFile = clientData;
