@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ClientWinform.BLL
 {
@@ -280,6 +281,22 @@ namespace ClientWinform.BLL
                 connection.UpdatedDate = DateTime.Now;
                 connection.UpdatedBy = idUser;
                 db.SaveChanges();
+            }
+        }
+
+        public static void changePassword(int idUser, string newPassword, string currentPassword)
+        {
+            currentPassword = MD5Hasher.ToMD5(currentPassword);
+            using (testpbldbEntities1 testpbldb = new testpbldbEntities1())
+            {
+                var user = testpbldb.Users.Where(x => x.Id == idUser && x.Status == Constants.Statuses.ACTIVE).FirstOrDefault();
+                
+                if (user == null) throw new Exception("User not found");
+                if (!user.Password.Equals(currentPassword)) throw new Exception("Current Password is wrong");
+
+                user.Password = MD5Hasher.ToMD5(newPassword);
+                user.UpdatedDate = DateTime.Now;
+                testpbldb.SaveChanges();
             }
         }
     }
