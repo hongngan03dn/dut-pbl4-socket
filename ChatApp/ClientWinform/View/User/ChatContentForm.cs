@@ -43,10 +43,23 @@ namespace ClientWinform.View.User
             width.Size = new Size(flowLayoutPanelChat.Width, 0);
             flowLayoutPanelChat.Controls.Add(width);
             LoadData(idFrom, idTo);
-
+        }
+        public async void LoadData(int idFrom, int idTo)
+        {
+            var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
+            loadedMessageCount += 50;
             if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
             {
-                MessageBox.Show("Your connection had been deleted. You cannot chat with \"" + userTo.Username + "\"");
+                Label lblNotConnect = new Label();
+                lblNotConnect.Text = ("Your connection had been deleted. You cannot chat with \"" + userTo.Username + "\"");
+                lblNotConnect.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                lblNotConnect.AutoSize = true;
+                lblNotConnect.TextAlign = ContentAlignment.MiddleCenter;
+                lblNotConnect.ForeColor = Color.Red;
+                lblNotConnect.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+                flowLayoutPanelChat.Controls.Add(lblNotConnect);
+                flowLayoutPanelChat.Controls.SetChildIndex(lblNotConnect, flowLayoutPanelChat.Controls.Count - 1);
             }
             else
             {
@@ -62,13 +75,6 @@ namespace ClientWinform.View.User
                     return;
                 }
             }
-
-        }
-        public async void LoadData(int idFrom, int idTo)
-        {
-            var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
-            await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
-            loadedMessageCount += 50;
         }
         public async Task AddMessagesToChatPanel(List<DTO.Message> messages, Nullable<System.Int32> idFrom, FlowLayoutPanel flowLayoutPanel)
         {
