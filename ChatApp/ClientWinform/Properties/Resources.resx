@@ -121,8 +121,8 @@
   <data name="min_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\min_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Chat content (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Chat content (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="OnlineIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OnlineIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Ava img (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Ava img (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -132,12 +132,6 @@
   </data>
   <data name="Minimal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Minimal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="OnlineIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\OnlineIcon.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="message-square1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\message-square1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,6 +145,9 @@
   <data name="defaultAvatar" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\defaultAvatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="mic" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Untitled (2)" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Untitled (2).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -162,6 +159,9 @@
   </data>
   <data name="user-plus" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user-plus.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Chat content (1)" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Chat content (1).png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="log-out" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\log-out.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,14 +175,17 @@
   <data name="Untitled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Untitled.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="avaHy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\avaHy.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="Close button" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Close button.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Setup-amico 1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Setup-amico 1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="avaHy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\avaHy.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="close_btn" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\close_btn.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -211,7 +214,7 @@
   <data name="message-square" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\message-square.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="mic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\mic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="mic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\mic1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

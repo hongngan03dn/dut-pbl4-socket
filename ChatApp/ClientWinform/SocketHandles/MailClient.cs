@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.16";
+        static String _ipServer = "192.168.2.19";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
