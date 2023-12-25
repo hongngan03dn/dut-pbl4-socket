@@ -1,5 +1,6 @@
 ﻿using ClientWinform.BLL;
 using ClientWinform.DTO;
+using ClientWinform.Properties;
 using ClientWinform.SocketHandles;
 using Guna.UI2.WinForms;
 using System;
@@ -12,6 +13,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
@@ -27,6 +29,10 @@ namespace ClientWinform.View.User
         Label lblStatus;
         private int loadedMessageCount = 0;
         Nullable<System.DateTime> previousTime = null;
+
+        public static int idMsgLoaded = 0;
+        public static bool isLoaded = false;
+        public static byte[] imgLoaded = new byte[1024 * 85];
 
         public ChatContentForm()
         {
@@ -187,7 +193,44 @@ namespace ClientWinform.View.User
             label.Dock = DockStyle.Fill;
             label.TextAlign = ContentAlignment.MiddleLeft;
 
-            panel.Controls.Add(label);
+            Guna2PictureBox pictureBox = new Guna2PictureBox();
+            pictureBox.Image = Resources.defaultAvatar;
+            pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
+
+            if (messageObject.IdFile != null && Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(messages)))
+            {
+                DTO.Message tmpMessage = messageObject;
+                tmpMessage.ContentMsg = "";
+
+                // waiting for turn loading img
+                while (idMsgLoaded != 0)
+                {
+                    Thread.Sleep(1000);
+                }
+                idMsgLoaded = messageObject.Id;
+                isLoaded = false;
+
+                LoadImage(tmpMessage);
+
+                // flag assign pictureBox.Img
+                while (!isLoaded)
+                {
+                    Thread.Sleep(1000);
+                }
+
+                MemoryStream mstream = new MemoryStream(imgLoaded);
+                pictureBox.Image = Image.FromStream(mstream);
+
+                idMsgLoaded = 0;
+                isLoaded = false;
+                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+
+                panel.Controls.Add(pictureBox);
+            }
+            else
+            {
+                panel.Controls.Add(label);
+            }
 
             Guna2Elipse border = new Guna2Elipse();
             border.BorderRadius = 12;
@@ -225,7 +268,19 @@ namespace ClientWinform.View.User
 
             return panelContainTime;
         }
-        
+
+        public void LoadImage(DTO.Message messageObject)
+        {
+            try
+            {
+                MailClient.sendRequestFile(messageObject, messageObject.ContentMsg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
         public void DownloadFile(object sender, EventArgs e, DTO.Message messageObject)
         {
             FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();

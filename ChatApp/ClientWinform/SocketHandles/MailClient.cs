@@ -332,6 +332,16 @@ namespace ClientWinform.SocketHandles
                             int receiveByteLen = packet.SubPacketFile.Length;
                             int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
                             string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+
+                            // handle load image
+                            if (string.IsNullOrEmpty(path))
+                            {
+                                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(ChatContentForm.imgLoaded,0);
+                                ChatContentForm.isLoaded = true;
+                                continue;
+                            }
+
                             BinaryWriter writer = new BinaryWriter(System.IO.File.Open(path + "/" + fname, FileMode.Append));
                             writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
                             writer.Close();
