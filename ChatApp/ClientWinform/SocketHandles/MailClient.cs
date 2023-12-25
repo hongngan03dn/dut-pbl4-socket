@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.219";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -332,6 +332,16 @@ namespace ClientWinform.SocketHandles
                             int receiveByteLen = packet.SubPacketFile.Length;
                             int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
                             string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+
+                            // handle load image
+                            if (string.IsNullOrEmpty(path))
+                            {
+                                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(ChatContentForm.imgLoaded,0);
+                                ChatContentForm.isLoaded = true;
+                                continue;
+                            }
+
                             BinaryWriter writer = new BinaryWriter(System.IO.File.Open(path + "/" + fname, FileMode.Append));
                             writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
                             writer.Close();
