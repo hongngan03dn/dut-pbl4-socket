@@ -33,6 +33,7 @@ namespace ClientWinform.View.User
 
         public static int idMsgLoaded = 0;
         public static bool isLoaded = false;
+        public static bool isLoadSuccess = true;
         public static byte[] imgLoaded = new byte[1024 * 85];
 
         public ChatContentForm()
@@ -220,8 +221,11 @@ namespace ClientWinform.View.User
                     Thread.Sleep(1000);
                 }
 
-                MemoryStream mstream = new MemoryStream(imgLoaded);
-                pictureBox.Image = Image.FromStream(mstream);
+                if (isLoadSuccess)
+                {
+                    MemoryStream mstream = new MemoryStream(imgLoaded);
+                    pictureBox.Image = Image.FromStream(mstream);
+                }
 
                 idMsgLoaded = 0;
                 isLoaded = false;
