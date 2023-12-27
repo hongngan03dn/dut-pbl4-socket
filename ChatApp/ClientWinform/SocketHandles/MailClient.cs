@@ -18,6 +18,7 @@ using Guna.UI2.WinForms;
 using System.Globalization;
 using System.Web.UI.WebControls;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Media;
 
 namespace ClientWinform.SocketHandles
 {
@@ -29,7 +30,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.3";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -336,12 +337,26 @@ namespace ClientWinform.SocketHandles
                             int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
                             string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
 
-                            // handle load image
+                            // handle load media file
                             if (string.IsNullOrEmpty(path))
                             {
-                                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
-                                packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(ChatContentForm.imgLoaded,0);
-                                ChatContentForm.isLoaded = true;
+                                if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(fname)))
+                                {
+                                    Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                    packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(ChatContentForm.imgLoaded, 0);
+                                    ChatContentForm.isLoadSuccess = true;
+                                    ChatContentForm.isLoaded = true;
+                                }
+                                else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(fname)))
+                                {
+                                    byte[] audioBytes = new byte[1024 * 1024 * 100];
+                                    packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(audioBytes, 0);
+                                    using (var stream = new MemoryStream(audioBytes))
+                                    {
+                                        SoundPlayer player = new SoundPlayer(stream);
+                                        player.Play();
+                                    }
+                                }
                                 continue;
                             }
 
@@ -352,12 +367,24 @@ namespace ClientWinform.SocketHandles
                         }
                         catch (Exception e)
                         {
+                            if (ChatContentForm.idMsgLoaded != 0 && ChatContentForm.isLoaded == false)
+                            {
+                                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                ChatContentForm.isLoadSuccess = false;
+                                ChatContentForm.isLoaded = true;
+                            }
                             MessageBox.Show(e.Message);
                         }
                         
                     }
                     else if (packet.PacketType == Constants.PacketType.ERROR)
                     {
+                        if (ChatContentForm.idMsgLoaded != 0 && ChatContentForm.isLoaded == false)
+                        {
+                            Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                            ChatContentForm.isLoadSuccess = false;
+                            ChatContentForm.isLoaded = true;
+                        }
                         MessageBox.Show(packet.ContentMsg);
                     }
                 }
