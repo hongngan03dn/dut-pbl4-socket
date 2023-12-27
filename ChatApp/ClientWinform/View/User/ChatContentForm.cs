@@ -202,6 +202,7 @@ namespace ClientWinform.View.User
 
             if (messageObject.IdFile != null && Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(messages)))
             {
+                // To markup loading not downloading
                 DTO.Message tmpMessage = messageObject;
                 tmpMessage.ContentMsg = "";
 
@@ -242,8 +243,18 @@ namespace ClientWinform.View.User
             border.BorderRadius = 12;
             border.TargetControl = panel;
 
-            panel.Click += (sender, e) => DownloadFile(sender, e, messageObject);
-            label.Click += (sender, e) => DownloadFile(sender, e, messageObject);
+            panel.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
+            label.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
+
+            if (messageObject.IdFile != null && Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(messages)))
+            {
+                // To markup loading not downloading
+                DTO.Message tmpMessage = messageObject;
+                tmpMessage.ContentMsg = "";
+
+                panel.Click += (sender, e) => playAudio(sender, e, tmpMessage);
+                label.Click += (sender, e) => playAudio(sender, e, tmpMessage);
+            }
 
             FlowLayoutPanel panelContainTime = new FlowLayoutPanel();
             panelContainTime.AutoSize = true;
@@ -276,6 +287,17 @@ namespace ClientWinform.View.User
         }
 
         public void LoadImage(DTO.Message messageObject)
+        {
+            try
+            {
+                MailClient.sendRequestFile(messageObject, messageObject.ContentMsg);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        public void playAudio (object sender, EventArgs e, DTO.Message messageObject)
         {
             try
             {
