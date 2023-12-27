@@ -29,7 +29,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.2.19";
+        static String _ipServer = "192.168.1.3";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -107,7 +107,7 @@ namespace ClientWinform.SocketHandles
                 datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
             }
-
+            UpdateListChat(null, formAll, true);
         }
         public static void receivedMsg(int idMsg, Form form)
         {
@@ -262,10 +262,13 @@ namespace ClientWinform.SocketHandles
                     {
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
-                        if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
+                            if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             {
-
                                 chat.isPictureBoxOnlineVisible = true;
+                            }
+                            else
+                            {
+                                chat.isPictureBoxOnlineVisible = false;
                             }
                         }
                     }

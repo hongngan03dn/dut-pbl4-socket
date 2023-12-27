@@ -12,6 +12,7 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,7 +55,7 @@ namespace ClientWinform.View.User
         {
             var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
             await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
-            loadedMessageCount += 50;
+            loadedMessageCount += 20;
             if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
             {
                 Label lblNotConnect = new Label();
@@ -163,7 +164,8 @@ namespace ClientWinform.View.User
         public async Task<FlowLayoutPanel> shapeFormatPanelChat(DTO.Message messageObject, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
         {
             string messages = messageObject.ContentMsg;
-            FontStyle styleMsg = (messageObject.IdFile != null && messageObject.IdFile != 0) ? FontStyle.Underline : FontStyle.Regular;
+            FontStyle styleMsg = (messageObject.IdFile != null && messageObject.IdFile != 0) ? FontStyle.Underline  : FontStyle.Regular;
+            Cursor cursorType = (messageObject.IdFile != null && messageObject.IdFile != 0 ) ? Cursors.Hand : Cursors.Default;
             StringBuilder sb = new StringBuilder();
 
             for (int j = 0; j < messages.Length; j += Constants.MessageTies.MAXLENGTHINCONTENT)
@@ -422,8 +424,7 @@ namespace ClientWinform.View.User
                         newMessage.CreatedDate = DateTime.Now;
                         loadedMessageCount++;
                         List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                        await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
-
+                        //await AddMessagesToChatPanel(msg, userFrom.Id, flowLayoutPanelChat);
                         messageTxt.Focus();
                         try
                         {

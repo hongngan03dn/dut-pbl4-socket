@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.2.19"); //hostEntry.AddressList[9]; 
+            IPAddress address =  hostEntry.AddressList[3]; //IPAddress.Parse("192.168.1.3");
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -217,6 +217,11 @@ namespace MailServer
                             messageHelper.UpdateMesageToReceived(packet.IdMsg);
                             byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo + " CreatedDate: " + packet.CreatedDate + " IdMsg: " + packet.IdMsg);
                             onlineToClient.clientSocket.Send(msg);
+                            if(packet.PacketType == Constants.PacketType.FILE)
+                            {
+                                clientSendMsg.clientSocket.Send(msg);
+                            }
+                            
                         }
                         else
                         {

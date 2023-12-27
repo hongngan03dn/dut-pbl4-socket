@@ -69,7 +69,7 @@ namespace ClientWinform.BLL
             {
                 var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
                                                       (record.IdFrom == idTo && record.IdTo == idFrom))
-                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status != Constants.MessageStatuses.INACTIVE)
                                         .OrderByDescending(record => record.CreatedDate)
                                         .FirstOrDefault();
                 return msg;
@@ -105,6 +105,7 @@ namespace ClientWinform.BLL
                 var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.Status == Constants.MessageStatuses.SENT && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).ToList();
 
                 msgLi.ForEach(msg => { msg.Status = Constants.MessageStatuses.RECEIVED;
+                                       msg.UpdatedBy = idTo;
                                        msg.UpdatedDate = DateTime.Now;}) ;
 
                 db.SaveChanges();
@@ -120,6 +121,7 @@ namespace ClientWinform.BLL
 
                 msgLi.ForEach(msg => {
                     msg.Status = Constants.MessageStatuses.SEEN;
+                    msg.UpdatedBy = idTo;
                     msg.UpdatedDate = DateTime.Now;
                 });
 
@@ -178,9 +180,9 @@ namespace ClientWinform.BLL
             {
                 var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
                                                        (record.IdFrom == idTo && record.IdTo == idFrom))
-                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status != Constants.MessageStatuses.INACTIVE)
                                      .OrderByDescending(record => record.CreatedDate)
-                                     .Skip(skipCount).Take(30).ToList();
+                                     .Skip(skipCount).Take(20).ToList();
                 return msg;
             }
         }
