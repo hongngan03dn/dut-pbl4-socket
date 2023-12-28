@@ -39,5 +39,10 @@ namespace MailServer
             public const int GET_FILE = 3;
             public const int ERROR = 4;
         }
+        public static class AllowedFileType
+        {
+            public static readonly List<string> IMAGES = new List<string> { ".jpg", ".jpeg", ".png" };
+            public static readonly List<string> AUDIOS = new List<string> { ".wav" };
+        }
     }
 }
