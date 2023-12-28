@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Web.UI.WebControls;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Media;
+using static Guna.UI2.Native.WinApi;
 
 namespace ClientWinform.SocketHandles
 {
@@ -30,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.13";
+        static String _ipServer = "192.168.2.19";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -122,16 +123,19 @@ namespace ClientWinform.SocketHandles
                 if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
                 {
                     DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+                    List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
                     if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
                     {
-                        List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
                         BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
-                        
                         navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
                         navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-
                         sendStatusSeen(newMessage.IdFrom);
                     }
+                    else if(newMessage.IdFile != null && newMessage.IdFile != 0)
+                    {
+                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+                    }
+
                     
                 }
             }
@@ -446,7 +450,7 @@ namespace ClientWinform.SocketHandles
             {
                 byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
-                UpdateListChat(null, formAll, true);
+                //UpdateListChat(null, formAll, true);
             }
             catch (Exception ex)
             {
@@ -467,6 +471,21 @@ namespace ClientWinform.SocketHandles
             {
                 throw ex;
             }
+        }
+        public static async Task sendRequestFileAsync(DTO.Message message, string selectedFolderClient)
+        {
+            SocketPacketModel packet = new SocketPacketModel(message.Id, 0, 0, selectedFolderClient, DateTime.Now, Constants.PacketType.GET_FILE);
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] dataSend = Encoding.ASCII.GetBytes(sendMsg);
+                await _client.SendAsync(new ArraySegment<byte>(dataSend), SocketFlags.None); // This line should be asynchronous
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Rethrowing the exception like this can lose the stack trace.
+            }
+
         }
     }
 }

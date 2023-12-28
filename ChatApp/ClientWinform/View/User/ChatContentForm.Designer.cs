@@ -34,9 +34,9 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.labelUsername = new System.Windows.Forms.Label();
             this.flowLayoutPanelChat = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLoadmore = new System.Windows.Forms.Label();
+            this.labelUsername = new System.Windows.Forms.Label();
             this.butVoice = new Guna.UI2.WinForms.Guna2Button();
             this.messageTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
@@ -80,7 +80,7 @@ namespace ClientWinform.View.User
             this.tableLayoutPanel2.ColumnCount = 3;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.60439F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.395605F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
             this.tableLayoutPanel2.Controls.Add(this.butVoice, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.messageTxt, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btnSubmit, 2, 0);
@@ -104,7 +104,7 @@ namespace ClientWinform.View.User
             this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnSubmit.Location = new System.Drawing.Point(1192, 32);
+            this.btnSubmit.Location = new System.Drawing.Point(1190, 32);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSubmit.Name = "btnSubmit";
             this.btnSubmit.Size = new System.Drawing.Size(142, 42);
@@ -123,19 +123,6 @@ namespace ClientWinform.View.User
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1337, 72);
             this.panel1.TabIndex = 0;
-            // 
-            // labelUsername
-            // 
-            this.labelUsername.AutoSize = true;
-            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.labelUsername.Location = new System.Drawing.Point(92, 32);
-            this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
-            this.labelUsername.Name = "labelUsername";
-            this.labelUsername.Size = new System.Drawing.Size(128, 32);
-            this.labelUsername.TabIndex = 6;
-            this.labelUsername.Text = "Username";
-            this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // flowLayoutPanelChat
             // 
@@ -165,6 +152,19 @@ namespace ClientWinform.View.User
             this.btnLoadmore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnLoadmore.Click += new System.EventHandler(this.btnLoadmore_Click);
             // 
+            // labelUsername
+            // 
+            this.labelUsername.AutoSize = true;
+            this.labelUsername.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelUsername.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.labelUsername.Location = new System.Drawing.Point(92, 32);
+            this.labelUsername.Margin = new System.Windows.Forms.Padding(0);
+            this.labelUsername.Name = "labelUsername";
+            this.labelUsername.Size = new System.Drawing.Size(128, 32);
+            this.labelUsername.TabIndex = 6;
+            this.labelUsername.Text = "Username";
+            this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // butVoice
             // 
             this.butVoice.Anchor = System.Windows.Forms.AnchorStyles.None;
@@ -178,7 +178,7 @@ namespace ClientWinform.View.User
             this.butVoice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
             this.butVoice.Image = global::ClientWinform.Properties.Resources.mic1;
             this.butVoice.ImageSize = new System.Drawing.Size(28, 28);
-            this.butVoice.Location = new System.Drawing.Point(1140, 32);
+            this.butVoice.Location = new System.Drawing.Point(1137, 32);
             this.butVoice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.butVoice.Name = "butVoice";
             this.butVoice.Size = new System.Drawing.Size(46, 42);
@@ -214,7 +214,7 @@ namespace ClientWinform.View.User
             this.messageTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.messageTxt.PlaceholderText = "Type a message...";
             this.messageTxt.SelectedText = "";
-            this.messageTxt.Size = new System.Drawing.Size(1137, 42);
+            this.messageTxt.Size = new System.Drawing.Size(1134, 42);
             this.messageTxt.TabIndex = 13;
             this.messageTxt.IconRightClick += new System.EventHandler(this.messageTxt_IconRightClick);
             // 
