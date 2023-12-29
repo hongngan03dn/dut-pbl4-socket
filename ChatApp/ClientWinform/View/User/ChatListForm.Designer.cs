@@ -29,6 +29,8 @@ namespace ClientWinform.View.User
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ChatListForm));
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -38,6 +40,7 @@ namespace ClientWinform.View.User
             this.panelChatContent = new System.Windows.Forms.Panel();
             this.pictureBoxNoChatSelected = new System.Windows.Forms.PictureBox();
             this.panelLineLeft = new System.Windows.Forms.Panel();
+            this.notifyMsg = new System.Windows.Forms.NotifyIcon(this.components);
             this.panelMain.SuspendLayout();
             this.tableLayoutPanelMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -173,6 +176,12 @@ namespace ClientWinform.View.User
             this.panelLineLeft.Size = new System.Drawing.Size(1, 967);
             this.panelLineLeft.TabIndex = 1;
             // 
+            // notifyMsg
+            // 
+            this.notifyMsg.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyMsg.Icon")));
+            this.notifyMsg.Text = "WeConnect";
+            this.notifyMsg.Visible = true;
+            // 
             // ChatListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -184,6 +193,7 @@ namespace ClientWinform.View.User
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ChatListForm";
             this.Text = "ChatListForm";
+            this.Load += new System.EventHandler(this.ChatListForm_Load);
             this.panelMain.ResumeLayout(false);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
@@ -205,5 +215,6 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Panel panelChatContent;
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListChat;
         private System.Windows.Forms.PictureBox pictureBoxNoChatSelected;
+        public System.Windows.Forms.NotifyIcon notifyMsg;
     }
 }

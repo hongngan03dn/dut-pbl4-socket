@@ -49,5 +49,10 @@ namespace ClientWinform.DTO
             public static readonly List<string> IMAGES = new List<string> { ".jpg", ".jpeg", ".png" };
             public static readonly List<string> AUDIOS = new List<string> { ".wav" };
         }
+
+        public static class Notify
+        {
+            public static int NOTIFY_TIMEOUT = 10000;
+        }
     }
 }

@@ -27,6 +27,10 @@ namespace ClientWinform.View.User
             this.Activate();
             searchTxt.KeyDown += new KeyEventHandler(searchTxt_KeyDown);
         }
+        private void ChatListForm_Load(object sender, EventArgs e)
+        {
+            notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, "Notify", "You have " + BLL.MsgBLL.CountMessageUnRead(user.Id).ToString() + " new messages", ToolTipIcon.Info);
+        }
         private void ActiveButton(object btnSender)
         {
             DisableButton();
@@ -95,5 +99,7 @@ namespace ClientWinform.View.User
                 searchTxt_IconLeftClick(sender, e);
             }
         }
+
+
     }
 }

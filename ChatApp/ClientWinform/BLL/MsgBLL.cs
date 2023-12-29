@@ -29,14 +29,24 @@ namespace ClientWinform.BLL
                                        Id = g.Key.Id,
                                        Username = g.Key.Username,
                                        IdAvatar = g.Key.IdAvatar,
-                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate)
+                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate),
+                                       Status = g.Max(um => um.Message.Status)
                                    })
                                    .OrderByDescending(u => u.LatestMessageTime)
                                    .Where(u => u.Username.Contains(txtSearch))
                                    .ToList();
-
                 return users;
             }
+        }
+        public static int CountMessageUnRead(int id)
+        {
+            List<UserModel> users = getUserListChat(id, "");
+            int countUnread = 0;
+            foreach(int status in users.Select(record => record.Status))
+            {
+                if(status == Constants.MessageStatuses.RECEIVED) countUnread++;
+            }
+            return countUnread;
         }
         public static List<UserModel> getUserListExplore(int id, string search)
         {

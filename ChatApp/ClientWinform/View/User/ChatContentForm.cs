@@ -144,7 +144,9 @@ namespace ClientWinform.View.User
             panel.Padding = new Padding(10, 6, 10, 6);
 
             //lable time of message
-            Label lblTime = new Label();
+            Label lblTime = new Label()
+            {
+            };
             lblTime.Text = BLL.MsgBLL.formatTimeInChatContent(time);
             lblTime.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             lblTime.AutoSize = true;
@@ -167,6 +169,7 @@ namespace ClientWinform.View.User
                 // waiting for turn loading img
                 while (idMsgLoaded != 0)
                 {
+                    flowLayoutPanelChat.Cursor = Cursors.AppStarting;
                     //Thread.Sleep(1000);
                     await Task.Delay(500);
                 }
@@ -194,6 +197,7 @@ namespace ClientWinform.View.User
 
                 idMsgLoaded = 0;
                 isLoaded = false;
+                flowLayoutPanelChat.Cursor = Cursors.Default;
                 Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
             }
             else
@@ -245,17 +249,12 @@ namespace ClientWinform.View.User
             border.BorderRadius = 12;
             border.TargetControl = panel;
 
-            //panel.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
             label.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
 
             if (messageObject.IdFile != null && Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(messages)))
             {
-                // To markup loading not downloading
                 DTO.Message tmpMessage = messageObject;
                 tmpMessage.ContentMsg = "";
-
-                //panel.Click += (sender, e) => playAudio(sender, e, tmpMessage);
-                //label.Click += (sender, e) => playAudio(sender, e, tmpMessage);
                 iconFile.Click += (sender, e) => playAudio(sender, e, tmpMessage);
             }
 

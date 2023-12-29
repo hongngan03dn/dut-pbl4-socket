@@ -29,6 +29,7 @@ namespace ClientWinform
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationForm));
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMenu = new System.Windows.Forms.TableLayoutPanel();
@@ -403,6 +404,7 @@ namespace ClientWinform
             this.ClientSize = new System.Drawing.Size(1640, 756);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "NavigationForm";
             this.Text = "NavigationForm";

@@ -47,7 +47,6 @@ namespace ClientWinform.SocketHandles
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             userLoggined = BLL.UserBLL.getUserByID(myId);
             formAll = activeForm;
-
             try
             {
                 // kết nối Server
@@ -217,9 +216,9 @@ namespace ClientWinform.SocketHandles
             }
             else
             {
-
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
+                    
                     optionForm(navigationForm.chatForm, bindLogin, "");
                 }
                 else if (activeForm is ChatListForm chatList && idLoggined != 0)
