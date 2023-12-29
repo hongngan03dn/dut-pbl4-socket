@@ -11,7 +11,7 @@ namespace ClientWinform.BLL
     internal class MsgBLL
     {
 
-        public static List<UserModel> getUserListChat(int id)
+        public static List<UserModel> getUserListChat(int id, string txtSearch)
         {
             using (var context = new testpbldbEntities1())
             {
@@ -32,12 +32,13 @@ namespace ClientWinform.BLL
                                        LatestMessageTime = g.Max(um => um.Message.CreatedDate)
                                    })
                                    .OrderByDescending(u => u.LatestMessageTime)
+                                   .Where(u => u.Username.Contains(txtSearch))
                                    .ToList();
 
                 return users;
             }
         }
-        public static List<UserModel> getUserListExplore(int id)
+        public static List<UserModel> getUserListExplore(int id, string search)
         {
             using (var context = new testpbldbEntities1())
             {
@@ -56,7 +57,7 @@ namespace ClientWinform.BLL
                                        IdAvatar = g.Key.IdAvatar,
                                        LatestMessageTime = g.Max(um => um.Message.CreatedDate)
                                    })
-                                   .OrderByDescending(u => u.LatestMessageTime)
+                                   .OrderBy(u => u.Username).Where(u => u.Username.Contains(search))
                                    .ToList();
 
                 return users;
@@ -68,7 +69,7 @@ namespace ClientWinform.BLL
             {
                 var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
                                                       (record.IdFrom == idTo && record.IdTo == idFrom))
-                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                                      && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status != Constants.MessageStatuses.INACTIVE)
                                         .OrderByDescending(record => record.CreatedDate)
                                         .FirstOrDefault();
                 return msg;
@@ -104,6 +105,7 @@ namespace ClientWinform.BLL
                 var msgLi = db.Messages.Where(record => record.IdTo == idTo && record.Status == Constants.MessageStatuses.SENT && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD).ToList();
 
                 msgLi.ForEach(msg => { msg.Status = Constants.MessageStatuses.RECEIVED;
+                                       msg.UpdatedBy = idTo;
                                        msg.UpdatedDate = DateTime.Now;}) ;
 
                 db.SaveChanges();
@@ -119,6 +121,7 @@ namespace ClientWinform.BLL
 
                 msgLi.ForEach(msg => {
                     msg.Status = Constants.MessageStatuses.SEEN;
+                    msg.UpdatedBy = idTo;
                     msg.UpdatedDate = DateTime.Now;
                 });
 
@@ -135,19 +138,37 @@ namespace ClientWinform.BLL
                 db.SaveChanges();
             }
         }
-        public static int InsertMessage(int idFrom, int idTo, String contentMsg)
+        public static int InsertMessage(int idFrom, int idTo, String contentMsg, int idFile = 0)
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
-                DTO.Message msg = new DTO.Message()
+                DTO.Message msg;
+                if (idFile == 0)
                 {
-                    IdFrom = idFrom,
-                    IdTo = idTo,
-                    ContentMsg = contentMsg,
-                    Status = Constants.MessageStatuses.SENT,
-                    CreatedDate = DateTime.Now,
-                    CreatedBy = idFrom,
-                };
+                    msg = new DTO.Message()
+                    {
+                        IdFrom = idFrom,
+                        IdTo = idTo,
+                        ContentMsg = contentMsg,
+                        Status = Constants.MessageStatuses.SENT,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = idFrom,
+                    };
+                }
+                else
+                {
+                    msg = new DTO.Message()
+                    {
+                        IdFrom = idFrom,
+                        IdTo = idTo,
+                        ContentMsg = contentMsg,
+                        Status = Constants.MessageStatuses.SENT,
+                        CreatedDate = DateTime.Now,
+                        CreatedBy = idFrom,
+                        IdFile = idFile
+                    };
+                }
+                 
                 db.Messages.Add(msg);
                 db.SaveChanges();
                 return msg.Id;
@@ -159,9 +180,9 @@ namespace ClientWinform.BLL
             {
                 var msg = db.Messages.Where(record => ((record.IdFrom == idFrom && record.IdTo == idTo) ||
                                                        (record.IdFrom == idTo && record.IdTo == idFrom))
-                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                                     && record.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status != Constants.MessageStatuses.INACTIVE)
                                      .OrderByDescending(record => record.CreatedDate)
-                                     .Skip(skipCount).Take(50).ToList();
+                                     .Skip(skipCount).Take(20).ToList();
                 return msg;
             }
         }

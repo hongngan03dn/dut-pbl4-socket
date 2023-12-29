@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 using System.Security.Cryptography;
 using System.Windows.Forms;
 using static TheArtOfDevHtmlRenderer.Adapters.RGraphicsPath;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace ClientWinform.BLL
 {
@@ -183,12 +184,12 @@ namespace ClientWinform.BLL
                 }
             }
         }
-        public static List<User> getConnectingOfUser(int idFrom)
+        public static List<User> getConnectingOfUser(int idFrom, string txtSearch)
         {
             using (testpbldbEntities1 db = new testpbldbEntities1())
             {
                 var connections = db.Messages.Where(record => ((record.IdFrom == idFrom || record.IdTo == idFrom))
-                                         && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
+                                                 && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && record.Status == Constants.ConnectionsDescr.CONNECTING).ToList();
                 List<User> users = new List<User>();
                 User user = null;
                 foreach (DTO.Message connection in connections)
@@ -200,10 +201,10 @@ namespace ClientWinform.BLL
                         user = BLL.UserBLL.getUserByID((int)connection.IdFrom);
                     users.Add(user);
                 }
-                return users;
+                return users.OrderBy(record => record.Username).Where(record => record.Username.Contains(txtSearch)).ToList();
             }
         }
-        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList)
+        public static List<User> GetUserExplore(int idFrom, List<int> idUserExcept, List<User> connectingList, string txtSearch)
         {
             using(testpbldbEntities1 db = new testpbldbEntities1())
             {
@@ -220,7 +221,7 @@ namespace ClientWinform.BLL
                     userTemp.Remove(userConnecting);
                 }
                 getUserExplore = userTemp.ToList();
-                return getUserExplore;
+                return getUserExplore.OrderBy(record => record.Username).Where(record => record.Username.Contains(txtSearch)).ToList();
             }
         }
         public static int getConnectionsOfUser(int userId)
@@ -238,7 +239,7 @@ namespace ClientWinform.BLL
             {
                 var check = db.Messages.Where(record => ((record.IdFrom == userId && record.IdTo == connectionId) ||
                                                          (record.IdFrom == connectionId && record.IdTo == userId))
-                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).FirstOrDefault();
+                                                       && record.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD).OrderByDescending(record => record.CreatedDate).FirstOrDefault();
                 return check;
             }
         }
@@ -280,6 +281,22 @@ namespace ClientWinform.BLL
                 connection.UpdatedDate = DateTime.Now;
                 connection.UpdatedBy = idUser;
                 db.SaveChanges();
+            }
+        }
+
+        public static void changePassword(int idUser, string newPassword, string currentPassword)
+        {
+            currentPassword = MD5Hasher.ToMD5(currentPassword);
+            using (testpbldbEntities1 testpbldb = new testpbldbEntities1())
+            {
+                var user = testpbldb.Users.Where(x => x.Id == idUser && x.Status == Constants.Statuses.ACTIVE).FirstOrDefault();
+                
+                if (user == null) throw new Exception("User not found");
+                if (!user.Password.Equals(currentPassword)) throw new Exception("Current Password is wrong");
+
+                user.Password = MD5Hasher.ToMD5(newPassword);
+                user.UpdatedDate = DateTime.Now;
+                testpbldb.SaveChanges();
             }
         }
     }

@@ -14,15 +14,21 @@ namespace ClientWinform.DTO
         public String ContentMsg { get; set; }
 
         public Nullable<System.DateTime> CreatedDate { get; set; }
+        public int PacketType { get; set; }
+        public byte[] SubPacketFile { get; set; } = new byte[1024 * 85]; // 80KB
 
-        public SocketPacketModel() { }
-        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg, Nullable<DateTime> createdDate)
+        public SocketPacketModel() 
+        {
+            PacketType = Constants.PacketType.MESSAGE;
+        }
+        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg, Nullable<DateTime> createdDate, int packetType = Constants.PacketType.MESSAGE)
         {
             IdMsg = idMsg;
             IdFrom = fromId;
             IdTo = toId;
             ContentMsg = contentMsg;
             CreatedDate = createdDate;
+            PacketType = packetType;
         }
     }
 }

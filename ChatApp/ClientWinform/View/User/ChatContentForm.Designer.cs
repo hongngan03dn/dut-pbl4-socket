@@ -32,13 +32,14 @@ namespace ClientWinform.View.User
             this.panelMain = new System.Windows.Forms.Panel();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.messageTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.btnSubmit = new Guna.UI2.WinForms.Guna2Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelUsername = new System.Windows.Forms.Label();
-            this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.flowLayoutPanelChat = new System.Windows.Forms.FlowLayoutPanel();
             this.btnLoadmore = new System.Windows.Forms.Label();
+            this.butVoice = new Guna.UI2.WinForms.Guna2Button();
+            this.messageTxt = new Guna.UI2.WinForms.Guna2TextBox();
+            this.backBtn = new Guna.UI2.WinForms.Guna2CircleButton();
             this.panelMain.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -76,53 +77,21 @@ namespace ClientWinform.View.User
             // 
             // tableLayoutPanel2
             // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85.63025F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.36975F));
+            this.tableLayoutPanel2.ColumnCount = 3;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 95.60439F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 4.395605F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 147F));
+            this.tableLayoutPanel2.Controls.Add(this.butVoice, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.messageTxt, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.btnSubmit, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.btnSubmit, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 676);
-            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 674);
+            this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1331, 103);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1337, 107);
             this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // messageTxt
-            // 
-            this.messageTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.messageTxt.AutoRoundedCorners = true;
-            this.messageTxt.BorderColor = System.Drawing.Color.Black;
-            this.messageTxt.BorderRadius = 20;
-            this.messageTxt.BorderThickness = 0;
-            this.messageTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.messageTxt.DefaultText = "";
-            this.messageTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.messageTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.messageTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.messageTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.messageTxt.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
-            this.messageTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.messageTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.messageTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.messageTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.messageTxt.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
-            this.messageTxt.IconLeftSize = new System.Drawing.Size(22, 22);
-            this.messageTxt.IconRight = global::ClientWinform.Properties.Resources.paperclip;
-            this.messageTxt.IconRightOffset = new System.Drawing.Point(15, 0);
-            this.messageTxt.IconRightSize = new System.Drawing.Size(25, 25);
-            this.messageTxt.Location = new System.Drawing.Point(23, 30);
-            this.messageTxt.Margin = new System.Windows.Forms.Padding(0);
-            this.messageTxt.Name = "messageTxt";
-            this.messageTxt.PasswordChar = '\0';
-            this.messageTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
-            this.messageTxt.PlaceholderText = "Type a message...";
-            this.messageTxt.SelectedText = "";
-            this.messageTxt.Size = new System.Drawing.Size(1092, 42);
-            this.messageTxt.TabIndex = 13;
-            this.messageTxt.IconRightClick += new System.EventHandler(this.messageTxt_IconRightClick);
             // 
             // btnSubmit
             // 
@@ -135,10 +104,10 @@ namespace ClientWinform.View.User
             this.btnSubmit.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(218)))), ((int)(((byte)(251)))));
             this.btnSubmit.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
             this.btnSubmit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
-            this.btnSubmit.Location = new System.Drawing.Point(1167, 30);
+            this.btnSubmit.Location = new System.Drawing.Point(1192, 32);
             this.btnSubmit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(135, 42);
+            this.btnSubmit.Size = new System.Drawing.Size(142, 42);
             this.btnSubmit.TabIndex = 7;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
@@ -168,24 +137,6 @@ namespace ClientWinform.View.User
             this.labelUsername.Text = "Username";
             this.labelUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // backBtn
-            // 
-            this.backBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.backBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.backBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.backBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.backBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
-            this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.backBtn.ForeColor = System.Drawing.Color.White;
-            this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
-            this.backBtn.Location = new System.Drawing.Point(26, 29);
-            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.backBtn.Name = "backBtn";
-            this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.backBtn.Size = new System.Drawing.Size(44, 40);
-            this.backBtn.TabIndex = 0;
-            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
-            // 
             // flowLayoutPanelChat
             // 
             this.flowLayoutPanelChat.AutoScroll = true;
@@ -213,6 +164,77 @@ namespace ClientWinform.View.User
             this.btnLoadmore.Text = "Load more...";
             this.btnLoadmore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.btnLoadmore.Click += new System.EventHandler(this.btnLoadmore_Click);
+            // 
+            // butVoice
+            // 
+            this.butVoice.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.butVoice.BorderRadius = 8;
+            this.butVoice.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.butVoice.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.butVoice.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.butVoice.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.butVoice.FillColor = System.Drawing.Color.White;
+            this.butVoice.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.butVoice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.butVoice.Image = global::ClientWinform.Properties.Resources.mic1;
+            this.butVoice.ImageSize = new System.Drawing.Size(28, 28);
+            this.butVoice.Location = new System.Drawing.Point(1140, 32);
+            this.butVoice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.butVoice.Name = "butVoice";
+            this.butVoice.Size = new System.Drawing.Size(46, 42);
+            this.butVoice.TabIndex = 14;
+            // 
+            // messageTxt
+            // 
+            this.messageTxt.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.messageTxt.AutoRoundedCorners = true;
+            this.messageTxt.BorderColor = System.Drawing.Color.Black;
+            this.messageTxt.BorderRadius = 20;
+            this.messageTxt.BorderThickness = 0;
+            this.messageTxt.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.messageTxt.DefaultText = "";
+            this.messageTxt.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.messageTxt.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.messageTxt.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.messageTxt.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.messageTxt.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(233)))), ((int)(((byte)(233)))), ((int)(((byte)(236)))));
+            this.messageTxt.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.messageTxt.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.messageTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(16)))), ((int)(((byte)(14)))));
+            this.messageTxt.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.messageTxt.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
+            this.messageTxt.IconLeftSize = new System.Drawing.Size(22, 22);
+            this.messageTxt.IconRight = global::ClientWinform.Properties.Resources.paperclip;
+            this.messageTxt.IconRightOffset = new System.Drawing.Point(15, 0);
+            this.messageTxt.IconRightSize = new System.Drawing.Size(25, 25);
+            this.messageTxt.Location = new System.Drawing.Point(0, 32);
+            this.messageTxt.Margin = new System.Windows.Forms.Padding(0);
+            this.messageTxt.Name = "messageTxt";
+            this.messageTxt.PasswordChar = '\0';
+            this.messageTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
+            this.messageTxt.PlaceholderText = "Type a message...";
+            this.messageTxt.SelectedText = "";
+            this.messageTxt.Size = new System.Drawing.Size(1137, 42);
+            this.messageTxt.TabIndex = 13;
+            this.messageTxt.IconRightClick += new System.EventHandler(this.messageTxt_IconRightClick);
+            // 
+            // backBtn
+            // 
+            this.backBtn.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.backBtn.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.backBtn.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.backBtn.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.backBtn.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(217)))), ((int)(((byte)(217)))), ((int)(((byte)(217)))));
+            this.backBtn.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.backBtn.ForeColor = System.Drawing.Color.White;
+            this.backBtn.Image = global::ClientWinform.Properties.Resources.Untitled__2_;
+            this.backBtn.Location = new System.Drawing.Point(26, 29);
+            this.backBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.backBtn.Size = new System.Drawing.Size(44, 40);
+            this.backBtn.TabIndex = 0;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // ChatContentForm
             // 
@@ -249,5 +271,6 @@ namespace ClientWinform.View.User
         public System.Windows.Forms.FlowLayoutPanel flowLayoutPanelChat;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label btnLoadmore;
+        private Guna.UI2.WinForms.Guna2Button butVoice;
     }
 }

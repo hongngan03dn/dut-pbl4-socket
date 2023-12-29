@@ -67,6 +67,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\FileBLL.cs" />
     <Compile Include="BLL\MsgBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DTO\Avatar.cs">
@@ -320,6 +321,8 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\mic1.png" />
+    <None Include="Resources\avaHy.jpg" />
     <None Include="Resources\log-out %281%29.png" />
     <None Include="Resources\log-out.png" />
     <None Include="Resources\OnlineIcon.png" />

@@ -18,6 +18,7 @@ using Guna.UI2.WinForms;
 using System.Globalization;
 using System.Web.UI.WebControls;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Media;
 
 namespace ClientWinform.SocketHandles
 {
@@ -29,7 +30,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.31.16";
+        static String _ipServer = "192.168.56.1";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -107,7 +108,7 @@ namespace ClientWinform.SocketHandles
                 datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
             }
-
+            UpdateListChat(null, formAll, true);
         }
         public static void receivedMsg(int idMsg, Form form)
         {
@@ -161,7 +162,7 @@ namespace ClientWinform.SocketHandles
             {
                 if (form is NavigationForm navigationForm && navigationForm.panelExplore.Visible == true)
                 {
-                    navigationForm.addExplorePanel();
+                    navigationForm.addExplorePanel("");
                 }
             }
         }
@@ -203,11 +204,7 @@ namespace ClientWinform.SocketHandles
                     }
                     Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
-
-
             }
-
-
             //delegate
             if (activeForm.InvokeRequired)
             {
@@ -219,17 +216,21 @@ namespace ClientWinform.SocketHandles
 
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
-                    optionForm(navigationForm.chatForm, bindLogin);
+                    optionForm(navigationForm.chatForm, bindLogin, "");
                 }
                 else if (activeForm is ChatListForm chatList && idLoggined != 0)
                 {
-                    optionForm(chatList, bindLogin);
+                    optionForm(chatList, bindLogin, "");
                 }
             }
         }
-        public static void optionForm(ChatListForm chatList, bool bindLogin)
+        public static void optionForm(ChatListForm chatList, bool bindLogin, string txtSearch)
         {
-            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id);
+            if(txtSearch != "")
+            {
+                chatList.flowLayoutPanelListChat.Controls.Clear();
+            }
+            List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id, txtSearch);
             foreach (DTO.UserModel user in users)
             {
                 chatList.Invoke((MethodInvoker)delegate
@@ -253,7 +254,7 @@ namespace ClientWinform.SocketHandles
                     }
                     if (user.Id == idLoggined)
                     {
-                        if (bindLogin)
+                        if (bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             chat.isPictureBoxOnlineVisible = true;
                         else 
                             chat.isPictureBoxOnlineVisible = false;
@@ -262,15 +263,14 @@ namespace ClientWinform.SocketHandles
                     {
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
-                            if (user.Id == idOnlines[i] && bindLogin)
+                            if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             {
-                                DTO.Message checkConnected = BLL.UserBLL.checkIsHaveConnection(idLoggined, user.Id);
-                                if (checkConnected != null) 
-                                { 
-                                    if(checkConnected.Status == Constants.ConnectionsDescr.CONNECTED)
-                                        chat.isPictureBoxOnlineVisible = true;
-                                }
-                            }                                
+                                chat.isPictureBoxOnlineVisible = true;
+                            }
+                            else
+                            {
+                                chat.isPictureBoxOnlineVisible = false;
+                            }
                         }
                     }
                     chat.userName = user.Username;
@@ -297,8 +297,6 @@ namespace ClientWinform.SocketHandles
                     {
                         chat.message = "";
                     }
-
-
                     foreach (Control c in chat.Controls)
                     {
                         c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
@@ -312,10 +310,85 @@ namespace ClientWinform.SocketHandles
         {
             while(true)
             {
-                byte[] data = new byte[1024];
+                byte[] data = new byte[1024 * 128];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
-                if(stringData.Contains("Message: "))
+
+                SocketPacketModel packet = new SocketPacketModel();
+                bool isJsonString;
+                try
+                {
+                    packet = JsonConvert.DeserializeObject<SocketPacketModel>(stringData);
+                    isJsonString = true;
+                }
+                catch (Exception)
+                {
+                    isJsonString = false;
+                }
+
+                if (isJsonString)
+                {
+                    if (packet.PacketType == Constants.PacketType.GET_FILE)
+                    {
+                        try
+                        {
+                            string path = packet.ContentMsg;
+                            int receiveByteLen = packet.SubPacketFile.Length;
+                            int fnameLen = BitConverter.ToInt32(packet.SubPacketFile, 0);
+                            string fname = Encoding.ASCII.GetString(packet.SubPacketFile, 4, fnameLen);
+
+                            // handle load media file
+                            if (string.IsNullOrEmpty(path))
+                            {
+                                if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(fname)))
+                                {
+                                    Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                    packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(ChatContentForm.imgLoaded, 0);
+                                    ChatContentForm.isLoadSuccess = true;
+                                    ChatContentForm.isLoaded = true;
+                                }
+                                else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(fname)))
+                                {
+                                    byte[] audioBytes = new byte[1024 * 1024 * 100];
+                                    packet.SubPacketFile.Skip(4 + fnameLen).Take(receiveByteLen - 4 - fnameLen).ToArray().CopyTo(audioBytes, 0);
+                                    using (var stream = new MemoryStream(audioBytes))
+                                    {
+                                        SoundPlayer player = new SoundPlayer(stream);
+                                        player.Play();
+                                    }
+                                }
+                                continue;
+                            }
+
+                            BinaryWriter writer = new BinaryWriter(System.IO.File.Open(path + "/" + fname, FileMode.Append));
+                            writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
+                            writer.Close();
+                            MessageBox.Show("Downloaded Successfully!");
+                        }
+                        catch (Exception e)
+                        {
+                            if (ChatContentForm.idMsgLoaded != 0 && ChatContentForm.isLoaded == false)
+                            {
+                                Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                                ChatContentForm.isLoadSuccess = false;
+                                ChatContentForm.isLoaded = true;
+                            }
+                            MessageBox.Show(e.Message);
+                        }
+                        
+                    }
+                    else if (packet.PacketType == Constants.PacketType.ERROR)
+                    {
+                        if (ChatContentForm.idMsgLoaded != 0 && ChatContentForm.isLoaded == false)
+                        {
+                            Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
+                            ChatContentForm.isLoadSuccess = false;
+                            ChatContentForm.isLoaded = true;
+                        }
+                        MessageBox.Show(packet.ContentMsg);
+                    }
+                }
+                else if(stringData.Contains("Message: "))
                 {
                     string[] messages = stringData.Split(new string[] { "Message: ", " From: ", " To: ", " CreatedDate: ", " IdMsg: " }, StringSplitOptions.None);
                     receivedMsg(Int32.Parse(messages[5]), form);
@@ -341,7 +414,61 @@ namespace ClientWinform.SocketHandles
                     string[] messages = stringData.Split('\n');
                     UpdateListChat(messages, form, true);
                 }
+            }
+        }
 
+        public static void sendFile(int myId, int toId, string fname, Nullable<System.DateTime> createdDate)
+        {
+            // handle fname
+            string path = "";
+            fname = fname.Replace("\\", "/");
+            while (fname.IndexOf("/") > -1)
+            {
+                path += fname.Substring(0, fname.IndexOf("/") + 1);
+                fname = fname.Substring(fname.IndexOf("/") + 1);
+            }
+
+            // handle SaveNameFile
+            string savedNameFile = myId + "_" + toId + "_" + DateTime.Now.Ticks.ToString() + "_" + fname;
+
+            byte[] fileData = System.IO.File.ReadAllBytes(path + fname);
+            byte[] fnameByte = Encoding.ASCII.GetBytes(savedNameFile);
+            byte[] fnameLen = BitConverter.GetBytes(fnameByte.Length);
+            byte[] clientData = new byte[4 + fnameByte.Length + fileData.Length];
+            fnameLen.CopyTo(clientData, 0);
+            fnameByte.CopyTo(clientData, 4);
+            fileData.CopyTo(clientData, 4 + fnameByte.Length);
+
+            //giống sendMsg
+            int idFile = BLL.FileBLL.InsertFile(myId, fname, savedNameFile);
+            int idMsg = BLL.MsgBLL.InsertMessage(myId, toId, fname, idFile);
+            SocketPacketModel packet = new SocketPacketModel(idMsg, myId, toId, fname, createdDate, Constants.PacketType.FILE);
+            packet.SubPacketFile = clientData;
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+                UpdateListChat(null, formAll, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static void sendRequestFile(DTO.Message message, string selectedFolderClient)
+        {
+            SocketPacketModel packet = new SocketPacketModel(message.Id, 0, 0, selectedFolderClient, DateTime.Now, Constants.PacketType.GET_FILE);
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
+                _client.Send(datasend, datasend.Length, SocketFlags.None);
+                //UpdateListChat(null, formAll, true);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
     }

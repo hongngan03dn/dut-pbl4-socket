@@ -62,7 +62,7 @@ namespace ClientWinform.View.User
             this.changeAvaBtn = new Guna.UI2.WinForms.Guna2Button();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanelTittle = new System.Windows.Forms.TableLayoutPanel();
-            this.picBoxAva = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.picBoxAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.genderGroupBox.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -597,15 +597,14 @@ namespace ClientWinform.View.User
             // picBoxAva
             // 
             this.picBoxAva.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.picBoxAva.AutoRoundedCorners = true;
-            this.picBoxAva.BorderRadius = 64;
             this.picBoxAva.ImageRotate = 0F;
-            this.picBoxAva.Location = new System.Drawing.Point(74, 56);
-            this.picBoxAva.Margin = new System.Windows.Forms.Padding(0, 0, 18, 16);
+            this.picBoxAva.Location = new System.Drawing.Point(58, 36);
+            this.picBoxAva.Margin = new System.Windows.Forms.Padding(3, 3, 20, 20);
             this.picBoxAva.Name = "picBoxAva";
-            this.picBoxAva.Size = new System.Drawing.Size(146, 131);
+            this.picBoxAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.picBoxAva.Size = new System.Drawing.Size(160, 147);
             this.picBoxAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picBoxAva.TabIndex = 7;
+            this.picBoxAva.TabIndex = 1;
             this.picBoxAva.TabStop = false;
             // 
             // tableLayoutPanelMain
@@ -697,6 +696,6 @@ namespace ClientWinform.View.User
         private System.Windows.Forms.Label labelUsernameEdit;
         private Guna.UI2.WinForms.Guna2Button changeAvaBtn;
         protected System.Windows.Forms.Label labelInvalidemail;
-        private Guna.UI2.WinForms.Guna2PictureBox picBoxAva;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox picBoxAva;
     }
 }

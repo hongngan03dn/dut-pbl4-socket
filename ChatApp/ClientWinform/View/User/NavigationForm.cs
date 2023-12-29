@@ -147,18 +147,18 @@ namespace ClientWinform
             lbl.ForeColor = Color.FromArgb(151, 142, 142);
             return lbl;
         }
-        public  void addExplorePanel()
+        public void addExplorePanel(string txtSearch)
         {
             flowLayoutPanelListExplore.Controls.Clear();
             Label lblFriend = createLable("Friend");
             Label lblConnecting = createLable("Connecting");
             Label lblExplore = createLable("Explore");
 
-            List<DTO.UserModel> users = BLL.MsgBLL.getUserListExplore(userOwn.Id);
-            if(users.Count > 0)
+            List<DTO.UserModel> friends = BLL.MsgBLL.getUserListExplore(userOwn.Id, txtSearch);
+            if(friends.Count > 0)
             {
                 flowLayoutPanelListExplore.Controls.Add(lblFriend);
-                foreach(DTO.UserModel user in users)
+                foreach(DTO.UserModel user in friends)
                 {
                     UserExploreControl userFriend = flowLayoutPanelListExplore.Controls.OfType<UserExploreControl>().FirstOrDefault(c => c.userName == user.Username);
                     if(userFriend == null)
@@ -188,7 +188,7 @@ namespace ClientWinform
                 }
             }
 
-            List<User> connectings = BLL.UserBLL.getConnectingOfUser(userOwn.Id);
+            List<User> connectings = BLL.UserBLL.getConnectingOfUser(userOwn.Id, txtSearch);
             if(connectings.Count > 0)
             {
                 flowLayoutPanelListExplore.Controls.Add(lblConnecting);
@@ -223,11 +223,11 @@ namespace ClientWinform
             }
 
             List<int> idUserExcept = new List<int>();
-            foreach (DTO.UserModel user in users)
+            foreach (DTO.UserModel user in friends)
             {
                 idUserExcept.Add(user.Id);
             }
-            List<User> explores = BLL.UserBLL.GetUserExplore(userOwn.Id, idUserExcept, connectings);
+            List<User> explores = BLL.UserBLL.GetUserExplore(userOwn.Id, idUserExcept, connectings, txtSearch);
             if(explores.Count > 0)
             {
                 flowLayoutPanelListExplore.Controls.Add(lblExplore);
@@ -269,7 +269,11 @@ namespace ClientWinform
             panelExplore.Visible = true;
             panelExplore.BringToFront();
             flowLayoutPanelListExplore.Controls.Clear();
-            addExplorePanel();
+            addExplorePanel("");
+        }
+        private void searchTxt_IconLeftClick(object sender, EventArgs e)
+        {
+            addExplorePanel(searchTxt.Text);
         }
         private void exploreUserPanel_Click(object sender, EventArgs e, int userId)
         {
@@ -321,5 +325,7 @@ namespace ClientWinform
             }
 
         }
+
+
     }
 }
