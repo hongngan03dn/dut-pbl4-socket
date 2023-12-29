@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.2.19"); //hostEntry.AddressList[3]; 
+            IPAddress address = IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -207,14 +207,14 @@ namespace MailServer
                             BinaryWriter writer = new BinaryWriter(System.IO.File.Open(pathServer + "/" + fname, FileMode.Append));
                             writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
                             writer.Close();
-                            if(clientSendMsg != null)
-                            {
-                                clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + 
-                                                                                        " From: " + packet.IdFrom + 
-                                                                                        " To: " + packet.IdTo + 
-                                                                                        " CreatedDate: " + packet.CreatedDate + 
-                                                                                        " IdMsg: " + packet.IdMsg));
-                            }
+                            //if(clientSendMsg != null)
+                            //{
+                            //    clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + 
+                            //                                                            " From: " + packet.IdFrom + 
+                            //                                                            " To: " + packet.IdTo + 
+                            //                                                            " CreatedDate: " + packet.CreatedDate + 
+                            //                                                            " IdMsg: " + packet.IdMsg));
+                            //}
                            
                         }
 
@@ -257,7 +257,17 @@ namespace MailServer
                             Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
 
                         }
+                        // Start handle File - send back img to fromID
+                        if (packet.PacketType == Constants.PacketType.FILE && clientSendMsg != null)
+                        {
+                            clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg +
+                                                                                        " From: " + packet.IdFrom +
+                                                                                        " To: " + packet.IdTo +
+                                                                                        " CreatedDate: " + packet.CreatedDate +
+                                                                                        " IdMsg: " + packet.IdMsg));
 
+                        }
+                        // End handle File  - send back img to fromID
                     }
                 }
                 catch (Exception ex)
