@@ -37,6 +37,7 @@ namespace ClientWinform
             this.chatBtn = new Guna.UI2.WinForms.Guna2Button();
             this.exploreBtn = new Guna.UI2.WinForms.Guna2Button();
             this.profileBtn = new Guna.UI2.WinForms.Guna2Button();
+            this.btnSignOut = new Guna.UI2.WinForms.Guna2Button();
             this.pictureAva = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.lableUsername = new System.Windows.Forms.Label();
             this.panelControlBox = new System.Windows.Forms.Panel();
@@ -72,7 +73,7 @@ namespace ClientWinform
             this.tableLayoutPanelMain.Name = "tableLayoutPanelMain";
             this.tableLayoutPanelMain.RowCount = 1;
             this.tableLayoutPanelMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1047, 629);
+            this.tableLayoutPanelMain.Size = new System.Drawing.Size(1640, 756);
             this.tableLayoutPanelMain.TabIndex = 0;
             // 
             // panelNavigation
@@ -86,7 +87,7 @@ namespace ClientWinform
             this.panelNavigation.Location = new System.Drawing.Point(0, 0);
             this.panelNavigation.Margin = new System.Windows.Forms.Padding(0);
             this.panelNavigation.Name = "panelNavigation";
-            this.panelNavigation.Size = new System.Drawing.Size(125, 629);
+            this.panelNavigation.Size = new System.Drawing.Size(196, 756);
             this.panelNavigation.TabIndex = 0;
             // 
             // tableLayoutPanelMenu
@@ -105,7 +106,7 @@ namespace ClientWinform
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 44F));
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.902357F));
             this.tableLayoutPanelMenu.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 49.15825F));
-            this.tableLayoutPanelMenu.Size = new System.Drawing.Size(125, 475);
+            this.tableLayoutPanelMenu.Size = new System.Drawing.Size(196, 475);
             this.tableLayoutPanelMenu.TabIndex = 1;
             this.tableLayoutPanelMenu.MouseDown += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseDown);
             this.tableLayoutPanelMenu.MouseMove += new System.Windows.Forms.MouseEventHandler(this.loginForm_MouseMove);
@@ -117,11 +118,12 @@ namespace ClientWinform
             this.panelBtn.Controls.Add(this.chatBtn);
             this.panelBtn.Controls.Add(this.exploreBtn);
             this.panelBtn.Controls.Add(this.profileBtn);
+            this.panelBtn.Controls.Add(this.btnSignOut);
             this.panelBtn.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelBtn.Location = new System.Drawing.Point(0, 240);
             this.panelBtn.Margin = new System.Windows.Forms.Padding(0);
             this.panelBtn.Name = "panelBtn";
-            this.panelBtn.Size = new System.Drawing.Size(125, 235);
+            this.panelBtn.Size = new System.Drawing.Size(196, 235);
             this.panelBtn.TabIndex = 3;
             // 
             // panelLeftMenu
@@ -148,11 +150,11 @@ namespace ClientWinform
             this.chatBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.chatBtn.Image = global::ClientWinform.Properties.Resources.message_square1;
             this.chatBtn.ImageOffset = new System.Drawing.Point(-8, 0);
-            this.chatBtn.Location = new System.Drawing.Point(0, 63);
+            this.chatBtn.Location = new System.Drawing.Point(0, 5);
             this.chatBtn.Margin = new System.Windows.Forms.Padding(0);
             this.chatBtn.Name = "chatBtn";
             this.chatBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.chatBtn.Size = new System.Drawing.Size(125, 57);
+            this.chatBtn.Size = new System.Drawing.Size(196, 57);
             this.chatBtn.TabIndex = 0;
             this.chatBtn.Text = "Chat";
             this.chatBtn.TextOffset = new System.Drawing.Point(-4, 0);
@@ -172,11 +174,11 @@ namespace ClientWinform
             this.exploreBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.exploreBtn.Image = global::ClientWinform.Properties.Resources.user_plus;
             this.exploreBtn.ImageOffset = new System.Drawing.Point(-3, 0);
-            this.exploreBtn.Location = new System.Drawing.Point(0, 120);
+            this.exploreBtn.Location = new System.Drawing.Point(0, 62);
             this.exploreBtn.Margin = new System.Windows.Forms.Padding(0);
             this.exploreBtn.Name = "exploreBtn";
             this.exploreBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.exploreBtn.Size = new System.Drawing.Size(125, 57);
+            this.exploreBtn.Size = new System.Drawing.Size(196, 57);
             this.exploreBtn.TabIndex = 1;
             this.exploreBtn.Text = "Explore";
             this.exploreBtn.Click += new System.EventHandler(this.exploreBtn_Click);
@@ -195,25 +197,49 @@ namespace ClientWinform
             this.profileBtn.HoverState.ForeColor = System.Drawing.Color.White;
             this.profileBtn.Image = global::ClientWinform.Properties.Resources.user;
             this.profileBtn.ImageOffset = new System.Drawing.Point(-5, 0);
-            this.profileBtn.Location = new System.Drawing.Point(0, 177);
+            this.profileBtn.Location = new System.Drawing.Point(0, 119);
             this.profileBtn.Margin = new System.Windows.Forms.Padding(0);
             this.profileBtn.Name = "profileBtn";
             this.profileBtn.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
-            this.profileBtn.Size = new System.Drawing.Size(125, 58);
+            this.profileBtn.Size = new System.Drawing.Size(196, 58);
             this.profileBtn.TabIndex = 2;
             this.profileBtn.Text = "Profile";
             this.profileBtn.TextOffset = new System.Drawing.Point(-1, 0);
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             // 
+            // btnSignOut
+            // 
+            this.btnSignOut.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignOut.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnSignOut.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnSignOut.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnSignOut.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.btnSignOut.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(122)))), ((int)(((byte)(151)))), ((int)(((byte)(244)))));
+            this.btnSignOut.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSignOut.ForeColor = System.Drawing.Color.White;
+            this.btnSignOut.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
+            this.btnSignOut.HoverState.ForeColor = System.Drawing.Color.White;
+            this.btnSignOut.Image = global::ClientWinform.Properties.Resources.log_out__1_;
+            this.btnSignOut.ImageOffset = new System.Drawing.Point(-2, 0);
+            this.btnSignOut.Location = new System.Drawing.Point(0, 177);
+            this.btnSignOut.Margin = new System.Windows.Forms.Padding(0);
+            this.btnSignOut.Name = "btnSignOut";
+            this.btnSignOut.PressedColor = System.Drawing.Color.FromArgb(((int)(((byte)(96)))), ((int)(((byte)(127)))), ((int)(((byte)(244)))));
+            this.btnSignOut.Size = new System.Drawing.Size(196, 58);
+            this.btnSignOut.TabIndex = 3;
+            this.btnSignOut.Text = "Sign out";
+            this.btnSignOut.TextOffset = new System.Drawing.Point(2, 0);
+            this.btnSignOut.Click += new System.EventHandler(this.btnSignOut_Click);
+            // 
             // pictureAva
             // 
             this.pictureAva.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.pictureAva.ImageRotate = 0F;
-            this.pictureAva.Location = new System.Drawing.Point(20, 161);
+            this.pictureAva.Location = new System.Drawing.Point(43, 109);
             this.pictureAva.Margin = new System.Windows.Forms.Padding(0);
             this.pictureAva.Name = "pictureAva";
             this.pictureAva.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.pictureAva.Size = new System.Drawing.Size(100, 100);
+            this.pictureAva.Size = new System.Drawing.Size(110, 99);
             this.pictureAva.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureAva.TabIndex = 0;
             this.pictureAva.TabStop = false;
@@ -226,7 +252,7 @@ namespace ClientWinform
             this.lableUsername.ForeColor = System.Drawing.Color.White;
             this.lableUsername.Location = new System.Drawing.Point(3, 208);
             this.lableUsername.Name = "lableUsername";
-            this.lableUsername.Size = new System.Drawing.Size(119, 23);
+            this.lableUsername.Size = new System.Drawing.Size(190, 23);
             this.lableUsername.TabIndex = 1;
             this.lableUsername.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -239,7 +265,7 @@ namespace ClientWinform
             this.panelControlBox.Location = new System.Drawing.Point(0, 0);
             this.panelControlBox.Margin = new System.Windows.Forms.Padding(0);
             this.panelControlBox.Name = "panelControlBox";
-            this.panelControlBox.Size = new System.Drawing.Size(125, 26);
+            this.panelControlBox.Size = new System.Drawing.Size(196, 26);
             this.panelControlBox.TabIndex = 1;
             // 
             // closeBtn
@@ -291,10 +317,10 @@ namespace ClientWinform
             this.panelChild.BackColor = System.Drawing.Color.White;
             this.panelChild.Controls.Add(this.panelExplore);
             this.panelChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelChild.Location = new System.Drawing.Point(125, 0);
+            this.panelChild.Location = new System.Drawing.Point(196, 0);
             this.panelChild.Margin = new System.Windows.Forms.Padding(0);
             this.panelChild.Name = "panelChild";
-            this.panelChild.Size = new System.Drawing.Size(922, 629);
+            this.panelChild.Size = new System.Drawing.Size(1444, 756);
             this.panelChild.TabIndex = 0;
             // 
             // panelExplore
@@ -305,7 +331,7 @@ namespace ClientWinform
             this.panelExplore.Location = new System.Drawing.Point(0, 0);
             this.panelExplore.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelExplore.Name = "panelExplore";
-            this.panelExplore.Size = new System.Drawing.Size(344, 630);
+            this.panelExplore.Size = new System.Drawing.Size(416, 660);
             this.panelExplore.TabIndex = 2;
             // 
             // tableLayoutPanelExplore
@@ -322,7 +348,7 @@ namespace ClientWinform
             this.tableLayoutPanelExplore.RowCount = 2;
             this.tableLayoutPanelExplore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.894212F));
             this.tableLayoutPanelExplore.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.10579F));
-            this.tableLayoutPanelExplore.Size = new System.Drawing.Size(340, 626);
+            this.tableLayoutPanelExplore.Size = new System.Drawing.Size(412, 656);
             this.tableLayoutPanelExplore.TabIndex = 1;
             // 
             // searchTxt
@@ -346,32 +372,35 @@ namespace ClientWinform
             this.searchTxt.IconLeft = global::ClientWinform.Properties.Resources.Untitled__1_;
             this.searchTxt.IconLeftCursor = System.Windows.Forms.Cursors.Hand;
             this.searchTxt.IconLeftSize = new System.Drawing.Size(22, 22);
-            this.searchTxt.Location = new System.Drawing.Point(12, 3);
+            this.searchTxt.Location = new System.Drawing.Point(0, 4);
             this.searchTxt.Margin = new System.Windows.Forms.Padding(0);
             this.searchTxt.Name = "searchTxt";
             this.searchTxt.PasswordChar = '\0';
             this.searchTxt.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(187)))), ((int)(((byte)(175)))), ((int)(((byte)(175)))));
             this.searchTxt.PlaceholderText = "Search...";
             this.searchTxt.SelectedText = "";
-            this.searchTxt.Size = new System.Drawing.Size(316, 42);
+            this.searchTxt.Size = new System.Drawing.Size(412, 42);
             this.searchTxt.TabIndex = 13;
+            this.searchTxt.IconLeftClick += new System.EventHandler(this.searchTxt_IconLeftClick);
             // 
             // flowLayoutPanelListExplore
             // 
             this.flowLayoutPanelListExplore.AutoScroll = true;
             this.flowLayoutPanelListExplore.BackColor = System.Drawing.Color.White;
             this.flowLayoutPanelListExplore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanelListExplore.Location = new System.Drawing.Point(0, 49);
+            this.flowLayoutPanelListExplore.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanelListExplore.Location = new System.Drawing.Point(0, 51);
             this.flowLayoutPanelListExplore.Margin = new System.Windows.Forms.Padding(0);
             this.flowLayoutPanelListExplore.Name = "flowLayoutPanelListExplore";
-            this.flowLayoutPanelListExplore.Size = new System.Drawing.Size(340, 577);
+            this.flowLayoutPanelListExplore.Size = new System.Drawing.Size(412, 605);
             this.flowLayoutPanelListExplore.TabIndex = 0;
+            this.flowLayoutPanelListExplore.WrapContents = false;
             // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 629);
+            this.ClientSize = new System.Drawing.Size(1640, 756);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -412,6 +441,7 @@ namespace ClientWinform
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelListExplore;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanelExplore;
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
-        private System.Windows.Forms.Panel panelExplore;
+        public System.Windows.Forms.Panel panelExplore;
+        private Guna.UI2.WinForms.Guna2Button btnSignOut;
     }
 }

@@ -67,6 +67,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BLL\FileBLL.cs" />
+    <Compile Include="BLL\MsgBLL.cs" />
     <Compile Include="BLL\UserBLL.cs" />
     <Compile Include="DTO\Avatar.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
@@ -103,6 +105,7 @@
     <Compile Include="DTO\User.cs">
       <DependentUpon>DBChatApp.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\UserModel.cs" />
     <Compile Include="Helpers\MailUtils.cs" />
     <Compile Include="Helpers\MD5Hasher.cs" />
     <Compile Include="SocketHandles\MailClient.cs" />
@@ -180,6 +183,12 @@
     <Compile Include="View\User\UpdateProfileForm.Designer.cs">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\User\UserExploreControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\User\UserExploreControl.Designer.cs">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="View\Admin\AdminHomeForm.resx">
       <DependentUpon>AdminHomeForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -225,6 +234,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\User\UpdateProfileForm.resx">
       <DependentUpon>UpdateProfileForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\User\UserExploreControl.resx">
+      <DependentUpon>UserExploreControl.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="DTO\DBChatApp.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
@@ -309,6 +321,11 @@
       <DependentUpon>DBChatApp.edmx</DependentUpon>
       <LastGenOutput>DBChatApp.cs</LastGenOutput>
     </Content>
+    <None Include="Resources\mic1.png" />
+    <None Include="Resources\avaHy.jpg" />
+    <None Include="Resources\log-out %281%29.png" />
+    <None Include="Resources\log-out.png" />
+    <None Include="Resources\OnlineIcon.png" />
     <None Include="Resources\defaultAvatar.jpg" />
     <None Include="Resources\Ava img %281%29.png" />
     <None Include="Resources\avaKiet.jpg" />

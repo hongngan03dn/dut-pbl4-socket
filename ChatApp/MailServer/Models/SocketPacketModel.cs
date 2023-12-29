@@ -8,16 +8,27 @@ namespace MailServer.Models
 {
     public class SocketPacketModel
     {
-        public int FromId { get; set; }
-        public int ToId { get; set; }
+        public int IdMsg { get; set; }
+        public int IdFrom { get; set; }
+        public int IdTo { get; set; }
         public String ContentMsg { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public int PacketType { get; set; }
+        public byte[] SubPacketFile { get; set; } = new byte[1024 * 85]; // 85KB
 
-        public SocketPacketModel() { }
-        public SocketPacketModel(int fromId, int toId, string contentMsg)
+
+        public SocketPacketModel() 
         {
-            FromId = fromId;
-            ToId = toId;
+            PacketType = Constants.PacketType.MESSAGE;
+        }
+        public SocketPacketModel(int idMsg, int fromId, int toId, string contentMsg, DateTime createdDate, int packetType = Constants.PacketType.MESSAGE)
+        {
+            IdMsg = idMsg;
+            IdFrom = fromId;
+            IdTo = toId;
             ContentMsg = contentMsg;
+            CreatedDate = createdDate;
+            PacketType = packetType;
         }
     }
 }

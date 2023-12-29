@@ -30,6 +30,7 @@ namespace ClientWinform
         {
             labelUsername.Text = user.Username;
             labelName.Text = user.Name;
+            labelNumberConnections.Text = BLL.UserBLL.getConnectionsOfUser(user.Id).ToString(); 
             labelBio.Text = user.Bio;
             if(user.Gender == true)
             {
@@ -84,7 +85,7 @@ namespace ClientWinform
 
         private void changePassBtn_Click(object sender, EventArgs e)
         {
-            ChangePassForm f = new ChangePassForm();
+            ChangePassForm f = new ChangePassForm(user);
             f.ShowDialog();
         }
     }

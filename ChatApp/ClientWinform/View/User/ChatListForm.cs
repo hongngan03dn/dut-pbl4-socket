@@ -17,45 +17,16 @@ namespace ClientWinform.View.User
     public partial class ChatListForm : Form
     {
         private Panel chat;
+        public ChatContentForm chatContentForm = null;
         private Form activeForm;
-        //public int idUser;
-        public ClientWinform.DTO.User user = new DTO.User();
-        public ChatListForm(ClientWinform.DTO.User user)
+        public DTO.User user = new DTO.User();
+        public ChatListForm(DTO.User user)
         {
             this.user = user;
             InitializeComponent();
             this.Activate();
-            //Thread listenThread = new Thread(SocketHandles.MailClient.listenForMessages(this));
-            //Thread listenThread = new Thread(() => SocketHandles.MailClient.listenForMessages(this));
-            //listenThread.Start();
-            listChatOfUser();
+            searchTxt.KeyDown += new KeyEventHandler(searchTxt_KeyDown);
         }
-        private void listChatOfUser()
-        {
-            List<DTO.User> users = BLL.UserBLL.getUserListChat(user.Id);
-            byte[] images = null;
-            foreach (DTO.User user in users) 
-            {
-                ChatReviewForm chat = new ChatReviewForm();
-                images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
-                if (images == null)
-                {
-                    chat.ava = Resources.defaultAvatar;
-                }
-                else
-                {
-                    MemoryStream mstream = new MemoryStream(images);
-                    chat.ava = Image.FromStream(mstream);
-                }
-                chat.userName = user.Username;
-                foreach (Control c in chat.Controls)
-                {
-                    c.Click += new EventHandler(chatPanel_Click);
-                }
-                flowLayoutPanelListChat.Controls.Add(chat);
-            }
-        }
-
         private void ActiveButton(object btnSender)
         {
             DisableButton();
@@ -70,10 +41,11 @@ namespace ClientWinform.View.User
         {
             foreach (Control ctrl in flowLayoutPanelListChat.Controls)
             {
-                if (ctrl is Panel)
+                if (ctrl is ChatReviewForm)
                 {
-                    Panel btn = (Panel)ctrl;
-                    btn.BackColor = Color.FromArgb(233, 233, 236);
+                    ChatReviewForm panel = (ChatReviewForm)ctrl;
+                    panel.isSelected.BackColor = Color.White;
+                    panel.isClicked = false;
                 }
             }
         }
@@ -93,10 +65,35 @@ namespace ClientWinform.View.User
             childForm.BringToFront();
             childForm.Show();
         }
-        private void chatPanel_Click(object sender, EventArgs e)
+        public void chatPanel_Click(object sender, EventArgs e, int userId, int userToId)
         {
-            ChatContentForm f = new ChatContentForm(this.user);
-            OpenChilForm(f, sender);
+            chatContentForm = new ChatContentForm(userId, userToId);
+            OpenChilForm(chatContentForm, sender);
+        }
+        private void searchTxt_IconLeftClick(object sender, EventArgs e)
+        {
+            foreach (Control ctrl in flowLayoutPanelListChat.Controls)
+            {
+                if (ctrl is ChatReviewForm)
+                {
+                    ChatReviewForm userChat = (ChatReviewForm)ctrl;
+                    if(userChat.userName.Contains(searchTxt.Text))
+                    {
+                        userChat.Visible = true;
+                    }
+                    else
+                    {
+                        userChat.Visible = false;
+                    }
+                }
+            }
+        }
+        private void searchTxt_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                searchTxt_IconLeftClick(sender, e);
+            }
         }
     }
 }

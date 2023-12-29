@@ -50,6 +50,7 @@ namespace ClientWinform
 
         private void signUpBtn_Click(object sender, EventArgs e)
         {
+            this.Hide();
             SignUpForm f = new SignUpForm();
             f.ShowDialog();
         }
@@ -86,12 +87,13 @@ namespace ClientWinform
                     {
                         NavigationForm f = new NavigationForm(user);
                         SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        BLL.MsgBLL.LoadMsgesToReceived(id);
                         f.ShowDialog();
                     }
                     else if (idRole == Constants.Roles.ADMIN)
                     {
                         AdminHomeForm f = new AdminHomeForm();
-                        SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
+                        //SocketHandles.MailClient.connectServer(id, txtUsername.Text, f);
                         f.ShowDialog();
                     }
                 }
