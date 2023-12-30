@@ -60,6 +60,15 @@ namespace ClientWinform.View.User
             mciSendString("close Som", null, 0, 0);
             ConvertWavToLowQuality(fullPath, fullPathLower, 2000, 8);
             currentFile = fullPathLower;
+
+            // check 85KB  == 25s
+            long fileSize = new FileInfo(currentFile).Length;
+            if (fileSize >= (1024 * 85))
+            {
+                MessageBox.Show("Failed. Record Speech only under 25 seconds. Record again.");
+                return;
+            }
+
             sendFileAudio();
         }
 
