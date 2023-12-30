@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.2.10";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -110,35 +110,136 @@ namespace ClientWinform.SocketHandles
             }
 
         }
+        //public static void receivedMsg(int idMsg, Form form)
+        //{
+        //    if (form.InvokeRequired)
+        //    {
+        //        setSubForm d = new setSubForm(receivedMsg);
+        //        form.Invoke(d, new object[] { idMsg, form});
+        //    }
+        //    else
+        //    {
+        //        if (form is NavigationForm navigationForm)
+        //        {
+        //            DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+        //            if(navigationForm.chatForm.chatContentForm != null)
+        //            {
+        //                List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+        //                if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
+        //                {
+        //                    BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
+        //                    navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+        //                    sendStatusSeen(newMessage.IdFrom);
+        //                }
+        //                else if(newMessage.IdFrom != userLoggined.Id)
+        //                {
+        //                    string contentMsg = null;
+        //                    if (newMessage.IdFile != null)
+        //                    {
+        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a photo";
+        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a voice message";
+        //                        else
+        //                            contentMsg = "Sent an attachment";
+        //                    }
+        //                    else
+        //                        contentMsg = newMessage.ContentMsg;
+        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
+        //                }
+        //                else if(newMessage.IdFile != null && newMessage.IdFile != 0)
+        //                {
+        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+        //                } 
+        //            }
+        //            else
+        //            {
+        //                if (newMessage.IdTo == navigationForm.chatForm.user.Id)
+        //                {
+        //                    string contentMsg = null;
+        //                    if (newMessage.IdFile != null)
+        //                    {
+        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a photo";
+        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a voice message";
+        //                        else
+        //                            contentMsg = "Sent an attachment";
+        //                    }
+        //                    else 
+        //                        contentMsg = newMessage.ContentMsg;
+        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
         public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)
             {
-                setSubForm d = new setSubForm(receivedMsg);
-                form.Invoke(d, new object[] { idMsg, form});
+                setSubForm delegateCall = new setSubForm(receivedMsg);
+                form.Invoke(delegateCall, new object[] { idMsg, form });
             }
             else
             {
-                if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
+                if (!(form is NavigationForm navigationForm)) return;
+                DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+                string contentMsg = GetMessageContent(newMessage);
+                if (navigationForm.chatForm.chatContentForm != null)
                 {
-                    DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
-                    List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                    if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
-                    {
-                        BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
-                        navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
-                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-                        sendStatusSeen(newMessage.IdFrom);
-                    }
-                    else if(newMessage.IdFile != null && newMessage.IdFile != 0)
-                    {
-                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-                    }
-
-                    
+                    HandleChatContentForm(newMessage, navigationForm);
+                }
+                else if (ShouldShowNotification(newMessage, navigationForm.chatForm.user.Id))
+                {
+                    ShowNotification(newMessage, navigationForm.chatForm, contentMsg);
                 }
             }
         }
+        private static void HandleChatContentForm(DTO.Message newMessage, NavigationForm navigationForm)
+        {
+            List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+            if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
+            {
+                BLL.MsgBLL.UpdateMsgesToSeen(newMessage.Id);
+                navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+                navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+                sendStatusSeen(newMessage.IdFrom);
+            }
+            else if (newMessage.IdFile != null && newMessage.IdFile != 0)
+            {
+                navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+            }
+        }
+        private static string GetMessageContent(DTO.Message newMessage)
+        {
+            string contentMsg = newMessage.ContentMsg;
+            if (newMessage.IdFile != null)
+            {
+                string fileExtension = Path.GetExtension(newMessage.ContentMsg).ToLower();
+                if (Constants.AllowedFileType.IMAGES.Contains(fileExtension))
+                    contentMsg = "Sent a photo";
+                else if (Constants.AllowedFileType.AUDIOS.Contains(fileExtension))
+                    contentMsg = "Sent a voice message";
+                else
+                    contentMsg = "Sent an attachment";
+            }
+            return contentMsg;
+        }
+
+        private static bool ShouldShowNotification(DTO.Message newMessage, int currentUserId)
+        {
+            return newMessage.IdTo == currentUserId && newMessage.IdFrom != userLoggined.Id;
+        }
+        private static void ShowNotification(DTO.Message newMessage, ChatListForm chatForm, string contentMsg)
+        {
+            chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+            chatForm.notifyMsg.MouseClick += (sender, e) => chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom);
+        }
+
         public static void returnStatus(int status, Form form)
         {
             if (form.InvokeRequired)
@@ -218,7 +319,6 @@ namespace ClientWinform.SocketHandles
             {
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
-                    
                     optionForm(navigationForm.chatForm, bindLogin, "");
                 }
                 else if (activeForm is ChatListForm chatList && idLoggined != 0)
@@ -277,19 +377,31 @@ namespace ClientWinform.SocketHandles
                     DTO.Message msg = BLL.MsgBLL.getMessage(userLoggined.Id, user.Id);
                     if (msg != null)
                     {
+                        string contentMsg;
+                        if (msg.IdFile != null)
+                        {
+                            if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(msg.ContentMsg)))
+                                contentMsg = "Sent a photo";
+                            else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(msg.ContentMsg)))
+                                contentMsg = "Sent a voice message";
+                            else
+                                contentMsg = "Sent an attachment";
+                        }
+                        else
+                            contentMsg = msg.ContentMsg;
                         if (msg.IdFrom == userLoggined.Id)
                         {
-                            if (("You: " + msg.ContentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                chat.message = ("You: " + msg.ContentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                            if (("You: " + contentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                chat.message = ("You: " + contentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
                             else
-                                chat.message = "You: " + msg.ContentMsg;
+                                chat.message = "You: " + contentMsg;
                         }
                         else
                         {
                             if (msg.ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                chat.message = msg.ContentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                                chat.message = contentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
                             else
-                                chat.message = msg.ContentMsg;
+                                chat.message = contentMsg;
                         }
                         chat.time = BLL.MsgBLL.formatTime(msg.CreatedDate);
                     }

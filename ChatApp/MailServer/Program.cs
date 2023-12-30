@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
+            IPAddress address = IPAddress.Parse("192.168.2.10"); //hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");

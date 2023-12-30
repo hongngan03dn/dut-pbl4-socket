@@ -27,7 +27,7 @@ namespace ClientWinform.DTO
         }
         public static class MessageTies
         {
-            public const int MAXLENGTHINREVIEW = 18;
+            public const int MAXLENGTHINREVIEW = 25;
             public const int MAXLENGTHINCONTENT = 70;
         }
         public static class ConnectionsDescr

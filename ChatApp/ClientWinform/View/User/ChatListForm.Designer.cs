@@ -178,9 +178,12 @@ namespace ClientWinform.View.User
             // 
             // notifyMsg
             // 
+            this.notifyMsg.BalloonTipText = "You have new message";
+            this.notifyMsg.BalloonTipTitle = "Message";
             this.notifyMsg.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyMsg.Icon")));
             this.notifyMsg.Text = "WeConnect";
             this.notifyMsg.Visible = true;
+            //this.notifyMsg.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyMsg_MouseClick);
             // 
             // ChatListForm
             // 

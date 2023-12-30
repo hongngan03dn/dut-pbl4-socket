@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -280,6 +281,20 @@ namespace ClientWinform
 
         }
 
-
+        private void NavigationForm_Load(object sender, EventArgs e)
+        {
+            Size s = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height - 40);
+            this.Location = new Point(0, 0);
+            this.Size = s;
+            foreach(UserModel fr in BLL.MsgBLL.getUserListExplore(userOwn.Id, ""))
+            {
+                User user = BLL.UserBLL.getUserByID(fr.Id);
+                string gender;
+                if (user.Gender == false) gender = "she";
+                else gender = "he";
+                if (user.BOD != null && user.BOD.Value.Day == DateTime.Now.Day && user.BOD.Value.Month == DateTime.Now.Month )
+                    notifyMain.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, "Hi, " + userOwn.Username, "Today is " + user.Username + "'s birthday. Let's give " + gender + " a wish", ToolTipIcon.None);
+            }
+        }
     }
 }
