@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClientWinform.View.User;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace ClientWinform
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new loginForm());
+            Application.Run(new loginForm()); //loginForm VoiceChat
         }
     }
 }

@@ -512,5 +512,12 @@ namespace ClientWinform.View.User
             }
 
         }
+
+        private void butVoice_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("helu");
+            VoiceChat vc = new VoiceChat(userFrom, userTo);
+            vc.Visible = true;
+        }
     }
 }
