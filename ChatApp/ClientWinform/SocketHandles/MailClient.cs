@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.50";
+        static String _ipServer = "192.168.1.47";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -98,6 +98,7 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes(idFrom.ToString() + " has signned out");
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                _client.Close(1000);
             }
         }
         public static void sendNotiConnection(Nullable<Int32> idFrom, Nullable<Int32> idTo, int status)
@@ -107,8 +108,8 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                
             }
-
         }
         //public static void receivedMsg(int idMsg, Form form)
         //{
@@ -288,25 +289,32 @@ namespace ClientWinform.SocketHandles
                 string onlyIdNumbers = "";
                 if (message.Count() >= 2)
                 {
-                    string[] parts = message[1].Split(new[] {keyword}, StringSplitOptions.None);
-                    if (parts.Length == 2)
+                    //string[] parts = null;
+                    foreach (string findCurrentOnline in message)
                     {
-                        if (parts[0] != "")
-                            idLoggined = int.Parse(parts[0].Trim());
-
-                        onlyIdNumbers = parts[1];
-                    }
-                    string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
-
-                    idOnlines = new int[onlineStrings.Length];
-                    for (int i = 0; i < onlineStrings.Length; i++)
-                    {
-                        if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                        if (findCurrentOnline.Contains("Current onlines: "))
                         {
-                            idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                            string[] parts = findCurrentOnline.Split(new[] {keyword}, StringSplitOptions.None);
+                            if (parts.Length == 2)
+                            {
+                                if (parts[0] != "")
+                                    idLoggined = int.Parse(parts[0].Trim());
+
+                                onlyIdNumbers = parts[1];
+                            }
+                            string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
+
+                            idOnlines = new int[onlineStrings.Length];
+                            for (int i = 0; i < onlineStrings.Length; i++)
+                            {
+                                if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                                {
+                                    idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                                }
+                            }
+                            Array.Resize(ref idOnlines, idOnlines.Length - 1);                        
                         }
                     }
-                    Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
             }
             //delegate
@@ -420,11 +428,16 @@ namespace ClientWinform.SocketHandles
         }
         public static void listenForMessages(Form form)
         {
-            while(true)
+            while(_client.Connected)
             {
                 byte[] data = new byte[1024 * 128];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
+
+                if(string.IsNullOrEmpty(stringData))
+                {
+                    break;
+                }
 
                 SocketPacketModel packet = new SocketPacketModel();
                 bool isJsonString;
