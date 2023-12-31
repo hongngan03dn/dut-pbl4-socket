@@ -36,14 +36,9 @@ namespace ClientWinform.View.User
         public static bool isLoadSuccess = true;
         public static byte[] imgLoaded = new byte[1024 * 85];
 
-        public ChatContentForm()
+        public ChatContentForm(int idFrom, int idTo)
         {
             InitializeComponent();
-
-        }
-        public ChatContentForm(int idFrom, int idTo): this()
-        {
-            
             this.userFrom.Id = idFrom;
             this.userTo = BLL.UserBLL.getUserByID(idTo);
             labelUsername.Text = this.userTo.Username;
@@ -54,7 +49,8 @@ namespace ClientWinform.View.User
         }
         public async void LoadData(int idFrom, int idTo)
         {
-            var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            //var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            var messages = BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount);
             await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
             loadedMessageCount += 20;
             if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
@@ -159,6 +155,7 @@ namespace ClientWinform.View.User
             Label label = new Label();
 
             Guna2PictureBox pictureBox = new Guna2PictureBox();
+            pictureBox.Image = Resources.defaultAvatar;
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
             if (messageObject.IdFile != null && Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(messages)))
             {
@@ -184,8 +181,8 @@ namespace ClientWinform.View.User
                 {
                     //Thread.Sleep(1000);
                     await Task.Delay(500);
-                    pictureBox.Visible = false;
-                    panel.Controls.Add(pictureBox);
+                    //pictureBox.Visible = false;
+                    //panel.Controls.Add(pictureBox);
                 }
 
                 if (isLoadSuccess)
@@ -195,6 +192,7 @@ namespace ClientWinform.View.User
                     pictureBox.Visible = true;
                 }
 
+                panel.Controls.Add(pictureBox);
                 idMsgLoaded = 0;
                 isLoaded = false;
                 flowLayoutPanelChat.Cursor = Cursors.Default;

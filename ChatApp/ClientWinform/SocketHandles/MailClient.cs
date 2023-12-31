@@ -238,7 +238,7 @@ namespace ClientWinform.SocketHandles
         private static void ShowNotification(DTO.Message newMessage, ChatListForm chatForm, string contentMsg)
         {
             chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
-            chatForm.notifyMsg.MouseClick += (sender, e) => chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom);
+            //chatForm.notifyMsg.MouseClick += (sender, e) => chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom);
         }
 
         public static void returnStatus(int status, Form form)
@@ -419,14 +419,18 @@ namespace ClientWinform.SocketHandles
                     }
                     foreach (Control c in chat.Controls)
                     {
-                        c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
-                        c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        if(c.Name == "panelMain")
+                        {
+                            c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                            c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        }
+
                     };
                     chatList.flowLayoutPanelListChat.Controls.Add(chat);
                 });
             }
         }
-        public static void listenForMessages(Form form)
+        public static async void listenForMessages(Form form)
         {
             while(_client.Connected)
             {
@@ -538,6 +542,7 @@ namespace ClientWinform.SocketHandles
                 {
                     string[] messages = stringData.Split('\n');
                     UpdateListChat(messages, form, true);
+                    await Task.Delay(1000);
                 }
             }
         }
