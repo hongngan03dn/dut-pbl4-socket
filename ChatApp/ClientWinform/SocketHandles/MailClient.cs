@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.50";
+        static String _ipServer = "192.168.1.47";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -98,6 +98,7 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes(idFrom.ToString() + " has signned out");
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                _client.Close(1000);
             }
         }
         public static void sendNotiConnection(Nullable<Int32> idFrom, Nullable<Int32> idTo, int status)
@@ -420,12 +421,16 @@ namespace ClientWinform.SocketHandles
         }
         public static void listenForMessages(Form form)
         {
-            while(true)
+            while(_client.Connected)
             {
                 byte[] data = new byte[1024 * 128];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
 
+                if(string.IsNullOrEmpty(stringData))
+                {
+                    break;
+                }
                 SocketPacketModel packet = new SocketPacketModel();
                 bool isJsonString;
                 try

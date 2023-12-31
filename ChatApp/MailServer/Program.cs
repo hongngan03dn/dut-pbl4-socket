@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.1.50"); //hostEntry.AddressList[3]; 
+            IPAddress address = IPAddress.Parse("192.168.1.47"); //hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -135,12 +135,14 @@ namespace MailServer
                     {
                         string[] messages = recvStr.Split(new string[] { " has signned out" }, StringSplitOptions.None);
                         ClientModel clientSendMsg = clientOnline.Where(x => x.Id == Int32.Parse(messages[0].Trim())).FirstOrDefault();
+                        clientSendMsg.clientSocket.Close(1000);
                         clientOnline.Remove(clientSendMsg);
                         if(clientOnline.Count > 0)
                         {
                             broadcastMessage(recvStr);
                         }
                         Console.WriteLine("INFO Logout by: " + Int32.Parse(messages[0].Trim()) + "\n");
+                        break;
                     }
                     else if (recvStr.Contains("Connection"))
                     {
