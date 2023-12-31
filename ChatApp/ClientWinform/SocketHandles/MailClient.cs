@@ -108,8 +108,8 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                
             }
-
         }
         //public static void receivedMsg(int idMsg, Form form)
         //{
@@ -289,25 +289,32 @@ namespace ClientWinform.SocketHandles
                 string onlyIdNumbers = "";
                 if (message.Count() >= 2)
                 {
-                    string[] parts = message[1].Split(new[] {keyword}, StringSplitOptions.None);
-                    if (parts.Length == 2)
+                    //string[] parts = null;
+                    foreach (string findCurrentOnline in message)
                     {
-                        if (parts[0] != "")
-                            idLoggined = int.Parse(parts[0].Trim());
-
-                        onlyIdNumbers = parts[1];
-                    }
-                    string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
-
-                    idOnlines = new int[onlineStrings.Length];
-                    for (int i = 0; i < onlineStrings.Length; i++)
-                    {
-                        if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                        if (findCurrentOnline.Contains("Current onlines: "))
                         {
-                            idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                            string[] parts = findCurrentOnline.Split(new[] {keyword}, StringSplitOptions.None);
+                            if (parts.Length == 2)
+                            {
+                                if (parts[0] != "")
+                                    idLoggined = int.Parse(parts[0].Trim());
+
+                                onlyIdNumbers = parts[1];
+                            }
+                            string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
+
+                            idOnlines = new int[onlineStrings.Length];
+                            for (int i = 0; i < onlineStrings.Length; i++)
+                            {
+                                if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                                {
+                                    idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                                }
+                            }
+                            Array.Resize(ref idOnlines, idOnlines.Length - 1);                        
                         }
                     }
-                    Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
             }
             //delegate
@@ -431,6 +438,7 @@ namespace ClientWinform.SocketHandles
                 {
                     break;
                 }
+
                 SocketPacketModel packet = new SocketPacketModel();
                 bool isJsonString;
                 try
