@@ -49,8 +49,8 @@ namespace ClientWinform.View.User
         }
         public async void LoadData(int idFrom, int idTo)
         {
-            //var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
-            var messages = BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount);
+            var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            //var messages = BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount);
             await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
             loadedMessageCount += 20;
             if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)

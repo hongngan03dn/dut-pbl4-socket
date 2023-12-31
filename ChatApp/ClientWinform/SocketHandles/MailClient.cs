@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.47";
+        static String _ipServer = "192.168.2.20";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -274,7 +274,7 @@ namespace ClientWinform.SocketHandles
 
         public static void UpdateListChat(string[] message, Form activeForm, bool bindLogin)
         {
-            if(message != null)
+            if (message != null)
             {
                 string[] partsLogin = message[0].Split(' ');
                 bool isParsableToId = int.TryParse(partsLogin[0], out int myId);
@@ -289,7 +289,6 @@ namespace ClientWinform.SocketHandles
                 string onlyIdNumbers = "";
                 if (message.Count() >= 2)
                 {
-                    //string[] parts = null;
                     foreach (string findCurrentOnline in message)
                     {
                         if (findCurrentOnline.Contains("Current onlines: "))
@@ -342,10 +341,19 @@ namespace ClientWinform.SocketHandles
                 chatList.flowLayoutPanelListChat.Controls.Clear();
             }
             List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id, txtSearch);
+            foreach (Control ctrl in chatList.flowLayoutPanelListChat.Controls)
+            {
+                if (ctrl is ChatReviewForm)
+                {
+                    ChatReviewForm userChat = (ChatReviewForm)ctrl;
+                        userChat.Visible = false;
+                }
+            }
             foreach (DTO.UserModel user in users)
             {
                 chatList.Invoke((MethodInvoker)delegate
                 {
+
                     ChatReviewForm chat = chatList.flowLayoutPanelListChat.Controls.OfType<ChatReviewForm>()
                                                                                                   .FirstOrDefault(c => c.userName == user.Username);
                     if (chat == null)
@@ -419,14 +427,18 @@ namespace ClientWinform.SocketHandles
                     }
                     foreach (Control c in chat.Controls)
                     {
-                        if(c.Name == "panelMain")
+                        if(!chat.isAddEventClick)
                         {
-                            c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
-                            c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                            EventHandler panelClickHandler = (sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id);
+                            c.Click -= panelClickHandler;
+                            c.Click += panelClickHandler;
+                            chat.isAddEventClick = true;
                         }
-
+                        //c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        //c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
                     };
                     chatList.flowLayoutPanelListChat.Controls.Add(chat);
+                    chat.Visible = true;
                 });
             }
         }
