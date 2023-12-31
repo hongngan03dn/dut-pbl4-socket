@@ -216,6 +216,7 @@ namespace ClientWinform.View.User
                         iconFile.Image = Resources.play;
                         iconFile.Size = new Size(16, 16);
                         iconFile.Cursor = Cursors.Hand;
+                        label.Text = "Voice";
                     }
                     else
                     {
@@ -515,7 +516,6 @@ namespace ClientWinform.View.User
 
         private void butVoice_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("helu");
             VoiceChat vc = new VoiceChat(userFrom, userTo);
             vc.Visible = true;
         }

@@ -36,13 +36,15 @@ namespace ClientWinform.View.User
 
         private void btnStartRecord_Click(object sender, EventArgs e)
         {
+            timerVoiceLimit.Start();
             mciSendString("open new type waveaudio alias Som", null, 0, 0);
-            mciSendString("record Som", null, 0,0);
+            mciSendString("record Som", null, 0, 0);
             currentFile = "";
         }
 
         private void btnEndRecord_Click(object sender, EventArgs e)
         {
+            timerVoiceLimit.Stop();
             mciSendString("pause Som", null, 0, 0);
             //SaveFileDialog saveFileDialog = new SaveFileDialog();
             //saveFileDialog.Filter = "wave|*.wav";
@@ -70,6 +72,7 @@ namespace ClientWinform.View.User
             }
 
             sendFileAudio();
+            this.Close();
         }
 
         public static void ConvertWavToLowQuality(string inputFile, string outputFile, int sampleRate, int bitDepth)
@@ -114,6 +117,15 @@ namespace ClientWinform.View.User
                         return;
                     }
                 }
+            }
+        }
+
+        private void timerVoiceLimit_Tick(object sender, EventArgs e)
+        {
+            progressBarVoice.PerformStep();
+            if (progressBarVoice.Value == 24)
+            {
+                btnEndRecord_Click(sender, e);
             }
         }
     }

@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.1.50";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -398,7 +398,7 @@ namespace ClientWinform.SocketHandles
                         }
                         else
                         {
-                            if (msg.ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                            if (contentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
                                 chat.message = contentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
                             else
                                 chat.message = contentMsg;

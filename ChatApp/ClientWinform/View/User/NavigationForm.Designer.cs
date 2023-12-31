@@ -453,6 +453,6 @@ namespace ClientWinform
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
         public System.Windows.Forms.Panel panelExplore;
         private Guna.UI2.WinForms.Guna2Button btnSignOut;
-        private System.Windows.Forms.NotifyIcon notifyMain;
+        public System.Windows.Forms.NotifyIcon notifyMain;
     }
 }
