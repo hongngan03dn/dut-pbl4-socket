@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
+            IPAddress address = hostEntry.AddressList[11]; //IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -108,7 +108,7 @@ namespace MailServer
         }
 
         
-        public static void listenMsgClient(object objClient)
+        public static async void listenMsgClient(object objClient)
         {
             Socket client = objClient as Socket;
             while (true)
@@ -135,12 +135,14 @@ namespace MailServer
                     {
                         string[] messages = recvStr.Split(new string[] { " has signned out" }, StringSplitOptions.None);
                         ClientModel clientSendMsg = clientOnline.Where(x => x.Id == Int32.Parse(messages[0].Trim())).FirstOrDefault();
+                        clientSendMsg.clientSocket.Close(1000);
                         clientOnline.Remove(clientSendMsg);
                         if(clientOnline.Count > 0)
                         {
                             broadcastMessage(recvStr);
                         }
                         Console.WriteLine("INFO Logout by: " + Int32.Parse(messages[0].Trim()) + "\n");
+                        break;
                     }
                     else if (recvStr.Contains("Connection"))
                     {
@@ -207,6 +209,15 @@ namespace MailServer
                             BinaryWriter writer = new BinaryWriter(System.IO.File.Open(pathServer + "/" + fname, FileMode.Append));
                             writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
                             writer.Close();
+                            //if(clientSendMsg != null)
+                            //{
+                            //    clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + 
+                            //                                                            " From: " + packet.IdFrom + 
+                            //                                                            " To: " + packet.IdTo + 
+                            //                                                            " CreatedDate: " + packet.CreatedDate + 
+                            //                                                            " IdMsg: " + packet.IdMsg));
+                            //}
+                           
                         }
 
                         // End handle File
@@ -215,31 +226,51 @@ namespace MailServer
                         if (onlineToClient != null)
                         {
                             messageHelper.UpdateMesageToReceived(packet.IdMsg);
-                            byte[] msg = Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + " From: " + packet.IdFrom + " To: " + packet.IdTo + " CreatedDate: " + packet.CreatedDate + " IdMsg: " + packet.IdMsg);
-                            onlineToClient.clientSocket.Send(msg);
-                            if(packet.PacketType == Constants.PacketType.FILE)
+                            string messageToRecipient = "Message: " + packet.ContentMsg + 
+                                                        " From: " + packet.IdFrom + 
+                                                        " To: " + packet.IdTo + 
+                                                        " CreatedDate: " + packet.CreatedDate + 
+                                                        " IdMsg: " + packet.IdMsg;
+                            byte[] msgToRecipient = Encoding.ASCII.GetBytes(messageToRecipient);
+                            onlineToClient.clientSocket.Send(msgToRecipient);
+                            if(clientSendMsg != null)
                             {
+                                //if (onlineToClient != null)
+                                //{
+                                byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
                                 clientSendMsg.clientSocket.Send(msg);
+                                //}
+                                //else
+                                //{
+                                //    byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
+                                //    clientSendMsg.clientSocket.Send(msg);
+                                //}
+                                //Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                             }
-                            
                         }
-                        else
+                        else if(clientSendMsg != null)
                         {
+                            byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
+
+                            clientSendMsg.clientSocket.Send(msg);
                         }
                         if(clientSendMsg != null)
                         {
-                            if (onlineToClient != null)
-                            {
-                                byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
-                                clientSendMsg.clientSocket.Send(msg);
-                            }
-                            else
-                            {
-                                byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
-                                clientSendMsg.clientSocket.Send(msg);
-                            }
                             Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
+
                         }
+                        // Start handle File - send back img to fromID
+                        if (packet.PacketType == Constants.PacketType.FILE && clientSendMsg != null)
+                        {
+                            await Task.Delay(1000);
+                            clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg +
+                                                                                        " From: " + packet.IdFrom +
+                                                                                        " To: " + packet.IdTo +
+                                                                                        " CreatedDate: " + packet.CreatedDate +
+                                                                                        " IdMsg: " + packet.IdMsg));
+
+                        }
+                        // End handle File  - send back img to fromID
                     }
                 }
                 catch (Exception ex)

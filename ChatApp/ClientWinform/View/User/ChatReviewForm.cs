@@ -25,6 +25,7 @@ namespace ClientWinform.View.User
         private Image _ava;
         private Image _isOnline;
         private bool _isClicked = false;
+        private bool _isAddEventClick = false;
 
         [Category("Custom Props")]
         public string userName
@@ -76,6 +77,13 @@ namespace ClientWinform.View.User
         {
             get { return _isClicked; }
             set { _isClicked = value;}
+        }
+
+        [Category("Custom Props")]
+        public bool isAddEventClick
+        {
+            get { return _isAddEventClick; }
+            set { _isAddEventClick = value; }
         }
         #endregion
 

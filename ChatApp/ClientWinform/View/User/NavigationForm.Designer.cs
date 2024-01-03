@@ -29,6 +29,8 @@ namespace ClientWinform
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NavigationForm));
             this.tableLayoutPanelMain = new System.Windows.Forms.TableLayoutPanel();
             this.panelNavigation = new System.Windows.Forms.Panel();
             this.tableLayoutPanelMenu = new System.Windows.Forms.TableLayoutPanel();
@@ -49,6 +51,7 @@ namespace ClientWinform
             this.tableLayoutPanelExplore = new System.Windows.Forms.TableLayoutPanel();
             this.searchTxt = new Guna.UI2.WinForms.Guna2TextBox();
             this.flowLayoutPanelListExplore = new System.Windows.Forms.FlowLayoutPanel();
+            this.notifyMain = new System.Windows.Forms.NotifyIcon(this.components);
             this.tableLayoutPanelMain.SuspendLayout();
             this.panelNavigation.SuspendLayout();
             this.tableLayoutPanelMenu.SuspendLayout();
@@ -396,6 +399,12 @@ namespace ClientWinform
             this.flowLayoutPanelListExplore.TabIndex = 0;
             this.flowLayoutPanelListExplore.WrapContents = false;
             // 
+            // notifyMain
+            // 
+            this.notifyMain.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyMain.Icon")));
+            this.notifyMain.Text = "Main";
+            this.notifyMain.Visible = true;
+            // 
             // NavigationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -403,10 +412,11 @@ namespace ClientWinform
             this.ClientSize = new System.Drawing.Size(1640, 756);
             this.Controls.Add(this.tableLayoutPanelMain);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "NavigationForm";
             this.Text = "NavigationForm";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.NavigationForm_Load);
             this.tableLayoutPanelMain.ResumeLayout(false);
             this.panelNavigation.ResumeLayout(false);
             this.tableLayoutPanelMenu.ResumeLayout(false);
@@ -443,5 +453,6 @@ namespace ClientWinform
         private Guna.UI2.WinForms.Guna2TextBox searchTxt;
         public System.Windows.Forms.Panel panelExplore;
         private Guna.UI2.WinForms.Guna2Button btnSignOut;
+        public System.Windows.Forms.NotifyIcon notifyMain;
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ClientWinform.DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ClientWinform.BLL
                                          u => u.Id,
                                          m => m.IdFrom == id ? m.IdTo : (m.IdTo == id ? m.IdFrom : -1),
                                          (u, m) => new { User = u, Message = m })
-                                   .Where(um => (((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                   .Where(um => (((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD && um.Message.Status != Constants.MessageStatuses.INACTIVE)
                                                || ((um.Message.IdFrom == id || um.Message.IdTo == id) && um.Message.Description == Constants.ConnectionsDescr.CONNECTIONKEYWORD && um.Message.Status == Constants.ConnectionsDescr.CONNECTED)))
                                    .GroupBy(um => new { um.User.Id, um.User.Username, um.User.IdAvatar })
                                    .Select(g => new UserModel
@@ -29,13 +30,25 @@ namespace ClientWinform.BLL
                                        Id = g.Key.Id,
                                        Username = g.Key.Username,
                                        IdAvatar = g.Key.IdAvatar,
-                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate)
+                                       LatestMessageTime = g.Max(um => um.Message.CreatedDate),
+                                       Status = g.Max(um => um.Message.Status)
                                    })
                                    .OrderByDescending(u => u.LatestMessageTime)
                                    .Where(u => u.Username.Contains(txtSearch))
                                    .ToList();
-
                 return users;
+            }
+        }
+        public static int CountMessageUnRead(int id)
+        {
+            using (var context = new testpbldbEntities1())
+            {
+                var messages = context.Messages.Where(m => m.IdTo == id && m.Description != Constants.ConnectionsDescr.CONNECTIONKEYWORD)
+                                               .GroupBy(m => m.IdFrom)
+                                               .Select(group => new { IdFrom = group.Key, UnreadCount = group.Count(m => m.Status != Constants.MessageStatuses.SEEN) })
+                                               .ToList();
+                var unreadCount = messages.Sum(m => m.UnreadCount);
+                return unreadCount;
             }
         }
         public static List<UserModel> getUserListExplore(int id, string search)

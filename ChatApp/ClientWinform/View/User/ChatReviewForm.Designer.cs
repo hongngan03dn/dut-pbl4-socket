@@ -136,7 +136,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Panel panelMain;
+        public System.Windows.Forms.Panel panelMain;
         private Guna.UI2.WinForms.Guna2CirclePictureBox picAva;
         private System.Windows.Forms.Label labelMessage;
         private System.Windows.Forms.Label labelUsername;

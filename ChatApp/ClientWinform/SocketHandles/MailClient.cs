@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Web.UI.WebControls;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Media;
+using static Guna.UI2.Native.WinApi;
 
 namespace ClientWinform.SocketHandles
 {
@@ -30,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.56.1";
+        static String _ipServer = "192.168.1.18";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -46,7 +47,6 @@ namespace ClientWinform.SocketHandles
             _client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             userLoggined = BLL.UserBLL.getUserByID(myId);
             formAll = activeForm;
-
             try
             {
                 // kết nối Server
@@ -98,6 +98,7 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes(idFrom.ToString() + " has signned out");
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                _client.Close(1000);
             }
         }
         public static void sendNotiConnection(Nullable<Int32> idFrom, Nullable<Int32> idTo, int status)
@@ -107,35 +108,139 @@ namespace ClientWinform.SocketHandles
             {
                 datasend = Encoding.ASCII.GetBytes("Connection: " + idFrom.ToString() + " | " + idTo.ToString() + " status: " + status.ToString());
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
+                
             }
-            UpdateListChat(null, formAll, true);
         }
+        //public static void receivedMsg(int idMsg, Form form)
+        //{
+        //    if (form.InvokeRequired)
+        //    {
+        //        setSubForm d = new setSubForm(receivedMsg);
+        //        form.Invoke(d, new object[] { idMsg, form});
+        //    }
+        //    else
+        //    {
+        //        if (form is NavigationForm navigationForm)
+        //        {
+        //            DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+        //            if(navigationForm.chatForm.chatContentForm != null)
+        //            {
+        //                List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+        //                if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
+        //                {
+        //                    BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
+        //                    navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+        //                    sendStatusSeen(newMessage.IdFrom);
+        //                }
+        //                else if(newMessage.IdFrom != userLoggined.Id)
+        //                {
+        //                    string contentMsg = null;
+        //                    if (newMessage.IdFile != null)
+        //                    {
+        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a photo";
+        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a voice message";
+        //                        else
+        //                            contentMsg = "Sent an attachment";
+        //                    }
+        //                    else
+        //                        contentMsg = newMessage.ContentMsg;
+        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
+        //                }
+        //                else if(newMessage.IdFile != null && newMessage.IdFile != 0)
+        //                {
+        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+        //                } 
+        //            }
+        //            else
+        //            {
+        //                if (newMessage.IdTo == navigationForm.chatForm.user.Id)
+        //                {
+        //                    string contentMsg = null;
+        //                    if (newMessage.IdFile != null)
+        //                    {
+        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a photo";
+        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
+        //                            contentMsg = "Sent a voice message";
+        //                        else
+        //                            contentMsg = "Sent an attachment";
+        //                    }
+        //                    else 
+        //                        contentMsg = newMessage.ContentMsg;
+        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
         public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)
             {
-                setSubForm d = new setSubForm(receivedMsg);
-                form.Invoke(d, new object[] { idMsg, form});
+                setSubForm delegateCall = new setSubForm(receivedMsg);
+                form.Invoke(delegateCall, new object[] { idMsg, form });
             }
             else
             {
-                if (form is NavigationForm navigationForm && navigationForm.chatForm.chatContentForm != null)
+                if (!(form is NavigationForm navigationForm)) return;
+                DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
+                string contentMsg = GetMessageContent(newMessage);
+                if (navigationForm.chatForm.chatContentForm != null)
                 {
-                    DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
-                    if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
-                    {
-                        List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-                        BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
-                        
-                        navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
-                        navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-
-                        sendStatusSeen(newMessage.IdFrom);
-                    }
-                    
+                    HandleChatContentForm(newMessage, navigationForm);
+                }
+                else if (ShouldShowNotification(newMessage, navigationForm.chatForm.user.Id))
+                {
+                    ShowNotification(newMessage, navigationForm.chatForm, contentMsg);
                 }
             }
         }
+        private static void HandleChatContentForm(DTO.Message newMessage, NavigationForm navigationForm)
+        {
+            List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
+            if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
+            {
+                BLL.MsgBLL.UpdateMsgesToSeen(newMessage.Id);
+                navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
+                navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+                sendStatusSeen(newMessage.IdFrom);
+            }
+            else if (newMessage.IdFile != null && newMessage.IdFile != 0)
+            {
+                navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
+            }
+        }
+        private static string GetMessageContent(DTO.Message newMessage)
+        {
+            string contentMsg = newMessage.ContentMsg;
+            if (newMessage.IdFile != null)
+            {
+                string fileExtension = Path.GetExtension(newMessage.ContentMsg).ToLower();
+                if (Constants.AllowedFileType.IMAGES.Contains(fileExtension))
+                    contentMsg = "Sent a photo";
+                else if (Constants.AllowedFileType.AUDIOS.Contains(fileExtension))
+                    contentMsg = "Sent a voice message";
+                else
+                    contentMsg = "Sent an attachment";
+            }
+            return contentMsg;
+        }
+
+        private static bool ShouldShowNotification(DTO.Message newMessage, int currentUserId)
+        {
+            return newMessage.IdTo == currentUserId && newMessage.IdFrom != userLoggined.Id;
+        }
+        private static void ShowNotification(DTO.Message newMessage, ChatListForm chatForm, string contentMsg)
+        {
+            chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
+            //chatForm.notifyMsg.MouseClick += (sender, e) => chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom);
+        }
+
         public static void returnStatus(int status, Form form)
         {
             if (form.InvokeRequired)
@@ -169,7 +274,7 @@ namespace ClientWinform.SocketHandles
 
         public static void UpdateListChat(string[] message, Form activeForm, bool bindLogin)
         {
-            if(message != null)
+            if (message != null)
             {
                 string[] partsLogin = message[0].Split(' ');
                 bool isParsableToId = int.TryParse(partsLogin[0], out int myId);
@@ -184,25 +289,31 @@ namespace ClientWinform.SocketHandles
                 string onlyIdNumbers = "";
                 if (message.Count() >= 2)
                 {
-                    string[] parts = message[1].Split(new[] {keyword}, StringSplitOptions.None);
-                    if (parts.Length == 2)
+                    foreach (string findCurrentOnline in message)
                     {
-                        if (parts[0] != "")
-                            idLoggined = int.Parse(parts[0].Trim());
-
-                        onlyIdNumbers = parts[1];
-                    }
-                    string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
-
-                    idOnlines = new int[onlineStrings.Length];
-                    for (int i = 0; i < onlineStrings.Length; i++)
-                    {
-                        if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                        if (findCurrentOnline.Contains("Current onlines: "))
                         {
-                            idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                            string[] parts = findCurrentOnline.Split(new[] {keyword}, StringSplitOptions.None);
+                            if (parts.Length == 2)
+                            {
+                                if (parts[0] != "")
+                                    idLoggined = int.Parse(parts[0].Trim());
+
+                                onlyIdNumbers = parts[1];
+                            }
+                            string[] onlineStrings = onlyIdNumbers.Trim().Split(',');
+
+                            idOnlines = new int[onlineStrings.Length];
+                            for (int i = 0; i < onlineStrings.Length; i++)
+                            {
+                                if (onlineStrings[i].Trim() != "" && int.Parse(onlineStrings[i].Trim()) != idLoggined)
+                                {
+                                    idOnlines[i] = int.Parse(onlineStrings[i].Trim());
+                                }
+                            }
+                            Array.Resize(ref idOnlines, idOnlines.Length - 1);                        
                         }
                     }
-                    Array.Resize(ref idOnlines, idOnlines.Length - 1);
                 }
             }
             //delegate
@@ -213,7 +324,6 @@ namespace ClientWinform.SocketHandles
             }
             else
             {
-
                 if (activeForm is NavigationForm navigationForm && idLoggined != 0)
                 {
                     optionForm(navigationForm.chatForm, bindLogin, "");
@@ -231,10 +341,19 @@ namespace ClientWinform.SocketHandles
                 chatList.flowLayoutPanelListChat.Controls.Clear();
             }
             List<DTO.UserModel> users = BLL.MsgBLL.getUserListChat(userLoggined.Id, txtSearch);
+            foreach (Control ctrl in chatList.flowLayoutPanelListChat.Controls)
+            {
+                if (ctrl is ChatReviewForm)
+                {
+                    ChatReviewForm userChat = (ChatReviewForm)ctrl;
+                        userChat.Visible = false;
+                }
+            }
             foreach (DTO.UserModel user in users)
             {
                 chatList.Invoke((MethodInvoker)delegate
                 {
+
                     ChatReviewForm chat = chatList.flowLayoutPanelListChat.Controls.OfType<ChatReviewForm>()
                                                                                                   .FirstOrDefault(c => c.userName == user.Username);
                     if (chat == null)
@@ -263,13 +382,10 @@ namespace ClientWinform.SocketHandles
                     {
                         for (int i = 0; i < idOnlines.Length; i++)
                         {
-                            if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
+                        if (user.Id == idOnlines[i] && bindLogin && BLL.UserBLL.checkIsHaveConnection(user.Id, userLoggined.Id).Status == Constants.ConnectionsDescr.CONNECTED)
                             {
+
                                 chat.isPictureBoxOnlineVisible = true;
-                            }
-                            else
-                            {
-                                chat.isPictureBoxOnlineVisible = false;
                             }
                         }
                     }
@@ -277,19 +393,31 @@ namespace ClientWinform.SocketHandles
                     DTO.Message msg = BLL.MsgBLL.getMessage(userLoggined.Id, user.Id);
                     if (msg != null)
                     {
+                        string contentMsg;
+                        if (msg.IdFile != null)
+                        {
+                            if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(msg.ContentMsg)))
+                                contentMsg = "Sent a photo";
+                            else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(msg.ContentMsg)))
+                                contentMsg = "Sent a voice message";
+                            else
+                                contentMsg = "Sent an attachment";
+                        }
+                        else
+                            contentMsg = msg.ContentMsg;
                         if (msg.IdFrom == userLoggined.Id)
                         {
-                            if (("You: " + msg.ContentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                chat.message = ("You: " + msg.ContentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                            if (("You: " + contentMsg).Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                chat.message = ("You: " + contentMsg).Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
                             else
-                                chat.message = "You: " + msg.ContentMsg;
+                                chat.message = "You: " + contentMsg;
                         }
                         else
                         {
-                            if (msg.ContentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
-                                chat.message = msg.ContentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
+                            if (contentMsg.Length > Constants.MessageTies.MAXLENGTHINREVIEW)
+                                chat.message = contentMsg.Substring(0, Constants.MessageTies.MAXLENGTHINREVIEW) + "...";
                             else
-                                chat.message = msg.ContentMsg;
+                                chat.message = contentMsg;
                         }
                         chat.time = BLL.MsgBLL.formatTime(msg.CreatedDate);
                     }
@@ -299,20 +427,33 @@ namespace ClientWinform.SocketHandles
                     }
                     foreach (Control c in chat.Controls)
                     {
-                        c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
-                        c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        if(!chat.isAddEventClick)
+                        {
+                            EventHandler panelClickHandler = (sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id);
+                            c.Click -= panelClickHandler;
+                            c.Click += panelClickHandler;
+                            chat.isAddEventClick = true;
+                        }
+                        //c.Click -= new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
+                        //c.Click += new EventHandler((sender, e) => chatList.chatPanel_Click(sender, e, userLoggined.Id, user.Id));
                     };
                     chatList.flowLayoutPanelListChat.Controls.Add(chat);
+                    chat.Visible = true;
                 });
             }
         }
-        public static void listenForMessages(Form form)
+        public static async void listenForMessages(Form form)
         {
-            while(true)
+            while(_client.Connected)
             {
                 byte[] data = new byte[1024 * 128];
                 int receivedDataLength = _client.Receive(data);
                 string stringData = Encoding.ASCII.GetString(data, 0, receivedDataLength);
+
+                if(string.IsNullOrEmpty(stringData))
+                {
+                    break;
+                }
 
                 SocketPacketModel packet = new SocketPacketModel();
                 bool isJsonString;
@@ -413,6 +554,7 @@ namespace ClientWinform.SocketHandles
                 {
                     string[] messages = stringData.Split('\n');
                     UpdateListChat(messages, form, true);
+                    await Task.Delay(1000);
                 }
             }
         }
@@ -449,7 +591,7 @@ namespace ClientWinform.SocketHandles
             {
                 byte[] datasend = Encoding.ASCII.GetBytes(sendMsg);
                 _client.Send(datasend, datasend.Length, SocketFlags.None);
-                UpdateListChat(null, formAll, true);
+                //UpdateListChat(null, formAll, true);
             }
             catch (Exception ex)
             {
@@ -470,6 +612,21 @@ namespace ClientWinform.SocketHandles
             {
                 throw ex;
             }
+        }
+        public static async Task sendRequestFileAsync(DTO.Message message, string selectedFolderClient)
+        {
+            SocketPacketModel packet = new SocketPacketModel(message.Id, 0, 0, selectedFolderClient, DateTime.Now, Constants.PacketType.GET_FILE);
+            string sendMsg = JsonConvert.SerializeObject(packet);
+            try
+            {
+                byte[] dataSend = Encoding.ASCII.GetBytes(sendMsg);
+                await _client.SendAsync(new ArraySegment<byte>(dataSend), SocketFlags.None); // This line should be asynchronous
+            }
+            catch (Exception ex)
+            {
+                throw ex; // Rethrowing the exception like this can lose the stack trace.
+            }
+
         }
     }
 }

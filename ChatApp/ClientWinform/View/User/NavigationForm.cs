@@ -6,9 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -25,6 +27,7 @@ namespace ClientWinform
         private bool mouseDown;
         private Point lastLocation;
 
+
         private static User userOwn = new User();
         byte[] images = null;
 
@@ -33,6 +36,7 @@ namespace ClientWinform
         public NavigationForm()
         {
             InitializeComponent();
+
         }
         public NavigationForm(User user):this()
         {
@@ -42,7 +46,8 @@ namespace ClientWinform
             chatForm = new ChatListForm(userOwn);
             profileForm = new ProfileForm(user);
             OpenStartForm(chatForm);
-        }  
+            
+        } 
         public void showDetail(User user)
         {
             lableUsername.Text = user.Username;
@@ -147,91 +152,41 @@ namespace ClientWinform
             lbl.ForeColor = Color.FromArgb(151, 142, 142);
             return lbl;
         }
-        public void addExplorePanel(string txtSearch)
+
+        public async void addExplorePanel(string txtSearch)
         {
+            List<UserModel> friendModel = await Task.Run(() => BLL.MsgBLL.getUserListExplore(userOwn.Id, txtSearch));
+            List<User> friends = new List<User>();
+            foreach(UserModel frModel in friendModel)
+            {
+                User fr = BLL.UserBLL.getUserByID(frModel.Id);
+                friends.Add(fr);
+            }
+            List<User> connectings = await Task.Run(() => BLL.UserBLL.getConnectingOfUser(userOwn.Id, txtSearch));
+            List<int> idUserExcept = friends.Select(user => user.Id).ToList();
+            List<User> explores = await Task.Run(() => BLL.UserBLL.GetUserExplore(userOwn.Id, idUserExcept, connectings, txtSearch));
+
+
+            flowLayoutPanelListExplore.SuspendLayout();  // Suspend layout logic
+
             flowLayoutPanelListExplore.Controls.Clear();
-            Label lblFriend = createLable("Friend");
-            Label lblConnecting = createLable("Connecting");
-            Label lblExplore = createLable("Explore");
 
-            List<DTO.UserModel> friends = BLL.MsgBLL.getUserListExplore(userOwn.Id, txtSearch);
-            if(friends.Count > 0)
-            {
-                flowLayoutPanelListExplore.Controls.Add(lblFriend);
-                foreach(DTO.UserModel user in friends)
-                {
-                    UserExploreControl userFriend = flowLayoutPanelListExplore.Controls.OfType<UserExploreControl>().FirstOrDefault(c => c.userName == user.Username);
-                    if(userFriend == null)
-                    {
-                        userFriend = new UserExploreControl();
-                        flowLayoutPanelListExplore.Controls.Add(userFriend);
-                    }
-                    byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)user.IdAvatar);
-                
-                    if (images == null)
-                    {
-                        userFriend.ava = Resources.defaultAvatar;
-                    }
-                    else
-                    {
-                        MemoryStream mstream = new MemoryStream(images);
-                        userFriend.ava = Image.FromStream(mstream);
-                    }
-                    userFriend.userName = user.Username;
-                    userFriend.name = BLL.UserBLL.getUserByID(user.Id).Name;
-                    foreach (Control c in userFriend.Controls)
-                    {
-                        c.Click -= new EventHandler((sender, e) => exploreUserPanel_Click(sender, e, user.Id));
-                        c.Click += new EventHandler((sender, e) => exploreUserPanel_Click(sender, e, user.Id));
-                    };
-                    flowLayoutPanelListExplore.Controls.Add(userFriend);
-                }
-            }
+            AddUsersToPanel("Friend", friends);
 
-            List<User> connectings = BLL.UserBLL.getConnectingOfUser(userOwn.Id, txtSearch);
-            if(connectings.Count > 0)
-            {
-                flowLayoutPanelListExplore.Controls.Add(lblConnecting);
-                foreach (User connecting in connectings)
-                {
-                    UserExploreControl userConnecting = flowLayoutPanelListExplore.Controls.OfType<UserExploreControl>().FirstOrDefault(c => c.userName == connecting.Username);
-                    if (userConnecting == null)
-                    {
-                        userConnecting = new UserExploreControl();
-                        flowLayoutPanelListExplore.Controls.Add(userConnecting);
-                    }
-                    byte[] images = BLL.UserBLL.getAvaLinkById((Nullable<System.Int32>)connecting.IdAvatar);
+            AddUsersToPanel("Connecting", connectings);
 
-                    if (images == null)
-                    {
-                        userConnecting.ava = Resources.defaultAvatar;
-                    }
-                    else
-                    {
-                        MemoryStream mstream = new MemoryStream(images);
-                        userConnecting.ava = Image.FromStream(mstream);
-                    }
-                    userConnecting.userName = connecting.Username;
-                    userConnecting.name = connecting.Name;
-                    foreach (Control c in userConnecting.Controls)
-                    {
-                        c.Click -= new EventHandler((sender, e) => exploreUserPanel_Click(sender, e, connecting.Id));
-                        c.Click += new EventHandler((sender, e) => exploreUserPanel_Click(sender, e, connecting.Id));
-                    };
-                    flowLayoutPanelListExplore.Controls.Add(userConnecting);
-                }
-            }
+            AddUsersToPanel("Explore", explores);
 
-            List<int> idUserExcept = new List<int>();
-            foreach (DTO.UserModel user in friends)
+            flowLayoutPanelListExplore.ResumeLayout();  // Resume layout logic
+
+        }
+
+        private void AddUsersToPanel(string categoryLabel, List<User> users)
+        {
+            if (users.Any())
             {
-                idUserExcept.Add(user.Id);
-            }
-            List<User> explores = BLL.UserBLL.GetUserExplore(userOwn.Id, idUserExcept, connectings, txtSearch);
-            if(explores.Count > 0)
-            {
-                flowLayoutPanelListExplore.Controls.Add(lblExplore);
-                foreach (User user in explores)
+                flowLayoutPanelListExplore.Controls.Add(createLable(categoryLabel));
+                foreach (var user in users)
                 {
                     UserExploreControl userExplore = flowLayoutPanelListExplore.Controls.OfType<UserExploreControl>().FirstOrDefault(c => c.userName == user.Username);
                     if (userExplore == null)
@@ -326,6 +281,20 @@ namespace ClientWinform
 
         }
 
-
+        private void NavigationForm_Load(object sender, EventArgs e)
+        {
+            Size s = new Size(SystemInformation.VirtualScreen.Width, SystemInformation.VirtualScreen.Height - 40);
+            this.Location = new Point(0, 0);
+            this.Size = s;
+            foreach(UserModel fr in BLL.MsgBLL.getUserListExplore(userOwn.Id, ""))
+            {
+                User user = BLL.UserBLL.getUserByID(fr.Id);
+                string gender;
+                if (user.Gender == false) gender = "she";
+                else gender = "he";
+                if (user.BOD != null && user.BOD.Value.Day == DateTime.Now.Day && user.BOD.Value.Month == DateTime.Now.Month )
+                    notifyMain.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, "Hi, " + userOwn.Username, "Today is " + user.Username + "'s birthday. Let's give " + gender + " a wish", ToolTipIcon.None);
+            }
+        }
     }
 }
