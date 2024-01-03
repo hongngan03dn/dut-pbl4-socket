@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = hostEntry.AddressList[3]; 
+            IPAddress address = hostEntry.AddressList[11]; //IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -101,7 +101,7 @@ namespace MailServer
         }
 
         
-        public static void listenMsgClient(object objClient)
+        public static async void listenMsgClient(object objClient)
         {
             Socket client = objClient as Socket;
             while (true)
@@ -237,6 +237,7 @@ namespace MailServer
                         // Start handle File - send back img to fromID
                         if (packet.PacketType == Constants.PacketType.FILE && clientSendMsg != null)
                         {
+                            await Task.Delay(1000);
                             clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg +
                                                                                         " From: " + packet.IdFrom +
                                                                                         " To: " + packet.IdTo +
