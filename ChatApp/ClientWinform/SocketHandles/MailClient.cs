@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.2.20";
+        static String _ipServer = "192.168.1.18";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -111,73 +111,7 @@ namespace ClientWinform.SocketHandles
                 
             }
         }
-        //public static void receivedMsg(int idMsg, Form form)
-        //{
-        //    if (form.InvokeRequired)
-        //    {
-        //        setSubForm d = new setSubForm(receivedMsg);
-        //        form.Invoke(d, new object[] { idMsg, form});
-        //    }
-        //    else
-        //    {
-        //        if (form is NavigationForm navigationForm)
-        //        {
-        //            DTO.Message newMessage = BLL.MsgBLL.getMessageById(idMsg);
-        //            if(navigationForm.chatForm.chatContentForm != null)
-        //            {
-        //                List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
-        //                if (newMessage.IdFrom == navigationForm.chatForm.chatContentForm.userTo.Id)
-        //                {
-        //                    BLL.MsgBLL.UpdateMsgesToSeen(idMsg);
-        //                    navigationForm.chatForm.chatContentForm.AddStatusPanelToChat(Constants.MessageStatuses.SEEN, false);
-        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-        //                    sendStatusSeen(newMessage.IdFrom);
-        //                }
-        //                else if(newMessage.IdFrom != userLoggined.Id)
-        //                {
-        //                    string contentMsg = null;
-        //                    if (newMessage.IdFile != null)
-        //                    {
-        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
-        //                            contentMsg = "Sent a photo";
-        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
-        //                            contentMsg = "Sent a voice message";
-        //                        else
-        //                            contentMsg = "Sent an attachment";
-        //                    }
-        //                    else
-        //                        contentMsg = newMessage.ContentMsg;
-        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
-        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
-        //                }
-        //                else if(newMessage.IdFile != null && newMessage.IdFile != 0)
-        //                {
-        //                    navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
-        //                } 
-        //            }
-        //            else
-        //            {
-        //                if (newMessage.IdTo == navigationForm.chatForm.user.Id)
-        //                {
-        //                    string contentMsg = null;
-        //                    if (newMessage.IdFile != null)
-        //                    {
-        //                        if (Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(newMessage.ContentMsg)))
-        //                            contentMsg = "Sent a photo";
-        //                        else if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(newMessage.ContentMsg)))
-        //                            contentMsg = "Sent a voice message";
-        //                        else
-        //                            contentMsg = "Sent an attachment";
-        //                    }
-        //                    else 
-        //                        contentMsg = newMessage.ContentMsg;
-        //                    navigationForm.chatForm.notifyMsg.ShowBalloonTip(Constants.Notify.NOTIFY_TIMEOUT, BLL.UserBLL.getUserByID((int)newMessage.IdFrom).Username, contentMsg, ToolTipIcon.None);
-        //                    navigationForm.chatForm.notifyMsg.MouseClick += new MouseEventHandler((sender, e) => navigationForm.chatForm.notifyMsg_MouseClick(sender, e, (int)newMessage.IdTo, (int)newMessage.IdFrom));
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
+
         public static void receivedMsg(int idMsg, Form form)
         {
             if (form.InvokeRequired)

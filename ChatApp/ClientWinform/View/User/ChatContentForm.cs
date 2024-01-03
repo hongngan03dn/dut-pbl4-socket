@@ -425,7 +425,7 @@ namespace ClientWinform.View.User
             }
             flowLayoutPanelChat.Controls.Add(btnLoadmore);
             flowLayoutPanelChat.Controls.SetChildIndex(btnLoadmore, 0);
-            loadedMessageCount += 50;
+            loadedMessageCount += 20;
         }
 
         private void backBtn_Click(object sender, EventArgs e)

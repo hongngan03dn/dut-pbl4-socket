@@ -51,7 +51,7 @@ namespace MailServer
         {
             string computerName = Dns.GetHostName();
             var hostEntry = Dns.GetHostEntry(computerName);
-            IPAddress address = IPAddress.Parse("192.168.56.1"); //hostEntry.AddressList[3]; 
+            IPAddress address = hostEntry.AddressList[3]; 
             IPEndPoint endPoint = new IPEndPoint(address, 6767);
 
             Console.WriteLine("INFO IP: " + address.ToString() + "; Port: " + endPoint.Port.ToString() + "\n");
@@ -70,12 +70,6 @@ namespace MailServer
             String[] splitted = recvStr.Split('|');
             int id = Int32.Parse(splitted[0].Trim());
 
-            //clientOnline.Add(new ClientModel()
-            //{
-            //    Id = id,
-            //    Username = splitted[1].Trim(),
-            //    clientSocket = client,
-            //});
             ClientModel newClient = new ClientModel()
             {
                 Id = id,
@@ -86,7 +80,6 @@ namespace MailServer
             clientOnline.Add(newClient);
 
             Console.WriteLine("INFO Login by: " + id + " | " + splitted[1].Trim() + "\n");
-            //broadcastMessage(newClient.Username + " has logged in.");
             return newClient;
         }
         public static void broadcastMessage(string message)
@@ -209,15 +202,6 @@ namespace MailServer
                             BinaryWriter writer = new BinaryWriter(System.IO.File.Open(pathServer + "/" + fname, FileMode.Append));
                             writer.Write(packet.SubPacketFile, 4 + fnameLen, receiveByteLen - 4 - fnameLen);
                             writer.Close();
-                            //if(clientSendMsg != null)
-                            //{
-                            //    clientSendMsg.clientSocket.Send(Encoding.ASCII.GetBytes("Message: " + packet.ContentMsg + 
-                            //                                                            " From: " + packet.IdFrom + 
-                            //                                                            " To: " + packet.IdTo + 
-                            //                                                            " CreatedDate: " + packet.CreatedDate + 
-                            //                                                            " IdMsg: " + packet.IdMsg));
-                            //}
-                           
                         }
 
                         // End handle File
@@ -235,17 +219,8 @@ namespace MailServer
                             onlineToClient.clientSocket.Send(msgToRecipient);
                             if(clientSendMsg != null)
                             {
-                                //if (onlineToClient != null)
-                                //{
                                 byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.RECEIVED);
                                 clientSendMsg.clientSocket.Send(msg);
-                                //}
-                                //else
-                                //{
-                                //    byte[] msg = Encoding.ASCII.GetBytes("Return status: " + Constants.MessageStatuses.SENT);
-                                //    clientSendMsg.clientSocket.Send(msg);
-                                //}
-                                //Console.WriteLine("INFO Listen from: " + packet.IdFrom + " | " + packet.IdTo + " | " + packet.ContentMsg + "\n");
                             }
                         }
                         else if(clientSendMsg != null)
