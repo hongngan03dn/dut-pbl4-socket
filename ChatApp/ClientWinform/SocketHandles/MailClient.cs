@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.18";
+        static String _ipServer = "192.168.1.12";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -546,21 +546,6 @@ namespace ClientWinform.SocketHandles
             {
                 throw ex;
             }
-        }
-        public static async Task sendRequestFileAsync(DTO.Message message, string selectedFolderClient)
-        {
-            SocketPacketModel packet = new SocketPacketModel(message.Id, 0, 0, selectedFolderClient, DateTime.Now, Constants.PacketType.GET_FILE);
-            string sendMsg = JsonConvert.SerializeObject(packet);
-            try
-            {
-                byte[] dataSend = Encoding.ASCII.GetBytes(sendMsg);
-                await _client.SendAsync(new ArraySegment<byte>(dataSend), SocketFlags.None); // This line should be asynchronous
-            }
-            catch (Exception ex)
-            {
-                throw ex; // Rethrowing the exception like this can lose the stack trace.
-            }
-
         }
     }
 }

@@ -167,22 +167,17 @@ namespace ClientWinform.View.User
                 while (idMsgLoaded != 0)
                 {
                     flowLayoutPanelChat.Cursor = Cursors.AppStarting;
-                    //Thread.Sleep(1000);
                     await Task.Delay(500);
                 }
                 idMsgLoaded = messageObject.Id;
                 isLoaded = false;
 
                 LoadImage(tmpMessage);
-                //await LoadImageAsync(tmpMessage);
 
                 // flag assign pictureBox.Img
                 while (!isLoaded)
                 {
-                    //Thread.Sleep(1000);
                     await Task.Delay(500);
-                    //pictureBox.Visible = false;
-                    //panel.Controls.Add(pictureBox);
                 }
 
                 if (isLoadSuccess)
@@ -282,19 +277,6 @@ namespace ClientWinform.View.User
             panelContainTime.Controls.Add(lblTime);
 
             return panelContainTime;
-        }
-        public async Task<byte[]> LoadImageAsync(DTO.Message messageObject)
-        {
-            try
-            {
-                await MailClient.sendRequestFileAsync(messageObject, messageObject.ContentMsg);
-            }
-
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            return null;
         }
 
         public void LoadImage(DTO.Message messageObject)
