@@ -12,5 +12,6 @@ namespace ClientWinform.DTO
         public string Username { get; set; }
         public int? IdAvatar { get; set; }
         public System.DateTime? LatestMessageTime { get; set; }
+        public int? Status { get; set; }
     }
 }

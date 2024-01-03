@@ -27,7 +27,7 @@ namespace ClientWinform.DTO
         }
         public static class MessageTies
         {
-            public const int MAXLENGTHINREVIEW = 18;
+            public const int MAXLENGTHINREVIEW = 25;
             public const int MAXLENGTHINCONTENT = 70;
         }
         public static class ConnectionsDescr
@@ -48,6 +48,11 @@ namespace ClientWinform.DTO
         {
             public static readonly List<string> IMAGES = new List<string> { ".jpg", ".jpeg", ".png" };
             public static readonly List<string> AUDIOS = new List<string> { ".wav" };
+        }
+
+        public static class Notify
+        {
+            public static int NOTIFY_TIMEOUT = 10000;
         }
     }
 }

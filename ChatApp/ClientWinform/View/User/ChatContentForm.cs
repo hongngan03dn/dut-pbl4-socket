@@ -36,14 +36,9 @@ namespace ClientWinform.View.User
         public static bool isLoadSuccess = true;
         public static byte[] imgLoaded = new byte[1024 * 85];
 
-        public ChatContentForm()
+        public ChatContentForm(int idFrom, int idTo)
         {
             InitializeComponent();
-
-        }
-        public ChatContentForm(int idFrom, int idTo): this()
-        {
-            
             this.userFrom.Id = idFrom;
             this.userTo = BLL.UserBLL.getUserByID(idTo);
             labelUsername.Text = this.userTo.Username;
@@ -55,6 +50,7 @@ namespace ClientWinform.View.User
         public async void LoadData(int idFrom, int idTo)
         {
             var messages = await Task.Run(() => BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount));
+            //var messages = BLL.MsgBLL.GetTopMessages(idFrom, idTo, loadedMessageCount);
             await AddMessagesToChatPanel(messages, userFrom.Id, flowLayoutPanelChat);
             loadedMessageCount += 20;
             if(BLL.UserBLL.checkIsHaveConnection(userFrom.Id, userTo.Id).Status == Constants.ConnectionsDescr.NOTCONNECT)
@@ -88,87 +84,48 @@ namespace ClientWinform.View.User
         {
             for (int i = messages.Count - 1; i >= 0; i--)
             {
-                if (flowLayoutPanel.IsHandleCreated)
+                var message = messages[i];
+                if (ShouldAddTimeSectionLabel(message.CreatedDate))
                 {
-                    var message = messages[i];
-
-                    await Task.Run(() => flowLayoutPanel.Invoke((MethodInvoker)async delegate
-                    {
-                        if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
-                        {
-                            Label timeSectionLabel = new Label();
-                            timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                            timeSectionLabel.AutoSize = true;
-                            timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                            timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
-                            timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
-                            timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                            flowLayoutPanel.Controls.Add(timeSectionLabel);
-                        }
-                        FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = await shapeFormatPanelChat(message, message.IdFrom, idFrom, message.CreatedDate);
-                        flowLayoutPanel.Controls.Add(panel);
-                        flowLayoutPanel.ScrollControlIntoView(panel);
-                        previousTime = messages[i].CreatedDate;
-                        if (i == 0)
-                        {
-                            if (messages[i].IdFrom == idFrom)
-                            {
-                                if (messages[i].Status == Constants.MessageStatuses.SEEN)
-                                {
-                                    AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
-                                }
-                                else
-                                {
-                                    AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
-                                }
-                            }
-                        }
-                    }));
+                    Label timeSectionLabel = CreateTimeSectionLabel(message.CreatedDate);
+                    flowLayoutPanel.Controls.Add(timeSectionLabel);
                 }
-                else
+                FlowLayoutPanel panel = await shapeFormatPanelChat(message, message.IdFrom, idFrom, message.CreatedDate);
+                flowLayoutPanel.Controls.Add(panel);
+                flowLayoutPanel.ScrollControlIntoView(panel);
+                previousTime = message.CreatedDate;
+                if (i == 0 && message.IdFrom == idFrom)
                 {
-                    var message = messages[i];
-                    if (previousTime != null && (messages[i].CreatedDate.Value - previousTime.Value).TotalMinutes > 20)
-                    {
-                        Label timeSectionLabel = new Label();
-                        timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-                        timeSectionLabel.AutoSize = true;
-                        timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-                        timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
-                        timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(messages[i].CreatedDate);
-                        timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-                        flowLayoutPanel.Controls.Add(timeSectionLabel);
-                    }
-                    FlowLayoutPanel panel = new FlowLayoutPanel();
-                    panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, idFrom, messages[i].CreatedDate);
-                    flowLayoutPanel.Controls.Add(panel);
-                    flowLayoutPanel.ScrollControlIntoView(panel);
-                    previousTime = messages[i].CreatedDate;
-                    if (i == 0)
-                    {
-                        if (messages[i].IdFrom == idFrom)
-                        {
-                            if (messages[i].Status == Constants.MessageStatuses.SEEN)
-                            {
-                                AddStatusPanelToChat(Constants.MessageStatuses.SEEN, true);
-                            }
-                            else
-                            {
-                                AddStatusPanelToChat(Constants.MessageStatuses.SENT, true);
-                            }
-                        }
-                    }
+                    AddStatusPanelToChat(message.Status == Constants.MessageStatuses.SEEN ? Constants.MessageStatuses.SEEN : Constants.MessageStatuses.SENT, true);
                 }
             }
+        }
+
+        private bool ShouldAddTimeSectionLabel(DateTime? createdDate)
+        {
+            return previousTime != null && (createdDate.Value - previousTime.Value).TotalMinutes > 20;
+        }
+
+        private Label CreateTimeSectionLabel(DateTime? createdDate)
+        {
+            Label timeSectionLabel = new Label
+            {
+                Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                AutoSize = true,
+                TextAlign = ContentAlignment.MiddleCenter,
+                ForeColor = Color.FromArgb(151, 142, 142),
+                Text = BLL.MsgBLL.formatTimeInChatContent(createdDate),
+                Anchor = AnchorStyles.Left | AnchorStyles.Right
+            };
+            return timeSectionLabel;
+
         }
         public async Task<FlowLayoutPanel> shapeFormatPanelChat(DTO.Message messageObject, Nullable<System.Int32> idFromOfMsg, Nullable<System.Int32> idFrom, Nullable<System.DateTime> time)
         {
             string messages = messageObject.ContentMsg;
-            FontStyle styleMsg = (messageObject.IdFile != null && messageObject.IdFile != 0) ? FontStyle.Underline  : FontStyle.Regular;
-            Cursor cursorType = (messageObject.IdFile != null && messageObject.IdFile != 0 ) ? Cursors.Hand : Cursors.Default;
-            StringBuilder sb = new StringBuilder();
 
+
+            StringBuilder sb = new StringBuilder();
             for (int j = 0; j < messages.Length; j += Constants.MessageTies.MAXLENGTHINCONTENT)
             {
                 if (j + Constants.MessageTies.MAXLENGTHINCONTENT < messages.Length)
@@ -177,11 +134,15 @@ namespace ClientWinform.View.User
                     sb.AppendLine(messages.Substring(j));
             }
             string result = sb.ToString();
+            //panel contain content of message
             Panel panel = new FlowLayoutPanel();
             panel.AutoSize = true;
             panel.Padding = new Padding(10, 6, 10, 6);
 
-            Label lblTime = new Label();
+            //lable time of message
+            Label lblTime = new Label()
+            {
+            };
             lblTime.Text = BLL.MsgBLL.formatTimeInChatContent(time);
             lblTime.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             lblTime.AutoSize = true;
@@ -189,17 +150,13 @@ namespace ClientWinform.View.User
             lblTime.TextAlign = ContentAlignment.BottomRight;
             lblTime.ForeColor = Color.FromArgb(151, 142, 142);
 
+            Cursor cursorType;
+            PictureBox iconFile = new PictureBox();
             Label label = new Label();
-            label.Text = result;
-            label.Font = new System.Drawing.Font("Segoe UI", 10F, styleMsg, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            label.AutoSize = true;
-            label.Dock = DockStyle.Fill;
-            label.TextAlign = ContentAlignment.MiddleLeft;
 
             Guna2PictureBox pictureBox = new Guna2PictureBox();
             pictureBox.Image = Resources.defaultAvatar;
             pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
-
             if (messageObject.IdFile != null && Constants.AllowedFileType.IMAGES.Contains(Path.GetExtension(messages)))
             {
                 // To markup loading not downloading
@@ -209,67 +166,108 @@ namespace ClientWinform.View.User
                 // waiting for turn loading img
                 while (idMsgLoaded != 0)
                 {
-                    Thread.Sleep(1000);
+                    flowLayoutPanelChat.Cursor = Cursors.AppStarting;
+                    //Thread.Sleep(1000);
+                    await Task.Delay(500);
                 }
                 idMsgLoaded = messageObject.Id;
                 isLoaded = false;
 
                 LoadImage(tmpMessage);
+                //await LoadImageAsync(tmpMessage);
 
                 // flag assign pictureBox.Img
                 while (!isLoaded)
                 {
-                    Thread.Sleep(1000);
+                    //Thread.Sleep(1000);
+                    await Task.Delay(500);
+                    //pictureBox.Visible = false;
+                    //panel.Controls.Add(pictureBox);
                 }
 
                 if (isLoadSuccess)
                 {
                     MemoryStream mstream = new MemoryStream(imgLoaded);
                     pictureBox.Image = Image.FromStream(mstream);
+                    pictureBox.Visible = true;
                 }
 
+                panel.Controls.Add(pictureBox);
                 idMsgLoaded = 0;
                 isLoaded = false;
+                flowLayoutPanelChat.Cursor = Cursors.Default;
                 Array.Clear(ChatContentForm.imgLoaded, 0, ChatContentForm.imgLoaded.Length);
-
-                panel.Controls.Add(pictureBox);
             }
             else
             {
-                panel.Controls.Add(label);
-            }
+                //lable content of message
+                label.Text = result;
+                label.Dock = DockStyle.Fill;
+                TableLayoutPanel containFile = new TableLayoutPanel();
+                containFile.AutoSize = true;
+                if (messageObject.IdFile != null && messageObject.IdFile != 0)
+                {
+                    cursorType = Cursors.Hand;
+                    iconFile.SizeMode = PictureBoxSizeMode.Zoom;
+                    if (Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(messages)))
+                    {
+                        iconFile.Image = Resources.play;
+                        iconFile.Size = new Size(16, 16);
+                        iconFile.Cursor = Cursors.Hand;
+                        label.Text = "Voice";
+                    }
+                    else
+                    {
+                        iconFile.Image = Resources.File_Icon;
+                        iconFile.Size = new Size(20, 20);
+                        label.Cursor = Cursors.Hand;
+                    }
+                    iconFile.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
 
+                    label.AutoSize = true;
+                    label.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    label.TextAlign = ContentAlignment.BottomLeft;
+                    label.Anchor = AnchorStyles.Left | AnchorStyles.Bottom;
+                    label.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
+
+                    containFile.Controls.Add(iconFile, 0, 0);
+                    containFile.Controls.Add(label, 1, 0);
+                    panel.Controls.Add(containFile);
+
+                }
+                else
+                {
+                    label.AutoSize = true;
+                    label.Font = new System.Drawing.Font("Segoe UI", 10F, FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    label.TextAlign = ContentAlignment.MiddleLeft;
+                    label.Cursor = Cursors.Default;
+                    panel.Controls.Add(label);
+                }
+            }
             Guna2Elipse border = new Guna2Elipse();
             border.BorderRadius = 12;
             border.TargetControl = panel;
 
-            panel.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
             label.DoubleClick += (sender, e) => DownloadFile(sender, e, messageObject);
 
             if (messageObject.IdFile != null && Constants.AllowedFileType.AUDIOS.Contains(Path.GetExtension(messages)))
             {
-                // To markup loading not downloading
                 DTO.Message tmpMessage = messageObject;
                 tmpMessage.ContentMsg = "";
-
-                panel.Click += (sender, e) => playAudio(sender, e, tmpMessage);
-                label.Click += (sender, e) => playAudio(sender, e, tmpMessage);
+                iconFile.Click += (sender, e) => playAudio(sender, e, tmpMessage);
             }
 
             FlowLayoutPanel panelContainTime = new FlowLayoutPanel();
             panelContainTime.AutoSize = true;
             panelContainTime.FlowDirection = FlowDirection.BottomUp;
             panelContainTime.WrapContents = false;
-            
-            
+
             if (idFromOfMsg == idFrom)
             {
-                
                 panelContainTime.Anchor = AnchorStyles.Top | AnchorStyles.Right;
                 panel.Anchor = AnchorStyles.Right;
                 panel.BackColor = Color.FromArgb(114, 214, 200);
                 label.ForeColor = Color.White;
-                
             }
             else
             {
@@ -284,6 +282,19 @@ namespace ClientWinform.View.User
             panelContainTime.Controls.Add(lblTime);
 
             return panelContainTime;
+        }
+        public async Task<byte[]> LoadImageAsync(DTO.Message messageObject)
+        {
+            try
+            {
+                await MailClient.sendRequestFileAsync(messageObject, messageObject.ContentMsg);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return null;
         }
 
         public void LoadImage(DTO.Message messageObject)
@@ -479,7 +490,7 @@ namespace ClientWinform.View.User
                 {
                     DTO.Message newMessage = new DTO.Message();
                     newMessage.IdFrom = userFrom.Id;
-                    newMessage.ContentMsg = Path.GetFileName(messageTxt.Text);
+                    newMessage.ContentMsg = messageTxt.Text;
                     newMessage.CreatedDate = DateTime.Now;
                     loadedMessageCount ++;
                     List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
@@ -499,6 +510,12 @@ namespace ClientWinform.View.User
                 }
             }
 
+        }
+
+        private void butVoice_Click(object sender, EventArgs e)
+        {
+            VoiceChat vc = new VoiceChat(userFrom, userTo);
+            vc.Visible = true;
         }
     }
 }
