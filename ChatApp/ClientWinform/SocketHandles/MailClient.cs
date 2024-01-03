@@ -31,7 +31,7 @@ namespace ClientWinform.SocketHandles
         delegate void CustomClickHandler(object sender, EventArgs e, int userId, int userToId);
         delegate void updateExplore(Form form);
 
-        static String _ipServer = "192.168.1.12";
+        static String _ipServer = "192.168.1.17";
         static int _port = 6767;
         static IPEndPoint _ipep;
         static Socket _client;
@@ -127,6 +127,10 @@ namespace ClientWinform.SocketHandles
                 if (navigationForm.chatForm.chatContentForm != null)
                 {
                     HandleChatContentForm(newMessage, navigationForm);
+                    if (ShouldShowNotification(newMessage, navigationForm.chatForm.user.Id))
+                    {
+                        ShowNotification(newMessage, navigationForm.chatForm, contentMsg);
+                    }
                 }
                 else if (ShouldShowNotification(newMessage, navigationForm.chatForm.user.Id))
                 {
@@ -144,7 +148,7 @@ namespace ClientWinform.SocketHandles
                 navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdTo, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
                 sendStatusSeen(newMessage.IdFrom);
             }
-            else if (newMessage.IdFile != null && newMessage.IdFile != 0)
+            else if (newMessage.IdFile != null && newMessage.IdFile != 0 && navigationForm.chatForm.chatContentForm.userTo.Id == newMessage.IdTo)
             {
                 navigationForm.chatForm.chatContentForm.AddMessagesToChatPanel(msg, newMessage.IdFrom, navigationForm.chatForm.chatContentForm.flowLayoutPanelChat);
             }

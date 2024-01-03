@@ -379,14 +379,15 @@ namespace ClientWinform.View.User
                         flowLayoutPanelChat.Controls.Add(timeSectionLabel);
                         flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
                     }
-                    flowLayoutPanelChat.Invoke((MethodInvoker)async delegate
+                    FlowLayoutPanel panel = new FlowLayoutPanel();
+                    panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                    flowLayoutPanelChat.Invoke((MethodInvoker) delegate
                     {
-                        FlowLayoutPanel panel = new FlowLayoutPanel();
-                        panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
+                        int a = i;
                         flowLayoutPanelChat.Controls.Add(panel);
                         flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                         flowLayoutPanelChat.ScrollControlIntoView(panel);
-                        previousTimeInClick = messages[i].CreatedDate;
+                        previousTimeInClick = messages[a].CreatedDate;
                     });
                 }
                 else

@@ -86,7 +86,7 @@ namespace ClientWinform
             {
                 UserBLL.SignUp(user);
                 MessageBox.Show("Sign Up Successfully.", "INFO");
-                this.Close();
+                this.Hide();
                 loginForm f = new loginForm();
                 f.ShowDialog();
             }
