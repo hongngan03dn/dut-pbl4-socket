@@ -363,35 +363,47 @@ namespace ClientWinform.View.User
             List<DTO.Message> messages = BLL.MsgBLL.GetTopMessages(userFrom.Id, userTo.Id, loadedMessageCount);
             flowLayoutPanelChat.Controls.Remove(btnLoadmore);
             Nullable<System.DateTime> previousTimeInClick = null;
-            Label timeSectionLabel = new Label();
-            timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            timeSectionLabel.AutoSize = true;
-            timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
-            timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
-            timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            //Label timeSectionLabel = new Label();
+            //timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //timeSectionLabel.AutoSize = true;
+            //timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+            //timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+            //timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             for (int i = 0; i < messages.Count; i++)
             {
                 if (flowLayoutPanelChat.IsHandleCreated)
                 {
-                    if (previousTimeInClick != null && (previousTimeInClick.Value - messages[i].CreatedDate.Value).TotalMinutes > 20)
-                    {
-                        timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(previousTimeInClick.Value);
-                        flowLayoutPanelChat.Controls.Add(timeSectionLabel);
-                        flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
-                    }
+                    Label timeSectionLabel = new Label();
+                    timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    timeSectionLabel.AutoSize = true;
+                    timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+                    timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+                    timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
                     FlowLayoutPanel panel = new FlowLayoutPanel();
                     panel = await shapeFormatPanelChat(messages[i], messages[i].IdFrom, userFrom.Id, messages[i].CreatedDate);
                     flowLayoutPanelChat.Invoke((MethodInvoker) delegate
                     {
-                        int a = i;
+                        int tmp = i;
+                        if (previousTimeInClick != null && (previousTimeInClick.Value - messages[i].CreatedDate.Value).TotalMinutes > 20)
+                        {
+                            timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(previousTimeInClick.Value);
+                            flowLayoutPanelChat.Controls.Add(timeSectionLabel);
+                            flowLayoutPanelChat.Controls.SetChildIndex(timeSectionLabel, 0);
+                        }
                         flowLayoutPanelChat.Controls.Add(panel);
                         flowLayoutPanelChat.Controls.SetChildIndex(panel, 0);
                         flowLayoutPanelChat.ScrollControlIntoView(panel);
-                        previousTimeInClick = messages[a].CreatedDate;
+                        previousTimeInClick = messages[tmp].CreatedDate;
                     });
                 }
                 else
                 {
+                    Label timeSectionLabel = new Label();
+                    timeSectionLabel.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    timeSectionLabel.AutoSize = true;
+                    timeSectionLabel.TextAlign = ContentAlignment.MiddleCenter;
+                    timeSectionLabel.ForeColor = Color.FromArgb(151, 142, 142);
+                    timeSectionLabel.Anchor = AnchorStyles.Left | AnchorStyles.Right;
                     if (previousTimeInClick != null && (previousTimeInClick.Value - messages[i].CreatedDate.Value).TotalMinutes > 20)
                     {
                         timeSectionLabel.Text = BLL.MsgBLL.formatTimeInChatContent(previousTimeInClick.Value);
