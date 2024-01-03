@@ -490,7 +490,7 @@ namespace ClientWinform.View.User
                 {
                     DTO.Message newMessage = new DTO.Message();
                     newMessage.IdFrom = userFrom.Id;
-                    newMessage.ContentMsg = Path.GetFileName(messageTxt.Text);
+                    newMessage.ContentMsg = messageTxt.Text;
                     newMessage.CreatedDate = DateTime.Now;
                     loadedMessageCount ++;
                     List<DTO.Message> msg = new List<DTO.Message>() { newMessage };
